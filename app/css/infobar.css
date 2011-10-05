@@ -1,0 +1,28 @@
+.tui-panel {
+	transition-property: bottom, top;
+	transition-duration: 0.35s;
+	-moz-transition-property: bottom, top;
+	-moz-transition-duration: 0.35s;
+	-webkit-transition-property: bottom, top;
+	-webkit-transition-duration: 0.35s;
+	 background-image: -webkit-gradient(
+	     linear,
+	     left bottom,
+	     left top,
+	     color-stop(0.07, rgba(0,0,0,.9)),
+	     color-stop(0.58, rgba(0,0,0,0.7))
+	 );
+	 background-image: -moz-linear-gradient(
+	     center bottom,
+	     rgba(0,0,0,1) 7%,
+	     rgba(0,0,0,0.85) 58%
+	 );
+	 position: fixed;
+	 width: 100%;	
+	 z-index: 1000;
+	 height: 60px;
+}
+.tui-titlebar { top: -60px; }
+.tui-titlebar-active { top: 0px; }
+.tui-infobar { bottom: -60px; }
+.tui-infobar-active { bottom: 0px; }

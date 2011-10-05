@@ -1,0 +1,6 @@
+.tui-menu {
+	background:-moz-linear-gradient(center top , #FFFFFF 0%, #EFEFEF 100%) repeat scroll 0 0 transparent; 
+	box-shadow: 1px 1px 2px #AAAAAA;
+	border-top: 4px solid red;
+	z-index: 50;
+}

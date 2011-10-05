@@ -1,0 +1,105 @@
+#appselector {
+	width: 270px;
+	height: 480px;
+	float: right;
+	right: 0;
+	overflow: hidden;
+	z-index: 100;
+}
+/*
+ * 
+ * 	@-moz-keyframes pulse {
+ * 		from {
+ * 			opacity: 0;
+ * 			-moz-transform: scale(3.0);
+ * 		}
+ * 		50% {
+ * 			-moz-transform: scale(1.2);
+ * 		}
+ * 		65% {
+ * 			-moz-transform: scale(1.8);
+ * 		}
+ * 		80% {
+ * 			-moz-transform: scale(1.1);
+ * 		}
+ * 		90% {
+ * 			-moz-transform: scale(1.5);
+ * 		}
+ * 		to {
+ * 			-moz-transform: scale(1);
+ * 		}
+ * 	}
+ */
+.rotator-circle {
+	/*
+	 * -moz-animation-duration: 1.2s;
+	 * -moz-animation-name: pulse;
+	 */
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	top: 211px;
+	right: -120px;
+	opacity: 1;
+	background-image: -moz-radial-gradient(center center, circle contain, #47a6ff, #1553b0);
+	background-image: -webkit-gradient(radial, center center, 0, center center, 150, from(#47a6ff), to(#1553b0));	
+	box-shadow: 0 0 20px #ddd;
+	-moz-border-radius: 100px;
+	-moz-box-shadow: 0 0 20px #ddd;
+	-moz-transition-property: -moz-transform, opacity;
+	-moz-transition-duration: 0.3s, 0.3s;
+	-webkit-border-radius: 100px;
+	-webkit-box-shadow: 0 0 20px #ddd;
+	-webkit-transition-property: -moz-transform, opacity;
+	-webkit-transition-duration: 0.3s, 0.3s;
+}
+.rotator-circle.init {
+	opacity: 0.1;
+	-moz-transform: scale(2.3);
+	-webkit-transform: scale(2.3);
+}
+.approtator-item {
+	height: 125px;
+	width: 240px;
+	margin: 0;
+	position: absolute;
+	right: 0;
+	top: 240px;
+	color: white;
+	-moz-transition: -moz-transform 0.3s;
+	-moz-transform: rotate(170deg);
+	-moz-transform-origin: right center;
+	-webkit-transform: rotate(170deg); 
+	-webkit-transform-origin: right center;
+	-webkit-transition: -webkit-transform 0.3s;
+}
+.approtator-item h3 {
+	float: left;
+    text-align: center;
+    width: 110px;
+    margin-top: 40px;
+}
+.approtator-item img {
+	float: right;
+}
+.approtator-item.active {
+	-moz-transition: -moz-transform 0.3s;
+	-moz-transform: rotate(0deg); 
+	-moz-transform-origin: right center;
+	-webkit-transition: -webkit-transform 0.3s;
+	-webkit-transform: rotate(0deg); 
+	-webkit-transform-origin: right center;
+}
+.approtator-item.off {
+	-moz-transition: -moz-transform 0.3s;
+	-webkit-transition: -webkit-transform 0.3s;
+	-moz-transform: rotate(-180deg); 
+	-webkit-transform: rotate(-180deg); 
+	-moz-transform-origin: right center;
+	-webkit-transform-origin: right center;
+}
+/* obscure class for blurring when selector is active*/
+.obscure {
+	
+	filter: url(app/css/effects.svg#obscure);
+}

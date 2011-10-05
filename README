@@ -1,0 +1,6 @@
+Tornado User Interface
+===========================
+
+This work attempts to organize the work on M55 alternative interface and unify the look and feel of the created applications. It also provides better memory management of the screen objects (important if you want to keep your apps running longer).
+
+It is still a work in progress, however it will provide complete coverage of the original functionality found in Carbon and will be able to completely replace it!

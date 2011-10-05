@@ -1,0 +1,50 @@
+.epgoverlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: transparent;
+	overflow: hidden;
+	display: -moz-box;
+	display: -webkit-box;
+	-moz-box-pack: center;
+	-webkit-box-pack: center;
+	-moz-box-align: stretch;
+	-moz-box-orient: vertical;
+	-webkit-box-align: stretch;
+	-webkit-box-orient: vertical;
+}
+.epg {
+	background-color: rgba(239,239,239, 0.8);
+	/*
+	width: 600px;
+	height: 400px;
+	*/
+	margin: auto;
+}
+
+html.browser .epg {
+	box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+	background-image:-moz-linear-gradient(center top , #FFFFFF 0%, #EFEFEF 100%); 
+	background-image:-webkit-linear-gradient( rgba(255,255,255,0.4) 0%, #EFEFEF 100%);
+	-webkit-animation-duration: 0.4s;
+	-webkit-animation-name: epgshow;
+	-moz-animation-duration: 0.4s;
+	-moz-animation-name: epgshow;
+}
+
+html.m55 .epg {
+	position: relative;
+	left: -2px;
+	border: 2px solid #cacaca;
+}
+
+@-webkit-keyframes epgshow {
+	from {-webkit-transform: scale(0.001);}
+	90% {-webkit-transform: scale(1.1);}
+	to {-webkit-transform: scale(1);}
+}
+@-moz-keyframes epgshow {
+	from {-moz-transform: scale(0.001);}
+	90% {-moz-transform: scale(1.1);}
+	to {-moz-transform: scale(1);}
+}
