@@ -56,7 +56,10 @@ define(['types/types', 'array/array', 'dmc/dmc', 'debug/console'], function(Mtyp
 		addHandlers: function(ev_list) {
 			var k;
 			for (k in ev_list) {
-				ev_list[k].attached = addEventHandler(ev_list[k].name, ev_list[k].func);
+				if (ev_list[k].attached === false ) {
+					ev_list[k].attached = addEventHandler(ev_list[k].name, ev_list[k].func);					
+				}
+
 			}
 		},
 		/**

@@ -148,7 +148,7 @@ Loader.loaded(
                 
                 dirs: {
                         
-                                "23" : { location : {url: "/cgi-bin/voip.cgi?run=folder_list_json&type=12&dir=23", sig: "23"}},
+                                "23" : { location : {url: "app/sampledata/iptv_dir_23.js", sig: "23"}},
                         
                 }
                 

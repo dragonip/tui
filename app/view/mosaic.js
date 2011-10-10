@@ -75,7 +75,8 @@ function(dom, attr, classes, tpl, css, loader) {
 	}
 	function show(cont) {
 		this.app.fire('show-start');
-		this.container = cont;
+		if (typeof cont !== 'undefined')
+			this.container = cont;
 		this.rasterize();
 		this.app.fire('show-complete');
 	}

@@ -1,5 +1,5 @@
 define(['dmc/dmc'], function(dmc) {
-	var s  = 'sampledata/';
+	var s  = 'app/sampledata/';
 	
 	var urls = {
 		vod: {
@@ -8,6 +8,18 @@ define(['dmc/dmc'], function(dmc) {
 		iptv: {
 			list: s+'iptv.js',
 			epg: s+'iptvepg.js'
+		},
+		start: {
+			list: s+'start.js'
+		},
+		radio: {
+			list: s+'radio.js'
+		},
+		ppv: {
+			list: s+'ppv.js'
+		},
+		aod: {
+			list: s+'aod.js'
 		}
 	};
 

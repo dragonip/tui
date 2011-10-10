@@ -60,6 +60,13 @@ define(['shims/indexof'], function() {
 		isEmpty: function(arr) {
 			if (arr.length && arr.length > 0) return false;
 			return true;
+		},
+		/**
+		 * @method last Gets the last element of an array
+		 * @param {Array} the aaray to extract the last element from
+		 */
+		last: function(arr) {
+			return arr[arr.length -1 ];
 		}
 	};
 });

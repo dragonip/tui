@@ -82,7 +82,7 @@
 	}
 	if (tui.options.debug) {
 		window.DEBUG = {
-			popup: true
+			popup: false 
 		};
 	}
 	require(['ui/throbber'], function(t) {
