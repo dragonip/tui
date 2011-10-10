@@ -1,4 +1,4 @@
-define(['types/types', 'utils/oop', 'utils/baseapp', 'dom/dom', 'model/datastorage', 'utils/events', 'ui/epginfo', 'dom/attributes', 'view/mosaic', 'debug/console', 'array/array'], function(types, oop, appeng, dom, model, events, epg, domattr, presentation, logger) {
+define(['types/types', 'utils/baseapp', 'dom/dom', 'model/datastorage', 'utils/events', 'ui/epginfo', 'dom/attributes', 'view/list', 'debug/console', 'array/array'], function(types, appeng, dom, model, events, epg, domattr, presentation, logger) {
 	var APP = appeng({
 		config: {
 			name: 'iptv',	

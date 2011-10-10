@@ -71,7 +71,7 @@ define([], function(){
 	var types =  {
 		iptv: {
 			model: {
-				defThumb: 'http://www.sysmaster.com/demo/M55/Apps/VOD/imgs/default.png'
+				defThumb: null
 			},
 			converter:function(data){
 				var i = 0;

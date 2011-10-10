@@ -48,7 +48,7 @@ Loader.loaded(
                                 artists : "  "
                         }, "Test5"],
                         
-                        ["43", "8", "Test3", "  ", 0, 0, "1,0,0 ",
+                        ["43", "8", "Test1 - Some long name here expected. Testing Long IPTV Content object Names. Test1 - Some long name here expected. Testing Long IPTV Content object Names.", "  ", 0, 0, "1,0,0 ",
                         {
                                 genre : "Others ",
                                 rating : "G ",

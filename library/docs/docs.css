@@ -1,0 +1,49 @@
+body {
+background-color: #002F5E;
+margin: 0;
+padding: 0;
+color: white;
+overflow-y: scroll ;
+}
+#content {
+	display: none;
+}
+div, p {
+margin: 0;
+padding: 0;
+}
+.module {
+background-color: #002F5E;
+color: white;
+margin: 0;
+padding: 10px 10px 10px 20px;
+}
+.module-name {
+	color: red;
+	margin-right: 8px;
+}
+.method {
+
+padding-left: 5px;
+margin: 0px 0 0 30px;
+-webkit-transition-property: height;
+-webkit-transition-duration: 0.5s;
+-moz-transition-property: height;
+-moz-transition-duration: 0.5s;
+overflow: hidden;
+}
+.params {
+padding-left: 5px;
+margin-left: 50px;
+border: 1px gray solid;
+}
+.paramtype {
+	font-style: italic;
+	color: yellow;
+	margin-right: 8px;
+}
+.methoddescription {
+font-style: italic;
+font-size: 14px;
+}
+
