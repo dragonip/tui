@@ -1,6 +1,6 @@
 define(['data/parsersnew', 'debug/console', 'types/types', 'array/array'], function(parsers, logger, types, array) {
 
-	var pcli = logger.getInstance('model/default');
+	var pcli = logger.getInstance('model/datastorage');
 	var xhr = {
 		get: function xhr(a, b) {
 			var r = new XMLHttpRequest();

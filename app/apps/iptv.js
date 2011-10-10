@@ -1,5 +1,10 @@
 define(['types/types', 'utils/oop', 'utils/baseapp', 'dom/dom', 'model/datastorage', 'utils/events', 'ui/epginfo', 'dom/attributes', 'view/mosaic', 'debug/console', 'array/array'], function(types, oop, appeng, dom, model, events, epg, domattr, presentation, logger) {
 	var APP = appeng({
+		config: {
+			name: 'iptv',	
+			container: null
+		}
+	},{
 		tuiLoaderSubscribe: true
 	}),
 		commonKeys = ['left', 'right', 'up', 'down', 'chup', 'chdown', 'ok'],
@@ -16,10 +21,6 @@ define(['types/types', 'utils/oop', 'utils/baseapp', 'dom/dom', 'model/datastora
 			attached: false
 		};
 	}), pcli = logger.getInstance('iptv screen');
-	APP.config = {
-		name: 'iptv',
-		container: null
-	};
 	APP.model = model(APP);
 	APP.presentation = presentation(APP);
 	//Lock events for internal comunication

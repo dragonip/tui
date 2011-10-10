@@ -3,7 +3,7 @@ define([
 	'utils/oop',
 	'utils/baseapp',
 	'dom/dom',
-	'model/default',
+	'model/datastorage',
 	'utils/events',
 	'ui/epginfo',
 	'dom/attributes',
@@ -11,21 +11,16 @@ define([
 	'debug/console'
 	],
 function(types, oop, appeng, dom, model, events, epg, domattr, presentation, logger) {
-/*	var config = {
-		name: 'vod'
-	};
-	
-	var dataConfig = { 
-		parser: parsers.vod,
-		epgparser: null
-	};
-	*/
-	//var datatype = 'vodlist';
 	var pcli = logger.getInstance('app/apps/vod');
 	var APP = appeng({
+		config: {
+			name: 'vod',	
+			container: null
+		}
+	},{
 		tuiLoaderSubscribe: true
 	}),
-		commonKeys = ['left', 'right', 'up', 'down', 'chup', 'chdown'],
+		commonKeys = ['left', 'right', 'up', 'down', 'chup', 'chdown', 'ok'],
 		appEvents = {};
 	commonKeys.forEach(function(item) {
 		appEvents[item] = {
@@ -39,12 +34,8 @@ function(types, oop, appeng, dom, model, events, epg, domattr, presentation, log
 			attached: false
 		};
 	});
-	APP.config = {
-		name: 'vod',
-		container: null
-	};
-	APP.model = model(APP);
 	
+	APP.model = model(APP);
 	APP.presentation = presentation(APP);
 	
 	//Lock events for internal comunication
@@ -53,28 +44,33 @@ function(types, oop, appeng, dom, model, events, epg, domattr, presentation, log
 		//var a = types.assert(this.model.data.list, 'undefined');
 		//pcli.log(' Result of assert is ' + a );
 		//pcli.log(' Result of regular typeof ' + typeof this.model.data.list);
-		if (types.assert(this.model.data.list, 'undefined')) {
-			//pcli.log('\n\na\n\n');
-			APP.model.load({
+		if (!this.model.isLoaded) {
+			pcli.log('We do not have data for app ' + APP.config.name);
+			APP.model.loadData({
 				type: 'list'
 			});
 		}
 		else {
+			pcli.log('We have the data already');
 			this.fire('start-ready');
 		}
 	});
-	APP.on('data-load-start', function() {
-		pcli.log('Started loading data via XHR');
-	});
+	APP.on('data-load-start', function() {});
 	APP.on('data-load-end', function(data) {
-		pcli.log('data loaded end via XHR');
-		APP.fire('start-ready');
+		if (data.type === 'list') {
+			APP.fire('start-ready');
+		} else if (data.type === 'folder') {
+			this.presentation.show();
+			if (typeof data.index !== 'undefined') this.presentation.activate(data.index);
+		}
+	});
+	APP.on('try-play', function(obj) {
+		pcli.log(['Requested play for obj', obj]);
 	});
 	APP.on('selection-changed', function(o) {
-		this.model.selectedIndex = o.index;
+		this.model.currentIndex = o.index;
 	});
 	APP.on('show-complete', function() {
-		pcli.log('Attach events');
 		events.addHandlers(appEvents);
 	});
 	APP.on('stop-requested', function() { 
@@ -82,7 +78,6 @@ function(types, oop, appeng, dom, model, events, epg, domattr, presentation, log
 		this.presentation.unload();
 		events.removeHandlers(appEvents);
 	});
-	
 	//Provide public interface (Start, Stop, Show, Pause/Hide)
 	return {
 		name: APP.config.name,

@@ -190,7 +190,7 @@ Loader.loaded(
                 
                 dirs: {
                         
-                                "234" : { location : {url: "/cgi-bin/voip.cgi?run=folder_list_json&type=13&dir=234", sig: "234"}},
+                                "234" : { location : {url: "app/sampledata/vod_dir_234.js", sig: "234"}},
                         
                 }
                         
