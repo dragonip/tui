@@ -1,7 +1,7 @@
 define([
-	'dom/types', 
-	'utils/oop', 
-	'utils/baseapp', 
+	'types/types',
+	'utils/oop',
+	'utils/baseapp',
 	'dom/dom',
 	'utils/presentation', 
 	'utils/events', 
