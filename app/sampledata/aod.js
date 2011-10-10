@@ -21,7 +21,7 @@ Loader.loaded(
 		
 		dirs: {
 			
-				"76" : { location : {url: "/cgi-bin/voip.cgi?run=folder_list_json&type=16&dir=76", sig: "76"}}
+				"76" : { location : {url: "app/sampledata/aod_dir_76.js", sig: "76"}}
 			
 		}
 		

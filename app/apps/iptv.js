@@ -63,6 +63,7 @@ define(['types/types', 'utils/oop', 'utils/baseapp', 'dom/dom', 'model/datastora
 	APP.on('stop-requested', function() {
 		this.model.unload();
 		this.presentation.unload();
+		events.removeHandlers(appEvents);
 	});
 	//Provide public interface (Start, Stop, Show, Pause/Hide)
 	return {

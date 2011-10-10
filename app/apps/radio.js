@@ -3,7 +3,7 @@ define([
 	'utils/oop',
 	'utils/baseapp',
 	'dom/dom',
-	'model/default',
+	'model/datastorage',
 	'utils/events',
 	'ui/epginfo',
 	'dom/attributes',
@@ -11,20 +11,13 @@ define([
 	'debug/console'
 	],
 function(types, oop, appeng, dom, model, events, epg, domattr, presentation, logger) {
-/*	var config = {
-		name: 'radio'
-	};
-	
-	var dataConfig = { 
-		parser: parsers.radio,
-		epgparser: null
-	};
-	*/
-	//var datatype = 'radio';
-	var APP = appeng({
+	var APP = appeng({config : {
+		name: 'radio',
+		container: null
+	}},{
 		tuiLoaderSubscribe: true
 	}),
-		commonKeys = ['left', 'right', 'up', 'down', 'chup', 'chdown'],
+		commonKeys = ['left', 'right', 'up', 'down', 'chup', 'chdown','ok'],
 		appEvents = {};
 	commonKeys.forEach(function(item) {
 		appEvents[item] = {
@@ -39,33 +32,19 @@ function(types, oop, appeng, dom, model, events, epg, domattr, presentation, log
 		};
 	}),
 	pcli = logger.getInstance('radio screen');
-	appEvents.chUp = {
-		name: "chup",
-		func: function(){
-			events.showAll();
-		}, attached: false
-	}
-	APP.config = {
-		name: 'radio',
-		container: null
-	};
 	APP.model = model(APP);
-	
 	APP.presentation = presentation(APP);
 	
 	//Lock events for internal comunication
 	APP.on('start-requested', function() {
-		//pcli.log(types.getType(this.model.data.list));
-		//var a = types.assert(this.model.data.list, 'undefined');
-		//pcli.log(' Result of assert is ' + a );
-		//pcli.log(' Result of regular typeof ' + typeof this.model.data.list);
-		if (types.assert(this.model.data.list, 'undefined')) {
-			//pcli.log('\n\na\n\n');
-			APP.model.load({
+		if (!this.model.isLoaded) {
+			pcli.log('We do not have data for app ' + APP.config.name);
+			APP.model.loadData({
 				type: 'list'
 			});
 		}
 		else {
+			pcli.log('We have the data already');
 			this.fire('start-ready');
 		}
 	});
@@ -73,14 +52,17 @@ function(types, oop, appeng, dom, model, events, epg, domattr, presentation, log
 		pcli.log('Started loading data via XHR');
 	});
 	APP.on('data-load-end', function(data) {
-		pcli.log('data loaded end via XHR');
-		APP.fire('start-ready');
+		if (data.type === 'list') {
+			APP.fire('start-ready');
+		} else if (data.type === 'folder') {
+			this.presentation.show();
+			if (typeof data.index !== 'undefined') this.presentation.activate(data.index);
+		}
 	});
 	APP.on('selection-changed', function(o) {
-		this.model.selectedIndex = o.index;
+		this.model.currentIndex = o.index;
 	});
 	APP.on('show-complete', function() {
-		pcli.log('Attach events');
 		events.addHandlers(appEvents);
 	});
 	APP.on('stop-requested', function() { 
