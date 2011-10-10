@@ -1,5 +1,6 @@
 .tui-list.listContainer {
 	text-align: center;
+	margin: 10px auto 10px auto;
 	position: relative;
 }
 .tui-list .listitem {
