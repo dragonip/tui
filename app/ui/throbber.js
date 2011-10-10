@@ -19,10 +19,10 @@ define(['debug/console'], function(logger) {
 	var tobber;
 	tobber = document.createElement('div');
 	tobber.className = 'tui-text-tobber';
-	// create div with backgorund opacity
+/*	// create div with backgorund opacity
 	var backdiv;
 	backdiv = document.createElement('div');
-	backdiv.className = 'tobberBackground';
+	backdiv.className = 'tobberBackground';*/
 	
 	return {
 		/**
@@ -41,7 +41,7 @@ define(['debug/console'], function(logger) {
 			// tobber.style.lineHeight = opts.element.style.height;
 			// 
 			opts.element.appendChild(tobber);
-			opts.element.appendChild(backdiv);
+			/*opts.element.appendChild(backdiv);*/
 		},
 		/**
 		 * @method stop Stops the throbber and removes it from the DOM
@@ -49,7 +49,7 @@ define(['debug/console'], function(logger) {
 		stop: function() {
 			pcli.log('called stop tobber');
 			tobber.parentNode.removeChild(tobber);
-			backdiv.parentNode.removeChild(backdiv);
+		/*	backdiv.parentNode.removeChild(backdiv);*/
 		}
 	};
 });

@@ -1,0 +1,152 @@
+.tui-list.listContainer {
+	text-align: center;
+	position: relative;
+}
+.tui-list .listitem {
+	margin: 0.7em auto 0 auto;
+	width: 94%;
+	height: 3.4em;
+	text-align: left;
+	-moz-box-pack: center;
+	-webkit-box-pack: center;
+	border-radius: 0.3em;
+	-moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	-ms-border-radius: 0.3em;
+	border: 2px solid gray;	
+	color: white;
+	position: relative;
+	
+	background-image: linear-gradient(bottom, rgb(74,80,92) 4%, rgb(39,44,52) 49%, rgb(74,80,92) 93%);
+	background-image: -o-linear-gradient(bottom, rgb(74,80,92) 4%, rgb(39,44,52) 49%, rgb(74,80,92) 93%);
+	background-image: -moz-linear-gradient(bottom, rgb(74,80,92) 4%, rgb(39,44,52) 49%, rgb(74,80,92) 93%);
+	background-image: -webkit-linear-gradient(bottom, rgb(74,80,92) 4%, rgb(39,44,52) 49%, rgb(74,80,92) 93%);
+	background-image: -ms-linear-gradient(bottom, rgb(74,80,92) 4%, rgb(39,44,52) 49%, rgb(74,80,92) 93%);
+
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.04, rgb(74,80,92)),
+		color-stop(0.49, rgb(39,44,52)),
+		color-stop(0.93, rgb(74,80,92))
+	);	
+}
+.tui-list.listContainer .active {
+	background-color: gray;
+	background-image: none;
+	border: 2px solid #b74e02;
+	
+    box-shadow:inset 0 0 10px #000000;
+	-moz-box-shadow:inset 0 0 10px #000000;
+   	-webkit-box-shadow:inset 0 0 10px #000000;
+	-ms-box-shadow:inset 0 0 10px #000000;
+}
+.tui-list.listContainer .active .number_id {
+	color: #d08b05;
+/*	border-right: 5px solid #d3d2d2;
+	box-shadow:	10px 0 10px -10px #555555;
+	-moz-box-shadow: 10px 0 10px -10px #555555;
+	-webkit-box-shadow: 10px 0 10px -10px #555555;
+	-ms-box-shadow: 10px 0 10px -10px #555555;	*/
+}
+
+.tui-list .leftCont {
+	float: left;
+	width: 90%;
+	height: 80%;
+	padding: 0.5em;
+}
+.tui-list .leftContLong {
+	float: left;
+	width: 99%;
+	height: 80%;
+	padding: 0.5em;
+}
+
+.tui-list .rightCont {
+	float: left;
+    width: 7%;
+    height: 93%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    padding-bottom: 3px;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 3px;
+    text-align: right;
+}
+.tui-list .leftCont .number_id {
+	color: #b4b3ae;
+    float: left;
+    font-size: 1.3em;
+    font-weight: bold;
+    height: 100%;
+    margin-right: 0.5em;
+    text-align: center;
+    width: 70px;
+    line-height: 1em;
+}
+
+.tui-list .leftContLong .number_id {
+	color: #b4b3ae;
+    float: left;
+    font-size: 1.3em;
+    font-weight: bold;
+    height: 100%;
+    margin-right: 0.5em;
+    text-align: center;
+    width: 70px;
+    line-height: 1em;
+}
+
+.tui-list .item_name {
+    font-size: 1.1em;
+    font-weight: bold;
+    height: 50%;
+	-moz-box-pack:center;
+	-moz-box-align:center;
+	-webkit-box-pack:center;
+	-webkit-box-align:center;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.tui-list .img_thumb {
+	height: 3em;
+	border: 0;
+}
+.tui-list .description {
+	display: inline-block;
+	margin-right: 20px;
+}
+.tui-list .channel-settings-icons {
+	left: 2px;
+    list-style-type: none;
+    position: absolute;
+    bottom: 2px;
+}
+
+.tui-list.listContainer .icon {
+	background-color: #596876;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 20px;
+    margin-right: 1px;
+    width: 20px;
+    float: left; 
+}
+.tui-list.listContainer .bookmarked {
+	background-image: url("imgs/icon_favorite.png");
+}
+.tui-list.listContainer .recordable {
+	background-image: url("imgs/icon_recording.png");
+}
+.tui-list.listContainer .locked {
+	background-image: url("imgs/icon_lock.png");
+}
+
+
+
+
+

@@ -1,0 +1,210 @@
+<html><head><title>Docs</title><link href='docs.css' rel='stylesheet' type='text/css' /><script src='docs.js' type='text/javascript'></script></head><body><div id='content'>
+<p class="module"> applist List of all working applications for the TUI environment</p>
+<p class="module"> data Provides means to retrieve data from the STB device. Shim provided for browsers, setters will not work</p>
+<div class="method">get<p class="methoddescription"> Retrieves the related data</p></div>
+<div class="params"> {Object} Options, should contain the type of data and a callback</div>
+<p class="module"> dmc DOCS COMMING SOON Provides the standard DMC interface (as in the 1.x series of the SDK</p>
+<p class="module"> smjs DOCS COMMING SOON Wrapper for the native code implementation in the STBs, wraps most of the commands to make them work in browser environemtn where smjs C code is not available</p>
+<p class="module"> Model Basic model to implement the data processing in STB, it should be used as constructor function with one argument</p>
+<div class="method">{native}<p class="methoddescription"> (i.e. the method is the module itself, i.e. augmentor) - provides </p></div>
+<div class="params"> {Object} The application object that should use data models</div>
+<div class="method">show<p class="methoddescription"> Shows the App selector widget, from then one the keys are managed by the widget</p></div>
+<p class="module"> spinner Module that prvides SVG spinner as load indicator</p>
+<div class="method">spin<p class="methoddescription"></p></div>
+<div class="params"> {HTMLElement} The element where the spinner should be embeded</div>
+<div class="method">stop<p class="methoddescription"> Stops the spinner and removes it from the DOM</p></div>
+<p class="module"> throbber Provides throbbing test to use as loading indicator on lower end STB/Systems</p>
+<div class="method">start<p class="methoddescription"> Shows a throbber on the screen</p></div>
+<div class="params"> {Object} Object representing the options for the throbber, the following options are recognized&nlelement: The element to embed the throbber in&nltext: the text to use on the throbber</div>
+<div class="method">stop<p class="methoddescription"> Stops the throbber and removes it from the DOM</p></div>
+<p class="module"> appengine Basic module to inherit from when creating apps, the modules does not provide any methods and should be used as base object (i.e var myclass = moduleReference({options});)</p>
+<p class="module"> events Provides keyboard/remote key bindings for the TUI </p>
+<div class="method">addHandlers<p class="methoddescription"> Adds handlers for keys on top of the existing ones</p></div>
+<div class="params"> {Object} Object representing the handlers {name: keyname, func: function(keyname){toexec}, attached: boolean}</div>
+<div class="method">removeHandlers<p class="methoddescription"> removes handlers for keys from the handler stack</p></div>
+<div class="params"> {Object} Object representing the handlers {name: keyname, func: function(keyname){toexec}, attached: boolean}</div>
+<p class="module"> oop provides some OOP utilities</p>
+<div class="method">beget<p class="methoddescription"> Returns inherit object from a parent object keeping reference to it</p></div>
+<div class="params"> {Object} The parent object to use</div>
+<div class="method">enhance<p class="methoddescription"> Augments object with additional methods</p></div>
+<div class="params"> {Object} Object to augment</div>
+<div class="params"> {Array} List of augmentors to apply (see augmentors.js - functions that acept object and return the same object augmented)</div>
+<div class="method">setOptions<p class="methoddescription"> Augmentor that adds the missing properties to an object copying from another object</p></div>
+<div class="params"> {Object} Object to augment</div>
+<div class="params"> {Object} Object to copy from</div>
+<div class="method">events<p class="methoddescription"> Classical augmentor function, accepts an object and augments it, then returns the same object, this method adds even support withing the object ('on' and 'fire'), Afer that the object can have event listeners (on('eventname', {Function}) and event triggers (fire('eventName')))</p></div>
+<div class="params"> {Object} The object to augment</div>
+<p class="module"> strings Contains static and / or trasnl;ateble strings</p>
+<p class="module"> view/mosaic This is the default mosaic view layer, used in video listing, it uses the mosaiclist template and css/mosaic.css to display the grid with videos</p>
+<div class="method">{Module}<p class="methoddescription"> The module method should be aplpied to your controller/app and provides public interface to interact with the view layer</p></div>
+<p class="module"> array/array Provides useful methods for arrays, mostly copied from closure</p>
+<div class="method">has<p class="methoddescription"> Checks if the array has the object in it</p></div>
+<div class="params"> {Array} The array to check</div>
+<div class="params"> {Any} The object to search for in the array</div>
+<div class="method">remove<p class="methoddescription"> Removes item from array</p></div>
+<div class="params"> {Array} arr Array to operate on</div>
+<div class="params"> {Any} obj Object to remove from the array</div>
+<div class="method">removeExisting<p class="methoddescription"> Removes list of items from an array</p></div>
+<div class="params"> {Array} arr, The array that we will work on</div>
+<div class="params"> {Array} list, The list of items to remove from array</div>
+<div class="method">addMissing<p class="methoddescription"> Adds missing items in array</p></div>
+<div class="params"> {Array} arr. Array to add items to</div>
+<div class="params"> {Array} list, List of items to add if not already present</div>
+<div class="method">isEmpty<p class="methoddescription"> Checks the length property of an array like object</p></div>
+<div class="params"> {Array|ArrayLikeObject} arr. The object to check</div>
+<p class="module"> debug/console Provides simple debug console on all platrofms</p>
+<div class="method">getInstance<p class="methoddescription">  Gets an instance from log pool , useful to log with name, this way you can log rom different modules and know which log comes from where, if debugger provides filtering it is also useful</p></div>
+<div class="params"> {String} instancename. The name of the log pool to use</div>
+<p class="module"> debug/eyes Provides HTML rendering of JSON objects</p>
+<div class="method">inspect<p class="methoddescription"> Renders JSON object nesting to HTML print</p></div>
+<div class="params"> {JSON Object} obj. Any JS object worth printing with indentation</div>
+<p class="module"> logger Provides logging utility, configurable to use local or remote debugger</p>
+<div class="method">log<p class="methoddescription"> Logs a message to the configured debugger</p></div>
+<div class="params"> {Any} The log message (preferrably - JSON.stringifyable)</div>
+<div class="method">type<p class="methoddescription"> The type of the logger utilized</p></div>
+<p class="module"> domattributes setters and getters for the dom</p>
+<div class="method">set<p class="methoddescription"> Sets property to element</p></div>
+<div class="params"> {HTMLElement} The html element to set to</div>
+<div class="params"> {String} The property to set (can be classes, html, text or any directly accessible property (i.e. dot notation property)</div>
+<div class="params"> {String} Value to set on the property</div>
+<div class="method">get<p class="methoddescription"> Returns the value of the property if set</p></div>
+<div class="params"> {HTMLElement} Element to look up prpeprty for</div>
+<div class="params"> {String} Property/Attribute to look up</div>
+<div class="method">remove<p class="methoddescription"> Removes the property from element</p></div>
+<div class="params"> {HTMLElement} Element to clear from attribute</div>
+<div class="params"> {String} The property to remove</div>
+<p class="module"> domclasses Allows browser independent work with class names (the preferred method to change DOM properties at once instead of settings it one by one)</p>
+<div class="method">getClasses<p class="methoddescription"> Retirns Array with all classes currently set on the element</p></div>
+<div class="params"> {HTMLElement} The element to query</div>
+<div class="method">hasClass<p class="methoddescription"> Returns true/flase depending on the element class </p></div>
+<div class="params"> {HTMLElement} Element to query</div>
+<div class="method">addClasses<p class="methoddescription"> Adds one or more classes to an element</p></div>
+<div class="params"> {HTMLElement} The element to add the classes to</div>
+<div class="params"> {Array|String} Supported are two type of parameters, array that contains the strings for class names to be added or arbitary length of arguments as strings</div>
+<div class="method">removeClasses<p class="methoddescription"> Removes classes from element</p></div>
+<div class="params"> {HTMLElement} The element to alter</div>
+<div class="params"> {Array|String} Excpects array with strings or variable length of arguments as string</div>
+<div class="method">addRemoveClasses<p class="methoddescription"> Adds and removes classes as one step (i.e. alter the DOM once)</p></div>
+<div class="params"> {HTMLElement} The element to alter</div>
+<div class="params"> {Array} List of classes to add</div>
+<div class="params"> {Array} List of classes to remove</div>
+<div class="method">radioClass<p class="methoddescription"> Adds class name to element and removes it from its siblings</p></div>
+<div class="params"> {HTMLElement} The element to add the class to</div>
+<div class="params"> {String} Class name to set and remove from all siblings </div>
+<p class="module"> dom Provides means to work with the DOM more conveniently</p>
+<div class="method">getInnerNodes<p class="methoddescription"> returns a DOM tree from html string</p></div>
+<div class="params"> {String} The html string to parse</div>
+<div class="method">$<p class="methoddescription"> wraps querySelector</p></div>
+<div class="params"> {String} The selector to query</div>
+<div class="params"> {HTMLElement} The element to query, optional</div>
+<div class="method">$<p class="methoddescription"> wraps querySelectorAll</p></div>
+<div class="params"> {String} The selector to query</div>
+<div class="params"> {HTMLElement} The element to query, optional</div>
+<div class="method">create<p class="methoddescription"> Creates a new DOM element with tag name and properties</p></div>
+<div class="params"> {String} tag, The tag of the new element</div>
+<div class="params"> {Object} opts, Options to apply on the new element</div>
+<div class="method">adopt<p class="methoddescription"> Adopts a new element under the current one</p></div>
+<div class="params"> {HTMLElement} element, The element that will adopt the child</div>
+<div class="params"> {HTMLElement} what, The element to be adopted</div>
+<div class="method">dispose<p class="methoddescription"> Removes an element from the DOM tree</p></div>
+<div class="params"> {HTMLElement} element, The element to get rid of</div>
+<div class="method">dataSet<p class="methoddescription"> Sets data for element in cross browser manner </p></div>
+<div class="params"> {HTMLElement} Element to store data to</div>
+<div class="params"> {String} Name of the stored property</div>
+<div class="params"> {String} Value of the stored property</div>
+<div class="method">dataGet<p class="methoddescription"> Gets data for element in cross browser manner </p></div>
+<div class="params"> {HTMLElement} Element to get data from</div>
+<div class="params"> {String} Name of the stored property</div>
+<div class="method">dataRemove<p class="methoddescription"> Removes a key from data stored for element </p></div>
+<div class="params"> {HTMLElement} Element to operate on</div>
+<div class="params"> {String} Name of the stored property</div>
+<div class="method">dataHad<p class="methoddescription"> Checks if the element has data stored for key </p></div>
+<div class="params"> {HTMLElement} Element to operate on</div>
+<div class="params"> {String} Name of the stored property/key</div>
+<div class="method">getUniqueId<p class="methoddescription"> Always returns unique ID for use with autogenerated elements</p></div>
+<div class="params"> {String} optional, ID to check for uniquness, will return it if it is not in the document, else will return new unique ID</div>
+<p class="module"> string Module contains some utility functions for Strings operations</p>
+<div class="method">build<p class="methoddescription"></p></div>
+<div class="params"> {varargs} strings to concatenate into one</div>
+<div class="method">selectorCase<p class="methoddescription"> Returns the string as selector viable case (i.e. background-color becomes backgroundColor)</p></div>
+<div class="params"> {String} String to change</div>
+<div class="method">isAlpha<p class="methoddescription"> Tests if the string contains only letters returns boolean</p></div>
+<div class="params"> {String} String to test</div>
+<div class="method">stripNewLine<p class="methoddescription"> Removes new lines from text</p></div>
+<div class="params"> {String} String to remove the new lines from</div>
+<div class="method">normalizeWhiteSpace<p class="methoddescription"> Remplaces musltiple white spaces with one</p></div>
+<div class="params"> {String} String to clean</div>
+<div class="method">isEmpty<p class="methoddescription"> Returns boolean, true if the string is empty</p></div>
+<div class="params"> {String} The string to test</div>
+<div class="method">shrink<p class="methoddescription"> Shrinks a string to fit the length required</p></div>
+<div class="params"> {String} String to shrink</div>
+<div class="params"> {Number} Desired length</div>
+<p class="module"> loader Allows for loading external dependencies like templates and CSS files</p>
+<div class="method">loadTemplate<p class="methoddescription"> Loads HTML templates in an Iframe</p></div>
+<div class="params"> {String} The url to load, should be in the same domain to allow access from JS to the DOM constructs</div>
+<div class="method">loadCSS<p class="methoddescription"> Loads CSS files in the document if they are not already loaded, functions changed after 2beta and now uses XHR to get the CSS, thus you need to host it in the same domain as the main application. Alternative transport is allowed (loadExternalCSS) that uses a trick with image load even to notife when the css is done loading</p></div>
+<div class="params"> {Array} List of urls with CSS to load</div>
+<div class="params"> {Function} Callback to execute when all CSS is loaded</div>
+<div class="method">loadCSSFromText<p class="methoddescription"> Loads css rules from string, used in modules that get the scc via require/define text plugin</p></div>
+<div class="params"> {String} The CSS rules as text</div>
+<div class="params"> {String} [optional] Id to set in the style tag, if one is provided we check to see if we already have one and if we do we skip this one</div>
+<div class="method">loadExternalCSS<p class="methoddescription"> Used to load CSS that is not from the same domain, it will use the link attribute and a 'hack' to call the callback function once the CSS is loaded</p></div>
+<div class="params"> {String} The url of the css file to load in the document</div>
+<div class="params"> {Function} The callback function to call when the file is loaded in the document</div>
+<p class="module"> net/xhr Module to abstract the Ajax from browsers, currently uses jquery thus requirejs with JQ support is needed</p>
+<div class="method">get<p class="methoddescription"> Gets an URL from same domain and returns the content unaltered if success, otherwise does not return</p></div>
+<div class="params"> {String} url. The url to retrieve</div>
+<div class="params"> {Object} options. Object representing the request options, recognized options are dataType which defaults to 'text' and callback, which should be a function that receives one argument - the data received from the request</div>
+<p class="module"> oop/augment Module to provide convenient access to the augmentors</p>
+<div class="method">{Module}<p class="methoddescription"> call the whole module with Constructor functions and the desired augmentation</p></div>
+<div class="params"> {Function} obj. Should be a constructor function (i.e. protptypal inheritance is used</div>
+<div class="params"> {String} augmentation. The name of the module used to augment, one of the augentors in oop/</div>
+<p class="module"> oop/events Module that provides custom events in objects, use on constructor functions to add 'on' and 'fire' events on the prototype chain. </p>
+<p class="module"> oop provides some OOP utilities</p>
+<div class="method">beget<p class="methoddescription"> Returns inherit object from a parent object keeping reference to it</p></div>
+<div class="params"> {Object} The parent object to use</div>
+<div class="method">enhance<p class="methoddescription"> Augments object with additional methods</p></div>
+<div class="params"> {Object} Object to augment</div>
+<div class="params"> {Array} List of augmentors to apply (see augmentors.js - functions that acept object and return the same object augmented)</div>
+<div class="method">setOptions<p class="methoddescription"> Augmentor that adds the missing properties to an object copying from another object</p></div>
+<div class="params"> {Object} Object to augment</div>
+<div class="params"> {Object} Object to copy from</div>
+<div class="method">events<p class="methoddescription"> Classical augmentor function, accepts an object and augments it, then returns the same object, this method adds even support withing the object ('on' and 'fire'), Afer that the object can have event listeners (on('eventname', {Function}) and event triggers (fire('eventName')))</p></div>
+<div class="params"> {Object} The object to augment</div>
+<div class="params"> {Object} element A DOM element</div>
+<div class="params"> {String} type The event name</div>
+<div class="params"> {Function} handler The event handler</div>
+<div class="params"> {Object} element A DOM element</div>
+<div class="params"> {String} type The event name</div>
+<div class="params"> {Function} handler The event handler</div>
+<div class="params"> {Object} element A DOM element</div>
+<div class="params"> {String} type The event name</div>
+<div class="params"> {Function} callback A callback to run</div>
+<div class="params"> {String} eventName The name of the event</div>
+<div class="params"> {Function} handler A callback</div>
+<div class="params"> {String} eventName The name of the event</div>
+<div class="params"> {String} eventName The name of the event</div>
+<div class="params"> {String} eventName The name of the event</div>
+<div class="params"> {Function} handler The handler function to remove</div>
+<p class="module"> runtime Module allows for pre-compiled templates to be rendered on the client side, for thos to work the templates must be decorated with requirement for this runtime and must be in requireJS format, the module provides several public methods, but those are for use in the pre-compiled jade templates</p>
+<div class="params"> {Object} obj</div>
+<div class="params"> {String} html</div>
+<div class="params"> {Error} err</div>
+<div class="params"> {String} str</div>
+<div class="params"> {String} filename</div>
+<div class="params"> {String} lineno</div>
+<p class="module"> templates/compiler Client side support for Jade templates, include if you intend to build templates from text on the client, otherwise always prefer the pre-built templates as they run much faster on the client</p>
+<div class="method">getTemplate<p class="methoddescription"> Get a text template from the server</p></div>
+<div class="params"> {String} name. The file name of the template without the extention</div>
+<div class="params"> {Function} cb. The callback function to execute when ready, should accept one parameter - the compiled template</div>
+<p class="module"> types/types Provides better JS types support</p>
+<div class="method">getType<p class="methoddescription"> Returns the type of the passed argument in lower case</p></div>
+<div class="params"> {Any} the item to get the type of</div>
+<div class="method">assert<p class="methoddescription"> Returns true if the type of the passed item matchies the required on, otherwise returns false</p></div>
+<div class="params"> {Any} The item to test</div>
+<div class="params"> {String} The type to match</div>
+<p class="module"> utils/autoid Provides means to have automatic IDs generated for your module</p>
+<div class="method">get<p class="methoddescription"> Gets the next auto ID from the pool, you first need to create the ppol with getInstance(str)</p></div>
+<div class="method">getInstance<p class="methoddescription"> </p></div>
+<div class="params"> {String} The name of module to support with auto IDs</div>
+</div></body></html>

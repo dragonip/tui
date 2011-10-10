@@ -1,0 +1,23 @@
+div.tui-list.listContainer(style="width:"+ w, data-appid=id)
+	- for (var i = 0; i < things.length; i++ )
+		div.listitem(data-sequence=i)
+			div(class = ((things[i].thumbnail !== null)? "leftCont" : "leftContLong"))
+				h1.number_id!= things[i].sortIndex
+				h2.item_name!= things[i].publishName
+				- if (things[i].genre)
+					div.description!= "Genre:" + things[i].genre
+				- if (things[i].time)
+					div.description!= "Time:" + things[i].time
+				- if (things[i].cost)
+					div.description!= "Cost:" + things[i].cost
+			- if (things[i].thumbnail !== null)
+				div.rightCont
+					img.img_thumb(src=things[i].thumbnail)
+			- if (things[i].settings())
+				ul.channel-settings-icons
+					- if (things[i].isLocked)
+						li.icon.locked
+					- if (things[i].isBookmarked)
+						li.icon.bookmarked
+					- if (things[i].personalRecordingOptions.canRecord) 
+						li.icon.recordable
