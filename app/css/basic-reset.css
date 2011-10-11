@@ -28,10 +28,10 @@ body {
 	* background-repeat: repeat, repeat, repeat, repeat;
 	* background-size:16px 16px;
 	*/
-	background-color: #f6f6f6;
+	background-color: #000;
 	background-image: -moz-radial-gradient(center 0deg, ellipse cover , #444 15%, #000 100%);
 	/* old webkit */
-	background-image: -webkit-gradient(radial, center center, 0, center center, 141, color-stop(15%, #444), color-stop(100%, #000));
+	/*background-image: -webkit-gradient(radial, center center, 0, center center, 252, color-stop(15%, #444), color-stop(100%, #000));*/
 	background-image: -webkit-radial-gradient(#444 15%, #000 100%);
 	overflow: hidden;
 	color: #fff;
