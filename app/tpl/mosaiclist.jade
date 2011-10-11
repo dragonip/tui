@@ -1,6 +1,6 @@
 div.tui-mosaic.list-container(style="width:"+ w, data-appid=id)
 	- for (var i = 0; i < things.length; i++ )
-		div.item(data-sequence=i)
+		div.item.regular(data-sequence=i)
 			div.imgcont
 				img(src=things[i].thumbnail)
 			span.title!= things[i].publishName

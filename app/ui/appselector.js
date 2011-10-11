@@ -65,6 +65,7 @@ function(tpl,applist, dom, classes, Mevents, logger) {
 		}
 	};
 	function showAppSel() {
+			tui.setContainerVisibility(true);
 			Mevents.addHandlers(moduleEvent);
 			dom.adopt(document.body, DOM);
 			setTimeout(function() {

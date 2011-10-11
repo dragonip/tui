@@ -9,7 +9,7 @@ buf.push('>');
  for (var i = 0; i < things.length; i++ )
 {
 buf.push('<div');
-buf.push(attrs({ 'data-sequence':(i), "class": ('item') }));
+buf.push(attrs({ 'data-sequence':(i), "class": ('item') + ' ' + ('regular') }));
 buf.push('><div');
 buf.push(attrs({ "class": ('imgcont') }));
 buf.push('><img');
