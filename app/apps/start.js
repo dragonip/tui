@@ -26,11 +26,10 @@ define(['types/types', 'utils/baseapp', 'dom/dom', 'utils/events', 'dom/attribut
 		Show: function(cont) {
 			cont.innerHTML = html;
 			pcli.log('Show called from tui in app ' + this.name);
-			APP.presentation.show(cont);
 		},
 		Stop: function() {
 			pcli.log('Stop called for application ' + this.appname);
-			dom.dispose(dom.$('startCSS'));
+			dom.dispose(dom.$('#startCSS'));
 		}
 	};
 });
