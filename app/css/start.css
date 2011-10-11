@@ -47,6 +47,7 @@
 	-moz-box-shadow: 0px 0px 15px gray;
 	-webkit-box-shadow: 0px 0px 15px gray;
 	background: -moz-linear-gradient(63deg, #151515 5px, transparent 5px), -moz-linear-gradient(243deg, #151515 5px, transparent 5px), -moz-linear-gradient(63deg, #222222 5px, transparent 5px), -moz-linear-gradient(243deg, #222222 5px, transparent 5px), -moz-linear-gradient(0deg, #1B1B1B 10px, transparent 10px), -moz-linear-gradient(#1D1D1D 25%, #1A1A1A 25%, #1A1A1A 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+	background: -webkit-radial-gradient(center, black 15%, transparent 16%), -webkit-radial-gradient(center, black 15%, transparent 16%), -webkit-radial-gradient(center, rgba(255, 255, 255, 0.0976563) 15%, transparent 20%), -webkit-radial-gradient(center, rgba(255, 255, 255, 0.0976563) 15%, transparent 20%);
 	background-color: #131313;
 	background-size: 10px 10px;
 	/*background: url('app/imgs/bg1.png');
