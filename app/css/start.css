@@ -1,0 +1,75 @@
+.sadarjanie {
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	margin-top: 1px;
+	
+	display: -moz-box;
+	-moz-box-pack: center;
+	-moz-box-align: center;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+	display: box;
+	box-pack: center;
+	box-align: center;
+	vertical-align: middle;
+}
+
+@media all and (min-width: 1281px) {
+	.start {
+		font-size: 20px;
+	}
+
+}
+
+@media all and (min-width: 701px) and (max-width: 1280px) {
+	.start {
+		font-size: 16px;
+	}
+
+}
+
+@media all and (max-width: 700px) {
+	.start {
+		font-size: 11px;
+	}
+}
+
+.start {
+	margin: 20px auto;
+	border: 2px solid orange;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	padding: 35px 0 35px 0;
+	box-shadow: 0px 0px 15px gray;
+	-moz-box-shadow: 0px 0px 15px gray;
+	-webkit-box-shadow: 0px 0px 15px gray;
+	background: -moz-linear-gradient(63deg, #151515 5px, transparent 5px), -moz-linear-gradient(243deg, #151515 5px, transparent 5px), -moz-linear-gradient(63deg, #222222 5px, transparent 5px), -moz-linear-gradient(243deg, #222222 5px, transparent 5px), -moz-linear-gradient(0deg, #1B1B1B 10px, transparent 10px), -moz-linear-gradient(#1D1D1D 25%, #1A1A1A 25%, #1A1A1A 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+	background-color: #131313;
+	background-size: 10px 10px;
+	/*background: url('app/imgs/bg1.png');
+	background-size:100%;*/
+	
+	display: block;
+}
+
+.start .welcome {
+	color: #FF9933;
+	font-size: 230%;
+	text-align:center;
+	display: block;
+}
+
+.start ul.text {
+	font-size: 130%;
+	color: white;
+	width: 76%;
+	margin: 20px auto;
+	text-align: left;
+	display: block;
+}
+.start ul.text li {
+	margin-bottom: 8px;
+}

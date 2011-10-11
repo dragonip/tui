@@ -1,87 +1,36 @@
-define([
-	'types/types',
-	'utils/oop',
-	'utils/baseapp',
-	'dom/dom',
-	'utils/presentation', 
-	'utils/events', 
-	'data/data', 
-	'ui/epginfo',
-	'dom/attributes'], 
-function (types, oop, appeng, dom, presentation, Mevents, dget, epg, domattr) {
-	var datatype = 'vodlist';
+define(['types/types', 'utils/baseapp', 'dom/dom', 'utils/events', 'dom/attributes', 'debug/console', 'text!css/start.css', 'text!tpl/start.txt', 'loader/loader'], function(types, appeng, dom, events, domattr, logger, css, html, loader) {
+	loader.loadCSSFromText(css, 'startCSS');
 	var APP = appeng({
+		config: {
+			name: 'start',	
+			container: null
+		}
+	},{
 		tuiLoaderSubscribe: true
-	}),
-		commonKeys = ['left', 'right', 'up', 'down', 'chup', 'chdown'],
-		DOM = null,
-		moduleEvents = {};
-	//Define the UI presentation layer
-	presentation.mosaic(APP);
+	}),	pcli = logger.getInstance('start screen');
 
-	commonKeys.forEach(function (item) {
-		moduleEvents[item] = {
-			name: item,
-			func: function (k) {
-				APP.fire('userkey', {
-					key: k
-				});
-			},
-			attached: false
-		};
+	//Lock events for internal comunication
+	APP.on('start-requested', function() {
+		this.fire("start-ready");
 	});
 
-	APP.appname = 'start';
-	APP.container = null;
-	APP.view = {};
-	APP.rowData = null;
-
+	APP.on('stop-requested', function() {
+		
+	});
+	//Provide public interface (Start, Stop, Show, Pause/Hide)
 	return {
-		name: APP.appname,
-		Start: function () {
-			pcli('App started');
-			APP.fire('started');
-			if (APP.rowData === null) {
-				pcli('Get data for this screen');
-				dget.get({
-					type: datatype,
-					callback: function(data) {
-						APP.rawData = data;
-						pcli('Parsed data is ...');
-						pcli(data);
-						APP.fire('ready');
-					}
-				});
-			} else {
-				APP.fire('ready');
-			}
+		name: APP.config.name,
+		Start: function() {
+			APP.fire('start-requested');
 		},
-		Stop: function () {
-			pcli('App stopped');
+		Show: function(cont) {
+			cont.innerHTML = html;
+			pcli.log('Show called from tui in app ' + this.name);
+			APP.presentation.show(cont);
 		},
-		ShowIn: function (cont) {
-			/*if (DOM === null) {
-				DOM = dom.create('div', {
-					classes: 'colorfulbg'
-				});
-			}
-			*/
-			APP.container = cont;
-			
-			domattr.set(cont, 'html', APP.rasterizeData(APP.rawData));
-			
-			Mevents.addHandlers(moduleEvents);
-			/*setTimeout(function () {
-				pcli('Showing epg');
-				epg.show('<div style="width: 400px; height: 400px; background-color: blue;"></div>');
-			}, 4000);*/
-
-		},
-		Pause: function () {
-			pcli('Removing from DOM');
-			if (DOM !== null) dom.dispose(DOM);
-			APP.container = null;
-			Mevents.removeHandlers(moduleEvents);
+		Stop: function() {
+			pcli.log('Stop called for application ' + this.appname);
+			dom.dispose(dom.$('startCSS'));
 		}
 	};
 });
