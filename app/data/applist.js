@@ -28,12 +28,6 @@ define({
 		module: 'apps/aod',
 		icon: 'imgs/ppv_screen_icon.png'
 	},
-	start: {
-		name: 'Start',
-		apptag: 'start',
-		module: 'apps/start',
-		icon: 'imgs/start_screen_icon.png'
-	},
 	uvideo: {
 		name: 'user videos',
 		apptag: 'uvideo',
