@@ -9,21 +9,33 @@
 	-webkit-transition-property: top;
 	-webkit-transition-duration: 0.8s;
 }*/
+.tui-mosaic .item.regular {
+    width: 150px;
+    height: 130px;
+}
+.tui-mosaic .item.larger {
+	width: 210px;
+	height: 190px;
+}
 .tui-mosaic .item {
 	/* do not use - attributes to +1/+2 px in positioning (offsetTop)
     display: inline-block;
     */
     float: left;
-    width: 150px;
-    height: 130px;
     text-align: center;
    	padding: 5px 5px 5px 5px;
 	position: relative;
 
 }
-.tui-mosaic .imgcont {
+.tui-mosaic .larger .imgcont {
+	width: 200px;
+	height: 160px;
+}
+.tui-mosaic .regular .imgcont{
 	width: 140px;
 	height: 100px;
+}
+.tui-mosaic .imgcont {
 	-webkit-transition-property: background-color;
 	-webkit-transition-duration: 1.2s;
 	-moz-transition-property: background-color;
@@ -38,11 +50,17 @@
 	float: left;
 	margin-left: 5px;
 }
+.tui-mosaic .item.regular   img {
+    width: 130px;
+    height: 90px;
+}
+.tui-mosaic .item.larger img {
+	width: 190px;
+	height: 150px;
+}
 .tui-mosaic .item img {
 	border-radius: 3px;
     padding: 5px;
-    width: 130px;
-    height: 90px;
     /*display: block;
     margin: auto auto 2px auto;
     */

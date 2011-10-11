@@ -51,5 +51,11 @@ define({
 		apptag: 'radio',
 		module: 'apps/radio',
 		icon: 'imgs/radio_screen_icon.png'
+	},
+	games: {
+		name: 'GAMES',
+		apptag: 'games',
+		module: 'apps/games',
+		icon: 'imgs/radio_screen_icon.png'
 	}
 });

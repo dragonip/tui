@@ -43,6 +43,13 @@
 			this.currentActiveApp = app;
 			app.Start();
 		},
+		setContainerVisibility: function(bool) {
+			if (bool) {
+				this.mainContainer.style.opacity = 0.2;
+			} else {
+				this.mainContainer.style.opacity = 1;
+			}
+		},
 		apps: {
 			signals: function(signaltype, opts) {
 				switch (signaltype) {
@@ -51,6 +58,7 @@
 					if (tui.currentActiveApp.name === opts.name) {
 						tui.logger.log('my currentlyactve app is ready, time to hide the throbber and call draw on my app');
 						tui.loadIndicator.hide();
+						tui.setContainerVisibility(false);
 						tui.currentActiveApp.Show(tui.mainContainer);
 					}
 					break;
@@ -101,7 +109,7 @@
 				});
 			},
 			hide: function() {
-				tui.logger.log(t);
+				//tui.logger.log(t);
 				t.stop();
 			}
 		};
