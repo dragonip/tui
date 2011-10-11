@@ -13,9 +13,13 @@ define(['types/types', 'utils/baseapp', 'dom/dom', 'utils/events', 'dom/attribut
 	APP.on('start-requested', function() {
 		this.fire("start-ready");
 	});
+	APP.on('show-requested', function() {
+		this.config.container.innerHTML = html;
+	})
 
 	APP.on('stop-requested', function() {
-		
+		this.config.container.innerHTML = '';
+		dom.dispose(dom.$('#startCSS'));
 	});
 	//Provide public interface (Start, Stop, Show, Pause/Hide)
 	return {
@@ -24,12 +28,13 @@ define(['types/types', 'utils/baseapp', 'dom/dom', 'utils/events', 'dom/attribut
 			APP.fire('start-requested');
 		},
 		Show: function(cont) {
-			cont.innerHTML = html;
-			pcli.log('Show called from tui in app ' + this.name);
+			if (cont) {
+				APP.config.container = cont;
+				APP.fire('show-requested');
+			}
 		},
 		Stop: function() {
-			pcli.log('Stop called for application ' + this.appname);
-			dom.dispose(dom.$('#startCSS'));
+			APP.fire('stop-requested');			
 		}
 	};
 });
