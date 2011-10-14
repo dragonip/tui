@@ -1,0 +1,10 @@
+div.epg(style="width:"+ w + "px")
+	div.header
+		div.screenImg
+			img(src=channelThumb)
+		h1.channelTitle!= channelTitle
+	div.epgProgram(style="height:" + epgProgramHeight + "px")
+		- for (var i = 0; i < things.length; i++ )
+			div.epgItem
+				div.epgItemTime!= things[i][4].parsedTime
+				div.epgItemTitle!= things[i][3]

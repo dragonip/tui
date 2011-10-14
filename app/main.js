@@ -51,8 +51,8 @@ var options, initmodules, assets = {
 				var x1 = parseInt(((x * 20)/100), 10);
 				var y1 = parseInt(((y*20)/100), 10);
 				var moveX = parseInt(x/2) - parseInt(x1/2);
-				var moveY = parseInt(y/2) - parseInt(y1/2);
-				var res = "scale(0.2) translateX(" + moveX * 5 + "px)"  + "translateY(-" + moveY * 5 + "px)"
+				//var moveY = parseInt(y/2) - parseInt(y1/2);
+				var res = "scale(0.2) translateX(" + moveX * 5 + "px)"//  + "translateY(-" + moveY * 5 + "px)"
 				this.mainContainer.style.webkitTransform = res;
 				this.mainContainer.style.MozTransform = res;
 			} else {
@@ -116,7 +116,7 @@ function loadTUI() {
 }
 if (tui.options.debug) {
 	window.DEBUG = {
-		popup: false
+		popup: true
 	};
 }
 require(['ui/throbber'], function (t) {

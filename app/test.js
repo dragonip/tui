@@ -20,6 +20,10 @@
 		},
 		urlArgs: "bust=" +  (new Date()).getTime()
 	});
-require(['apps/games'], function(games){
-	console.log(games);
-})
+require(['ui/epginfo'], function(xhr) {
+//	var urlList = ['app/tpl/appselector.jade',  'app/tpl/list.jade', 'app/tpl/games.jade'];
+//	xhr.getMany(urlList, function(list) {
+//		console.log(list);
+//	}, {stripJSON: false});
+	console.log(xhr)
+});
