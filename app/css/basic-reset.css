@@ -31,8 +31,8 @@ body {
 	background-color: #000;
 	background-image: -moz-radial-gradient(center 0deg, ellipse cover , #444 15%, #000 100%);
 	/* old webkit */
-	/*background-image: -webkit-gradient(radial, center center, 0, center center, 252, color-stop(15%, #444), color-stop(100%, #000));*/
-	background-image: -webkit-radial-gradient(#444 15%, #000 100%);
+	background-image: -webkit-gradient(radial, left top, 0, center center, 252, color-stop(5%, #444), color-stop(100%, #0e0e0e));
+	/*background-image: -webkit-radial-gradient(#444 15%, #000 100%);*/
 	overflow: hidden;
 	color: #fff;
 }

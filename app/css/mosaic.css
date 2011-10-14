@@ -94,9 +94,24 @@
 	left: 9px;	
 }
 .tui-mosaic .item.current .imgcont {
-    background-color: #da0000;
+    /*background-color: #e10303;
     -webkit-transition-property: background-color;
-	-webkit-transition-duration: 0.1s;
+	-webkit-transition-duration: 0.1s; */
+	background-image: linear-gradient(bottom, rgb(135,15,15) 1%, rgb(237,12,12) 18%, rgb(230,23,23) 41%, rgb(173,38,38) 97%);
+background-image: -o-linear-gradient(bottom, rgb(135,15,15) 1%, rgb(237,12,12) 18%, rgb(230,23,23) 41%, rgb(173,38,38) 97%);
+background-image: -moz-linear-gradient(bottom, rgb(135,15,15) 1%, rgb(237,12,12) 18%, rgb(230,23,23) 41%, rgb(173,38,38) 97%);
+background-image: -webkit-linear-gradient(bottom, rgb(135,15,15) 1%, rgb(237,12,12) 18%, rgb(230,23,23) 41%, rgb(173,38,38) 97%);
+background-image: -ms-linear-gradient(bottom, rgb(135,15,15) 1%, rgb(237,12,12) 18%, rgb(230,23,23) 41%, rgb(173,38,38) 97%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.01, rgb(135,15,15)),
+	color-stop(0.18, rgb(237,12,12)),
+	color-stop(0.41, rgb(230,23,23)),
+	color-stop(0.97, rgb(173,38,38))
+);
 }
 .tui-mosaic .item.current span {
     color: #ffc4c4;
@@ -110,3 +125,34 @@
 .tui-mosaic .icon.recordable {
 	background-image: url('imgs/icon_recording.png');
 }
+
+.item .imgcont .screen_default_icon_size {
+	width: 130px; 
+	height: 90px;
+	margin: 5px;
+}
+div[data-appid="iptv"] .item .default_icon {
+	background-image: url('app/imgs/icon_set.png');
+	background-position: center -3px;
+}
+div[data-appid="ppv"] .item .default_icon {
+	background-image: url('app/imgs/icon_set.png');
+	background-position: center -104px;
+}
+div[data-appid="vod"] .item .default_icon {
+	background-image: url('app/imgs/icon_set.png');
+	background-position: center -205px;
+}
+div[data-appid="uvideo"] .item .default_icon {
+	background-image: url('app/imgs/icon_set.png');
+	background-position: center -306px;
+}
+div[data-appid="radio"] .item .default_icon {
+	background-image: url('app/imgs/icon_set.png');
+	background-position: center -407px;
+}
+div[data-appid="aod"] .item .default_icon {
+	background-image: url('app/imgs/icon_set.png');
+	background-position: center -508px;
+}
+

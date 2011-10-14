@@ -107,7 +107,7 @@ define([], function(){
 		},
 		vod: {
 			model: {
-				defThumb: 'http://www.sysmaster.com/demo/M55/Apps/VOD/imgs/default.png'
+				defThumb: null
 			},
 			converter: function(data) {
 				var i = 0;
@@ -143,7 +143,7 @@ define([], function(){
 		},
 		ppv: {
 			model: {
-				defThumb: 'http://www.sysmaster.com/demo/M55/Apps/VOD/imgs/default.png'
+				defThumb: null
 			},
 			converter: function(data) {
 				var i = 0;
@@ -180,7 +180,7 @@ define([], function(){
 		categorylist: {
 			model: {
 
-				defThumb: 'http://www.sysmaster.com/demo/M55/Apps/VOD/imgs/default.png'
+				defThumb: null
 				
 			},
 			converter: function(data) {
@@ -211,7 +211,7 @@ define([], function(){
 		radio: {
 			model: {
 
-				defThumb: ''
+				defThumb: null
 				
 			},
 			converter: function(data) {
@@ -249,7 +249,7 @@ define([], function(){
 		aod: {
 			model: {
 
-				defThumb: ''
+				defThumb: null
 				
 			},
 			converter: function(data) {
