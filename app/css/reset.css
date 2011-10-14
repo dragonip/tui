@@ -16,3 +16,20 @@ body {
 
 
 button, input, select, textarea { font-size: 100%; margin: 0; vertical-align: baseline; *vertical-align: middle; }
+
+#maincontainer {
+	-moz-transform: scale(1);
+	-moz-transition-property: -moz-transform;
+	-moz-transition-duration: 0.5s;
+	box-shadow: none;
+	-webkit-transform: scale(1);
+	-webkit-transition-property: -webkit-transform, box-shadow;
+	-webkit-transition-duration: 0.5s, 1s;
+}
+html.browser #maincontainer.scaled {
+	box-shadow: inset 0 0 15px 10px white;
+}
+html.m55 #maincontainer.scaled {
+	border: 10px solid white;
+	z-index: 10;
+}
