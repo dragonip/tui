@@ -10,11 +10,24 @@ buf.push('>');
 {
 buf.push('<div');
 buf.push(attrs({ 'data-sequence':(i), "class": ('item') + ' ' + ('regular') }));
+buf.push('>');
+ if (things[i].thumbnail === null)
+{
+buf.push('<div');
+buf.push(attrs({ "class": ('imgcont') }));
 buf.push('><div');
+buf.push(attrs({ "class": ('default_icon') + ' ' + ('screen_default_icon_size') }));
+buf.push('></div></div>');
+}
+ else
+{
+buf.push('<div');
 buf.push(attrs({ "class": ('imgcont') }));
 buf.push('><img');
 buf.push(attrs({ 'src':(things[i].thumbnail) }));
-buf.push('/></div><span');
+buf.push('/></div>');
+}
+buf.push('<span');
 buf.push(attrs({ "class": ('title') }));
 buf.push('>');
 var __val__ = things[i].publishName

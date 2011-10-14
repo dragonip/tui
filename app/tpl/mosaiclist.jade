@@ -1,8 +1,12 @@
 div.tui-mosaic.list-container(style="width:"+ w, data-appid=id)
 	- for (var i = 0; i < things.length; i++ )
 		div.item.regular(data-sequence=i)
-			div.imgcont
-				img(src=things[i].thumbnail)
+			- if (things[i].thumbnail === null)
+				div.imgcont
+					div.default_icon.screen_default_icon_size
+			- else
+				div.imgcont
+					img(src=things[i].thumbnail)
 			span.title!= things[i].publishName
 			- if (things[i].settings())
 				ul.channel-settings-icons
