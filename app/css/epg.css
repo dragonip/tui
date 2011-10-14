@@ -1,50 +1,111 @@
-.epgoverlay {
+.epgwrapper {
+	text-align: left;
 	position: absolute;
 	top: 0;
 	left: 0;
-	background-color: transparent;
-	overflow: hidden;
+	
 	display: -moz-box;
+	-moz-box-pack: start;
+	-moz-box-align: center;
 	display: -webkit-box;
-	-moz-box-pack: center;
-	-webkit-box-pack: center;
-	-moz-box-align: stretch;
-	-moz-box-orient: vertical;
-	-webkit-box-align: stretch;
-	-webkit-box-orient: vertical;
+	-webkit-box-pack: start;
+	-webkit-box-align: center;
+	display: box;
+	box-pack: start;
+	box-align: center;
+	vertical-align: middle;
 }
+
+@media all and (min-width: 1281px) {
+	.epg {
+		font-size: 20px;
+	}
+	.epg .header .channelTitle {
+		width: 75%;
+	}
+}
+
+@media all and (min-width: 701px) and (max-width: 1280px) {
+	.epg {
+		font-size: 16px;
+	}
+	.epg .header .channelTitle {
+		width: 68%;
+	}
+}
+
+@media all and (max-width: 700px) {
+	.epg {
+		font-size: 11px;
+	}
+	.epg .header .channelTitle {
+		width: 60%;
+	}
+}
+
 .epg {
-	background-color: rgba(239,239,239, 0.8);
-	/*
-	width: 600px;
-	height: 400px;
-	*/
-	margin: auto;
+	width: 100%;
+	height: 100%;
+	color: white;
+	background-color: #272b33;
 }
-
-html.browser .epg {
-	box-shadow: 0 1px 4px rgba(0,0,0,0.5);
-	background-image:-moz-linear-gradient(center top , #FFFFFF 0%, #EFEFEF 100%); 
-	background-image:-webkit-linear-gradient( rgba(255,255,255,0.4) 0%, #EFEFEF 100%);
-	-webkit-animation-duration: 0.4s;
-	-webkit-animation-name: epgshow;
-	-moz-animation-duration: 0.4s;
-	-moz-animation-name: epgshow;
+.epg .active {
+	background-color: #595b69;
 }
-
-html.m55 .epg {
-	position: relative;
-	left: -2px;
-	border: 2px solid #cacaca;
+.epg .header {
+	width: 100%;
+	height: 110px;
+	vertical-align: middle;
+	text-align: center;
+	padding: 10px;
 }
-
-@-webkit-keyframes epgshow {
-	from {-webkit-transform: scale(0.001);}
-	90% {-webkit-transform: scale(1.1);}
-	to {-webkit-transform: scale(1);}
+.epg .header .screenImg {
+	width: 130px;
+	height: 110px;
+	margin: 1px;
+	float: left;
 }
-@-moz-keyframes epgshow {
-	from {-moz-transform: scale(0.001);}
-	90% {-moz-transform: scale(1.1);}
-	to {-moz-transform: scale(1);}
+.epg .header .screenImg img {
+	width: 130px;
+	height: 110px;
+}
+.epg .header .channelTitle {
+	display: inline-block;
+	height: 110px;
+	font-size: 200%;
+	text-align: left;
+	line-height: 110px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.epg .epgProgram {
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+.epg .epgProgram .epgLoading {
+	text-align: center;
+}
+.epg .epgProgram .epgItem {
+	width: 100%;
+	font-size: 100%;
+	border-bottom: 2px solid #666666;
+	padding: 8px;
+	clear: both;
+}
+.epg .epgProgram .epgItem .epgItemTime {
+	width: 12%;
+	font-size: 100%;
+	padding: 5px;
+	display: inline-block;
+}
+.epg .epgProgram .epgItem .epgItemTitle {
+	display: inline-block;
+	font-size: 110%;
+	margin-left: 15px;
+    width: 78%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-bottom: 6px;
 }

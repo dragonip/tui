@@ -26,7 +26,7 @@ define(['data/parsersnew', 'debug/console', 'types/types', 'array/array'], funct
 		this.data = {
 			list: [],
 			dirs: {},
-			epg: []
+			epg: null
 		};
 		this.isLoaded = false;
 		this.pointer = null;
@@ -150,13 +150,13 @@ define(['data/parsersnew', 'debug/console', 'types/types', 'array/array'], funct
 				message: 'Cannot get requested URL : ' + url
 			};
 		}
-		
 		res = window.eval('('+text+')');
 		
 		if (typeof res.config !== 'undefined') {
 			delete res.config;
 		}
-		ret = parsers.parse(res, this.app.config.name);
+		if (o.type !== 'epg')
+			ret = parsers.parse(res, this.app.config.name);
 		switch (o.type) {
 			case 'list':
 				this.data.list = ret;
@@ -182,6 +182,12 @@ define(['data/parsersnew', 'debug/console', 'types/types', 'array/array'], funct
 					personalRecordingOptions: {canRecord: false},
 					isDir: false
 				});
+				break;
+			case 'epg':
+				pcli.log('Setting EPG data as property of this data');
+				console.log('Regturned RPG data')
+				console.log(ret)
+				this.data.epg = res;
 				break;
 		}
 		if (typeof o.callback === 'function') {
