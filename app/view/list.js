@@ -1,7 +1,7 @@
 /**
  * @module view/mosaic This is the default mosaic view layer, used in video listing, it uses the mosaiclist template and css/mosaic.css to display the grid with videos
  * */
-
+//TODO: merge list and mosaic as one Function with prototype extends and instead use instances for detailed settings for R, this way we can still use one instance for all mosaic displays, but have 3 instances fr list, games and mosaic
 define(['dom/dom',
 	    'dom/attributes',
 	    'dom/classes',
