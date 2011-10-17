@@ -42,6 +42,22 @@ var options, initmodules, assets = {
 			this.currentActiveApp = app;
 			app.Start();
 		},
+		setPanels: function(top, bottom, opt_topContent) {
+			if (top) {
+				this.panels.top.style.top = '0px';
+				this.mainContainer.style.marginTop = '60px';
+			} else {
+				this.panels.top.style.top = '-60px';
+				this.mainContainer.style.marginTop = '0px';
+			}
+			if (bottom) {
+				this.panels.bottom.style.bottom = '0px';
+				this.mainContainer.style.marginBottom = '60px';
+			} else {
+				this.panels.bottom.style.bottom = '-60px';
+				this.mainContainer.style.marginBottom = '0px';	
+			}
+		},
 		scaleContainer: function(bool) {
 			if (bool) {
 				//calculate for 20%
@@ -124,6 +140,8 @@ require(['ui/throbber'], function (t) {
 	a.setAttribute('id', 'maincontainer');
 	a.style.height = window.innerHeight + 'px';
 	a.style.width = window.innerWidth + 'px';
+	a.style.marginTop = '0px';
+	a.style.marginBottom = '0px';
 	document.body.setAttribute('style', 'width: ' + window.innerWidth + 'px; height: ' + window.innerHeight + 'px;');
 	tui.mainContainer = a;
 	document.querySelector('body').appendChild(a);
@@ -140,6 +158,16 @@ require(['ui/throbber'], function (t) {
 		}
 	};
 	tui.loadIndicator.show();
+	tui.panels = { 
+		top: document.createElement('div'),
+		bottom: document.createElement('div')
+	};
+	tui.panels.top.className = 'tui-component panels top-panel';
+	tui.panels.top.style.top = '-60px';
+	tui.panels.bottom.className = 'tui-component panels bottom-panel';
+	tui.panels.bottom.style.bottom = '-60px';
+	document.body.appendChild(tui.panels.top);
+	document.body.appendChild(tui.panels.bottom);
 
 	//Request our logger utility and then the static loader
 	require(['debug/console'], function (logger) {

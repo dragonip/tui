@@ -93,3 +93,13 @@ body {
 		color: #000;
 	}
 }
+.tui-component.panels {
+	position: fixed;
+	height: 60px;
+	width: 100%;
+	background-color: rgba(255,0,0,0.3);
+	-webkit-transition-property: top, bottom;
+	-webkit-transition-duration: 1s;
+}
+
+
