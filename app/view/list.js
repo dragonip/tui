@@ -1,7 +1,7 @@
 /**
  * @module view/mosaic This is the default mosaic view layer, used in video listing, it uses the mosaiclist template and css/mosaic.css to display the grid with videos
  * */
-
+//TODO: merge list and mosaic as one Function with prototype extends and instead use instances for detailed settings for R, this way we can still use one instance for all mosaic displays, but have 3 instances fr list, games and mosaic
 define(['dom/dom',
 	    'dom/attributes',
 	    'dom/classes',
@@ -63,11 +63,15 @@ function(dom, attr, classes, tpl, css, loader) {
 		classes.addClasses(collxn[i], 'active');
 		//add checks here for scxroll into view
 		var mosaicContainer = dom.$('.tui-list.listContainer');
+		var margint = parseInt(tui.mainContainer.style.marginTop, 10);
+		var marginb = parseInt(tui.mainContainer.style.marginBottom, 10);
 		var offsetTop = collxn[i].offsetTop;
 		var parentTop = parseInt(mosaicContainer.style.top, 10)  || 0;
-		if (Math.abs(parentTop) + window.innerHeight < offsetTop + R.itemHeight ) {
-			mosaicContainer.style.top = '-' + (offsetTop + R.itemHeight - window.innerHeight) + 'px';
+		if (Math.abs(parentTop) + window.innerHeight < offsetTop + R.itemHeight + margint + marginb ) {
+			mosaicContainer.style.top = '-' + ( (offsetTop + R.itemHeight - window.innerHeight) +  margint + marginb) + 'px';
+			
 		} else if ( Math.abs(parentTop) > offsetTop ) {
+			console.log(123);
 			mosaicContainer.style.top = '-' + offsetTop + 'px';
 		}
 		//done movement
