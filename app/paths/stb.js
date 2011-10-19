@@ -1,35 +1,27 @@
-define(['dmc/dmc'], function(dmc) {
-	var s  = 'app/sampledata/';
-	
-	var urls = {
+define({
+	prefix: "/cgi-bin/voip.cgi?",
+	urls : {
 		vod: {
-			list: s+'vod.js'
+			list: "run=vod_json_list"
 		},
 		iptv: {
-			list: s+'iptv.js',
-			epg: s+'iptvepg.js'
-		},
-		start: {
-			list: s+'start.js'
+			list: "run=iptv_json_list",
+			epg: "run=epg_json_list"
 		},
 		radio: {
-			list: s+'radio.js'
+			list: "run=radio_json_list"
 		},
 		ppv: {
-			list: s+'ppv.js'
+			list: "run=ppv_json_list"
 		},
 		aod: {
-			list: s+'aod.js'
+			list: "run=aod_json_list"
 		}
-	};
-
-	
-	return {
-		getPath: function(name, type) {
-			if (typeof type === 'undefined') {
-				type = 'list';
-			}
-			return urls[name][type];
+	},
+	getPath: function (name, type) {
+		if (typeof type === 'undefined') {
+			type = 'list';
 		}
-	};
+		return this.prefix + this.urls[name][type];
+	}
 });
