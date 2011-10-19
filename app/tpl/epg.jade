@@ -4,6 +4,8 @@ div.epg(style="width:"+ w + "px")
 			img(src=channelThumb)
 		h1.channelTitle!= channelTitle
 	div.epgProgram(style="height:" + epgProgramHeight + "px")
+		- if (things.length < 1)
+			div.no-epg-available Sorry, no EPG information is abailable for this channel
 		- for (var i = 0; i < things.length; i++ )
 			div.epgItem
 				div.epgItemTime!= things[i][4].parsedTime

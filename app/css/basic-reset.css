@@ -31,7 +31,8 @@ body {
 	background-color: #000;
 	background-image: -moz-radial-gradient(center 0deg, ellipse cover , #444 15%, #000 100%);
 	/* old webkit */
-	background-image: -webkit-gradient(radial, left top, 0, center center, 252, color-stop(5%, #444), color-stop(100%, #0e0e0e));
+/*	background-image: -webkit-gradient(radial, left top, 0, center center, 252, color-stop(5%, #444), color-stop(100%, #0e0e0e));*/
+	background-image: -webkit-gradient(radial, 0 0, 0, 80% 65%, 220, color-stop(20%, #222) , color-stop(80%, #000));
 	/*background-image: -webkit-radial-gradient(#444 15%, #000 100%);*/
 	overflow: hidden;
 	color: #fff;
@@ -93,7 +94,6 @@ body {
 		color: #000;
 	}
 }
-
 /*------------------- scroll styling --------------------*/
 ::-webkit-scrollbar { 
 	width: 8px; 
@@ -168,5 +168,13 @@ scrollbar[orient="horizontal"] {
 	max-height: 11px !important;
 }
 
+.tui-component.panels {
+	position: fixed;
+	height: 60px;
+	width: 100%;
+	background-color: rgba(255,0,0,0.3);
+	-webkit-transition-property: top, bottom;
+	-webkit-transition-duration: 1s;
+}
 
 

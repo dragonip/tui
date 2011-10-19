@@ -46,12 +46,12 @@
 	box-shadow: 0 0 20px #ddd;
 	-moz-border-radius: 100px;
 	-moz-box-shadow: 0 0 20px #ddd;
-	-moz-transition-property: -moz-transform, opacity;
-	-moz-transition-duration: 0.3s, 0.3s;
+/*	-moz-transition-property: -moz-transform, opacity;*/
+/*	-moz-transition-duration: 0.3s, 0.3s;*/
 	-webkit-border-radius: 100px;
 	-webkit-box-shadow: 0 0 20px #ddd;
-	-webkit-transition-property: -moz-transform, opacity;
-	-webkit-transition-duration: 0.3s, 0.3s;
+/*	-webkit-transition-property: -moz-transform, opacity;*/
+/*	-webkit-transition-duration: 0.3s, 0.3s;*/
 }
 .rotator-circle.init {
 	opacity: 0.1;
@@ -100,6 +100,5 @@
 }
 /* obscure class for blurring when selector is active*/
 .obscure {
-	
 	filter: url(app/css/effects.svg#obscure);
 }

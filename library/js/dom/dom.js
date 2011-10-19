@@ -85,6 +85,9 @@ define(['dom/string',
 		 * @param {HTMLElement} what, The element to be adopted
 		 */
 		adopt: function(element, what) {
+			if (arguments.length === 1) {
+				return document.body.appendChild(element);
+			}
 			return element.appendChild(what);
 		},
 		/**

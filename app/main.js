@@ -27,9 +27,10 @@ var options, initmodules, assets = {
 	clearActions: {}
 },
 	options = {
-		debug: true,
+		debug: false,
 		nodejs: false,
-		version: '0.1'
+		version: '0.1',
+		useScale: false
 	}
 
 	window.tui = {
@@ -42,23 +43,48 @@ var options, initmodules, assets = {
 			this.currentActiveApp = app;
 			app.Start();
 		},
+		setPanels: function(top, bottom, opt_topContent) {
+			if (top) {
+				this.panels.top.style.top = '0px';
+				this.mainContainer.style.marginTop = '60px';
+			} else {
+				this.panels.top.style.top = '-60px';
+				this.mainContainer.style.marginTop = '0px';
+			}
+			if (bottom) {
+				this.panels.bottom.style.bottom = '0px';
+				this.mainContainer.style.marginBottom = '60px';
+			} else {
+				this.panels.bottom.style.bottom = '-60px';
+				this.mainContainer.style.marginBottom = '0px';	
+			}
+		},
 		scaleContainer: function(bool) {
 			if (bool) {
 				//calculate for 20%
-				this.mainContainer.className = 'scaled'
-				var x = parseInt(this.mainContainer.style.width, 10);
-				var y = parseInt(this.mainContainer.style.height, 10);
-				var x1 = parseInt(((x * 20)/100), 10);
-				var y1 = parseInt(((y*20)/100), 10);
-				var moveX = parseInt(x/2) - parseInt(x1/2);
-				//var moveY = parseInt(y/2) - parseInt(y1/2);
-				var res = "scale(0.2) translateX(" + moveX * 5 + "px)"//  + "translateY(-" + moveY * 5 + "px)"
-				this.mainContainer.style.webkitTransform = res;
-				this.mainContainer.style.MozTransform = res;
+				if (this.useScale){
+					this.mainContainer.className = 'scaled'
+					var x = parseInt(this.mainContainer.style.width, 10);
+					var y = parseInt(this.mainContainer.style.height, 10);
+					var x1 = parseInt(((x * 20)/100), 10);
+					var y1 = parseInt(((y*20)/100), 10);
+					var moveX = parseInt(x/2) - parseInt(x1/2);
+					//var moveY = parseInt(y/2) - parseInt(y1/2);
+					var res = "scale(0.2) translateX(" + moveX * 5 + "px)"//  + "translateY(-" + moveY * 5 + "px)"
+					this.mainContainer.style.webkitTransform = res;
+					this.mainContainer.style.MozTransform = res;
+				} else {
+					this.mainContainer.style.visibility = 'hidden';					
+				}
 			} else {
-				this.mainContainer.className = '';
-				this.mainContainer.style.MozTransform = 'scale(1)';
-				this.mainContainer.style.webkitTransform = "scale(1)"
+				if (this.useScale){
+					this.mainContainer.className = '';
+					this.mainContainer.style.MozTransform = 'scale(1)';
+					this.mainContainer.style.webkitTransform = "scale(1)"
+					
+				} else {
+					this.mainContainer.style.visibility = '';
+				}
 			}
 		},
 		setContainerVisibility: function (bool) {
@@ -102,9 +128,11 @@ var options, initmodules, assets = {
 
 function loadTUI() {
 	require(['ui/appselector', 'dmc/dmc'], function (Mappsel, Mdmc) {
-		require([(Mdmc.isNative()) ? 'app/paths/stb.js' : 'app/paths/browser.js', 'data/applist'], function (paths, apps) {
+		require(['app/paths/stb.js', 'data/applist'], function (paths, apps) {
 			tui.options.paths = paths;
 			tui.loadIndicator.hide();
+//			Signal to backend that we are ready to receive signals
+			alert("app://dmcready");
 			tui.loadApp({
 				name: 'Start',
 				apptag: 'start',
@@ -119,11 +147,15 @@ if (tui.options.debug) {
 		popup: true
 	};
 }
+//Use this in tets as loggins slows down the app very very much!!
+//window.DEBUG = undefined;
 require(['ui/throbber'], function (t) {
 	var a = document.createElement('div');
 	a.setAttribute('id', 'maincontainer');
 	a.style.height = window.innerHeight + 'px';
 	a.style.width = window.innerWidth + 'px';
+	a.style.marginTop = '0px';
+	a.style.marginBottom = '0px';
 	document.body.setAttribute('style', 'width: ' + window.innerWidth + 'px; height: ' + window.innerHeight + 'px;');
 	tui.mainContainer = a;
 	document.querySelector('body').appendChild(a);
@@ -140,6 +172,16 @@ require(['ui/throbber'], function (t) {
 		}
 	};
 	tui.loadIndicator.show();
+	tui.panels = { 
+		top: document.createElement('div'),
+		bottom: document.createElement('div')
+	};
+	tui.panels.top.className = 'tui-component panels top-panel';
+	tui.panels.top.style.top = '-60px';
+	tui.panels.bottom.className = 'tui-component panels bottom-panel';
+	tui.panels.bottom.style.bottom = '-60px';
+	document.body.appendChild(tui.panels.top);
+	document.body.appendChild(tui.panels.bottom);
 
 	//Request our logger utility and then the static loader
 	require(['debug/console'], function (logger) {

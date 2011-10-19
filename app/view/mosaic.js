@@ -62,11 +62,13 @@ function(dom, attr, classes, tpl, css, loader) {
 		if (a !== null) classes.removeClasses(a, 'current');
 		classes.addClasses(collxn[i], 'current');
 		//add checks here for scxroll into view
+		var margint = parseInt(tui.mainContainer.style.marginTop, 10);
+		var marginb = parseInt(tui.mainContainer.style.marginBottom, 10);
 		var mosaicContainer = dom.$('.tui-mosaic.list-container');
 		var offsetTop = collxn[i].offsetTop;
 		var parentTop = parseInt(mosaicContainer.style.top, 10)  || 0;
-		if (Math.abs(parentTop) + window.innerHeight < offsetTop + R.itemHeight ) {
-			mosaicContainer.style.top = '-' + (offsetTop + R.itemHeight - window.innerHeight) + 'px';
+		if (Math.abs(parentTop) + window.innerHeight < offsetTop + R.itemHeight + margint + marginb ) {
+			mosaicContainer.style.top = '-' +( (offsetTop + R.itemHeight - window.innerHeight) +  margint + marginb) + 'px';
 		} else if ( Math.abs(parentTop) > offsetTop ) {
 			mosaicContainer.style.top = '-' + offsetTop + 'px';
 		}

@@ -19,6 +19,12 @@ buf.push(null == __val__ ? "" : __val__);
 buf.push('</h1></div><div');
 buf.push(attrs({ 'style':("height:" + epgProgramHeight + "px"), "class": ('epgProgram') }));
 buf.push('>');
+ if (things.length < 1)
+{
+buf.push('<div');
+buf.push(attrs({ "class": ('no-epg-available') }));
+buf.push('>Sorry, no EPG information is abailable for this channel</div>');
+}
  for (var i = 0; i < things.length; i++ )
 {
 buf.push('<div');
