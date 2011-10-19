@@ -27,9 +27,10 @@ var options, initmodules, assets = {
 	clearActions: {}
 },
 	options = {
-		debug: true,
+		debug: false,
 		nodejs: false,
-		version: '0.1'
+		version: '0.1',
+		useScale: false
 	}
 
 	window.tui = {
@@ -45,20 +46,29 @@ var options, initmodules, assets = {
 		scaleContainer: function(bool) {
 			if (bool) {
 				//calculate for 20%
-				this.mainContainer.className = 'scaled'
-				var x = parseInt(this.mainContainer.style.width, 10);
-				var y = parseInt(this.mainContainer.style.height, 10);
-				var x1 = parseInt(((x * 20)/100), 10);
-				var y1 = parseInt(((y*20)/100), 10);
-				var moveX = parseInt(x/2) - parseInt(x1/2);
-				//var moveY = parseInt(y/2) - parseInt(y1/2);
-				var res = "scale(0.2) translateX(" + moveX * 5 + "px)"//  + "translateY(-" + moveY * 5 + "px)"
-				this.mainContainer.style.webkitTransform = res;
-				this.mainContainer.style.MozTransform = res;
+				if (this.useScale){
+					this.mainContainer.className = 'scaled'
+					var x = parseInt(this.mainContainer.style.width, 10);
+					var y = parseInt(this.mainContainer.style.height, 10);
+					var x1 = parseInt(((x * 20)/100), 10);
+					var y1 = parseInt(((y*20)/100), 10);
+					var moveX = parseInt(x/2) - parseInt(x1/2);
+					//var moveY = parseInt(y/2) - parseInt(y1/2);
+					var res = "scale(0.2) translateX(" + moveX * 5 + "px)"//  + "translateY(-" + moveY * 5 + "px)"
+					this.mainContainer.style.webkitTransform = res;
+					this.mainContainer.style.MozTransform = res;
+				} else {
+					this.mainContainer.style.visibility = 'hidden';					
+				}
 			} else {
-				this.mainContainer.className = '';
-				this.mainContainer.style.MozTransform = 'scale(1)';
-				this.mainContainer.style.webkitTransform = "scale(1)"
+				if (this.useScale){
+					this.mainContainer.className = '';
+					this.mainContainer.style.MozTransform = 'scale(1)';
+					this.mainContainer.style.webkitTransform = "scale(1)"
+					
+				} else {
+					this.mainContainer.style.visibility = '';
+				}
 			}
 		},
 		setContainerVisibility: function (bool) {
@@ -102,9 +112,11 @@ var options, initmodules, assets = {
 
 function loadTUI() {
 	require(['ui/appselector', 'dmc/dmc'], function (Mappsel, Mdmc) {
-		require([(Mdmc.isNative()) ? 'app/paths/stb.js' : 'app/paths/browser.js', 'data/applist'], function (paths, apps) {
+		require(['app/paths/stb.js', 'data/applist'], function (paths, apps) {
 			tui.options.paths = paths;
 			tui.loadIndicator.hide();
+//			Signal to backend that we are ready to receive signals
+			alert("app://dmcready");
 			tui.loadApp({
 				name: 'Start',
 				apptag: 'start',
@@ -119,6 +131,8 @@ if (tui.options.debug) {
 		popup: true
 	};
 }
+//Use this in tets as loggins slows down the app very very much!!
+//window.DEBUG = undefined;
 require(['ui/throbber'], function (t) {
 	var a = document.createElement('div');
 	a.setAttribute('id', 'maincontainer');
