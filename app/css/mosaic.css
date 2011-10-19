@@ -25,7 +25,6 @@
     text-align: center;
    	padding: 5px 5px 5px 5px;
 	position: relative;
-
 }
 .tui-mosaic .larger .imgcont {
 	width: 200px;
@@ -96,22 +95,36 @@
 .tui-mosaic .item.current .imgcont {
     /*background-color: #e10303;
     -webkit-transition-property: background-color;
-	-webkit-transition-duration: 0.1s; */
+	-webkit-transition-duration: 0.1s; *//*
 	background-image: linear-gradient(bottom, rgb(135,15,15) 1%, rgb(237,12,12) 18%, rgb(230,23,23) 41%, rgb(173,38,38) 97%);
-background-image: -o-linear-gradient(bottom, rgb(135,15,15) 1%, rgb(237,12,12) 18%, rgb(230,23,23) 41%, rgb(173,38,38) 97%);
-background-image: -moz-linear-gradient(bottom, rgb(135,15,15) 1%, rgb(237,12,12) 18%, rgb(230,23,23) 41%, rgb(173,38,38) 97%);
-background-image: -webkit-linear-gradient(bottom, rgb(135,15,15) 1%, rgb(237,12,12) 18%, rgb(230,23,23) 41%, rgb(173,38,38) 97%);
-background-image: -ms-linear-gradient(bottom, rgb(135,15,15) 1%, rgb(237,12,12) 18%, rgb(230,23,23) 41%, rgb(173,38,38) 97%);
+	background-image: -o-linear-gradient(bottom, rgb(135,15,15) 1%, rgb(237,12,12) 18%, rgb(230,23,23) 41%, rgb(173,38,38) 97%);
+	background-image: -moz-linear-gradient(bottom, rgb(135,15,15) 1%, rgb(237,12,12) 18%, rgb(230,23,23) 41%, rgb(173,38,38) 97%);
+	background-image: -webkit-linear-gradient(bottom, rgb(135,15,15) 1%, rgb(237,12,12) 18%, rgb(230,23,23) 41%, rgb(173,38,38) 97%);
+	background-image: -ms-linear-gradient(bottom, rgb(135,15,15) 1%, rgb(237,12,12) 18%, rgb(230,23,23) 41%, rgb(173,38,38) 97%);
 
-background-image: -webkit-gradient(
-	linear,
-	left bottom,
-	left top,
-	color-stop(0.01, rgb(135,15,15)),
-	color-stop(0.18, rgb(237,12,12)),
-	color-stop(0.41, rgb(230,23,23)),
-	color-stop(0.97, rgb(173,38,38))
-);
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.01, rgb(135,15,15)),
+		color-stop(0.18, rgb(237,12,12)),
+		color-stop(0.41, rgb(230,23,23)),
+		color-stop(0.97, rgb(173,38,38))
+	);*/
+	background-image: linear-gradient(bottom, rgb(214,114,26) 10%, rgb(158,82,24) 19%, rgb(250,108,13) 87%);
+	background-image: -o-linear-gradient(bottom, rgb(214,114,26) 10%, rgb(158,82,24) 19%, rgb(250,108,13) 87%);
+	background-image: -moz-linear-gradient(bottom, rgb(214,114,26) 10%, rgb(158,82,24) 19%, rgb(250,108,13) 87%);
+	background-image: -webkit-linear-gradient(bottom, rgb(214,114,26) 10%, rgb(158,82,24) 19%, rgb(250,108,13) 87%);
+	background-image: -ms-linear-gradient(bottom, rgb(214,114,26) 10%, rgb(158,82,24) 19%, rgb(250,108,13) 87%);
+
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.1, rgb(214,114,26)),
+		color-stop(0.19, rgb(158,82,24)),
+		color-stop(0.87, rgb(250,108,13))
+	);
 }
 .tui-mosaic .item.current span {
     color: #ffc4c4;
