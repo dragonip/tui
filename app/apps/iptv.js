@@ -1,4 +1,4 @@
-define(['types/types', 'utils/baseapp', 'dom/dom', 'model/datastorage', 'utils/events', 'ui/epginfo', 'dom/attributes', 'view/list', 'debug/console', 'utils/defaultactions','utils/avapp'], function (types, appeng, dom, model, events, epg, domattr, presentation, logger, defaultevents, avapp) {
+define(['types/types', 'utils/baseapp', 'dom/dom', 'model/datastorage', 'utils/events', 'ui/epginfo', 'dom/attributes', 'view/list', 'debug/console', 'utils/defaultactions','utils/avapp', 'utils/empty'], function (types, appeng, dom, model, events, epg, domattr, presentation, logger, defaultevents, avapp, empty) {
 //	We use EPG in this screen, so support its visibility
 	var	epgIsVisible = false,
 		pcli = logger.getInstance('iptv screen');
@@ -7,11 +7,21 @@ define(['types/types', 'utils/baseapp', 'dom/dom', 'model/datastorage', 'utils/e
 		name: 'iptv',
 		container: null
 	});
-	
-	var epgEvents = {
-		
-		
+	var epgMove = function(key) {};
+	//GEt tainted events for default actions so we can fly with EPG
+	var epgEvents = empty.getTainted(['left', 'right', 'chup', 'chdown', 'ok']);
+	epgEvents.up = {
+		name: 'up',
+		func: epgMove,
+		attached: false
 	};
+	epgEvents.down = {
+		name: 'down',
+		func: epgMove,
+		attached: false
+	};
+	
+	
 	
 //	Add model and presentation levels, as configured in the define	
 	APP.model = model(APP);
@@ -35,12 +45,11 @@ define(['types/types', 'utils/baseapp', 'dom/dom', 'model/datastorage', 'utils/e
 	};
 	
 	APP.updateEPG = function() {
-		console.log(this.model.data);
 		var it = this.model.getItem();
 		epg.display({ 
 			icon: it.thumbnail,
 			title: it.publishName,
-			things: this.model.data.epg[it.id].body
+			things: (this.model.data.epg[it.id] ? this.model.data.epg[it.id].body : [])
 		});
 	};
 	
