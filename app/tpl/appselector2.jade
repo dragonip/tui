@@ -1,0 +1,5 @@
+div.screenChooserWrapper
+	div.chooseScreen
+	div.screenChooser
+		- for (var i = 0; i < apps.length ; i++ )
+			div(class="screen " + apps[i].apptag, 'data-appname'="#{apps[i].apptag}")
