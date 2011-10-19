@@ -185,8 +185,6 @@ define(['data/parsersnew', 'debug/console', 'types/types', 'array/array'], funct
 				break;
 			case 'epg':
 				pcli.log('Setting EPG data as property of this data');
-				console.log('Regturned RPG data')
-				console.log(ret)
 				this.data.epg = res;
 				break;
 		}

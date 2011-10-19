@@ -47,13 +47,11 @@ function(dom, attr, classes, tpl, css, loader) {
 
 			return;
 		}
-		console.log(2);
 		var res = tpl.render({
 			things: this.app.model.get('list'),
 			id: this.app.config.name,
 			w: R.ulWidth + 'px'
 		});
-		console.log(3);
 		this.container.innerHTML = res;
 		this.dom = this.container.firstChild;
 		this.activate(idx);
