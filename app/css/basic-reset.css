@@ -1,3 +1,4 @@
+/* NOTE: Keep this file as minimal as possible tobe able to show loader asap*/
 html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
@@ -108,12 +109,12 @@ body {
 ::-webkit-scrollbar-thumb { 
 	-webkit-border-radius: 10px; 
 	border-radius: 10px; 
-	background: #383838; 
+	background: #717171; 
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 } 
-::-webkit-scrollbar-thumb:window-inactive { 
-	background: rgba(255,0,0,0.4); 
-}
+/*::-webkit-scrollbar-thumb:window-inactive { */
+/*	background: rgba(255,0,0,1); */
+/*}*/
 
 /* NEW SCROLLBAR */
 scrollbarbutton {
@@ -124,14 +125,14 @@ scrollbarbutton {
 thumb {
   -moz-appearance: none !important;
   border: none !important;
-  background-color: #c2c2c2 !important;
+  background-color: #8e8e8e !important;
   -moz-border-radius: 10px;
   /*-moz-box-shadow: inset 0 0 3px #000*/
 }
 scrollbar {
   -moz-appearance: none !important;
   background: transparent !important;
-  opacity: 0.1 !important;
+/*  opacity: 0.1 !important;*/
 }
 scrollbar:hover {
   -moz-appearance: none !important;
@@ -175,6 +176,31 @@ scrollbar[orient="horizontal"] {
 	background-color: rgba(255,0,0,0.3);
 	-webkit-transition-property: top, bottom;
 	-webkit-transition-duration: 1s;
+	z-index: 10000;
 }
+.tui-component.tui-preloader {
+	position: absolute;
+	top: -5000px;
+	left: -5000px;
+}
+.tui-component.tui-systemclock {
+	background-image: url("../imgs/small_clock.png");
+    background-position: left center;
+    background-repeat: no-repeat;
 
+    float: right;
+    height: 26px;
+    margin-right: 35px;
+    margin-top: 15px;
 
+    right: 30px;
+    width: 110px;
+    z-index: 10001;
+}
+.tui-component.tui-systemclock h1 {
+	color: white;
+	font-weight: normal;
+	font-family: Arial,Helvetica,sans-serif;
+	margin: 7px 0 0 18px;
+	font-size: 12px;
+}
