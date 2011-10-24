@@ -11,8 +11,9 @@ define(['dmc/smjs'], function (smjs) {
 	//
 	// when config is changed from outside please fire an event so that we can clear cache!!!
 	// 
-	// TODO get conig options with the new method and store them locally for faster access
-	// TODO test get request with web worker
+	// TODO: get conig options with the new method and store them locally for faster access
+	// TODO: test get request with web worker
+	// TODO: Blia
 	//
 	function resolveSection(getWhat, onWhat) {
 		var resolved = {};
@@ -78,7 +79,9 @@ define(['dmc/smjs'], function (smjs) {
 		isDHCP: function(iface) { return getCfgOption('dhcp', iface); },
 		getIPAddress: function(iface) { return getCfgOption('ip', iface); },
 		onKeyPress: function(fn) { smjs.onKeyPress(fn); },
-		isNative: function() { return (typeof smjs.emulated === 'boolean' && smjs.emulated)?false:true ; }
+		isNative: function() { return (typeof smjs.emulated === 'boolean' && smjs.emulated)?false:true ; },
+		play: function(playString) {return smjs.play(playString);},
+		stop: function() {return smjs.stop();}
 
 	};
 });
