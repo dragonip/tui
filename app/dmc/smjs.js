@@ -125,10 +125,10 @@ define(['debug/console'],function(logger) {
 					STORAGE.onKeyPressFunction(kbdInputsMap(ev.keyCode));
 				}
 			}, false);
-			smjs.play = function () {}
-			smjs.pause = function () {}
-			smjs.stop = function () {}
-			smjs.resume = function () {}
+			smjs.play = function () {return 0;}
+			smjs.pause = function () {return 0;}
+			smjs.stop = function () {return 0;}
+			smjs.resume = function () {return 0;}
 			smjs.setPosition = function () {}
 			smjs.getPosition = function () {}
 			smjs.getStreamDuration = function () {}
