@@ -72,7 +72,7 @@ define(['data/parsersnew', 'debug/console', 'types/types', 'array/array'], funct
 				if (this.getItem().id === null) {
 					this.outDir();
 				} else {
-					this.app.fire('try-play');					
+					this.app.fire('try-play', this.getItem());					
 				}
 			}
 		}
