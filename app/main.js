@@ -27,7 +27,7 @@ var options, initmodules, assets = {
 	clearActions: {}
 },
 	options = {
-		debug: false,
+		debug: true,
 		nodejs: false,
 		version: '0.1',
 		useScale: false
@@ -43,20 +43,29 @@ var options, initmodules, assets = {
 			this.currentActiveApp = app;
 			app.Start();
 		},
-		setPanels: function(top, bottom, opt_topContent) {
+		setPanels: function(top, bottom, opt_topContent, opt_bottomContent) {
 			if (top) {
+//				if (opt_topContent) {
+//					this.panels.top.innerHTML = opt_topContent;
+//				}
 				this.panels.top.style.top = '0px';
 				this.mainContainer.style.marginTop = '60px';
+
 			} else {
 				this.panels.top.style.top = '-60px';
 				this.mainContainer.style.marginTop = '0px';
+				//this.panels.top.innerHTML = '';
 			}
 			if (bottom) {
+				if (opt_bottomContent) {
+					this.panels.infoBlock.innerHTML = opt_bottomContent;
+				}
 				this.panels.bottom.style.bottom = '0px';
 				this.mainContainer.style.marginBottom = '60px';
 			} else {
 				this.panels.bottom.style.bottom = '-60px';
 				this.mainContainer.style.marginBottom = '0px';	
+				this.panels.infoBlock.innerHTML = '';
 			}
 		},
 		scaleContainer: function(bool) {
@@ -127,8 +136,9 @@ var options, initmodules, assets = {
 
 
 function loadTUI() {
-	require(['ui/appselector', 'dmc/dmc'], function (Mappsel, Mdmc) {
-		require(['app/paths/stb.js', 'data/applist'], function (paths, apps) {
+	require(['ui/simplescreenselector', 'dmc/dmc'], function (Mappsel, Mdmc) {
+		require(['app/paths/stb.js', 'data/applist', 'ui/player'], function (paths, apps, player) {
+			tui.player = player;
 			tui.options.paths = paths;
 			tui.loadIndicator.hide();
 //			Signal to backend that we are ready to receive signals
@@ -144,9 +154,10 @@ function loadTUI() {
 }
 if (tui.options.debug) {
 	window.DEBUG = {
-		popup: true
+		popup: false
 	};
 }
+
 //Use this in tets as loggins slows down the app very very much!!
 //window.DEBUG = undefined;
 require(['ui/throbber'], function (t) {
@@ -172,6 +183,31 @@ require(['ui/throbber'], function (t) {
 		}
 	};
 	tui.loadIndicator.show();
+//	After we are ready with showing the loader indicator we can preload the images
+//	We do not wait for the images to be loaded, we just hope they will be loaded on time...
+//	this is because if the image is too larde the starting will be unacceptably slow
+	var preload = document.createElement('div');
+	preload.className = 'tui-component tui-preloader';
+	document.body.appendChild(preload);
+	preload.innerHTML = '<img src="app/imgs/icon_set.png"><img src="apps/imgs/activeScreenArrow.png">';
+	var updateClock = (function() {
+			var clockElementRer = null;
+
+			function format(txt) {
+				var mysecs = (txt % 60).toString();
+				if (mysecs.length < 2) mysecs = "0" + mysecs;
+				return mysecs;
+			}
+			return function(el) {
+				if (el) clockElementRer = el;
+				var d = new Date();
+				var timestring = d.getDate() + '/' + (d.getMonth() + 1).toString() + '/' + d.getFullYear() + '&nbsp;' + d.getHours() + ':' + format(d.getMinutes());
+				clockElementRer.innerHTML = timestring;
+				setTimeout(updateClock, 60000);
+			};
+		})();
+
+	
 	tui.panels = { 
 		top: document.createElement('div'),
 		bottom: document.createElement('div')
@@ -180,6 +216,18 @@ require(['ui/throbber'], function (t) {
 	tui.panels.top.style.top = '-60px';
 	tui.panels.bottom.className = 'tui-component panels bottom-panel';
 	tui.panels.bottom.style.bottom = '-60px';
+	//Create System clock 
+	var clock = document.createElement('div');
+	clock.innerHTML = '<h1></h1>';
+	clock.className = 'tui-component tui-systemclock';
+	updateClock(clock.querySelector('h1'));
+	tui.panels.bottom.appendChild(clock);
+	tui.panels.infoBlock = document.createElement('div');
+	tui.panels.infoBlock.className = 'tui-component tui-infoblock'
+	
+	tui.panels.bottom.appendChild(tui.panels.infoBlock);
+	
+	
 	document.body.appendChild(tui.panels.top);
 	document.body.appendChild(tui.panels.bottom);
 
@@ -192,7 +240,7 @@ require(['ui/throbber'], function (t) {
 		tui.logger.log('Load the intrinsic loader now..');
 		require(['loader/loader'], function (loader) {
 			tui.logger.log(['Loaded intrinsic loader', 'Should switch to jquery and net/xrh to be browser independent']);
-			loader.loadCSS(['app/css/reset.css', 'app/css/appselector.css'], loadTUI);
+			loader.loadCSS(['app/css/reset.css', 'app/css/appselector2.css'], loadTUI);
 		});
 	});
 });
