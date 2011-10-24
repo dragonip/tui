@@ -1,5 +1,6 @@
-div.screenChooserWrapper
-	div.chooseScreen
-	div.screenChooser
-		- for (var i = 0; i < apps.length ; i++ )
-			div(class="screen " + apps[i].apptag, 'data-appname'="#{apps[i].apptag}")
+div.screenChooserWrapper.screenChooser
+	div.tui-component.screen-selector-pointer
+	div.filler
+	- for (var i = 0; i < apps.length ; i++ )
+		div(class="screen approtator-item " + apps[i].apptag, 'data-appname'="#{apps[i].apptag}", 'data-sequence'=i)
+	div.filler

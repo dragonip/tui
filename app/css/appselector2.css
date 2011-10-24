@@ -4,17 +4,27 @@
 	top: 0;
 	right: 0;
 	padding-right: 15px;
+	overflow: auto;
 }
-.screenChooser {
-	width: 155px;
+/*.screenChooser {*/
+/*	width: 155px;*/
+/*	height: 90px;*/
+/*	position: absolute;*/
+/*	right: 0;*/
+/*	top: 0;*/
+/*	z-index: 9000;*/
+/*	overflow-y: auto;*/
+/*	overflow-x: hidden;*/
+/*	padding: 195px 15px 195px 0;*/
+/*}*/
+.screen-selector-pointer {
+	background-image: url('app/imgs/activeScreenArrow.png');
+	background-position: left center;
+	background-repeat: no-repeat;
+	width: 25px;
 	height: 90px;
-	position: absolute;
-	right: 0;
-	top: 0;
-	z-index: 9000;
-	overflow-y: auto;
-	overflow-x: hidden;
-	padding: 195px 15px 195px 0;
+	position: fixed;
+	right: 155px;
 }
 .screenChooser .screen {
 	width: 155px;
@@ -67,14 +77,14 @@
 	background-repeat: no-repeat;
 }
 
-.screenChooserWrapper .chooseScreen{
-	background-image: url('app/imgs/activeScreenArrow.png');
-	background-position: left center;
-	background-repeat: no-repeat;
-	width: 25px;
-	height: 90px;
-	position: absolute;
-	top: 195px;
-	left: 0;
-}
+/*.screenChooserWrapper .chooseScreen{*/
+/*	background-image: url('app/imgs/activeScreenArrow.png');*/
+/*	background-position: left center;*/
+/*	background-repeat: no-repeat;*/
+/*	width: 25px;*/
+/*	height: 90px;*/
+/*	position: absolute;*/
+/*	top: 195px;*/
+/*	left: 0;*/
+/*}*/
 
