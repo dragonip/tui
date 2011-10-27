@@ -25,7 +25,7 @@ define([
 
 	function chooseLogger() {
 		if (typeof window.console !== 'undefined' && typeof window.DEBUG !== 'undefined' && !window.DEBUG.popup) {
-			if (smjs){
+			if (typeof smjs == 'undefined'){
 				return function(logMessages, level) {
 					var i, salam='';
 					console.log('STATED IN GROUP '+ this.name);
