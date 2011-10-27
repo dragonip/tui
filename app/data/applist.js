@@ -35,9 +35,9 @@ define({
 		icon: 'imgs/start_screen_icon.png'
 	},
 	podcast: {
-		name: 'podcasts',
-		apptag: 'podcast',
-		module: 'apps/start',
+		name: 'Settings',
+		apptag: 'settings',
+		module: 'apps/settings',
 		icon: 'imgs/start_screen_icon.png'
 	},
 	radio: {
