@@ -11,6 +11,7 @@ require.config({
 		"oop": "../library/js/oop",
 		"nls": "../library/js/nls",
 		"net": "../library/js/net",
+		"json": "../library/js/json",
 		"loader": "../library/js/loader",
 		"host": "../library/js/nost",
 		"env/exports": "../library/js/env/exports",
@@ -137,19 +138,31 @@ var options, initmodules, assets = {
 
 function loadTUI() {
 	require(['ui/simplescreenselector', 'dmc/dmc'], function (Mappsel, Mdmc) {
-		require(['app/paths/stb.js', 'data/applist', 'ui/player'], function (paths, apps, player) {
-			tui.player = player;
-			tui.options.paths = paths;
-			tui.loadIndicator.hide();
-//			Signal to backend that we are ready to receive signals
-			alert("app://dmcready");
-			tui.loadApp({
-				name: 'Start',
-				apptag: 'start',
-				module: 'apps/start',
-				icon: 'imgs/start_screen_icon.png'
+		require(['transport/response'], function(response) {
+			window.transportReceiver = function(JSONString) {
+				console.log("received message from server");
+				response.recall(JSONString);
+			};
+			require(['app/paths/stb.js', 'data/applist', 'ui/player', 'tpl/infobuttons'], function (paths, apps, player, itpl) {
+				tui.player = player;
+				tui.options.paths = paths;
+				tui.loadIndicator.hide();
+	//			Signal to backend that we are ready to receive signals
+				alert("app://dmcready");
+				tui.loadApp({
+					name: 'Start',
+					apptag: 'start',
+					module: 'apps/start',
+					icon: 'imgs/start_screen_icon.png'
+				});
+				tui.setPanels(false, true, false, itpl.render({
+					things: {
+						home: 'Select App'
+					}
+				}));
 			});
 		});
+
 	});
 }
 if (tui.options.debug) {
@@ -240,7 +253,7 @@ require(['ui/throbber'], function (t) {
 		tui.logger.log('Load the intrinsic loader now..');
 		require(['loader/loader'], function (loader) {
 			tui.logger.log(['Loaded intrinsic loader', 'Should switch to jquery and net/xrh to be browser independent']);
-			loader.loadCSS(['app/css/reset.css', 'app/css/appselector2.css'], loadTUI);
+			loader.loadCSS(['app/css/reset.css', 'app/css/appselector3.css', 'app/css/infobuttons.css'], loadTUI);
 		});
 	});
 });
