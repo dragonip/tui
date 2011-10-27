@@ -3,8 +3,16 @@ define(['text!css/epg.css', 'tpl/epg', 'loader/loader', 'debug/console', 'dom/do
 	function parserTime(objects) {
 		objects.forEach(function(item) {
 			var b = new Date(parseInt(item[1]));
-			item[4].parsedTime = b.toDateString() + ' ' + b.getHours() + ':' + b.getMinutes();
+			item[4].parsedTime = b.toDateString() + ' ' + b.getHours() + ':' + fillMinutes(b.getMinutes());
 		});
+	}
+	function fillMinutes(str) {
+		str = ''+str;
+
+		if ( str.length < 2 ) {
+			str = str +'0';
+		}
+		return str;
 	}
 	return {
 		logger: logger.getInstance('EPG'),
