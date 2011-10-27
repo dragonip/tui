@@ -25,12 +25,19 @@ define([
 
 	function chooseLogger() {
 		if (typeof window.console !== 'undefined' && typeof window.DEBUG !== 'undefined' && !window.DEBUG.popup) {
-			if (typeof window.console.group !== 'function') {
-				window.console.group = function(name) {
-					console.log('\n Stated in ');
-				};
-				window.console.groupEnd = function() {
-					console.log('End Group \n');
+			if (typeof smjs == 'undefined'){
+				return function(logMessages, level) {
+					var i, salam='';
+					console.log('STATED IN GROUP '+ this.name);
+					if (types.assert(logMessages, 'array')) {
+						for (i=0;i<logMessages.length;i++) {
+							salam = salam + ' ' + logMessages[i];
+						}
+					} else {
+						salam = logMessages;
+					}
+					console.log(salam);
+					console.log('END GROUP ' + this.name);
 				};
 			}
 			return function(logMessages, level) {

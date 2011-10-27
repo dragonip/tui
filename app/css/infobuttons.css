@@ -1,0 +1,61 @@
+
+.tui-infoblock .remoteOK {
+	background-image: url('app/imgs/remote-keys.png');
+	background-position: left 0px;
+	background-repeat: no-repeat;
+	height: 40px;
+	display: inline-block;
+	padding-left: 50px;
+	color: white;
+	line-height: 36px;
+	margin: 10px;
+	font-size: 120%;
+}
+.tui-infoblock .remoteArrows {
+	background-image: url('app/imgs/remote-keys.png');
+	background-position: left -40px;
+	background-repeat: no-repeat;
+	height: 40px;
+	display: inline-block;
+	padding-left: 50px;
+	color: white;
+	line-height: 36px;
+	margin: 10px;
+	font-size: 120%;
+}
+.tui-infoblock .remoteHome {
+	background-image: url('app/imgs/remote-keys.png');
+	background-position: left -80px;
+	background-repeat: no-repeat;
+	height: 40px;
+	display: inline-block;
+	padding-left: 50px;
+	color: white;
+	line-height: 36px;
+	margin: 10px;
+	font-size: 120%;
+}
+.tui-infoblock .remoteInfo {
+	background-image: url('app/imgs/remote-keys.png');
+	background-position: left -120px;
+	background-repeat: no-repeat;
+	height: 40px;
+	display: inline-block;
+	padding-left: 50px;
+	color: white;
+	line-height: 36px;
+	margin: 10px;
+	font-size: 120%;
+}
+.tui-infoblock .remoteDisplay {
+	background-image: url('app/imgs/remote-keys.png');
+	background-position: left -160px;
+	background-repeat: no-repeat;
+	height: 40px;
+	display: inline-block;
+	padding-left: 50px;
+	color: white;
+	line-height: 36px;
+	margin: 10px;
+	font-size: 120%;
+}

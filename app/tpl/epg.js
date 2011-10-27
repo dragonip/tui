@@ -28,7 +28,7 @@ buf.push('>Sorry, no EPG information is abailable for this channel</div>');
  for (var i = 0; i < things.length; i++ )
 {
 buf.push('<div');
-buf.push(attrs({ "class": ('epgItem') }));
+buf.push(attrs({ 'data-sequence':(i), "class": ('epgItem') }));
 buf.push('><div');
 buf.push(attrs({ "class": ('epgItemTime') }));
 buf.push('>');

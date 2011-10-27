@@ -1,30 +1,14 @@
 .screenChooserWrapper {
-	width: 155px;
+	width: 130px;
 	position: absolute;
 	top: 0;
 	right: 0;
-	padding-right: 15px;
-	overflow: auto;
 }
-/*.screenChooser {*/
-/*	width: 155px;*/
-/*	height: 90px;*/
-/*	position: absolute;*/
-/*	right: 0;*/
-/*	top: 0;*/
-/*	z-index: 9000;*/
-/*	overflow-y: auto;*/
-/*	overflow-x: hidden;*/
-/*	padding: 195px 15px 195px 0;*/
-/*}*/
-.screen-selector-pointer {
-	background-image: url('app/imgs/activeScreenArrow.png');
-	background-position: left center;
-	background-repeat: no-repeat;
-	width: 25px;
-	height: 90px;
-	position: fixed;
-	right: 155px;
+.screenChooser {
+	z-index: 1000;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding: 0 25px 0 0;
 }
 .screenChooser .screen {
 	width: 155px;
@@ -43,12 +27,12 @@
 }
 .screenChooser .screen.vod {
 	background-image: url('app/imgs/icon_set.png');
-	background-position: right -205px;
+	background-position: right -206px;
 	background-repeat: no-repeat;
 }
 .screenChooser .screen.uvideo {
 	background-image: url('app/imgs/icon_set.png');
-	background-position: right -306px;
+	background-position: right -307px;
 	background-repeat: no-repeat;
 }
 .screenChooser .screen.radio {
@@ -66,25 +50,31 @@
 	background-position: right -609px;
 	background-repeat: no-repeat;
 }
+.screenChooser .screen.settings {
+	background-image: url('app/imgs/icon_set.png');
+	background-position: right -706px;
+	background-repeat: no-repeat;
+
+}
 .screenChooser .screen.games {
 	background-image: url('app/imgs/icon_set.png');
-	background-position: right -811px;
+	background-position: right -809px;
 	background-repeat: no-repeat;
 }
 .screenChooser .screen.phone {
 	background-image: url('app/imgs/icon_set.png');
-	background-position: right -912px;
+	background-position: right -908px;
 	background-repeat: no-repeat;
 }
 
-/*.screenChooserWrapper .chooseScreen{*/
-/*	background-image: url('app/imgs/activeScreenArrow.png');*/
-/*	background-position: left center;*/
-/*	background-repeat: no-repeat;*/
-/*	width: 25px;*/
-/*	height: 90px;*/
-/*	position: absolute;*/
-/*	top: 195px;*/
-/*	left: 0;*/
-/*}*/
-
+.screen-selector-pointer {
+	background-image: url('app/imgs/icon_set.png');
+	background-position: left -1005px;
+	background-repeat: no-repeat;
+	width: 130px;
+	height: 90px;
+	position: fixed;
+	top: 238px;
+	right: 0;
+	z-index: 2000;
+}

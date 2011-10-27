@@ -1,4 +1,17 @@
-define(['types/types', 'utils/baseapp', 'dom/dom', 'model/datastorage', 'utils/events', 'ui/epginfo', 'dom/attributes', 'view/list', 'debug/console', 'utils/defaultactions','utils/avapp', 'utils/empty'], function (types, appeng, dom, model, events, epg, domattr, presentation, logger, defaultevents, avapp, empty) {
+define([
+	'types/types', 
+	'utils/baseapp', 
+	'dom/dom', 
+	'model/datastorage', 
+	'utils/events', 
+	'ui/epginfo', 
+	'dom/attributes', 
+	'view/list', 
+	'debug/console', 
+	'utils/defaultactions',
+	'utils/avapp', 
+	'utils/empty', 
+	'tpl/infobuttons'], function (types, appeng, dom, model, events, epg, domattr, presentation, logger, defaultevents, avapp, empty, infobuttonstpl) {
 //	We use EPG in this screen, so support its visibility
 	var	epgIsVisible = false,
 		pcli = logger.getInstance('iptv screen');
@@ -7,17 +20,62 @@ define(['types/types', 'utils/baseapp', 'dom/dom', 'model/datastorage', 'utils/e
 		name: 'iptv',
 		container: null
 	});
-	var epgMove = function(key) {};
+	var epgMove = function(key) {
+		//Implement logic for movement in EOG via the Scroller internface!! in rpginfo
+		console.log('Now we should move in PEG')
+		if (key === 'up') {
+
+		}
+	};
+	var infoTimeout;
 	//GEt tainted events for default actions so we can fly with EPG
-	var epgEvents = empty.getTainted(['left', 'right', 'chup', 'chdown', 'ok']);
+	var moveInEPG = false;
+	var epgActivate  = function() {
+		moveInEPG = true;
+	};
+	var epgEvents = empty.getTainted(['left', 'right', 'chup', 'chdown']);
 	epgEvents.up = {
 		name: 'up',
-		func: epgMove,
+		func: function(k) {
+			if (moveInEPG) epgMove('up');
+			else {
+				APP.model.acceptEvent({
+					type: 'remote',
+					action: k
+				});
+			}
+		},
 		attached: false
 	};
 	epgEvents.down = {
 		name: 'down',
-		func: epgMove,
+		func: function(k){
+			if (moveInEPG) epgMove('down');
+			else {
+				APP.model.acceptEvent({
+					type: 'remote',
+					action: k
+				});				
+			}
+		},
+		attached: false
+	};
+	epgEvents.ok = {
+		name: 'ok',
+		func: function() {
+			if (!moveInEPG) {
+				epgActivate();
+			} else {
+				pcli.log('Show now the switch/record options');
+			}
+		},
+		attached: false
+	};
+	epgEvents['return'] = {
+		name:'return',
+		func: function() {
+			moveInEPG = false;
+		},
 		attached: false
 	};
 	
@@ -35,8 +93,19 @@ define(['types/types', 'utils/baseapp', 'dom/dom', 'model/datastorage', 'utils/e
 			tui.scaleContainer(epgIsVisible);
 			if (epgIsVisible) {
 				epg.show();
-				APP.updateEPG();	
+				APP.updateEPG();
+				if (infoTimeout) { clearTimeout(infoTimeout); }
+				tui.setPanels(false, true, false, infobuttonstpl.render({
+					things: {
+						arrows: "Move",
+						info: "Hide EPG"
+					}
+				}));
+				events.addHandlers(epgEvents);
 			} else {
+				tui.setPanels(false, false);
+				moveInEPG = false;
+				events.removeHandlers(epgEvents);
 				epg.hide();
 			}
 
@@ -59,7 +128,7 @@ define(['types/types', 'utils/baseapp', 'dom/dom', 'model/datastorage', 'utils/e
 			pcli.log('Loading EPG data for IPTV')
 			this.model.loadData({
 				type: 'epg',
-				url: 'app/sampledata/iptv_epg.js'
+				url: tui.options.paths.getPath('iptv', 'epg')
 			});
 //		}
 	});
@@ -71,6 +140,7 @@ define(['types/types', 'utils/baseapp', 'dom/dom', 'model/datastorage', 'utils/e
 //	future support for play, shold be straigh forward with URL only
 	APP.on('try-play', function (obj) {
 		pcli.log(['Requested play for obj', obj]);
+		tui.player.play(obj);
 	});
 	
 //	handle hide EPG and normilize screen when unloading
@@ -93,6 +163,14 @@ define(['types/types', 'utils/baseapp', 'dom/dom', 'model/datastorage', 'utils/e
 			APP.fire('show-requested');
 			pcli.log('Show called from tui in app ' + this.name);
 			APP.presentation.show(cont);
+			tui.setPanels(false, true, false, infobuttonstpl.render({
+				things: {
+					ok: "Play Enter",
+					info: "Show EPG",
+					arrows: "Move"
+				}
+			}));
+			infoTimeout = setTimeout(function() { tui.setPanels(); }, 20000 );
 		},
 		Stop: function () {
 			pcli.log('Stop called for application ' + this.appname);

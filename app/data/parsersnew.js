@@ -99,7 +99,8 @@ define([], function(){
 						isLocked: mode.locked(cd[4]),
 						isBookmarked: mode.bookmarked(cd[5]),
 						personalRecordingOptions: mode.pro(cd[6]),
-						isDir: mode.isDir(cd[0], data.dirs)
+						isDir: mode.isDir(cd[0], data.dirs),
+						playURI: cd[8]
 					});
 				}
 				return obj;
