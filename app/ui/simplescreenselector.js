@@ -87,6 +87,7 @@ function(tpl,applist, dom, classes, Mevents, logger, sizes) {
 	};
 	function showAppSel() {
 			tui.setContainerVisibility(true);
+			tui.setPanels(false, false);
 			Mevents.addHandlers(moduleEvent);
 			dom.adopt(document.body, DOM);
 			relocateTo(dom.dataGet(currenScreen, 'sequence'));
