@@ -32,17 +32,21 @@ require(['transport/response'], function(response) {
 		console.log("received message from server");
 		response.recall(JSONString);
 	};
-	require(['net/socket', 'transport/request'], function(socket, request) {
-		var myRequest = request.create('getiptvlist');
-		response.register(myRequest, function(data) {
-			alert(data);
-		}, null);
-		myRequest.json.response = {
-			status: 'ok',
-			data: null
-		};
-		myRequest.send();
-		myRequest.disposeInternal();
+	require(['view/mosaictemplate'], function(mt) {
+		
+
 	});
+//	require(['net/socket', 'transport/request'], function(socket, request) {
+//		var myRequest = request.create('getiptvlist');
+//		response.register(myRequest, function(data) {
+//			alert(data);
+//		}, null);
+//		myRequest.json.response = {
+//			status: 'ok',
+//			data: null
+//		};
+//		myRequest.send();
+//		myRequest.disposeInternal();
+//	});
 });
 
