@@ -48,7 +48,7 @@ define(['debug/console'], function(logger) {
 		 */
 		stop: function() {
 			pcli.log('called stop tobber');
-			tobber.parentNode.removeChild(tobber);
+			if (tobber.parentNode)	tobber.parentNode.removeChild(tobber);
 		/*	backdiv.parentNode.removeChild(backdiv);*/
 		}
 	};

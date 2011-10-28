@@ -13,7 +13,7 @@ define({
 	vod: {
 		name: 'VOD',
 		apptag: 'vod',
-		module: 'apps/vod',
+		module: 'apps/vodnew',
 		icon: 'imgs/start_screen_icon.png'
 	},
 	ppv: {

@@ -1,0 +1,85 @@
+idisposable 
+	|
+	|-disposeInternal-overwrite
+	|-dispose()
+	|-isDisposed ?=bool
+	|
+	\--ievent
+		|
+		|-on()
+		|-fire()
+		|
+		 \--defaultapp
+			|
+			|-name
+			|-on(start-ready)
+			|-setStateReady()
+			|
+			 \--visualapp
+			 	|
+			 	|-container ?=null
+			 	|-Start()
+			 	|-Show(container)
+			 	|-Stop()
+			 	|-attachEvents(bool)
+			 	|
+			 	 \--listingapp - remoteKeys_
+			 	 	|
+			 	 	|-model -> idisposable
+			 	 	|-presentation -> idisposable
+			 	 	|-generateDefaultEvents()
+			 	 	|-appEvents ?{}
+			 	 	|-defaultRemoteKeyHandler(key)
+			 	 	|-defaultStartRequested(on(start-requested))
+			 	 	|-onShowScreen(on('show-requested'))
+			 	 	|-onDataLoadEnd(on('data-load-end'))
+			 	 	|-onStopRequested(on('stop-requested')) - call(attachEvents, false)
+			 	 	|-onSelectionChanged(on('selection-changed'))
+			 	 	|-onShowComplete(on('show-complete')) - call(acceptEvent, true)
+			 	 	|
+			 	 	 \--listwithepg 
+			 	 	 	|
+			 	 	 	|-onSelectionChanged(on('selection-changed')) - call(onSelectionChanged)
+			 	 	 	
+===========================================
+idisposable 
+	|
+	|-disposeInternal-overwrite
+	|-dispose()
+	|-isDisposed ?=bool
+	|
+	\--listmodel
+		|
+		|-app ?= listingapp
+		|-history []
+		|-currentIndex {Number}	
+		|-data {list:[],dirs:{},epg:?null|{}}
+		|-isLoaded bool
+		|-pointer
+		|-isLoading
+		|-loadData() -> this.app
+		|-acceptEvent() -> this.app, this.app.presentation.getStep
+		|-outDir() -> this.app
+		|-enterDir()
+		|-getItem()
+		|-get()
+		|-load()
+		|-unload()
+		
+==============================================
+idisposable 
+	|
+	|-disposeInternal-overwrite
+	|-dispose()
+	|-isDisposed ?=bool
+	|
+	\--mosaicpresentation
+		|
+		|-app ?= listingapp
+		|-template ?= mosaictemplate
+		|-show()
+		|-rasterize_()
+		|-activate()
+		|-getStep()
+		|-unload()
+

@@ -110,3 +110,10 @@
 	text-overflow: ellipsis;
 	margin-bottom: 6px;
 }
+.epg .epg-currently-playing {
+	background-color: #595b69;
+}
+.epg .epg-selected {
+	background-color: SlateGray;
+}
+
