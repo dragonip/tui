@@ -26,6 +26,7 @@ define([
 	};
 	
 	var Storage = function(app) {
+		Disposable.call(this);
 		this.app = app;
 		this.history = [];
 		this.currentIndex = 0;
@@ -40,6 +41,8 @@ define([
 	};
 	inherit(Storage, Disposable);
 	Storage.prototype.loadData = function(o) {
+		console.log(o);
+//		debugger;
 		var url = o.url || tui.options.paths.getPath(o.name, o.type);
 		var that = this;
 //		pcli.log(['Storage is loading data now', o.url]);
@@ -192,6 +195,7 @@ define([
 				});
 				break;
 			case 'epg':
+				console.log('JUST LOADED EPG DATA FROM SERVER')
 //				pcli.log('Setting EPG data as property of this data');
 				this.data.epg = res;
 				break;
@@ -203,6 +207,22 @@ define([
 			type: o.type,
 			app: this.app.name
 		});
+	};
+	Storage.prototype.getPropertyFromItem = function(item, index) {
+		var found = this.getItem(index);
+		return found[item];
+	};
+	Storage.prototype.getEPGForItem = function(index) {
+		if (this.data.epg === null) {
+			console.log('There is no EPG records for this data');
+			return null;
+		}
+		var itemByID = this.getPropertyFromItem('id',index);
+		if (itemByID && this.data.epg[itemByID]) {
+			return this.data.epg[itemByID].body;
+		} else {
+			return [];
+		}
 	};
 	Storage.prototype.unload = function(){};
 	Storage.prototype.disposeInternal = function() {

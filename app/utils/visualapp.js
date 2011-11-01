@@ -5,6 +5,7 @@ define([
 	'utils/defaultapp',
 	'utils/events'
 ], function(inherit, App, events) {
+
 	var VisualApp = function(options) {
 		App.call(this, options);
 	};

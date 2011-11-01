@@ -13,6 +13,11 @@ define([
 		this.registerDisposable(this.model);
 		this.registerDisposable(this.presentation);
 		this.generateDefaultEvents();
+		this.appEvents['play'] = {
+			name: 'play',
+			func: this.handlePlayButton.bind(this),
+			attached: false
+		};
 		this.on('start-requested', this.defaultStartRequested);
 		this.on('show-requested', this.onShowScreen);
 		this.on('selection-changed', this.onSelectionChanged);
@@ -74,8 +79,13 @@ define([
 			};
 		}.bind(this));
 	};
+	ListApp.prototype.handlePlayButton = function() {
+		var item = this.model.getItem();
+		console.log(item);
+	};
 	ListApp.prototype.disposeInternal = function() {
 		this.constructor.superClass_.disposeInternal.call(this);
+		delete this.appEvents;
 	};
 	return ListApp;
 });

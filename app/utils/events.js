@@ -77,6 +77,7 @@ define(['types/types', 'array/array', 'dmc/dmc', 'debug/console'], function(Mtyp
 		},
 		showAll: function(){
 			console.log(internalEventList);
-		}
-	}
+		},
+		defaultEventAccepter: dispatchEvent
+	};
 });

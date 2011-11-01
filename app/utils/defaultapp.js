@@ -3,7 +3,7 @@
 define(['oop/inherit', 'oop/ievent	'],function(inherit, EventBase){
 	var App = function(options) {
 		EventBase.call(this);
-		this.name = this.setName(options?options.name:null);
+		this.setName(options?options.name:null);
 		this.registerWithTUI();
 	};
 	inherit(App, EventBase);

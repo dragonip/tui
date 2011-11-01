@@ -8,7 +8,7 @@
 	z-index: 1000;
 	overflow-y: auto;
 	overflow-x: hidden;
-	padding: 0 25px 0 0;
+	padding: 0 40px 0 0;
 }
 .screenChooser .screen {
 	width: 155px;
@@ -27,12 +27,12 @@
 }
 .screenChooser .screen.vod {
 	background-image: url('app/imgs/icon_set.png');
-	background-position: right -206px;
+	background-position: right -205px;
 	background-repeat: no-repeat;
 }
 .screenChooser .screen.uvideo {
 	background-image: url('app/imgs/icon_set.png');
-	background-position: right -307px;
+	background-position: right -306px;
 	background-repeat: no-repeat;
 }
 .screenChooser .screen.radio {
@@ -42,7 +42,7 @@
 }
 .screenChooser .screen.aod {
 	background-image: url('app/imgs/icon_set.png');
-	background-position: right -508px;
+	background-position: right -506px;
 	background-repeat: no-repeat;
 }
 .screenChooser .screen.uaudio {

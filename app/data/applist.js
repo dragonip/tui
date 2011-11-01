@@ -7,7 +7,7 @@ define({
 	iptv: {
 		name: 'IPTV',
 		apptag: 'iptv',
-		module: 'apps/iptv',
+		module: 'apps/iptvnew',
 		icon: 'imgs/start_screen_icon.png'
 	},
 	vod: {
