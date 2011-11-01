@@ -8,5 +8,5 @@ div.epg(style="width:"+ w + "px")
 			div.no-epg-available Sorry, no EPG information is abailable for this channel
 		- for (var i = 0; i < things.length; i++ )
 			div.epgItem('data-sequence'=i)
-				div.epgItemTime!= things[i][4].parsedTime
+				div.epgItemTime!= things[i][4].startTime
 				div.epgItemTitle!= things[i][3]
