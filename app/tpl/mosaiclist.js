@@ -11,7 +11,7 @@ buf.push('>');
 buf.push('<div');
 buf.push(attrs({ 'data-sequence':(i), "class": ('item') + ' ' + ('regular') }));
 buf.push('>');
- if (things[i].thumbnail === null)
+ if (things[i].thumbnail.length < 5 )
 {
 buf.push('<div');
 buf.push(attrs({ "class": ('imgcont') }));
@@ -32,10 +32,7 @@ buf.push(attrs({ "class": ('title') }));
 buf.push('>');
 var __val__ = things[i].publishName
 buf.push(null == __val__ ? "" : __val__);
-buf.push('</span>');
- if (things[i].settings())
-{
-buf.push('<ul');
+buf.push('</span><ul');
 buf.push(attrs({ "class": ('channel-settings-icons') }));
 buf.push('>');
  if (things[i].isLocked)
@@ -56,9 +53,12 @@ buf.push('<li');
 buf.push(attrs({ "class": ('icon') + ' ' + ('recordable') }));
 buf.push('></li>');
 }
-buf.push('</ul>');
-}
-buf.push('</div>');
+buf.push('</ul><div');
+buf.push(attrs({ "class": ('object-index') }));
+buf.push('>');
+var __val__ = things[i].id
+buf.push(null == __val__ ? "" : __val__);
+buf.push('</div></div>');
 }
 buf.push('</div>');
 }

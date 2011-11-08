@@ -1,18 +1,18 @@
 div.tui-mosaic.list-container(style="width:"+ w, data-appid=id)
 	- for (var i = 0; i < things.length; i++ )
 		div.item.regular(data-sequence=i)
-			- if (things[i].thumbnail === null)
+			- if (things[i].thumbnail.length < 5 )
 				div.imgcont
 					div.default_icon.screen_default_icon_size
 			- else
 				div.imgcont
 					img(src=things[i].thumbnail)
 			span.title!= things[i].publishName
-			- if (things[i].settings())
-				ul.channel-settings-icons
-					- if (things[i].isLocked)
-						li.icon.locked
-					- if (things[i].isBookmarked)
-						li.icon.bookmarked
-					- if (things[i].personalRecordingOptions.canRecord) 
-						li.icon.recordable
+			ul.channel-settings-icons
+				- if (things[i].isLocked)
+					li.icon.locked
+				- if (things[i].isBookmarked)
+					li.icon.bookmarked
+				- if (things[i].personalRecordingOptions.canRecord) 
+					li.icon.recordable
+			div.object-index!= things[i].id
