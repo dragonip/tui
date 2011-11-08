@@ -2,27 +2,28 @@ define([
 	'oop/inherit',
 	'oop/idisposable',
 	'utils/listingapp',
-	'utils/epg'
-], function(inherit, Disposable, ListApp, Epg){
+	'utils/epg',
+	'shims/bind'
+], function(inherit, Disposable, ListApp, Epg,bind){
 	var App = function(opts){
 		ListApp.call(this, opts);
 		this.epgInstance = new Epg(this.model, ListApp.remoteKeys_);
 		this.appEvents['info'] = {
 			name: 'info',
-			func: function() {
+			func: bind(function() {
 				if (this.epgInstance.isAttachedToDom()) {
 					this.epgInstance.exitDom();
 				} else {
 					this.epgInstance.load();
 					this.epgInstance.enterDom();					
 				}
-			}.bind(this),
+			},this),
 			attached: false
 		};
 		//Override the OK event to handle EPG also
 		this.appEvents['ok'] = {
 			name: 'ok',
-			func: function() {
+			func: bind(function() {
 				if (this.epgInstance.isAttachedToDom()) {
 					this.epgInstance.attachEvents(true);
 				} else {
@@ -30,7 +31,7 @@ define([
 						action: 'ok'
 					});
 				}
-			}.bind(this), 
+			},this), 
 			attached: false
 		};
 	};
