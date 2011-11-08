@@ -1,5 +1,5 @@
 define([
-	'utils/listwithepg'
+	'utils/listingapp'
 ], function(App){
 	return new App({
 		name: 'vod'
