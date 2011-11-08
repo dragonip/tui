@@ -32,7 +32,7 @@
 }
 .screenChooser .screen.uvideo {
 	background-image: url('app/imgs/icon_set.png');
-	background-position: right -306px;
+	background-position: right -307px;
 	background-repeat: no-repeat;
 }
 .screenChooser .screen.radio {
@@ -58,7 +58,7 @@
 }
 .screenChooser .screen.games {
 	background-image: url('app/imgs/icon_set.png');
-	background-position: right -809px;
+	background-position: right -808px;
 	background-repeat: no-repeat;
 }
 .screenChooser .screen.phone {
@@ -75,6 +75,6 @@
 	height: 90px;
 	position: fixed;
 	top: 238px;
-	right: 0;
+	right: 15px;
 	z-index: 2000;
 }
