@@ -19,7 +19,7 @@ define({
 	ppv: {
 		name: 'PPV',
 		apptag: 'ppv',
-		module: 'apps/ppv',
+		module: 'apps/ppvnew',
 		icon: 'imgs/ppv_screen_icon.png'
 	},
 	aod: {
@@ -34,11 +34,16 @@ define({
 		module: 'apps/start',
 		icon: 'imgs/start_screen_icon.png'
 	},
-	podcast: {
+	settings: {
 		name: 'Settings',
 		apptag: 'settings',
 		module: 'apps/settings',
 		icon: 'imgs/start_screen_icon.png'
+	},
+	phone: {
+		name: 'phone',
+		apptag: 'phone',
+		module: 'apps/telefony'
 	},
 	radio: {
 		name: 'RADIO',
