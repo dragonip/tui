@@ -92,6 +92,14 @@
 	top: 3px;
 	left: 9px;	
 }
+.tui-mosaic div.object-index {
+	background-color: rgba(0, 0, 0, 0.4);
+    font-weight: bold;
+    padding: 2px 4px;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
 .tui-mosaic .item.current .imgcont {
     /*background-color: #e10303;
     -webkit-transition-property: background-color;

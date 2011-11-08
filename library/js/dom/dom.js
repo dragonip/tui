@@ -95,7 +95,7 @@ define(['dom/string',
 		 * @param {HTMLElement} element, The element to get rid of
 		 */
 		dispose: function(element) {
-			if (element.parentNode) {
+			if ( element && element.parentNode) {
 				return element.parentNode.removeChild(element);
 			}
 		},

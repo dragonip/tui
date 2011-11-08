@@ -3,16 +3,30 @@ define([
 	'utils/visualapp',
 	'model/listmodel',
 	//'view/listpresentation',
-	'view/mosaicpresentation'
-], function(inherit, VisualApp, ListModel, MosaicPresentation) {
+	'view/mosaicpresentation',
+	'shims/bind'
+], function(inherit, VisualApp, ListModel, MosaicPresentation, bind) {
 	var ListApp = function(options) {
 		VisualApp.call(this, options);
 		this.model = new ListModel(this);
+//		TODO: add the listview as in IPTV
 		//this.presentation = options.listType && options.listType === 'list'? new ListPresentation(this) : new MosaicPresentation(this);
-		this.presentation = new MosaicPresentation(this);
+		this.presentation = new MosaicPresentation(this, 'mosaic', undefined, undefined, true );
 		this.registerDisposable(this.model);
 		this.registerDisposable(this.presentation);
 		this.generateDefaultEvents();
+		this.appEvents['play'] = {
+			name: 'play',
+			func: bind(this.handlePlayButton, this),
+			attached: false
+		};
+		this.setFive= function(){this.presentation.activate(5-1);};
+		this.appEvents['five'] = {
+			name: 'five',
+			func: bind(this.setFive, this),
+			attached: false
+		};
+
 		this.on('start-requested', this.defaultStartRequested);
 		this.on('show-requested', this.onShowScreen);
 		this.on('selection-changed', this.onSelectionChanged);
@@ -26,7 +40,6 @@ define([
 		this.attachEvents(true);
 	}
 	ListApp.prototype.onSelectionChanged = function(objectWithIndex) {
-		console.log('Calling original onSelectionChanged methos in ListApp')
 		this.model.currentIndex = objectWithIndex.index;
 	};
 	ListApp.prototype.onStopRequested = function() {
@@ -46,8 +59,6 @@ define([
 		this.presentation.show(this.container);
 	}
 	ListApp.prototype.defaultRemoteKeyHandler = function(key) {
-		console.log('Caller default handler in listingapp');
-		console.log(this);
 		this.model.acceptEvent({
 			type: 'remote',
 			action: key
@@ -66,16 +77,66 @@ define([
 	//Add default events for mosaic, can be then overwritten by children
 	ListApp.prototype.generateDefaultEvents = function() {
 		this.appEvents = {};
-		ListApp.remoteKeys_.forEach(function(item){
+		ListApp.remoteKeys_.forEach(bind(function(item){
 			this.appEvents[item] = {
 				name: item,
-				func: this.defaultRemoteKeyHandler.bind(this),
+				func: bind(this.defaultRemoteKeyHandler, this),
 				attached: false
 			};
-		}.bind(this));
+		}, this));
+	};
+	ListApp.prototype.handlePlayButton = function() {
+		var objIndex = this.model.currentIndex;
+		var item = this.model.getItem(objIndex);
+		var options = [];
+		if (item.isBookmarked) {
+			options.push('Unbookmark');
+		} else {
+			options.push('Bookmark');
+		}
+		if (item.isLocked) {
+			options.push('Unlock');
+		} else {
+			options.push('Lock');
+		}
+		options.push('Cancel');
+		this.dialogInstance = {
+			index: objIndex,
+			object: item,
+			options: options
+		};
+		tui.createDialog('optionlist', this.dialogInstance.options, bind(this.handleDialogSelection, this), 'Select action');
+	};
+	ListApp.prototype.handleDialogSelection = function(selectedIndex) {
+		var action;
+		if (this.dialogInstance) {
+			action = this.dialogInstance.options[selectedIndex].toLowerCase();
+			switch (action) {
+				case 'lock':
+				case 'unlock':
+					this.dialogInstance.action = action;
+					tui.createDialog('password', true, bind(this.acceptPass, this), 'Enter lock password');
+					break;
+					
+				case 'bookmark':
+				case 'unbookmark':
+					this.acceptPass();
+			}
+		}
+	};
+	ListApp.prototype.acceptPass = function(val) {
+//		TODO: add server side support for attempting to lock/unlock and bm
+		if (['lock','unlock'].indexOf(this.dialogInstance.action)!== -1)
+			this.dialogInstance.object.isLocked = !this.dialogInstance.object.isLocked;
+		else 
+			this.dialogInstance.object.isBookmarked = !this.dialogInstance.object.isBookmarked;
+		this.presentation.updateItem(this.dialogInstance.index, this.dialogInstance.object);
+		this.dialogInstance.object = null;
+		delete this.dialogInstance;
 	};
 	ListApp.prototype.disposeInternal = function() {
 		this.constructor.superClass_.disposeInternal.call(this);
+		delete this.appEvents;
 	};
 	return ListApp;
 });

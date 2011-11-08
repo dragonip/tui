@@ -32,7 +32,7 @@ buf.push(attrs({ 'data-sequence':(i), "class": ('epgItem') }));
 buf.push('><div');
 buf.push(attrs({ "class": ('epgItemTime') }));
 buf.push('>');
-var __val__ = things[i][4].parsedTime
+var __val__ = things[i][4].startTime
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div><div');
 buf.push(attrs({ "class": ('epgItemTitle') }));

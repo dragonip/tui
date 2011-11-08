@@ -4,28 +4,13 @@ define([
 	'types/types', 
 	'array/array',
 	'oop/idisposable',
-	'oop/inherit'
-], function(parsers, logger, types, array, Disposable, inherit) {
-
-	var xhr = {
-		get: function xhr(a, b) {
-			var r = new XMLHttpRequest();
-			r.open('GET', a, true);
-			r.onreadystatechange = function(aEvt) {
-				if (r.readyState == 4) {
-					if (r.status == 200) {
-						b(r.responseText.substring(r.responseText.indexOf('{') - 1, r.responseText.lastIndexOf('}') + 1));
-					} else {
-						b(null);
-					}
-					r.onreadystatechange = null;
-				}
-			};
-			r.send(null);
-		}
-	};
+	'oop/inherit',
+	'json/json',
+	'net/simplexhr'
+], function(parsers, logger, types, array, Disposable, inherit, json, xhr) {
 	
 	var Storage = function(app) {
+		Disposable.call(this);
 		this.app = app;
 		this.history = [];
 		this.currentIndex = 0;
@@ -40,18 +25,21 @@ define([
 	};
 	inherit(Storage, Disposable);
 	Storage.prototype.loadData = function(o) {
+//		debugger;
 		var url = o.url || tui.options.paths.getPath(o.name, o.type);
 		var that = this;
-//		pcli.log(['Storage is loading data now', o.url]);
+		console.log('Try to load URL', url)
 		xhr.get(url, function(text) {
-			that.load(text, o);
+			//that.load(text, o);
+			that.loadJSON(text, o);
+		}, {
+			parse: true
 		});
 		this.app.fire('data-load-start')
 	};
 	Storage.prototype.acceptEvent = function(ev) {
 		if (this.isLoading) return;
 		var step = this.app.presentation.getStep();
-		console.log('The step returned by presentation layer', step)
 		switch(ev.action) {
 		case 'right':
 			if (step === 1) return;
@@ -148,31 +136,22 @@ define([
 			return this.data.epg;
 		}
 	}
-	
-	Storage.prototype.load = function(text, o) {
-		var res, ret;
-		if (text === null) {
-//			pcli.log('Null?');
+	Storage.prototype.loadJSON = function(res, o) {
+		if (res === null ) {
 			throw {
 				name: 'NetworkError',
-				message: 'Cannot get requested URL : ' + url
+				message: 'Cannot get requested URL : '
 			};
+			return;
 		}
-		res = window.eval('('+text+')');
-		
-		if (typeof res.config !== 'undefined') {
-			delete res.config;
-		}
-		if (o.type !== 'epg')
-			ret = parsers.parse(res, this.app.name);
 		switch (o.type) {
 			case 'list':
-				this.data.list = ret;
+				this.data.list = res;
 				if (array.isEmpty(this.history)) this.pointer = this.data.list;
 				this.isLoaded = true;
 				break;
 			case 'folder':
-				ret.unshift({
+				res.unshift({
 					id: null,
 					sortIndex: 0,
 					publishName: "up",
@@ -192,21 +171,93 @@ define([
 				});
 				break;
 			case 'epg':
-//				pcli.log('Setting EPG data as property of this data');
+				console.log('JUST LOADED EPG DATA FROM SERVER')
 				this.data.epg = res;
 				break;
 		}
 		if (typeof o.callback === 'function') {
-			o.callback(ret);
+			o.callback(res);
 		}
 		this.app.fire('data-load-end', {
 			type: o.type,
 			app: this.app.name
 		});
 	};
+//	Storage.prototype.load = function(text, o) {
+//		var res, ret;
+//		if (text === null) {
+////			pcli.log('Null?');
+//			throw {
+//				name: 'NetworkError',
+//				message: 'Cannot get requested URL : ' + url
+//			};
+//		}
+////		res = window.eval('('+text+')');
+//		
+//		if (typeof res.config !== 'undefined') {
+//			delete res.config;
+//		}
+//		if (o.type !== 'epg')
+//			ret = parsers.parse(res, this.app.name);
+//		switch (o.type) {
+//			case 'list':
+//				this.data.list = ret;
+//				if (array.isEmpty(this.history)) this.pointer = this.data.list;
+//				this.isLoaded = true;
+//				break;
+//			case 'folder':
+//				ret.unshift({
+//					id: null,
+//					sortIndex: 0,
+//					publishName: "up",
+//					type: "",
+//					time: "",
+//					cost: 0.00,
+//					currency: null,
+//					genre: "FOLDER",
+//					thumbnail: "app/imgs/mosaic-folder.png",
+//					settings: function(){
+//						return false;
+//					},
+//					isLocked: false,
+//					isBookmarked: false,
+//					personalRecordingOptions: {canRecord: false},
+//					isDir: false
+//				});
+//				break;
+//			case 'epg':
+//				console.log('JUST LOADED EPG DATA FROM SERVER')
+////				pcli.log('Setting EPG data as property of this data');
+//				this.data.epg = res;
+//				break;
+//		}
+//		if (typeof o.callback === 'function') {
+//			o.callback(ret);
+//		}
+//		this.app.fire('data-load-end', {
+//			type: o.type,
+//			app: this.app.name
+//		});
+//	};
+	Storage.prototype.getPropertyFromItem = function(item, index) {
+		var found = this.getItem(index);
+		return found[item];
+	};
+	Storage.prototype.getEPGForItem = function(index) {
+		if (this.data.epg === null) {
+			console.log('There is no EPG records for this data');
+			return null;
+		}
+		var itemByID = this.getPropertyFromItem('id',index);
+		if (itemByID && this.data.epg[itemByID]) {
+			return this.data.epg[itemByID].body;
+		} else {
+			return [];
+		}
+	};
 	Storage.prototype.unload = function(){};
 	Storage.prototype.disposeInternal = function() {
-		this.constructor.superClass_.disposeInternal.call(this);
+		Storage.superClass_.disposeInternal.call(this);
 		
 	}
 	return Storage;

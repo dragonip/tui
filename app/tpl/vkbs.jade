@@ -1,0 +1,6 @@
+div.tui-keyboard
+	- for (var i = 0; i < kbdlayout.length; i++ ) 
+		ul(class='ul'+ i + ' kbdrow')
+			- for (var j = 0; j < kbdlayout[i].length; j++) 
+				li(class=(kbdlayout[i][j].length>4)?'widekey':(kbdlayout[i][j].length>1)?'smallwidekey':(kbdlayout[i][j] === ' ')?'spacek':'')!= kbdlayout[i][j]
+		br

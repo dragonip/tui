@@ -22,7 +22,6 @@ function(tpl,applist, dom, classes, Mevents, logger, sizes) {
 	}
 	dom.$('.screen-selector-pointer', DOM).style.top = padding;
 	currenScreen = dom.$('.approtator-item', DOM);
-	console.log(currenScreen)
 	
 
 	function obj2array(obj) {
@@ -40,7 +39,6 @@ function(tpl,applist, dom, classes, Mevents, logger, sizes) {
 	}
 	function triggerScreen(bool){
 		var dir = (bool)?'nextElementSibling':'previousElementSibling';
-		console.log(currenScreen)
 		if ( currenScreen[dir] !== null && classes.hasClass(currenScreen[dir], 'approtator-item')) {
 			currenScreen =  currenScreen[dir];
 			relocateTo(dom.dataGet(currenScreen, 'sequence'));

@@ -29,7 +29,7 @@ define(['tpl/mosaiclist','text!css/mosaic.css','loader/loader','oop/idisposable'
 		return template.render({
 			things: templateFills,
 			id: name,
-			w: this.getULWidth()
+			w: this.getULWidth() + 'px'
 		});
 	};
 	View.prototype.disposeInternal = function() {

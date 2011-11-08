@@ -1,0 +1,627 @@
+.tui-multiscreen .system-info {
+	margin-top: 45px;
+}
+.phoneWrapper {
+	width: 640px; 
+	height: 480px; 
+	overflow: hidden;
+	position: relative;
+}
+.phoneWrapper .divForScroll_telephony {
+	position: absolute;
+	top: -2400px;
+	left: 0;
+}
+
+
+/*@media all and (max-height: 500px) {*/
+	.callCenter {
+		width: 600px;
+		height: 440px;
+	}
+	.callCenter .phoneDisplay {
+		font-size: 250%;
+	    height: 40px;
+	    line-height: 40px;
+	    margin-top: 45px;
+	}
+	.callCenter .phoneDictionary {
+		height: 40px;
+	}
+	.callCenter .phoneBtn {
+		height: 60px;
+    	line-height: 67px;	
+    	font-size: 300%;
+	}
+	.callCenter .phoneKeyboard .addToPhone {
+		line-height: 27px;
+		font-size: 18px;
+	}
+	.callCenter .phoneKeyboard .phoneBtn .phoneImg {
+		height: 40px;
+	}
+	
+/*	
+}
+*/
+
+
+.callCenter {
+	text-align: center;
+	padding: 20px;
+}
+.callCenter > * {
+	margin: 0 auto;
+}
+.callCenter .phoneDisplay {
+    text-align: right;
+    width: 65%;
+	padding: 5px;
+	display: inline-block;
+	border-radius: 8px;
+	border: 4px solid #afafaf;
+	background-image: linear-gradient(bottom, rgb(255,255,255) 58%, rgb(255,254,236) 88%);
+	background-image: -o-linear-gradient(bottom, rgb(255,255,255) 58%, rgb(255,254,236) 88%);
+	background-image: -moz-linear-gradient(bottom, rgb(255,255,255) 58%, rgb(255,254,236) 88%);
+	background-image: -webkit-linear-gradient(bottom, rgb(255,255,255) 58%, rgb(255,254,236) 88%);
+	background-image: -ms-linear-gradient(bottom, rgb(255,255,255) 58%, rgb(255,254,236) 88%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.58, rgb(255,255,255)),
+		color-stop(0.88, rgb(255,254,236))
+	);
+}
+.callCenter .phoneDisplay.active {
+	border: 4px solid #f1720b;
+}
+.callCenter .phoneKeyboard {
+	width: 100%;
+}
+.callCenter .phoneKeyboard .row {
+	padding: 10px;
+}
+.callCenter .phoneBtn {
+    width: 13%;	
+	display: inline-block;
+	border: 3px solid #afafaf;
+	border-radius: 8px;
+    font-weight: bold;
+    margin: 0 8px;
+    color: white;
+
+	background-image: linear-gradient(bottom, rgb(39,43,51) 7%, rgb(89,91,105) 80%);
+	background-image: -o-linear-gradient(bottom, rgb(39,43,51) 7%, rgb(89,91,105) 80%);
+	background-image: -moz-linear-gradient(bottom, rgb(39,43,51) 7%, rgb(89,91,105) 80%);
+	background-image: -webkit-linear-gradient(bottom, rgb(39,43,51) 7%, rgb(89,91,105) 80%);
+	background-image: -ms-linear-gradient(bottom, rgb(39,43,51) 7%, rgb(89,91,105) 80%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.07, rgb(39,43,51)),
+		color-stop(0.8, rgb(89,91,105))
+	);
+}
+
+.callCenter .phoneKeyboard .active {
+	border: 3px solid #f1720b;
+	background-color: transparent;
+}
+.callCenter .active {
+	border: 4px solid #f1720b;
+	background-color: #e8e8e8;
+}
+
+
+/*-----------------------  phone book  ------------------------*/
+
+.phonebookWrapper {
+	text-align: center;
+	width: 600px;
+	height: 440px;
+	padding: 20px;
+	color: white;
+}
+.phonebookWrapper > * {
+	margin: 0 auto;
+}
+.phonebookWrapper .inputCont {
+	position: relative;
+	width: 70%;
+	display: inline-block;
+	margin-top: 50px;
+}
+.phonebookWrapper .inputCont .searchText {
+	font-style: italic; 
+	font-size: 130%; 
+	color: #cacaca;
+	position: absolute;
+	top: 15px;
+	left: 20px;
+}
+.phonebookWrapper input.searchInput {
+	font-size: 180%;
+    height: 30px;    
+    color: black;
+
+	text-align: left;
+    width: 90%;
+	padding: 5px;
+	display: inline-block;
+	border-radius: 8px;
+	border: 4px solid #afafaf;
+	background-image: linear-gradient(bottom, rgb(255,255,255) 58%, rgb(255,254,236) 88%);
+	background-image: -o-linear-gradient(bottom, rgb(255,255,255) 58%, rgb(255,254,236) 88%);
+	background-image: -moz-linear-gradient(bottom, rgb(255,255,255) 58%, rgb(255,254,236) 88%);
+	background-image: -webkit-linear-gradient(bottom, rgb(255,255,255) 58%, rgb(255,254,236) 88%);
+	background-image: -ms-linear-gradient(bottom, rgb(255,255,255) 58%, rgb(255,254,236) 88%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.58, rgb(255,255,255)),
+		color-stop(0.88, rgb(255,254,236))
+	);
+
+}
+
+.phonebookWrapper .kbdButton {
+	display: inline-block;
+	padding: 5px 10px 5px 10px;
+	position: relative;
+	top: 3px;
+	left: 10px;
+	border-radius: 5px;
+	border: 2px solid transparent;
+	background-image: linear-gradient(bottom, rgb(39,43,51) 7%, rgb(89,91,105) 80%);
+	background-image: -o-linear-gradient(bottom, rgb(39,43,51) 7%, rgb(89,91,105) 80%);
+	background-image: -moz-linear-gradient(bottom, rgb(39,43,51) 7%, rgb(89,91,105) 80%);
+	background-image: -webkit-linear-gradient(bottom, rgb(39,43,51) 7%, rgb(89,91,105) 80%);
+	background-image: -ms-linear-gradient(bottom, rgb(39,43,51) 7%, rgb(89,91,105) 80%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.07, rgb(39,43,51)),
+		color-stop(0.8, rgb(89,91,105))
+	);
+}
+.phonebookWrapper .kbdButton img {
+	height: 30px;
+}
+.phonebookWrapper .phoneBookResults {
+	overflow-y: auto;
+	height: 300px;
+}
+
+.phonebookWrapper .phoneBookResults .no-phonebook-entries:before {
+	content: "No entries";
+	color: white;
+}
+.phonebookWrapper .phonebookItem {
+	background-color: #272b33;
+	margin-right: 5px;
+}
+.phonebookWrapper .phonebookItem.nobg {
+	background-color: transparent;
+	margin-top: 10px;
+	color: gray;
+}
+.phonebookWrapper .phonebookItem .name {
+	display: inline-block;
+	width: 52%;
+	margin: 0 2px;
+	height: 30px;
+    line-height: 30px;
+	text-align: left;
+	font-size: 120%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.phonebookWrapper .phonebookItem .general {
+	height: 30px;
+    line-height: 30px;
+	display: inline-block;
+	width: 22%;
+	margin: 0 2px;
+	text-align: left;
+	font-size: 120%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.phonebookWrapper .phonebookItem .ip {
+	height: 30px;
+    line-height: 30px;
+	width: 21%;
+	display: inline-block;
+	margin: 0 2px;
+	text-align: left;
+	font-size: 120%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.phonebookWrapper .phoneBookResults .phonebookItem.active {
+	background-color: #565965;
+}
+.phoneWrapper .phonebookWrapper .searchInput.active {
+	border: 4px solid #ffa500;
+}
+.phonebookWrapper .kbdButton.active {
+	border: 2px solid #ffa500;
+}
+
+/*----------------------- voice mail -------------------------*/
+
+.voiceMail {
+	text-align: center;
+	
+	width: 600px;
+	height: 440px;
+	padding: 20px;
+	color: white;
+}
+.voiceMail > * {
+	margin: 0 auto;
+}
+
+.voiceMail .voiceMailResults {
+	overflow-y: auto;
+	height: 365px;
+}
+.voiceMail .voiceMailResults .no-voicemail-messages:before {
+	content: "No entries";
+	color: white;
+}
+.voiceMail .voiceMailItem {
+	background-color: #272b33;
+	margin-right: 5px;
+}
+.voiceMail .voiceMailItem.nobg {
+	background-color: transparent;
+	margin-top: 45px;
+	color: gray;
+}
+.voiceMail .voiceMailItem .caller {
+	display: inline-block;
+	width: 65%;
+	margin: 0 2px;
+	height: 30px;
+    line-height: 30px;
+	text-align: left;
+	font-size: 120%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.voiceMail .voiceMailItem .time {
+	height: 30px;
+    line-height: 30px;
+	display: inline-block;
+	width: 32%;
+	margin: 0 2px;
+	text-align: left;
+	font-size: 120%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/*-------------------- call history --------------------*/
+
+.callHistory {
+	text-align: center;
+	
+	width: 600px;
+	height: 440px;
+	padding: 20px;
+	color: white;
+}
+.callHistory > * {
+	margin: 0 auto;
+}
+
+.callHistory .callHistoryResults {
+	overflow-y: auto;
+	height: 365px;
+}
+.callHistory .callHistoryResults .emptyScreen {
+	margin-top: 45px;
+}
+.callHistory .callHistoryResults .emptyScreen:before {
+	content: "No call history";
+	color: white;
+}
+.callHistory .callHistoryItem {
+	background-color: #272b33;
+	margin-right: 5px;
+}
+.callHistory .callHistoryItem.nobg {
+	background-color: transparent;
+	margin-top: 45px;
+	color: gray;
+}
+.callHistory .callHistoryItem .caller {
+	display: inline-block;
+	width: 35%;
+	margin: 0 2px;
+	height: 30px;
+    line-height: 30px;
+	text-align: left;
+	font-size: 120%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.callHistory .callHistoryItem .time {
+	height: 30px;
+    line-height: 30px;
+	display: inline-block;
+	width: 31%;
+	margin: 0 2px;
+	text-align: left;
+	font-size: 120%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.callHistory .callHistoryItem .duration {
+	height: 30px;
+    line-height: 30px;
+	display: inline-block;
+	width: 17%;
+	margin: 0 2px;
+	text-align: left;
+	font-size: 120%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.callHistory .callHistoryItem .type {
+	height: 30px;
+    line-height: 30px;
+	display: inline-block;
+	width: 10%;
+	margin: 0 2px;
+	text-align: left;
+	font-size: 120%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: center;
+}
+
+/*---------------------- send SMS -----------------------*/
+.sendSMS {
+	text-align: left;
+	
+	width: 600px;
+	height: 440px;
+	padding: 20px;
+	color: white;
+}
+
+.sendSMS .sendSmsHolder > * {
+	margin: 0;
+}
+.sendSMS .sendSmsHolder {
+	background-color: #212121;
+	padding: 10px 10px;
+}
+.sendSMS .smsReceiver {
+	display: inline-block;
+	font-size: 120%;
+	margin-right: 8px;
+}
+.sendSMS .receiver {
+	font-size: 180%;
+    height: 30px;    
+    color: black;
+	display: inline-block;
+	text-align: left;
+    width: 60%;
+	padding: 5px;
+	margin-top: 5px;
+	border-radius: 8px;
+	border: 4px solid #afafaf;
+	background-image: linear-gradient(bottom, rgb(255,255,255) 58%, rgb(255,254,236) 88%);
+	background-image: -o-linear-gradient(bottom, rgb(255,255,255) 58%, rgb(255,254,236) 88%);
+	background-image: -moz-linear-gradient(bottom, rgb(255,255,255) 58%, rgb(255,254,236) 88%);
+	background-image: -webkit-linear-gradient(bottom, rgb(255,255,255) 58%, rgb(255,254,236) 88%);
+	background-image: -ms-linear-gradient(bottom, rgb(255,255,255) 58%, rgb(255,254,236) 88%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.58, rgb(255,255,255)),
+		color-stop(0.88, rgb(255,254,236))
+	);
+
+}
+.sendSMS .receiver.active {
+	border: 4px solid #f1720b;
+}
+.sendSMS .phoneBook.active {
+	border: 2px solid #f1720b;
+}
+.sendSMS .phoneBook {
+	display: inline-block;
+	padding: 4px 10px;
+	border-radius: 8px;
+	float: right;
+	margin-right: 5%;
+	border: 2px solid transparent;
+	
+	background-image: linear-gradient(bottom, rgb(39,43,51) 7%, rgb(89,91,105) 80%);
+	background-image: -o-linear-gradient(bottom, rgb(39,43,51) 7%, rgb(89,91,105) 80%);
+	background-image: -moz-linear-gradient(bottom, rgb(39,43,51) 7%, rgb(89,91,105) 80%);
+	background-image: -webkit-linear-gradient(bottom, rgb(39,43,51) 7%, rgb(89,91,105) 80%);
+	background-image: -ms-linear-gradient(bottom, rgb(39,43,51) 7%, rgb(89,91,105) 80%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.07, rgb(39,43,51)),
+		color-stop(0.8, rgb(89,91,105))
+	);
+
+}
+.sendSMS .phoneBook .phoneDictionary {
+	height: 40px;
+}
+.sendSMS .sendSmsHolder .messageName {
+	font-size: 120%;
+    margin-top: 25px;
+}
+
+.sendSMS .sendSmsHolder .message {
+	width: 80%;
+	margin: 20px 0 0 35px;
+	height: 220px;
+	background-color: black;
+	font-size: 120%;
+	padding: 4px;
+	border: 2px solid transparent;
+}
+.sendSMS .sendSmsHolder .message.active {
+	border: 2px solid #f1720b;
+}
+.sendSMS .sendSmsHolder .sendBtn {
+	display: inline-block;
+	margin: 20px 30px 10px 170px;
+	padding: 8px 20px;
+	background-color: #363636;
+	font-size: 120%;
+	border: 2px solid transparent;
+}
+.sendSMS .sendSmsHolder .clearBtn {
+	display: inline-block;
+	margin: 0;
+	padding: 8px 20px;
+	background-color: #363636;
+	font-size: 120%;
+	border: 2px solid transparent;
+}
+.sendSMS .sendSmsHolder .sendBtn.active {
+	border: 2px solid #f1720b;
+}
+.sendSMS .sendSmsHolder .clearBtn.active {
+	border: 2px solid #f1720b;
+}
+/*----------------------------  in call message  ------------------------------*/
+.inCallMessage {
+	text-align: center;
+	width: 600px;
+	height: 440px;
+	padding: 20px;
+	color: white;
+	
+	display: -moz-box;
+	-moz-box-pack: center;
+	-moz-box-align: center;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+	display: box;
+	box-pack: center;
+	box-align: center;
+	vertical-align: middle;
+}
+.inCallMessage .callMessage {
+	text-align: center;
+}
+.inCallMessage .callMessage img {
+	height: 130px;
+}
+.inCallMessage .callMessage div {
+	font-size: 150%;
+}
+
+/*---------------------------  TELEPHONY Chooser  -------------------------------*/
+.telephonyChooser {
+	width: 640px;
+	height: 480px;
+	background-color: #333333;
+	
+	display: -moz-box;
+	-moz-box-pack: center;
+	-moz-box-align: center;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+	display: box;
+	box-pack: center;
+	box-align: center;
+	vertical-align: middle;
+}
+.telephonyChooser .icon {
+	width: 120px;
+	height: 90px;
+	text-align: center;
+	display: inline-block;
+}
+.telephonyChooser .icon span {
+	color: white;
+	z-index:1;
+    font-size: 120%;
+    position: relative;
+    top: -22px;
+    margin: 0 auto;
+}
+.telephonyChooser .icon div {
+	-webkit-transition: all 0.2s ease-in; 
+	-moz-transition: all 0.2s ease-in; 
+	-o-transition: all 0.2s ease-in; 
+	-ms-transition: all 0.2s ease-in;
+	position: relative;
+	width: 120px;
+	height: 90px;
+}
+.telephonyChooser .icon.active div {
+	-webkit-transform: translate(0px,-30px); 
+	-moz-transform: translate(0px,-30px);
+	-o-transform: translate(0px,-30px);
+	-ms-transform: translate(0px,-30px);
+}
+.telephonyChooser .icon .voiceMailC {
+	background-image: url('app/imgs/telephonyIcons.png');
+	background-position: left -3px;
+	background-repeat:no-repeat;
+	z-index: 5;
+}
+.telephonyChooser .icon .callHistoryC {
+	background-image: url('app/imgs/telephonyIcons.png');
+	background-position: left -205px;
+	background-repeat:no-repeat;
+	z-index: 5;
+}
+.telephonyChooser .icon .callCenterC {
+	background-image: url('app/imgs/telephonyIcons.png');
+	background-position: left -103px;
+	background-repeat:no-repeat;
+	z-index: 5;
+}
+.telephonyChooser .icon .phonebookC{
+	background-image: url('app/imgs/telephonyIcons.png');
+	background-position: left -303px;
+	background-repeat:no-repeat;
+	z-index: 5;
+}
+.telephonyChooser .icon .sendSMSC {
+	background-image: url('app/imgs/telephonyIcons.png');
+	background-position: left -405px;
+	background-repeat:no-repeat;
+	z-index: 5;
+}
+
+

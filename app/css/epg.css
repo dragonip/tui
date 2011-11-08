@@ -3,7 +3,6 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	
 	display: -moz-box;
 	-moz-box-pack: start;
 	-moz-box-align: center;
@@ -48,6 +47,7 @@
 	height: 100%;
 	color: white;
 	background-color: #272b33;
+	position: relative;
 }
 .epg .active {
 	background-color: #595b69;
@@ -58,6 +58,7 @@
 	vertical-align: middle;
 	text-align: center;
 	padding: 10px;
+	position: relative;
 }
 .epg .header .screenImg {
 	width: 110px;
@@ -83,6 +84,7 @@
 .epg .epgProgram {
 	overflow-x: hidden;
 	overflow-y: auto;
+	position:relative;
 }
 .epg .epgProgram .epgLoading {
 	text-align: center;

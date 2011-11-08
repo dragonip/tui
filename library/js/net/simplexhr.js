@@ -2,19 +2,19 @@
 * @module net/simplexhr Implements getters for same domain via XHR in supported browsers
 */
 
-define(function(){
+define(['json/json'], function(json){
 	function getInstance(opt) {
 		return new XMLHttpRequest();
 	}
 	function stripLoaderJSON(text) {
-		return substring(text.indexOf('{') - 1, text.lastIndexOf('}') + 1);
+		return text.substring(text.indexOf('{') - 1, text.lastIndexOf('}') + 1);
 	}
 	return {
 		/**
 		* @method get Get URL via Ajax, optionally strip from JSONP wrapper
 		* @param {String} url. URL to retrieve
 		* @param {Function} cb. Callback function to execute, parameter will be the response text or null
-		* @param {Object} opts. Additional configuration options, supported are: stripJSON {Boolean}
+		* @param {Object} opts. Additional configuration options, supported are: parse {Boolean} - pre-parse the result as JSON object
 		*/
 		get: function(url, cb, opts) {
 			opts = opts || { stripJSON: false};
@@ -25,8 +25,14 @@ define(function(){
 				var result;
 				if (r.readyState == 4) {
 					if (r.status == 200) {
-						result = opts.stripJSON ? stripLoaderJSON(r.responseText) : r.responseText;
-						cb(result);
+						if (r.responseText[0] === 'L')
+							result = stripLoaderJSON(r.responseText);
+						else 
+							result = r.responseText;
+						if (opts.parse === true) {
+							result = json.parse(result);
+						}
+						cb(result, r);
 					} else {
 						cb(null);
 					}
@@ -69,7 +75,7 @@ define(function(){
 				(function( requestNum ) {
 					that.get(urlList[requestNum], function(text){
 						receiveResponse(requestNum, text);
-					});
+					}, opts);
 				}(i))
 			}
 			

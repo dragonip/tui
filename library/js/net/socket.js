@@ -16,8 +16,24 @@ define(function() {
 	Socket.prototype.connect = function () {
 		if (this.socket) return;
 		console.log(this.url, this.protocol);
-		this.socket = new WebSocket(this.url, this.protocol);
+		try {
+			this.socket = new WebSocket(this.url, this.protocol);
+		} catch(e) {
+			try {
+				this.socket = new MozWebSocket(this.url, this.protocol);
+			} catch (e) {
+				console.log("Web socket is not supported")
+			}
+		}
+//		this.socket = new WebSocket(this.url, this.protocol);
 		this.socket.onmessage = this.messageHandler;
+//		
+//		function(e) {
+////			JSON.parse(e.data);
+//			this.messageHandler(e);
+//		}
+		
+//		this.messageHandler;
 		this.socket.onopen = this.setConnected.bind(this);
 		this.socket.onclose = this.disposeInternal.bind(this);
 	};

@@ -1,0 +1,81 @@
+.weatherWrapper::-webkit-scrollbar-thumb {
+	background: none;
+}
+.weatherWrapper {
+	width: 640px;
+	height: 480px;
+	overflow: auto;
+	
+}
+.weatherScreen {
+	padding: 50px 0 20px 20px;
+	color: white;
+	width: 935px;
+	overflow-x: auto;
+	overflow-y: hidden;
+}
+.weatherScreen .weatherCity {
+	font-size: 120%;
+	color: #FFAB2D;
+	text-align: left;
+	position: fixed;
+	left: 20px;
+	top: 20px;
+	z-index: 10;
+}
+.weatherScreen .weatherDate {
+	text-align: center;
+	font-size: 110%;
+}
+.weatherScreen .weatherDay {
+	width: 290px;
+	height: 160px;
+	background-color: #252525;
+	border-radius: 8px;
+	display: inline-block;
+	margin-top: 18px;
+	margin-right: 20px;
+	float: left;
+	box-shadow: inset 0px 0px 5px #545454;
+	-webkit-box-shadow: inset 0px 0px 5px #545454;
+	-moz-box-shadow: inset 0px 0px 5px #545454;
+	
+	background-image: linear-gradient(bottom, rgb(41,46,56) 15%, rgb(22,24,26) 49%, rgb(41,46,56) 94%);
+	background-image: -o-linear-gradient(bottom, rgb(41,46,56) 15%, rgb(22,24,26) 49%, rgb(41,46,56) 94%);
+	background-image: -moz-linear-gradient(bottom, rgb(41,46,56) 15%, rgb(22,24,26) 49%, rgb(41,46,56) 94%);
+	background-image: -webkit-linear-gradient(bottom, rgb(41,46,56) 15%, rgb(22,24,26) 49%, rgb(41,46,56) 94%);
+	background-image: -ms-linear-gradient(bottom, rgb(41,46,56) 15%, rgb(22,24,26) 49%, rgb(41,46,56) 94%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.15, rgb(41,46,56)),
+		color-stop(0.49, rgb(22,24,26)),
+		color-stop(0.94, rgb(41,46,56))
+	);
+}
+.weatherScreen .weatherDay div {
+	font-size: 110%;
+	color: #CCCCCC
+}
+.weatherScreen .weatherDay div.weatherName {
+	color: #C17400;
+}
+
+.weatherScreen .weatherDay div.weatherDayTitle {
+	text-align: center;
+	font-size: 130%;
+	color: white;
+	margin: 8px 0;
+}
+.weatherScreen .weatherDay .icon {
+	width: 105px;
+	height: 90%;
+	float: left;
+	line-height: 160px;
+	padding-right: 10px;
+}
+.weatherScreen .weatherDay .icon img {
+	height: 74px;
+}

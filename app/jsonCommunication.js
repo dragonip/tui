@@ -1,17 +1,25 @@
 {
 	header: {
 		globalCallback: "window.GlobalFunction",
-		sid: "unique ID",
-		run: "danocho's run",
+		tag: "unique ID",
+		method: "get_url|request|play|stop|pause|calld",
 		transport: "javascript|socket",
-		type: "request|event"
+		type: "request|event|reply|response",
+		mode: "sync|async"
 	},
 	request: {
 		templateurl: "",
 		template: "",
-		data: {}
+		url: "",//play|get_url|jsonget
+		content: 
 	},
-	response: {},
-	status: {}
+	=====
+	event: {
+		key: "up",
+	},
+	response: {
+		status: "ERR_*"
+	}//,
+//	status: {}
 }
 
