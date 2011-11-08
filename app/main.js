@@ -31,7 +31,9 @@ require(['ui/throbber'], function(t) {
 		useScale: false
 	};
 	//Fix the document dimenations and show loader first
-	document.body.setAttribute('style', 'width: ' + window.innerWidth + 'px; height: ' + window.innerHeight + 'px;');
+//	document.body.setAttribute('style', 'width: ' + window.innerWidth + 'px; height: ' + window.innerHeight + 'px;');
+	document.body.style.width = window.innerWidth + 'px';
+	document.body.style.height = window.innerHeight + 'px';
 	loadIndicator = {
 		show: function(text) {
 			t.start({
@@ -45,7 +47,7 @@ require(['ui/throbber'], function(t) {
 	};
 	loadIndicator.show();
 	//After we are done with the loader, require some helpers and the main event dispatcher and start building the app
-	require(['utils/events', 'dom/classes', 'dom/dom'], function(globalevents, classes, dom ) {
+	require(['utils/events', 'dom/classes', 'dom/dom', 'ui/popup', 'dmc/dmc', 'shims/bind'], function(globalevents, classes, dom, Dialogs, dmc, bind ) {
 		//Load images offscreen after we have loaded the deps to avoid trapping the JS in the max Concurent Reqs of the browsser
 		dom.adopt(dom.create('div', {
 			classes: 'tui-component tui-preloader',
@@ -59,13 +61,17 @@ require(['ui/throbber'], function(t) {
 		}));
 		//Create the main Controller
 		window.tui = {
+			signals: {
+				restoreEventTree: function() {
+					dmc.onKeyPress(globalevents.defaultEventAccepter);
+				}
+			},
 			mainContainer: dom.$('#maincontainer'),
 			loadIndicator: loadIndicator,
 			options: options,
 			currentActiveApp: null,
 			appRequested: false,
 			appModuleAdded: function(app) {
-				this.logger.log(['Setting current active app to', app]);
 				this.currentActiveApp = app;
 				app.Start();
 			},
@@ -73,6 +79,19 @@ require(['ui/throbber'], function(t) {
 				// TODO: make those confirm panels work
 				var header = options.header.html;
 				this.rerouteEventsToPanel();
+			},
+			stealEvents: function(newManager) {
+				dmc.onKeyPress(newManager);
+			},
+			createDialog: function(type, options, callback, title, defaultOption ) {
+				var dialog;
+				if (type === 'optionlist') {
+					dialog = new Dialogs.OptionList(type, options, callback, title, defaultOption);
+				} else if (['input', 'password', 'text'].indexOf(type) !== -1  ) {
+					dialog = new Dialogs.Text(type, options, callback, title);
+				}
+				dialog.show();
+				this.stealEvents(bind(dialog.eventHandler, dialog));
 			},
 			setPanels: function(top, bottom, opt_topContent, opt_bottomContent) {
 				if (top) {
@@ -137,13 +156,15 @@ require(['ui/throbber'], function(t) {
 				signals: function(signaltype, opts) {
 					switch (signaltype) {
 					case 'ready':
-						tui.logger.log(['TUI received signal ready for app', opts]);
 						if (tui.currentActiveApp.name === opts.name) {
 							tui.logger.log('my currentlyactve app is ready, time to hide the throbber and call draw on my app');
 							tui.loadIndicator.hide();
 							tui.setContainerVisibility(false);
 							tui.currentActiveApp.Show(tui.mainContainer);
 						}
+						break;
+					case 'restore-event-stack':
+						dmc.onKeyPress(globalevents.defaultEventAccepter);
 						break;
 					}
 				}
@@ -222,7 +243,6 @@ require(['ui/throbber'], function(t) {
 			require(['ui/simplescreenselector', 'dmc/dmc'], function(Mappsel, Mdmc) {
 				require(['transport/response'], function(response) {
 					window.transportReceiver = function(JSONString) {
-						console.log("received message from server");
 						response.recall(JSONString);
 					};
 					require(['app/paths/stb.js', 'data/applist', 'ui/player', 'tpl/infobuttons'], function(paths, apps, player, itpl) {
