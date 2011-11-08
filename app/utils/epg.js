@@ -11,8 +11,9 @@ define([
 	'tpl/infobuttons',
 	'dom/classes',
 	'dom/dom',
-	'utils/scrollable'
- ], function (inherit, Togglable, events, datetime, sizes, template, dom, css, loader, infobuttonstpl, classes, dom, Scrollable){
+	'utils/scrollable',
+	'shims/bind'
+ ], function (inherit, Togglable, events, datetime, sizes, template, dom, css, loader, infobuttonstpl, classes, dom, Scrollable, bind){
 	loader.loadCSSFromText(css);
 	var EPGModel = function(dataCollection, taint_list) {
 		Togglable.call(this);
@@ -21,26 +22,23 @@ define([
 			style: "width: " + sizes.getSizesForWindow().width + "px; height: " + sizes.getSizesForWindow().height + "px",
 			classes: 'epgwrapper'
 		});
+		var bound = bind(this.selectItem, this);
 		this.appEvents = {
 			'return': {
 				name: 'return',
-				func: function(key) {
+				func: bind(function(key) {
 					this.attachEvents(false);
-				}.bind(this),
+				},this),
 				attached: false
 			},
 			'down': {
 				name: 'down',
-				func: function(key) {
-					this.selectItem(key);
-				}.bind(this),
+				func: bound,
 				attached: false
 			},
 			'up': {
 				name: 'up',
-				func: function(key){
-					this.selectItem(key);
-				}.bind(this),
+				func: bound,
 				attached: false
 			}
 		};
