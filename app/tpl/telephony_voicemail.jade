@@ -1,0 +1,12 @@
+div.tui-multiscreen.voiceMail
+	div.voiceMailItem.nobg
+		div.caller Caller
+		div.time Time
+	div.voiceMailResults
+		- if (typeof things === 'object')
+			- for (var i = 0; i < things.length; i++ )
+				div.voiceMailItem
+					div.caller!= things[i].callername
+					div.time!= things[i].time
+		- else 
+			div.system-info.no-voicemail-messages

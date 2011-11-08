@@ -1,0 +1,166 @@
+.multi-select-wrapper {
+	background: rgba(28,28,28,0.8);
+    text-align: center;
+    position: relative;
+	left: 0;
+    top: 0;
+
+    -moz-box-align: stretch;
+	-moz-box-orient: vertical;
+	-webkit-box-align: stretch;
+	-webkit-box-orient: vertical;
+	display: -moz-box;
+	display: -webkit-box;
+	-moz-box-pack: center;
+	-webkit-box-pack: center;
+}
+.multi-select-wrapper .multi-select-shadow {
+	margin: 0 auto; 
+	padding: 4px;
+	background: rgba(36,36,36, 0.4);
+	width: 30%;
+	border-radius: 5px;
+}
+.multi-select-wrapper .multi-select-shadow.has-kbd {
+	width: 500px;
+}
+.multi-select-container .tui-kbd-container {
+	text-align: center;
+	width: 449px;
+	margin: 0 auto;
+/*	height: 225px;*/
+}
+.multi-select-wrapper .multi-select-shadow .multi-select-container {
+	color: white;
+	text-align: center;
+	padding: 20px 0 20px 0;
+	margin: 0 auto; 
+	border-radius: 5px;
+	
+	background-image: linear-gradient(bottom, rgb(33,27,33) 25%, rgb(51,43,51) 75%, rgb(74,69,74) 88%);
+	background-image: -o-linear-gradient(bottom, rgb(33,27,33) 25%, rgb(51,43,51) 75%, rgb(74,69,74) 88%);
+	background-image: -moz-linear-gradient(bottom, rgb(33,27,33) 25%, rgb(51,43,51) 75%, rgb(74,69,74) 88%);
+	background-image: -webkit-linear-gradient(bottom, rgb(33,27,33) 25%, rgb(51,43,51) 75%, rgb(74,69,74) 88%);
+	background-image: -ms-linear-gradient(bottom, rgb(33,27,33) 25%, rgb(51,43,51) 75%, rgb(74,69,74) 88%);
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.25, rgb(33,27,33)),
+		color-stop(0.75, rgb(51,43,51)),
+		color-stop(0.88, rgb(74,69,74))
+	);
+
+}
+.multi-select-wrapper .multi-select-shadow .multi-select-container .title {
+	font-weight: bold;
+	font-size: 160%;
+	color: white;
+	margin-bottom: 14px;
+}
+.multi-select-wrapper .multi-select-shadow .multi-select-container .multi-select-item {
+	font-weight: bold;
+	background-image: linear-gradient(bottom, rgb(69,69,69) 25%, rgb(102,102,102) 75%);
+	background-image: -o-linear-gradient(bottom, rgb(69,69,69) 25%, rgb(102,102,102) 75%);
+	background-image: -moz-linear-gradient(bottom, rgb(69,69,69) 25%, rgb(102,102,102) 75%);
+	background-image: -webkit-linear-gradient(bottom, rgb(69,69,69) 25%, rgb(102,102,102) 75%);
+	background-image: -ms-linear-gradient(bottom, rgb(69,69,69) 25%, rgb(102,102,102) 75%);
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.25, rgb(69,69,69)),
+		color-stop(0.75, rgb(102,102,102))
+	);
+
+	width: 65%;
+	height: 20px;
+	padding: 10px 20px;
+	text-align: center;
+	display: block;
+	margin: 4px auto;
+	border: 2px solid transparent;
+	font-size: 120%;
+	border-radius: 4px;
+}
+.multi-select-wrapper .multi-select-shadow .multi-select-container div.active {
+	background-image: linear-gradient(bottom, rgb(107,106,107) 25%, rgb(133,133,133) 75%);
+	background-image: -o-linear-gradient(bottom, rgb(107,106,107) 25%, rgb(133,133,133) 75%);
+	background-image: -moz-linear-gradient(bottom, rgb(107,106,107) 25%, rgb(133,133,133) 75%);
+	background-image: -webkit-linear-gradient(bottom, rgb(107,106,107) 25%, rgb(133,133,133) 75%);
+	background-image: -ms-linear-gradient(bottom, rgb(107,106,107) 25%, rgb(133,133,133) 75%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.25, rgb(107,106,107)),
+		color-stop(0.75, rgb(133,133,133))
+	);
+	border: 2px solid #9D5F00;
+}
+.multi-select-wrapper .multi-select-shadow .multi-select-container div.pressed {
+	border: 2px solid #808080; /*#9D5F00; /*#F49300;*/
+	
+	background-image: linear-gradient(bottom, rgb(66,62,66) 25%, rgb(51,51,51) 75%);
+	background-image: -o-linear-gradient(bottom, rgb(66,62,66) 25%, rgb(51,51,51) 75%);
+	background-image: -moz-linear-gradient(bottom, rgb(66,62,66) 25%, rgb(51,51,51) 75%);
+	background-image: -webkit-linear-gradient(bottom, rgb(66,62,66) 25%, rgb(51,51,51) 75%);
+	background-image: -ms-linear-gradient(bottom, rgb(66,62,66) 25%, rgb(51,51,51) 75%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.25, rgb(66,62,66)),
+		color-stop(0.75, rgb(51,51,51))
+	);	
+
+}
+.multi-select-wrapper .multi-select-shadow .multi-select-container .textarea {
+	width: 65%;
+	background-color: white;
+	color: black;
+	border: 2px gray solid;
+	box-shadow: inset 0 0 3px black;
+	margin: 0 auto 15px auto;
+	border-radius: 5px;
+	text-align: left;
+	padding: 4px;
+	font-size: 128%;
+	display: inline-block;
+}
+.multi-select-wrapper .multi-select-shadow .multi-select-container .area-type-input, .multi-select-wrapper .multi-select-shadow .multi-select-container .area-type-password {
+	height: 20px;
+	overflow: hidden;
+	line-height: 30px;
+}
+.multi-select-wrapper .multi-select-shadow .multi-select-container .area-type-text {
+	height: 60px;
+}
+.multi-select-wrapper .multi-select-shadow .multi-select-container .kbd-submitBtn {
+	display: inline-block;
+    float: right;
+    height: 20px;
+    margin: 20px 36px 0 0;
+    padding: 6px;
+	border-radius: 5px;
+	background-image: linear-gradient(bottom, rgb(138,136,138) 20%, rgb(176,176,176) 80%);
+	background-image: -o-linear-gradient(bottom, rgb(138,136,138) 20%, rgb(176,176,176) 80%);
+	background-image: -moz-linear-gradient(bottom, rgb(138,136,138) 20%, rgb(176,176,176) 80%);
+	background-image: -webkit-linear-gradient(bottom, rgb(138,136,138) 20%, rgb(176,176,176) 80%);
+	background-image: -ms-linear-gradient(bottom, rgb(138,136,138) 20%, rgb(176,176,176) 80%);
+
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.2, rgb(138,136,138)),
+		color-stop(0.8, rgb(176,176,176))
+	);
+	border: 2px solid transparent;
+	color: black;
+}
+.multi-select-wrapper .multi-select-shadow .multi-select-container .kbd-submitBtn.active {
+	border: 2px solid #f4a01c;
+}

@@ -1,0 +1,99 @@
+
+.tui-keyboard {
+	text-align: center;
+	height: 145px;
+}
+
+/*#vkbd {*/
+/*	opacity: 0.8;*/
+/*	position: fixed;*/
+/*	top: -500px;*/
+/*    width: 460px;*/
+/*    height: 225px;*/
+/*    margin: 0 auto 0;*/
+/*    padding: 3px;*/
+/*    background-color: rgba(0,0,0,0.93);*/
+/*    -moz-border-radius: 0 0 8px 8px;*/
+/*    -webkit-border-radius: 0 0 8px 8px;*/
+/*    border-radius: 0 0 8px 8px;*/
+/*}*/
+/*#vkbd.shown {*/
+/*	top: 0;*/
+/*	*/
+/*	 * -webkit-transition-duration: 300ms;*/
+/*	 */
+/*}*/
+    
+.tui-keyboard .kbdrow {
+    list-style: none;   
+}
+.tui-keyboard > ul {
+/*	margin: 0;*/
+	padding: 0;
+}
+.tui-keyboard .ul0 {
+	margin-left: 15px;
+}
+.tui-keyboard .ul1 {
+    margin-left: 30px;
+}
+.tui-keyboard .ul2 {
+    margin-left: 15px;
+}
+.tui-keyboard .ul3 {
+    margin-left: 15px;
+}
+.tui-keyboard .ul4 {
+    margin-left: 45px;
+}
+.tui-keyboard .kbdrow li {
+    -moz-border-radius: 3px;
+/*    webkit - our device*/
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+    width: 24px;
+    height: 20px;
+    background-color: white;
+    display: block;
+    margin: 3px;
+    float: left;
+    padding-top: 3px;
+    text-align: center;
+    color: black;
+	background-image: linear-gradient(bottom, rgb(138,136,138) 20%, rgb(176,176,176) 80%);
+	background-image: -o-linear-gradient(bottom, rgb(138,136,138) 20%, rgb(176,176,176) 80%);
+	background-image: -moz-linear-gradient(bottom, rgb(138,136,138) 20%, rgb(176,176,176) 80%);
+	background-image: -webkit-linear-gradient(bottom, rgb(138,136,138) 20%, rgb(176,176,176) 80%);
+	background-image: -ms-linear-gradient(bottom, rgb(138,136,138) 20%, rgb(176,176,176) 80%);
+
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.2, rgb(138,136,138)),
+		color-stop(0.8, rgb(176,176,176))
+	);
+}
+.tui-keyboard .kbdrow li.smallwidekey {
+    width: 55px;
+}
+.tui-keyboard .kbdrow li.widekey {
+    width: 84px;
+}
+.tui-keyboard .kbdrow li.spacek {
+    width: 143px;
+}
+.tui-keyboard .kbdrow li.activekey {
+	color: white;
+	font-weight: bold;
+	background: #bdbdbd;
+	
+	/*
+	 * -moz-box-shadow: 0 0 6px black;
+	 * -webkit-box-shadow: 0 0 6px black;
+	 * box-shadow: 0 0 6px black;
+	 */
+/*    webkit tweak as it does not support shoadows*/
+/*	margin: 2px;*/
+/*	border: 1px black solid;*/
+}

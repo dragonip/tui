@@ -1,0 +1,18 @@
+div
+	div(class='multi-select-shadow' + ((addKbdContainer) ? ' has-kbd' : ''))
+		div.multi-select-container
+			div.title!= title
+			- if (typeof type === 'string' && ['input', 'password', 'text'].indexOf(type) !== -1 )
+				div(class='textarea area-type-' + type)
+				- if (type === 'text')
+					div.kbd-submitBtn Submit
+				- if (addKbdContainer === true) 
+					div.tui-kbd-container
+				- else if (typeof useDefaultButtons === 'boolean' && useDefaultButtons)
+					div.tui-horizontal-container
+						div.tui-popup-button.horizontal-button OK
+						div.tui-popup-button.horizontal-button Cancel
+			- else if ( typeof things === 'object')
+				- for( var i = 0; i < things.length; i++) 
+					div.multi-select-item!= things[i]
+

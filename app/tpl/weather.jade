@@ -1,0 +1,15 @@
+div.weatherScreen
+	div.weatherCity!= things.cityname
+	- for (var i = 0; i < things.length; i++ )
+		div.weatherDay
+			div.weatherDayTitle!= things[i].dayOfWeek
+			div.icon
+				img(src= things[i].weatherIcon)
+			- if (things[i].humidity)
+				div.humidity!= "Humidity: " + things[i].humidity
+			- else
+				div.weatherName!= things[i].weathername
+			div.minTemp!= "Temp. Low: " + things[i].lowTemp
+			div.maxTemp!= "Temp. High: " + things[i].highTemp
+			div.wind!= "Winds: " + things[i].windSpeed
+			div.feelsLike!= "Feels like: " + things[i].feelsLike

@@ -1,0 +1,19 @@
+div.tui-multiscreen.phonebookWrapper
+	div.inputCont
+		span.searchText Press Left To activate the field
+		input.searchInput
+	div.kbdButton
+		img(src="app/imgs/kbdButton.png")
+	div.phonebookItem.nobg
+		div.name Name
+		div.general General
+		div.ip IP
+	div.phoneBookResults
+		-if (typeof things === 'object')
+			- for (var i = 0; i < things.length; i++ )
+				div.phonebookItem
+					div.name!= things[i].callername
+					div.general!= things[i].general
+					div.ip!= things[i].ip
+		- else 
+			div.system-info.no-phonebook-entries

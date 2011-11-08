@@ -1,0 +1,22 @@
+div.tui-multiscreen.callHistory
+	div.callHistoryItem.nobg
+		div.caller!= "Caller"	
+		div.time!= "Time"
+		div.duration!= "Duration"		
+		div.type!= "Type"
+	div.callHistoryResults
+		- if (typeof things === 'object')
+			- for (var i = 0; i < things.length; i++ )
+				div.callHistoryItem
+					div.caller!= things[i].callernum
+					div.time!= things[i].starttime
+					div.duration!= things[i].duration
+					div.type
+						- if(things[i].type === "received")
+							img(src="app/imgs/received.svg")
+						- else if(things[i].type === "missed")
+							img(src="app/imgs/missed.svg")
+						- else if(things[i].type === "dialed")
+							img(src="app/imgs/dialed.svg")
+		- else
+			div.emptyScreen

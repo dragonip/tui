@@ -1,0 +1,50 @@
+No registered callback for received object:
+response.js:24
+Object
+test.js:34END
+test.js:32received message from server { "header": { "type": "event", "tag": "00000931", "method": "media", "tstamp": 1320248227.412236 }, "event": { "state": "stopped" } }
+test.js:34END
+test.js:32received message from server { "header": { "method": "play", "tag": "12312312asdfasdf", "type": "response" }, "response": { "url": "http:\/\/192.168.0.177\/video\/StargateSG-1%5b8x13%5dItsGoodToBeKing.avi", "status": "OK" } }
+response.js:23No registered callback for received object:
+response.js:24
+Object
+test.js:34END
+test.js:32received message from server { "header": { "type": "event", "tag": "00000935", "method": "media", "tstamp": 1320248231.987236 }, "event": { "state": "started" } }
+test.js:34END
+test.js:32received message from server { "header": { "method": "pause", "mode": "sync", "tag": "12312312asdfasdf", "type": "response" }, "response": { "status": "OK" } }
+response.js:23No registered callback for received object:
+response.js:24
+Object
+test.js:34END
+test.js:32received message from server { "header": { "type": "event", "tag": "00000943", "method": "media", "tstamp": 1320248239.541236 }, "event": { "state": "paused" } }
+test.js:34END
+test.js:32received message from server { "header": { "method": "pause", "mode": "sync", "tag": "12312312asdfasdf", "type": "response" }, "response": { "status": "OK" } }
+response.js:23No registered callback for received object:
+response.js:24
+Object
+test.js:34END
+test.js:32received message from server { "header": { "type": "event", "tag": "00000946", "method": "media", "tstamp": 1320248242.749236 }, "event": { "state": "unpaused" } }
+test.js:34END
+test.js:32received message from server { "header": { "method": "stop", "mode": "sync", "tag": "12312312asdfasdf", "type": "response" }, "response": { "status": "OK" } }
+response.js:23No registered callback for received object:
+response.js:24
+Object
+test.js:34END
+test.js:32received message from server { "header": { "type": "event", "tag": "00000952", "method": "media", "tstamp": 1320248248.222567 }, "event": { "state": "stopped" } }
+test.js:34END
+test.js:32received message from server { "header": { "type": "event", "tag": "00000064", "method": "remote", "tstamp": 1320248384.447236 }, "event": { "key": "up" } }
+test.js:34END
+test.js:32received message from server { "header": { "type": "event", "tag": "00000064", "method": "remote", "tstamp": 1320248384.870236 }, "event": { "key": "up" } }
+test.js:34END
+test.js:32received message from server { "header": { "type": "event", "tag": "00000065", "method": "remote", "tstamp": 1320248385.382236 }, "event": { "key": "right" } }
+test.js:34END
+test.js:32received message from server { "header": { "type": "event", "tag": "00000065", "method": "remote", "tstamp": 1320248385.687236 }, "event": { "key": "right" } }
+test.js:34END
+test.js:32received message from server { "header": { "type": "event", "tag": "00000066", "method": "remote", "tstamp": 1320248386.277236 }, "event": { "key": "down" } }
+test.js:34END
+test.js:32received message from server { "header": { "type": "event", "tag": "00000066", "method": "remote", "tstamp": 1320248386.620236 }, "event": { "key": "down" } }
+test.js:34END
+test.js:32received message from server { "header": { "type": "event", "tag": "00000067", "method": "remote", "tstamp": 1320248387.142236 }, "event": { "key": "left" } }
+test.js:34END
+test.js:32received message from server { "header": { "type": "event", "tag": "00000067", "method": "remote", "tstamp": 1320248387.559236 }, "event": { "key": "left" } }
+test.js:34END

@@ -1,0 +1,26 @@
+div.tui-multiscreen.callCenter
+	input.phoneDisplay(type="tel", pattern="[0-9]", name="phoneNumber")
+	div.phoneKeyboard
+		div.row
+			div.phoneBtn!= "1"
+			div.phoneBtn!= "2"
+			div.phoneBtn!= "3"
+			div.phoneBtn
+				img.phoneImg(src="app/imgs/greenPhone.png")
+		div.row
+			div.phoneBtn!= "4"
+			div.phoneBtn!= "5"
+			div.phoneBtn!= "6"
+			div.phoneBtn
+				img.phoneImg(src="app/imgs/redPhone.png")
+		div.row
+			div.phoneBtn!= "7"
+			div.phoneBtn!= "8"
+			div.phoneBtn!= "9"
+			div.phoneBtn.addToPhone!= "Call<br>History"
+		div.row
+			div.phoneBtn!= "*"
+			div.phoneBtn!= "0"
+			div.phoneBtn!= "#"
+			div.phoneBtn
+				img.phoneDictionary(src="app/imgs/phoneBook.png")
