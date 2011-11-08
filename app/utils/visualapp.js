@@ -29,8 +29,6 @@ define([
 		}
 	};
 	VisualApp.prototype.attachEvents = function(bool) {
-		console.log('Calling attachEvents');
-		console.log(bool);
 		if (typeof this.appEvents  === 'object') {
 			if (bool)
 				events.addHandlers(this.appEvents);
