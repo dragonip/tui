@@ -15,7 +15,6 @@ define([
 	*/ 
 	Togglable.prototype.attachedToDom_ = false;
 	Togglable.prototype.enterDom = function() {
-		console.log(this.dom);
 		this.attachedToDom_ = true;
 		dom.adopt(this.container, this.dom);
 	};
