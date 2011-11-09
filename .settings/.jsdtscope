@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="con" path="org.eclipse.wst.jsdt.launching.baseBrowserLibrary"/>
+	<classpathentry excluding="apps/|sampledata/|transport/|paths/|config/|data/|utils/|model/|tpl/|dmc/|apps/games/|view/|ui/" kind="src" path="app"/>
+	<classpathentry excluding="games/" kind="src" path="app/apps"/>
+	<classpathentry kind="src" path="app/apps/games"/>
+	<classpathentry kind="src" path="app/config"/>
+	<classpathentry kind="src" path="app/data"/>
+	<classpathentry kind="src" path="app/dmc"/>
+	<classpathentry kind="src" path="app/model"/>
+	<classpathentry kind="src" path="app/paths"/>
+	<classpathentry kind="src" path="app/sampledata"/>
+	<classpathentry kind="src" path="app/tpl"/>
+	<classpathentry kind="src" path="app/transport"/>
+	<classpathentry kind="src" path="app/ui"/>
+	<classpathentry kind="src" path="app/utils"/>
+	<classpathentry kind="src" path="app/view"/>
+	<classpathentry kind="src" path="docs"/>
+	<classpathentry excluding="docs/|js/|js/array/|js/debug/|js/dom/|js/env/|js/host/|js/json/|js/loader/|js/net/|js/nls/|js/nls/root/|js/oop/|js/shims/|js/support/|js/templates/|js/types/|js/utils/|js/window/" kind="src" path="library"/>
+	<classpathentry kind="src" path="library/docs"/>
+	<classpathentry excluding="array/|debug/|dom/|env/|host/|i18n.js|json/|loader/|net/|nls/|nls/root/|oop/|require.js|shims/|support/|templates/|text.js|types/|utils/|window/" kind="src" path="library/js"/>
+	<classpathentry kind="src" path="library/js/array"/>
+	<classpathentry kind="src" path="library/js/debug"/>
+	<classpathentry kind="src" path="library/js/dom"/>
+	<classpathentry kind="src" path="library/js/env"/>
+	<classpathentry kind="src" path="library/js/host"/>
+	<classpathentry kind="src" path="library/js/json"/>
+	<classpathentry kind="src" path="library/js/loader"/>
+	<classpathentry kind="src" path="library/js/net"/>
+	<classpathentry excluding="root/" kind="src" path="library/js/nls"/>
+	<classpathentry kind="src" path="library/js/nls/root"/>
+	<classpathentry kind="src" path="library/js/oop"/>
+	<classpathentry kind="src" path="library/js/shims"/>
+	<classpathentry kind="src" path="library/js/support"/>
+	<classpathentry kind="src" path="library/js/templates"/>
+	<classpathentry kind="src" path="library/js/types"/>
+	<classpathentry kind="src" path="library/js/utils"/>
+	<classpathentry kind="src" path="library/js/window"/>
+	<classpathentry excluding="app/|app/apps/|app/apps/games/|app/config/|app/data/|app/dmc/|app/model/|app/paths/|app/sampledata/|app/tpl/|app/transport/|app/ui/|app/utils/|app/view/|docs/|library/|library/docs/|library/js/|library/js/array/|library/js/debug/|library/js/dom/|library/js/env/|library/js/host/|library/js/json/|library/js/loader/|library/js/net/|library/js/nls/|library/js/nls/root/|library/js/oop/|library/js/shims/|library/js/support/|library/js/templates/|library/js/types/|library/js/utils/|library/js/window/" kind="src" path=""/>
+	<classpathentry kind="con" path="org.eclipse.wst.jsdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
