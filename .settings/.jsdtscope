@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="view/|tpl/|apps/|utils/|model/|sampledata/|paths/|ui/|dmc/|data/" kind="src" path="app"/>
+	<classpathentry kind="src" path="app/apps"/>
+	<classpathentry kind="src" path="app/data"/>
+	<classpathentry kind="src" path="app/dmc"/>
+	<classpathentry kind="src" path="app/model"/>
+	<classpathentry kind="src" path="app/paths"/>
+	<classpathentry kind="src" path="app/sampledata"/>
+	<classpathentry kind="src" path="app/tpl"/>
+	<classpathentry kind="src" path="app/ui"/>
+	<classpathentry kind="src" path="app/utils"/>
+	<classpathentry kind="src" path="app/view"/>
+	<classpathentry kind="src" path="docs"/>
+	<classpathentry excluding="js/shims/|js/net/|js/host/|js/types/|js/|js/nls/root/|js/utils/|js/templates/|js/oop/|js/array/|js/nls/|js/loader/|js/dom/|js/support/|js/window/|js/env/|js/debug/" kind="src" path="library"/>
+	<classpathentry excluding="shims/|net/|host/|types/|nls/root/|utils/|templates/|oop/|array/|nls/|loader/|dom/|support/|window/|env/|debug/" kind="src" path="library/js"/>
+	<classpathentry kind="src" path="library/js/array"/>
+	<classpathentry kind="src" path="library/js/debug"/>
+	<classpathentry kind="src" path="library/js/dom"/>
+	<classpathentry kind="src" path="library/js/env"/>
+	<classpathentry kind="src" path="library/js/host"/>
+	<classpathentry kind="src" path="library/js/loader"/>
+	<classpathentry kind="src" path="library/js/net"/>
+	<classpathentry excluding="root/" kind="src" path="library/js/nls"/>
+	<classpathentry kind="src" path="library/js/nls/root"/>
+	<classpathentry kind="src" path="library/js/oop"/>
+	<classpathentry kind="src" path="library/js/shims"/>
+	<classpathentry kind="src" path="library/js/support"/>
+	<classpathentry kind="src" path="library/js/templates"/>
+	<classpathentry kind="src" path="library/js/types"/>
+	<classpathentry kind="src" path="library/js/utils"/>
+	<classpathentry kind="src" path="library/js/window"/>
+	<classpathentry kind="con" path="org.eclipse.wst.jsdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.wst.jsdt.launching.baseBrowserLibrary"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
