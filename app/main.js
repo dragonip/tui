@@ -18,7 +18,7 @@ require.config({
 		"dom": "../library/js/dom",
 		"debug": "../library/js/debug",
 		"array": "../library/js/array",
-		"text": "../library/js/text",
+		"text": "../library/js/text"
 	},
 	urlArgs: "bust=" + (new Date()).getTime()
 });
@@ -121,14 +121,14 @@ require(['ui/throbber'], function(t) {
 				if (bool) {
 					//calculate for 20%
 					if (this.useScale) {
-						this.mainContainer.className = 'scaled'
+						this.mainContainer.className = 'scaled';
 						var x = parseInt(this.mainContainer.style.width, 10);
 						var y = parseInt(this.mainContainer.style.height, 10);
 						var x1 = parseInt(((x * 20) / 100), 10);
 						var y1 = parseInt(((y * 20) / 100), 10);
 						var moveX = parseInt(x / 2) - parseInt(x1 / 2);
 						//var moveY = parseInt(y/2) - parseInt(y1/2);
-						var res = "scale(0.2) translateX(" + moveX * 5 + "px)" //  + "translateY(-" + moveY * 5 + "px)"
+						var res = "scale(0.2) translateX(" + moveX * 5 + "px)"; //  + "translateY(-" + moveY * 5 + "px)"
 						this.mainContainer.style.webkitTransform = res;
 						this.mainContainer.style.MozTransform = res;
 					} else {
@@ -138,7 +138,7 @@ require(['ui/throbber'], function(t) {
 					if (this.useScale) {
 						this.mainContainer.className = '';
 						this.mainContainer.style.MozTransform = 'scale(1)';
-						this.mainContainer.style.webkitTransform = "scale(1)"
+						this.mainContainer.style.webkitTransform = "scale(1)";
 
 					} else {
 						this.mainContainer.style.visibility = '';
@@ -238,7 +238,7 @@ require(['ui/throbber'], function(t) {
 		//Attach pannels
 		dom.adopt(tui.panels.bottom, tui.panels.infoBlock);
 		dom.adopt(tui.panels.top);
-		dom.adopt(tui.panels.bottom)
+		dom.adopt(tui.panels.bottom);
 		function loadTUI() {
 			require(['ui/simplescreenselector', 'dmc/dmc'], function(Mappsel, Mdmc) {
 				require(['transport/response'], function(response) {

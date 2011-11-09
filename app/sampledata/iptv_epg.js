@@ -19334,5 +19334,5 @@ Loader.loaded("epg", {
 				artists: "",
 				description: ""
 			}], ]
-	},
+	}
 });

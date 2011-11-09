@@ -190,7 +190,7 @@ Loader.loaded(
                 
                 dirs: {
                         
-                                "234" : { location : {url: "app/sampledata/vod_dir_234.js", sig: "234"}},
+                                "234" : { location : {url: "app/sampledata/vod_dir_234.js", sig: "234"}}
                         
                 }
                         
