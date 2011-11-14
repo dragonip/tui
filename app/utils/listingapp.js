@@ -4,13 +4,12 @@ define([
 	'model/listmodel',
 	//'view/listpresentation',
 	'view/mosaicpresentation',
-	'shims/bind'
-], function(inherit, VisualApp, ListModel, MosaicPresentation, bind) {
+	'shims/bind',
+	'net/simplexhr'
+], function(inherit, VisualApp, ListModel, MosaicPresentation, bind, xhr) {
 	var ListApp = function(options) {
 		VisualApp.call(this, options);
 		this.model = new ListModel(this);
-//		TODO: add the listview as in IPTV
-		//this.presentation = options.listType && options.listType === 'list'? new ListPresentation(this) : new MosaicPresentation(this);
 		this.presentation = new MosaicPresentation(this, options.listType, undefined, undefined, true );
 		this.registerDisposable(this.model);
 		this.registerDisposable(this.presentation);
@@ -110,30 +109,50 @@ define([
 	ListApp.prototype.handleDialogSelection = function(selectedIndex) {
 		var action;
 		if (this.dialogInstance) {
-			action = this.dialogInstance.options[selectedIndex].toLowerCase();
-			switch (action) {
+			this.dialogInstance.action = this.dialogInstance.options[selectedIndex].toLowerCase();
+			switch (this.dialogInstance.action) {
 				case 'lock':
 				case 'unlock':
-					this.dialogInstance.action = action;
 					tui.createDialog('password', true, bind(this.acceptPass, this), 'Enter lock password');
 					break;
 					
 				case 'bookmark':
 				case 'unbookmark':
 					this.acceptPass();
+					break;
 			}
 		}
 	};
 	ListApp.prototype.acceptPass = function(val) {
-//		TODO: add server side support for attempting to lock/unlock and bm
-		if (['lock','unlock'].indexOf(this.dialogInstance.action)!== -1)
-			this.dialogInstance.object.isLocked = !this.dialogInstance.object.isLocked;
-		else 
-			this.dialogInstance.object.isBookmarked = !this.dialogInstance.object.isBookmarked;
-		this.presentation.updateItem(this.dialogInstance.index, this.dialogInstance.object);
+		var url = tui.options.paths.getPath(this.name, this.dialogInstance.action) + '&id='+this.dialogInstance.object.id;
+		if (['lock','unlock'].indexOf(this.dialogInstance.action)!== -1){
+			url = url + '&password=' + val;
+		}
+		xhr.get(url, bind(this.handleUpdate, this, this.dialogInstance.index, this.dialogInstance.action), {
+			parse: true
+		});
 		this.dialogInstance.object = null;
 		delete this.dialogInstance;
 	};
+	ListApp.prototype.handleUpdate = function(index, action, result) {
+		console.log(arguments);
+		var obj = this.model.getItem(index);
+		if (result && result.status === 'OK') {
+			switch (action) {
+				case 'lock':
+				case 'unlock':
+					obj.isLocked = !obj.isLocked;
+					break;
+				case 'bookmark':
+				case 'unbookmark':
+					obj.isBookmarked = !obj.isBookmarked;
+					break;
+			}
+			this.presentation.updateItem(index, obj);
+		} else {
+//			TODO: display error messsage when action on object did not success
+		}
+	}
 	ListApp.prototype.disposeInternal = function() {
 		this.constructor.superClass_.disposeInternal.call(this);
 		delete this.appEvents;
