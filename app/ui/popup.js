@@ -37,7 +37,7 @@ define([
 			type: this.type,
 			addKbdContainer: this.useKbd
 		});
-		this.dom_.style.top = '-' +window.innerHeight + 'px';
+//		this.dom_.style.top = '-' +window.innerHeight + 'px';
 		dom.adopt(this.container, this.dom_);
 	};
 	
