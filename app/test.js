@@ -22,17 +22,30 @@
 		urlArgs: "bust=" +  (new Date()).getTime()
 	});
 
-//Test the vkbs class
+//Test the vkbs class -- result is : very fast kbd working!
 //require(['ui/vkbd', 'dom/dom', 'dmc/dmc'], function(KBD, dom, dmc) {
-//	var kbdcont = dom.create('div');
-//	dom.adopt(kbdcont);
-//	var kbd = new KBD();
-//	kbd.show(kbdcont);
-//	kbd.addCustomLayout('bg_bg')
-//		kbd.addCustomLayout('il_il')
-//	dmc.onKeyPress(kbd.getEventHandler());
+//		var kbdcont = dom.create('div');
+//		dmc.initAPI();
+//		dom.adopt(kbdcont);
+//		var kbd = new KBD();
+//		kbd.show(kbdcont);
+//		kbd.addCustomLayout('bg_bg');
+//		kbd.addCustomLayout('il_il');
+//		dmc.onKeyPress(kbd.getEventHandler());
 //});
-
+//Test the dialog with kbd - maybe problem is there
+require(['ui/popup', 'dmc/dmc', 'shims/bind'], function(Dialogs, dmc, bind){
+	console.log('a')
+	dmc.initAPI();
+	console.log(2);
+	var dialog = new Dialogs.Text('password', true, function(value) { console.log(value);}, 'Test');
+	console.log(3)
+	dialog.show();
+	console.log(4)
+	dmc.onKeyPress(bind(dialog.eventHandler, dialog));
+});
+	
+	
 //Test the kbd template
 /*require(['tpl/vkbs', 'dom/dom', 'text!css/vkbd.css', 'loader/loader'], function(template, dom, css, loader){
 	loader.loadCSSFromText(css);
@@ -52,43 +65,43 @@
 });*/
 
 //Test the JSON transport
-require(['transport/response'], function(response) {
-	window.tui = {
-		options : {
-			debug: true
-		}
-	};
-	window.transportReceiver = function(JSONString) {
-		console.log("received message from server", JSONString);
-		response.recall(JSONString);
-		console.log('END')
-	};
-
-	var webcontent = '';
-	window.getContent = function() {
-		return webcontent;
-	}
-
-	require(['net/socket', 'transport/request', 'transport/requestheader', 'dom/dom'], function(socket, request, header, dom) {
-		var myRequest = request.create('calld', {run: 'iptv_json_list', newif: 1}, 'http://www.google.bg/');
-		response.register(myRequest, function(respObj) {
-			console.log('Loaded frm socket, parsed and now render', respObj.content)
-//			webcontent = respObj.content
-//			var div = dom.create('div');
-//			var frame = dom.create('iframe', {
-//				src : 'javascript:top.getContent()'
-//			});
-//			dom.adopt(div, frame)
-//			dom.adopt(div);
-		}, null);
-//		myRequest.json.response = {
-//			status: 'ok',
-//			data: null
-//		};
-		myRequest.send();
-		myRequest.disposeInternal();
-	});
-});
+//require(['transport/response'], function(response) {
+//	window.tui = {
+//		options : {
+//			debug: true
+//		}
+//	};
+//	window.transportReceiver = function(JSONString) {
+//		console.log("received message from server", JSONString);
+//		response.recall(JSONString);
+//		console.log('END')
+//	};
+//
+//	var webcontent = '';
+//	window.getContent = function() {
+//		return webcontent;
+//	}
+//
+//	require(['net/socket', 'transport/request', 'transport/requestheader', 'dom/dom'], function(socket, request, header, dom) {
+//		var myRequest = request.create('calld', {run: 'iptv_json_list', newif: 1}, 'http://www.google.bg/');
+//		response.register(myRequest, function(respObj) {
+//			console.log('Loaded frm socket, parsed and now render', respObj.content)
+////			webcontent = respObj.content
+////			var div = dom.create('div');
+////			var frame = dom.create('iframe', {
+////				src : 'javascript:top.getContent()'
+////			});
+////			dom.adopt(div, frame)
+////			dom.adopt(div);
+//		}, null);
+////		myRequest.json.response = {
+////			status: 'ok',
+////			data: null
+////		};
+//		myRequest.send();
+//		myRequest.disposeInternal();
+//	});
+//});
 //console.log(typeof Function)
 //console.log(typeof Function.bind)
 //require(['json/json', 'net/simplexhr'], function(json, xhr) {
