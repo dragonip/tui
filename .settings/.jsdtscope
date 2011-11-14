@@ -31,7 +31,7 @@
 	<classpathentry kind="src" path="library/js/nls/root"/>
 	<classpathentry kind="src" path="library/js/oop"/>
 	<classpathentry kind="src" path="library/js/shims"/>
-	<classpathentry kind="src" path="library/js/support"/>
+	<classpathentry excluding="*" kind="src" path="library/js/support"/>
 	<classpathentry kind="src" path="library/js/templates"/>
 	<classpathentry kind="src" path="library/js/types"/>
 	<classpathentry kind="src" path="library/js/utils"/>
