@@ -20,7 +20,7 @@ define([
 		this.fire('show-requested');
 	};
 	VisualApp.prototype.Stop = function(){
-		this.fire('stop-requested')
+		this.fire('stop-requested');
 	};
 	VisualApp.prototype.disposeInternal = function() {
 		this.constructor.superClass_.disposeInternal.call(this);
