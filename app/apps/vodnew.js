@@ -2,6 +2,7 @@ define([
 	'utils/listingapp'
 ], function(App){
 	return new App({
-		name: 'vod'
+		name: 'vod',
+		shouldJump: true
 	});
 });

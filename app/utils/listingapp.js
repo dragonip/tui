@@ -10,7 +10,7 @@ define([
 	var ListApp = function(options) {
 		VisualApp.call(this, options);
 		this.model = new ListModel(this);
-		this.presentation = new MosaicPresentation(this, options.listType, undefined, undefined, true );
+		this.presentation = new MosaicPresentation(this, options.listType, options.itemWidth, options.itemHeight, options.shouldJump );
 		this.registerDisposable(this.model);
 		this.registerDisposable(this.presentation);
 		this.generateDefaultEvents();

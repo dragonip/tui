@@ -9,8 +9,12 @@ define(['tpl/mosaiclist','text!css/mosaic.css','loader/loader','oop/idisposable'
 		this.iw = iWidth || this.iw;
 		this.ih = iHeight || this.ih;
 		this.vh = window.innerHeight - 60 - 10;
+		if (this.iw > View.prototype.iw) {
+			this.alterClass = true;
+		}
 	};
 	inherit(View, Disposable);
+	View.prototype.alterClass = false;
 	View.prototype.iw = 160;
 	View.prototype.ih = 140;
 	View.prototype.getStep = function() {
@@ -27,6 +31,7 @@ define(['tpl/mosaiclist','text!css/mosaic.css','loader/loader','oop/idisposable'
 	};
 	View.prototype.rasterize = function(templateFills, name) {
 		return template.render({
+			alterClass: this.alterClass,
 			things: templateFills,
 			id: name,
 			w: this.getULWidth() + 'px'

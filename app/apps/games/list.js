@@ -1,22 +1,22 @@
 [{
-	"name": "Snake",
-	"icon": "app/imgs/snake_icon.svg",
+	"publishName": "Snake",
+	"thumbnail": "app/imgs/snake_icon.svg",
 	"path": "apps/games/snake"
 },{
-	"name": "Tetris",
-	"icon": "app/imgs/tetris_icon.svg",
+	"publishName": "Tetris",
+	"thumbnail": "app/imgs/tetris_icon.svg",
 	"path": "apps/games/tetris"
 },
 {
-	"name": "Hangman",
-	"icon": "app/imgs/hangman.svg",
+	"publishName": "Hangman",
+	"thumbnail": "app/imgs/hangman.svg",
 	"path": "apps/games/hangman"	
 },{
-	"name": "Sudoku",
-	"icon": "app/imgs/sudoko_icon.svg",
+	"publishName": "Sudoku",
+	"thumbnail": "app/imgs/sudoko_icon.svg",
 	"path": "apps/games/sudoku"
 },{
-	"name": "Cubes",
-	"icon": "app/imgs/cubes_icon.svg",
+	"publishName": "Cubes",
+	"thumbnail": "app/imgs/cubes_icon.svg",
 	"path": "apps/games/cubes"
 }]

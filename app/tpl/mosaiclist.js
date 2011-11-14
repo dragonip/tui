@@ -9,7 +9,7 @@ buf.push('>');
  for (var i = 0; i < things.length; i++ )
 {
 buf.push('<div');
-buf.push(attrs({ 'data-sequence':(i), "class": ('item') + ' ' + ('regular') }));
+buf.push(attrs({ 'data-sequence':(i), "class": ('item '+ (alterClass ? 'larger':'regular')) }));
 buf.push('>');
  if (things[i].thumbnail.length < 5 )
 {
@@ -47,18 +47,23 @@ buf.push('<li');
 buf.push(attrs({ "class": ('icon') + ' ' + ('bookmarked') }));
 buf.push('></li>');
 }
- if (things[i].personalRecordingOptions.canRecord) 
+ if (things[i].personalRecordingOptions && things[i].personalRecordingOptions.canRecord) 
 {
 buf.push('<li');
 buf.push(attrs({ "class": ('icon') + ' ' + ('recordable') }));
 buf.push('></li>');
 }
-buf.push('</ul><div');
+buf.push('</ul>');
+if (typeof things[i].id === 'number' )
+{
+buf.push('<div');
 buf.push(attrs({ "class": ('object-index') }));
 buf.push('>');
 var __val__ = things[i].id
 buf.push(null == __val__ ? "" : __val__);
-buf.push('</div></div>');
+buf.push('</div>');
+}
+buf.push('</div>');
 }
 buf.push('</div>');
 }

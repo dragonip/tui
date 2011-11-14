@@ -29,12 +29,17 @@ define({
 		},
 		aod: {
 			list: "run=aod_json_list"
+		},
+		games: {
+			skipParametrize: true,
+			list: "app/apps/games/list.js"
 		}
 	},
 	getPath: function (name, type) {
 		if (typeof type === 'undefined') {
 			type = 'list';
 		}
+		if (this.urls[name].skipParametrize) return  this.urls[name][type]
 		return this.prefix + this.urls[name][type] + this.suffix;
 	}
 });
