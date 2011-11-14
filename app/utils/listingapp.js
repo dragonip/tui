@@ -11,7 +11,7 @@ define([
 		this.model = new ListModel(this);
 //		TODO: add the listview as in IPTV
 		//this.presentation = options.listType && options.listType === 'list'? new ListPresentation(this) : new MosaicPresentation(this);
-		this.presentation = new MosaicPresentation(this, 'mosaic', undefined, undefined, true );
+		this.presentation = new MosaicPresentation(this, options.listType, undefined, undefined, true );
 		this.registerDisposable(this.model);
 		this.registerDisposable(this.presentation);
 		this.generateDefaultEvents();

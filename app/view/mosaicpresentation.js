@@ -6,10 +6,11 @@ define([
 	'dom/attributes',
 	'dom/classes',
 	'view/mosaictemplate',
+	'view/listtemplate',
 	'loader/loader',
 	'oop/idisposable',
 	'oop/inherit'
-], function(dom, attr, classes, MosaicTemplate, loader, Disposable, inherit) {	
+], function(dom, attr, classes, MosaicTemplate, ListTemplate, loader, Disposable, inherit) {	
 	function getContainerRestrains(container) {
 		var s = window.getComputedStyle(container, null);
 		return {
@@ -108,13 +109,12 @@ define([
 		var tempVal1 = 0;
 		if (Math.abs(parentTop) + window.innerHeight < offsetTop +itemHeight + margint + marginb ) {
 			if (this.shouldJump)
-				mosaicContainer.style.top = '-' + offsetTop + 'px';
+				tempVal1 = '-' + offsetTop + 'px';
 			else {
-				mosaicContainer.style.top = '-' +( (offsetTop + itemHeight - window.innerHeight) +  margint + marginb) + 'px';				
+				tempVal1 = '-' +( (offsetTop + itemHeight - window.innerHeight) +  margint + marginb) + 'px';				
 			}
-
+			mosaicContainer.style.top = tempVal1;
 		} else if ( Math.abs(parentTop) > offsetTop ) {
-//			mosaicContainer.style.top = '-' + offsetTop + 'px';
 			if (this.shouldJump) {
 				tempVal1 = (offsetTop + itemHeight - window.innerHeight) +  margint + marginb;
 				if (tempVal1 < 0 ) tempVal1 = 0;
@@ -125,7 +125,6 @@ define([
 			}
 			mosaicContainer.style.top = tempVal1;
 		}
-		//done movement
 		this.app.fire('selection-changed', { index: i });
 	};
 	MosaicPresentation.prototype.getStep = function() { return this.template.getStep(); };

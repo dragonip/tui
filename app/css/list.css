@@ -1,9 +1,9 @@
-.tui-list.listContainer {
+.tui-list.list-container {
 	text-align: center;
 	margin: 10px auto 10px auto;
 	position: relative;
 }
-.tui-list .listitem {
+.tui-list .item {
 	margin: 0.7em auto 0 auto;
 	width: 94%;
 	height: 3.4em;
@@ -33,7 +33,7 @@
 		color-stop(0.93, rgb(74,80,92))
 	);	
 }
-.tui-list.listContainer .active {
+.tui-list.list-container .current {
 	background-color: gray;
 	background-image: none;
 	border: 2px solid #b74e02;
@@ -43,7 +43,7 @@
    	-webkit-box-shadow:inset 0 0 10px #000000;
 	-ms-box-shadow:inset 0 0 10px #000000;
 }
-.tui-list.listContainer .active .number_id {
+.tui-list.list-container .current .number_id {
 	color: #d08b05;
 /*	border-right: 5px solid #d3d2d2;
 	box-shadow:	10px 0 10px -10px #555555;
@@ -128,7 +128,7 @@
     bottom: 2px;
 }
 
-.tui-list.listContainer .icon {
+.tui-list.list-container .icon {
 	background-color: #596876;
     background-position: center center;
     background-repeat: no-repeat;
@@ -137,13 +137,13 @@
     width: 20px;
     float: left; 
 }
-.tui-list.listContainer .bookmarked {
+.tui-list.list-container .bookmarked {
 	background-image: url("imgs/icon_favorite.png");
 }
-.tui-list.listContainer .recordable {
+.tui-list.list-container .recordable {
 	background-image: url("imgs/icon_recording.png");
 }
-.tui-list.listContainer .locked {
+.tui-list.list-container .locked {
 	background-image: url("imgs/icon_lock.png");
 }
 

@@ -4,12 +4,12 @@ var buf = [];
 with (locals || {}) {
 var interp;
 buf.push('<div');
-buf.push(attrs({ 'style':("width:"+ w), 'data-appid':(id), "class": ('tui-list') + ' ' + ('listContainer') }));
+buf.push(attrs({ 'style':("width:"+ w), 'data-appid':(id), "class": ('tui-list') + ' ' + ('list-container') }));
 buf.push('>');
  for (var i = 0; i < things.length; i++ )
 {
 buf.push('<div');
-buf.push(attrs({ 'data-sequence':(i), "class": ('listitem') }));
+buf.push(attrs({ 'data-sequence':(i), "class": ('item') }));
 buf.push('><div');
 buf.push(attrs({ "class": (((things[i].thumbnail !== null)? "leftCont" : "leftContLong")) }));
 buf.push('><h1');
@@ -59,8 +59,6 @@ buf.push('><img');
 buf.push(attrs({ 'src':(things[i].thumbnail), "class": ('img_thumb') }));
 buf.push('/></div>');
 }
- if (things[i].settings())
-{
 buf.push('<ul');
 buf.push(attrs({ "class": ('channel-settings-icons') }));
 buf.push('>');
@@ -82,9 +80,7 @@ buf.push('<li');
 buf.push(attrs({ "class": ('icon') + ' ' + ('recordable') }));
 buf.push('></li>');
 }
-buf.push('</ul>');
-}
-buf.push('</div>');
+buf.push('</ul></div>');
 }
 buf.push('</div>');
 }
