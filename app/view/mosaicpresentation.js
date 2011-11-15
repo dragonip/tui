@@ -81,6 +81,9 @@ define([
 		this.rasterize_();
 		this.app.fire('show-complete');
 	};
+	//
+	// TODO: Make sure this does nto break once we start actually unload data to save mem
+	// 
 	MosaicPresentation.prototype.rasterize_ = function(idx) {
 		if (this.container === null) {
 			return;
