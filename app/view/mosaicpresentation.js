@@ -89,7 +89,8 @@ define([
 			}
 			this.container.innerHTML = this.template.rasterize(this.app.model.get('list'),this.app.name);
 			this.dom = this.container.firstChild;
-			this.activate(idx);
+			if (this.app.model.get('list').length > 0)
+				this.activate(idx);
 			this.isRenered_ = true;			
 		}
 	};

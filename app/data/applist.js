@@ -7,19 +7,19 @@ define({
 	iptv: {
 		name: 'IPTV',
 		apptag: 'iptv',
-		module: 'apps/iptvnew',
+		module: 'apps/iptv',
 		icon: 'imgs/start_screen_icon.png'
 	},
 	vod: {
 		name: 'VOD',
 		apptag: 'vod',
-		module: 'apps/vodnew',
+		module: 'apps/vod',
 		icon: 'imgs/start_screen_icon.png'
 	},
 	ppv: {
 		name: 'PPV',
 		apptag: 'ppv',
-		module: 'apps/ppvnew',
+		module: 'apps/ppv',
 		icon: 'imgs/ppv_screen_icon.png'
 	},
 	aod: {

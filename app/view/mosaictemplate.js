@@ -1,5 +1,6 @@
-define(['tpl/mosaiclist','text!css/mosaic.css','loader/loader','oop/idisposable','oop/inherit'
-], function(template, css, loader, Disposable, inherit) {
+define(['tpl/mosaiclist','text!css/mosaic.css','loader/loader','oop/idisposable','oop/inherit',
+'data/static-strings'
+], function(template, css, loader, Disposable, inherit, strings) {
 	loader.loadCSSFromText(css);
 	
 	var View = function(iWidth, iHeight) {
@@ -34,7 +35,8 @@ define(['tpl/mosaiclist','text!css/mosaic.css','loader/loader','oop/idisposable'
 			alterClass: this.alterClass,
 			things: templateFills,
 			id: name,
-			w: this.getULWidth() + 'px'
+			w: this.getULWidth() + 'px',
+			nocontentstring: strings.lists.noContent
 		});
 	};
 	View.prototype.disposeInternal = function() {
