@@ -49,9 +49,6 @@ define(['json/json'], function(json){
 		* @param {Object} opts. Additional configuration options, supported are: stripJSON {Boolean}
 		*/
 		getMany: function(urlList, callback, opts) {
-			opts = opts || { stripJSON: false};
-			if (typeof opts.stripJSON === 'undefined' ) opts.stripJSON = false;
-			
 			var complete = 0;
 			var all = urlList.length;
 			var Req = [], Res = [];
@@ -61,9 +58,6 @@ define(['json/json'], function(json){
 			};
 			
 			var receiveResponse = function(requestNumber, responseText) {
-				if (opts.stripJSON === true) {
-					responseText = opts.stripJSON ? stripLoaderJSON(responseText) : responseText;
-				}
 				Res[requestNumber] = responseText;
 				complete += 1;
 				if (complete == all) {

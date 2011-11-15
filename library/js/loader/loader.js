@@ -140,6 +140,20 @@ define(['dom/dom', 'debug/console'], function(dom, logger) {
 			img.setAttribute('style', 'position: absolute; left: -5000px;');
 			document.body.appendChild(img);
 			img.src = cur;
+		},
+		loadJSONP: function(id, url) {
+			var node = document.querySelector('#'+id);
+			var src = url + '&tstamp=' + (new Date().getTime());
+			if (node === null) {
+				node = document.createElement('script');
+				node.setAttribute('id', id);
+				node.setAttribute('type', 'text/javascript');
+				node.setAttribute('async', true);
+				appendToHead(node);
+			}
+			window.setTimeout(function() {
+				node.setAttribute('src', src)
+			}, 1);
 		}
 	};
 });

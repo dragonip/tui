@@ -26,6 +26,10 @@ define({
 		games: {
 			skipParametrize: true,
 			list: "app/apps/games/list.js"
+		},
+		weather: {
+			units: "run=get_cfgval_json&section=system&var=temperature",
+			city: 'run=get_cfgval_json&section=system&var=weather_code'
 		}
 	},
 	getPath: function (name, type) {

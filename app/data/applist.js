@@ -56,5 +56,10 @@ define({
 		apptag: 'games',
 		module: 'apps/games',
 		icon: 'imgs/radio_screen_icon.png'
+	},
+	weather: {
+		name: 'WEATHER',
+		apptag: 'weather',
+		module: 'apps/weather'
 	}
 });
