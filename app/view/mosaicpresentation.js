@@ -44,12 +44,12 @@ define([
 	* @private 
 	*/
 	MosaicPresentation.prototype.shouldJump = false;
-	MosaicPresentation.prototype.isRenered_ = false;
+	MosaicPresentation.prototype.isRendered_ = false;
 	/**
 	* Resets the rendered state and enforce re-rendering of the template on the next 'show' request
 	*/
 	MosaicPresentation.prototype.reset = function() {
-		this.isRenered_ = false;
+		this.isRendered_ = false;
 	};
 	/**
 	* @param {?HTMLElement} The container to bind to, will be reset to the new one if submitted
@@ -82,16 +82,18 @@ define([
 		this.app.fire('show-complete');
 	};
 	MosaicPresentation.prototype.rasterize_ = function(idx) {
-		if (!this.isRenered_) {
+		if (this.container === null) {
+			return;
+		}
+		if (!this.isRendered_) {
 			if (typeof idx === 'undefined') idx = 0;
-			if (this.container === null) {
-				return;
-			}
 			this.container.innerHTML = this.template.rasterize(this.app.model.get('list'),this.app.name);
 			this.dom = this.container.firstChild;
-			if (this.app.model.get('list').length > 0)
-				this.activate(idx);
-			this.isRenered_ = true;			
+			if (this.app.model.get('list').length > 0) this.activate(idx);
+			this.isRendered_ = true;
+		} else {
+			this.container.innerHTML = '';
+			dom.adopt(this.container, this.dom);
 		}
 	};
 	MosaicPresentation.prototype.activate = function(i) {
@@ -130,7 +132,7 @@ define([
 	};
 	MosaicPresentation.prototype.getStep = function() { return this.template.getStep(); };
 	MosaicPresentation.prototype.unload = function() {
-		this.isRenered_ = false;
+//		this.isRendered_ = false;
 	};
 	MosaicPresentation.prototype.disposeInternal = function() {
 		this.constructor.superClass_.disposeInternal.call(this);
