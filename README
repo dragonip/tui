@@ -4,3 +4,15 @@ Tornado User Interface
 This work attempts to organize the work on M55 alternative interface and unify the look and feel of the created applications. It also provides better memory management of the screen objects (important if you want to keep your apps running longer).
 
 It is still a work in progress, however it will provide complete coverage of the original functionality found in Carbon and will be able to completely replace it!
+
+Update: 16.11.2011
+
+Large portion of the code base has been stabilized and is now available in the master branch
+Master now introduses most of the A/V streams and depends heavily on the device, so you will need development enabled tornado m55 device and apache/httpd with mod_proxy to test the interface and develop with it.
+Playback also introduces dependency on socket support in device and in your browser.
+
+TODO: add sample files to remove the device requirement
+TODO: add support for 'in browser' playback where possible
+TODO: stabilize the transport layer
+
+For more info read the 'SETUP' file
