@@ -23,6 +23,19 @@ require.config({
 	urlArgs: "bust=" + (new Date()).getTime()
 });
 //Requere the minimum set of dependencies and decorate the page with loading message
+
+//Require the response first because it provides global function that will be called from player and should be defined when calling request or player
+require(['transport/response'], function (response) {
+	window.transportReceiver = function(j) {
+		response.recall(j);
+	};
+});
+
+/**
+ * Require the interface now
+ * Basically we want to load the minimum set first to assure user notification for loading and then load everything needed
+ * to start processing the user input and display things on screen
+ */
 require(['ui/throbber'], function(t) {
 	var options = {
 		debug: true,
@@ -30,8 +43,7 @@ require(['ui/throbber'], function(t) {
 		version: '0.1',
 		useScale: false
 	};
-	//Fix the document dimenations and show loader first
-//	document.body.setAttribute('style', 'width: ' + window.innerWidth + 'px; height: ' + window.innerHeight + 'px;');
+//	Fix the document dimenations and show loader first
 	document.body.style.width = window.innerWidth + 'px';
 	document.body.style.height = window.innerHeight + 'px';
 	loadIndicator = {
@@ -46,15 +58,25 @@ require(['ui/throbber'], function(t) {
 		}
 	};
 	loadIndicator.show();
-	//After we are done with the loader, require some helpers and the main event dispatcher and start building the app
-	require(['utils/events', 'dom/classes', 'dom/dom', 'ui/popup', 'dmc/dmc', 'shims/bind'], function(globalevents, classes, dom, Dialogs, dmc, bind ) {
-		//Load images offscreen after we have loaded the deps to avoid trapping the JS in the max Concurent Reqs of the browsser
+	
+	
+//	After we are done with the loader, require some helpers and the main event dispatcher and start building the app
+	require([
+		'utils/events', 
+		'dom/classes', 
+		'dom/dom', 
+		'ui/popup', 
+		'dmc/dmc', 
+		'shims/bind', 
+		'ui/player'
+	], function(globalevents, classes, dom, Dialogs, dmc, bind, player ) {
+//		Load images offscreen after we have loaded the deps to avoid trapping the JS in the max Concurent Reqs of the browsser
 		dom.adopt(dom.create('div', {
 			classes: 'tui-component tui-preloader',
-			html: '<img src="app/imgs/icon_set.png"><img src="apps/imgs/activeScreenArrow.png">'
+			html: '<img src="app/imgs/icon_set.png">'
 		}));
-		// Now, while the images are loading, create the TUI
-		//Create the main container
+//		Now, while the images are loading, create the TUI
+//		Create the main container
 		dom.adopt(dom.create('div', {
 			id: 'maincontainer',
 			style: 'height: ' + window.innerHeight + 'px; width: ' + window.innerWidth + 'px; margin-top: 0; margin-bottom: 0'
@@ -64,8 +86,11 @@ require(['ui/throbber'], function(t) {
 			signals: {
 				restoreEventTree: function() {
 					dmc.onKeyPress(globalevents.defaultEventAccepter);
-				}
+					this.eventsAreFetched = false;
+				},
+				eventsAreFetched: false
 			},
+			globalPlayer: new player(),
 			mainContainer: dom.$('#maincontainer'),
 			loadIndicator: loadIndicator,
 			options: options,
@@ -82,6 +107,7 @@ require(['ui/throbber'], function(t) {
 			},
 			stealEvents: function(newManager) {
 				dmc.onKeyPress(newManager);
+				this.signals.eventsAreFetched = true;
 			},
 			createDialog: function(type, options, callback, title, defaultOption ) {
 				var dialog;
@@ -120,7 +146,8 @@ require(['ui/throbber'], function(t) {
 			scaleContainer: function(bool) {
 				if (bool) {
 					//calculate for 20%
-					if (this.useScale) {
+					if (this.options.useScale) {
+						console.log('SET SCALE')
 						this.mainContainer.className = 'scaled';
 						var x = parseInt(this.mainContainer.style.width, 10);
 						var y = parseInt(this.mainContainer.style.height, 10);
@@ -135,7 +162,7 @@ require(['ui/throbber'], function(t) {
 						this.mainContainer.style.visibility = 'hidden';
 					}
 				} else {
-					if (this.useScale) {
+					if (this.options.useScale) {
 						this.mainContainer.className = '';
 						this.mainContainer.style.MozTransform = 'scale(1)';
 						this.mainContainer.style.webkitTransform = "scale(1)";
@@ -164,7 +191,8 @@ require(['ui/throbber'], function(t) {
 						}
 						break;
 					case 'restore-event-stack':
-						dmc.onKeyPress(globalevents.defaultEventAccepter);
+						tui.signals.restoreEventTree();
+//						dmc.onKeyPress(globalevents.defaultEventAccepter);
 						break;
 					}
 				}
@@ -183,7 +211,34 @@ require(['ui/throbber'], function(t) {
 				});
 			}
 		};
-
+		
+//		Setup global return key to check for the player and route to it 
+//		This should be used when the user wants to use the UI while the player is playing, once done and he wants toLowerCase
+//		return to the player, he presses return, if return is not bound in the UI (which it should not be)
+//		the global return will hit, it will check if the player is active and reroute the events to it and hide the UI
+		
+		globalevents.addHandlers({
+			globalreturn: {
+				name: 'return',
+				func: function() {
+					if (tui.globalPlayer.getState() !== player.STATES.STOPPED) {
+						tui.stealEvents(tui.globalPlayer.keyHandler);
+					}
+				},
+				attached: false
+			}//,
+//			displaykey: {
+//				name: 'display',
+//				func: function() {
+//					if (tui.signals.eventsAreFetched) {
+//						if (tui.globalPlayer.getState() !== player.STATES.STOPPED) {
+//							tui.signals.restoreEventTree();
+//						}
+//					}
+//				}
+//			}
+		});
+		
 		if (tui.options.debug) {
 			window.DEBUG = {
 				popup: false
@@ -242,9 +297,9 @@ require(['ui/throbber'], function(t) {
 		function loadTUI() {
 			require(['ui/simplescreenselector', 'dmc/dmc'], function(Mappsel, Mdmc) {
 				require(['transport/response'], function(response) {
-					window.transportReceiver = function(JSONString) {
-						response.recall(JSONString);
-					};
+//					window.transportReceiver = function(JSONString) {
+//						response.recall(JSONString);
+//					};
 					require(['app/paths/stb.js', 'data/applist', 'ui/player', 'tpl/infobuttons'], function(paths, apps, player, itpl) {
 						tui.player = player;
 						tui.options.paths = paths;
