@@ -126,6 +126,7 @@ define([
 				info: "Hide EPG"
 			}
 		}));
+		tui.scaleContainer(true);
 		this.constructor.superClass_.enterDom.call(this);
 		this.Scrollable.scroll();
 	};
@@ -133,6 +134,7 @@ define([
 		if (this.isAttachedWithEvents) {
 			this.attachEvents(false);
 		}
+		tui.scaleContainer(false);
 		this.constructor.superClass_.exitDom.call(this);
 		tui.setPanels(false, false);
 	};
