@@ -108,9 +108,12 @@ define(['debug/console'],function(logger) {
 				case 83:
 					//s for stop
 					return 'stop';
+				case 68:
+					//d for display
+					return 'display';
 				default:
 					//log the codes we do not track
-					pcli.log('Keyboard key not bound to remote key, keyboard key hase code : '+ code);
+//					console.log('Keyboard key not bound to remote key, keyboard key hase code :', code);
 					return;
 				}
 			};
