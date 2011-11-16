@@ -68,7 +68,7 @@ define([
 				if (this.getItem().id === null) {
 					this.outDir();
 				} else {
-					this.app.fire('try-play', this.getItem());					
+					this.app.fire('try-play', this.getItem());
 				}
 			}
 		}
