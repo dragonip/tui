@@ -32,12 +32,16 @@ define([
 		this.on('show-complete', this.onShowComplete);
 		this.on('stop-requested', this.onStopRequested);
 		this.on('data-load-end', this.onDataLoadEnd);
+		this.on('try-play', this.onPlayRequest);
 	};
 	inherit(ListApp, VisualApp);
 	ListApp.remoteKeys_ = ['left', 'right', 'up', 'down', 'chup', 'chdown', 'ok'];
 	ListApp.prototype.onShowComplete = function() {
 		this.attachEvents(true);
-	}
+	};
+	ListApp.prototype.onPlayRequest = function() {
+		tui.globalPlayer.play(this.model.getItem());
+	};
 	ListApp.prototype.onSelectionChanged = function(objectWithIndex) {
 		this.model.currentIndex = objectWithIndex.index;
 	};
