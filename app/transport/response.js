@@ -2,8 +2,6 @@ define(['json/json'],function (json){
 	var Register = {};
 	var Response = function(JSONString) {
 		this.json = json.parse(JSONString);
-//		console.log('1');
-//		console.log(this.json);
 		this.findCallback();
 	};
 	Response.prototype.findCallback = function() {
@@ -17,12 +15,16 @@ define(['json/json'],function (json){
 					Register[sid][0].call(Register[sid][1], this.json["response"]);
 				} else {
 					console.log('Status of response is not "ok" ' + this.json.response.status );
+					Register[sid][0].call(Register[sid][1], this.json["response"]);
 				}
 				delete Register[sid];
 			} else {
 				console.log('No registered callback for received object:');
 				console.log(this.json);
 			}
+		}
+		else if (this.json['header']['type']=='event') {
+			tui.globalPlayer.handleEvent(this.json);
 		}
 		this.disposeInternal();
 	};
@@ -33,7 +35,6 @@ define(['json/json'],function (json){
 	return {
 		register: function(Request, callback, context) {
 			Register[Request.json["header"]["tag"]] = [ callback, context ];
-//			console.log(Request.json["header"]["tag"]);
 		},
 		recall: function(JSONString) {
 			var response = new Response(JSONString);
