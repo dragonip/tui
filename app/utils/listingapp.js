@@ -5,8 +5,9 @@ define([
 	//'view/listpresentation',
 	'view/mosaicpresentation',
 	'shims/bind',
-	'net/simplexhr'
-], function(inherit, VisualApp, ListModel, MosaicPresentation, bind, xhr) {
+	'net/simplexhr',
+	'data/static-strings'
+], function(inherit, VisualApp, ListModel, MosaicPresentation, bind, xhr, strings) {
 	var ListApp = function(options) {
 		VisualApp.call(this, options);
 		this.model = new ListModel(this);
@@ -92,32 +93,40 @@ define([
 		var objIndex = this.model.currentIndex;
 		var item = this.model.getItem(objIndex);
 		var options = [];
+		var actions = [];
 		if (item.isBookmarked) {
-			options.push('Unbookmark');
+			options.push(strings.lists.unbookmark);
+			actions.push('unbookmark');
 		} else {
-			options.push('Bookmark');
+			options.push(strings.lists.bookmark);
+			actions.push('bookmark');
 		}
-		if (item.isLocked) {
-			options.push('Unlock');
-		} else {
-			options.push('Lock');
+		if (item.rating !== 'X') {
+			if (item.isLocked) {
+				options.push(strings.lists.unlock);
+				actions.push('unlock');
+			} else {
+				options.push(strings.lists.lock);
+				actions.push('lock');
+			}
 		}
-		options.push('Cancel');
+		options.push(strings.components.dialogs.cancel);
 		this.dialogInstance = {
 			index: objIndex,
 			object: item,
-			options: options
+			options: options,
+			actions: actions
 		};
-		tui.createDialog('optionlist', this.dialogInstance.options, bind(this.handleDialogSelection, this), 'Select action');
+		tui.createDialog('optionlist', this.dialogInstance.options, bind(this.handleDialogSelection, this), strings.components.dialogs.select);
 	};
 	ListApp.prototype.handleDialogSelection = function(selectedIndex) {
 		var action;
 		if (this.dialogInstance) {
-			this.dialogInstance.action = this.dialogInstance.options[selectedIndex].toLowerCase();
+			this.dialogInstance.action = this.dialogInstance.actions[selectedIndex];
 			switch (this.dialogInstance.action) {
 				case 'lock':
 				case 'unlock':
-					tui.createDialog('password', true, bind(this.acceptPass, this), 'Enter lock password');
+					tui.createDialog('password', true, bind(this.acceptPass, this), strings.components.dialogs.lock);
 					break;
 					
 				case 'bookmark':
