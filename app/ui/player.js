@@ -113,7 +113,8 @@ define([
 				return;
 			}
 		}
-		var newreq = request.create('play', {url: obj.playURI});
+		var play_command = (obj.player? 'play_tube':'play')
+		var newreq = request.create(play_command, {url: obj.playURI});
 //		response.register(newreq, bind(this.requestResultHandle, this) );
 		newreq.send();
 	};
@@ -133,7 +134,6 @@ define([
 	Player.prototype.stop = function() {
 		if (this.state !== Player.STATES.STOPPED) {
 			var newreq = request.create('stop', {});
-//			response.register(newreq, bind(this.requestResultHandle, this) );
 			newreq.send();
 		}
 	};
@@ -141,13 +141,9 @@ define([
 	* Handle pause / unpause
 	*/
 	Player.prototype.pause = function() {
-//		if (this.state === Player.STATES.PAUSED) {
-//			this.play();
-//		} else {
-			var newreq = request.create('pause',{ });
-//			response.register(newreq, bind(this.requestResultHandle, this) );
-			newreq.send();
-//		}
+		var newreq = request.create('pause',{ });
+		newreq.send();
+
 	}
 	/**
 	* Handle for the request result (i.e. transport layer debug, no useful application yet)

@@ -9,7 +9,11 @@ define([
 ], function(inherit, VisualApp, ListModel, MosaicPresentation, bind, xhr, strings) {
 	var ListApp = function(options) {
 		VisualApp.call(this, options);
-		this.model = new ListModel(this);
+		if (options.datamodel) {
+			this.model = new options.datamodel(this)
+		} else {
+			this.model = new ListModel(this);	
+		}
 		this.presentation = new MosaicPresentation(this, options.listType, options.itemWidth, options.itemHeight, options.shouldJump );
 		this.registerDisposable(this.model);
 		this.registerDisposable(this.presentation);
@@ -56,6 +60,8 @@ define([
 		} else if (data.type === 'folder') {
 			this.presentation.show();
 			if (typeof data.index !== 'undefined') this.presentation.activate(data.index);
+		} else if (data.type === 'append') {
+			console.log('Append data to presentation');
 		}
 	};
 	ListApp.prototype.onShowScreen = function() {
