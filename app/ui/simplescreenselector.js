@@ -20,7 +20,7 @@ function(tpl,applist, dom, classes, Mevents, logger, sizes) {
 	for (var i1 = 0; i1 < fillers.length; i1++ ) {
 		fillers[i1].style.height = padding;
 	}
-	dom.$('.screen-selector-pointer', DOM).style.top = sizes.depixelate(padding) - 23 + 'px';
+	dom.$('.screen-selector-pointer', DOM).style.top = sizes.depixelate(padding) - 12 + 'px';
 	currenScreen = dom.$('.approtator-item', DOM);
 	
 
