@@ -1,7 +1,7 @@
 .tui-list.list-container {
 	text-align: center;
 	margin: 10px auto 10px auto;
-	position: relative;
+	position: absolute;
 }
 .tui-list .item {
 	margin: 0.7em auto 0 auto;
