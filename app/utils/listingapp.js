@@ -2,7 +2,6 @@ define([
 	'oop/inherit',
 	'utils/visualapp',
 	'model/listmodel',
-	//'view/listpresentation',
 	'view/mosaicpresentation',
 	'shims/bind',
 	'net/simplexhr'
