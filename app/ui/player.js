@@ -1,4 +1,9 @@
-define(['transport/request', 'transport/response', 'shims/bind'], function(request, response, bind) {
+define([
+	'transport/request',
+	'transport/response',
+	'shims/bind',
+	'data/static-strings'
+], function(request, response, bind, strings) {
 	/**
 	* Global player object to handle all playback in DSP
 	* @consructor
@@ -6,7 +11,9 @@ define(['transport/request', 'transport/response', 'shims/bind'], function(reque
 	var Player = function() {
 		this.state = Player.STATES.STOPPED;
 		this.keyHandler = bind(this.handleKeys, this);
+
 	};
+	Player.prototype.parentalPassword = '';
 	/**
 	* Internal player statuses, translated from DSP signals
 	* @define
@@ -83,12 +90,42 @@ define(['transport/request', 'transport/response', 'shims/bind'], function(reque
 	/**
 	* Try to play object from listings
 	* @param {Object} obj A channel/Video/Audio object with playURI property
+	* @param {?String} password The password the user has enetered when queried about the parental lock pass
 	*/
-	Player.prototype.play = function(obj) {
-		console.log('Try to play uri:', obj);
+	Player.prototype.play = function(obj, password) {
+		console.log('Try to play uri:', obj, password);
+		if (obj.isLocked ) {
+			if (this.parentalPassword === '') {
+				var newreq = request.create('calld', {
+					run: 'get_cfgval_json',
+					section: 'streaming',
+					'var': 'lockpass'
+				});
+				response.register(newreq, bind(this.setParentalPass, this));
+				newreq.send();
+			}
+			if (typeof password !== 'string') {
+				tui.createDialog('password', true, bind(this.play, this, obj), strings.components.dialogs.lock);
+				return;
+			}
+			else if ( password !== this.parentalPassword ) {
+				tui.createDialog('optionlist', [strings.components.dialogs.ok], function(){}, strings.components.dialogs.wrongPassword);
+				return;
+			}
+		}
 		var newreq = request.create('play', {url: obj.playURI});
 //		response.register(newreq, bind(this.requestResultHandle, this) );
 		newreq.send();
+	};
+	/**
+	* Set the parent lock password to the one provided by the backend
+	* @private
+	* @param {Object} obj Object containting the content returned and the status
+	*/
+	Player.prototype.setParentalPass = function(obj) {
+		if (obj.content) {
+			this.parentalPassword = obj.content;
+		}
 	};
 	/**
 	* Check status and if it is different from internal stopped, attempt stop signal on transport layer
