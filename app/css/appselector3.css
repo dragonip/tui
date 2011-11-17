@@ -17,7 +17,7 @@
 }
 .screenChooser .screen.iptv {
 	background-image: url('app/imgs/icon_set.png');
-	background-position: right -3px;
+	background-position: right -4px;
 	background-repeat: no-repeat;
 }
 .screenChooser .screen.ppv {
@@ -42,7 +42,7 @@
 }
 .screenChooser .screen.aod {
 	background-image: url('app/imgs/icon_set.png');
-	background-position: right -506px;
+	background-position: right -507px;
 	background-repeat: no-repeat;
 }
 .screenChooser .screen.uaudio {
@@ -52,7 +52,7 @@
 }
 .screenChooser .screen.settings {
 	background-image: url('app/imgs/icon_set.png');
-	background-position: right -706px;
+	background-position: right -707px;
 	background-repeat: no-repeat;
 
 }
@@ -66,15 +66,20 @@
 	background-position: right -908px;
 	background-repeat: no-repeat;
 }
+.screenChooser .screen.weather {
+	background-image: url('app/imgs/icon_set.png');
+	background-position: right -1110px;
+	background-repeat: no-repeat;
+}
 
 .screen-selector-pointer {
-	background-image: url('app/imgs/icon_set.png');
-	background-position: left -1005px;
-	background-repeat: no-repeat;
-	width: 130px;
-	height: 90px;
-	position: fixed;
-	top: 238px;
-	right: 15px;
-	z-index: 2000;
+    background-image: url("app/imgs/icon_set.png");
+    background-position: left -997px;
+    background-repeat: no-repeat;
+    height: 113px;
+    position: fixed;
+    right: 12px;
+    top: 167px;
+    width: 143px;
+    z-index: 2000;
 }
