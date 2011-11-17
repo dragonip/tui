@@ -20,6 +20,13 @@ define(['dom/string',
 	}
 	return {
 		/**
+		 * Empties the node of all HTMLElement
+		 * @param {HTMLElement} node The node to empty
+		 */
+		empty: function(node) {
+			node.innerHTML = '';
+		},
+		/**
 		 * @method getInnerNodes returns a DOM tree from html string
 		 * @param {String} The html string to parse
 		 */

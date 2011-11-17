@@ -6,11 +6,11 @@ define(['json/json'],function (json){
 	};
 	Response.prototype.findCallback = function() {
 		var sid = this.json["header"]["tag"];
+		console.log('Received packet', this.json);
 		if (this.json['header']['type'] == 'response') {
 			if (typeof Register[sid] !== 'undefined') {
 				if (!this.json["response"]) {
 					console.log('No response found');
-					console.log(this.json);
 				} else if (this.json["response"]["status"].toLowerCase() === 'ok' ) {
 					Register[sid][0].call(Register[sid][1], this.json["response"]);
 				} else {
@@ -23,9 +23,13 @@ define(['json/json'],function (json){
 				console.log(this.json);
 			}
 		}
-		else if (this.json['header']['type']=='event') {
-			tui.globalPlayer.handleEvent(this.json);
+		else if (this.json['header']['type'] == 'event') {
+			if (this.json['header']['method'] == 'media')
+				tui.globalPlayer.handleEvent(this.json);
+		} else {
+			console.log('No match yet for this packet', this.json);
 		}
+		
 		this.disposeInternal();
 	};
 	Response.prototype.disposeInternal = function() {

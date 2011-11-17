@@ -1,5 +1,5 @@
 define([
-	'utils/listingapp'
+	'utils/gamesapp'
 ], function(App){
 	return new App({
 		name: 'games',

@@ -41,6 +41,20 @@ define({
 		return {
 			padding: this.depixelate((this.getSizesForWindow().height / 2) - (itemSize / 2))
 		};
+	},
+	getSizesForGameLayer: function() {
+		var ws = this.getSizesForWindow();
+		return {
+			width: ws.width - 40,
+			height: ws.height - 40
+		};
+	},
+	getStyle: function(style) {
+		var result = '', key;
+		for (key in style) {
+			result = result + key + ': ' + style[key] + 'px; '
+		}
+		return result;
 	}
 });
 

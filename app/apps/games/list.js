@@ -14,7 +14,7 @@
 },{
 	"publishName": "Sudoku",
 	"thumbnail": "app/imgs/sudoko_icon.svg",
-	"path": "apps/games/sudoku"
+	"path": "apps/games/sudoku/index.html"
 },{
 	"publishName": "Cubes",
 	"thumbnail": "app/imgs/cubes_icon.svg",
