@@ -6,6 +6,8 @@ var interp;
 buf.push('<div');
 buf.push(attrs({ 'style':("width:"+ w), 'data-appid':(id), "class": ('tui-mosaic') + ' ' + ('list-container') }));
 buf.push('>');
+ if (things.length > 0)
+{
  for (var i = 0; i < things.length; i++ )
 {
 buf.push('<div');
@@ -63,6 +65,16 @@ var __val__ = things[i].id
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div>');
 }
+buf.push('</div>');
+}
+}
+ else 
+{
+buf.push('<div');
+buf.push(attrs({ "class": ('no-content') }));
+buf.push('>');
+var __val__ = nocontentstring
+buf.push(null == __val__ ? "" : __val__);
 buf.push('</div>');
 }
 buf.push('</div>');

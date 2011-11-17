@@ -1,0 +1,23 @@
+This document describes how to setup the development environment for the TUI SDK
+
+Prerequisites:
+==============
+Web server with proxy support (apache, lighttpd, etc)
+Tornado M55 device (with enabled devweloper mode)
+Tornado M55 software version (developer build)
+Web browser with WebSocket support
+
+Configuration:
+==============
+Download the source and put it in a path that can be served by your http server
+Configure the proxy mode of your server:
+(Following example is for lighttpd, other http server might require different options)
+
+proxy.server = ( "/cgi-bin/" => ( "m55" => ( "host" => "192.168.2.64" ))) 
+
+where the host should be the hostname or IP of your m55 device.
+The Tornado m55 device should be correctly configured itself (i.e. streaming server and PIN number as a minimum)
+You can now open your web browser and point it to the index.html file in the tui directory
+
+The static files will be loaded from your development shanpshot while the data will be loaded from the deviceas proxied from the http server. The events will be emulated in the browser to be seen by the interface as remote control key presses. Playback events and requests will be sent to the device via websocket, playback will be rendered in the device, thus available via its output TV set. 
+

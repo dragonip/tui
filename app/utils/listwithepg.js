@@ -52,10 +52,12 @@ define([
 			});
 		}
 	};
-//	App.prototype.disposeInternal = function() {
-//		this.constructor.superClass_.disposeInternal.call(this);
-//	};
-	
+	App.prototype.onStopRequested = function() {
+		if (this.epgInstance.isAttachedToDom()) {
+			this.epgInstance.exitDom();
+		}
+		App.superClass_.onStopRequested.call(this);
+	};
 	return App;
 	
 });

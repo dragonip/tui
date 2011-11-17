@@ -1,18 +1,37 @@
 define(function() {
+	/**
+	 * Wraps the socket interface to abstract FF and chrome, also sets the listeners for socket events
+	 * @constructor
+	 * @param {!String} url The url to connect to (ex: ws://url:port)
+	 * @param {!String} protocol The protocol to use, should be known for each server
+	 * @param {!Function} onMessage The function that will accept the 'onmessage' data comming on the socket link
+	 * @param {?Object} messageContext The object to be used as 'this' when calling the handler for messages  
+	 */
 	var Socket = function Socket(url, protocol, onMessage, messageContext) {
 		this.url = url;
+		this.isConnected = false;
 		this.protocol = protocol;
 		this.sendQueue = [];
 		if (typeof messageContext === 'undefined') messageContext = null;
 		this.messageHandler = this.createMessageHandler(onMessage, messageContext);
 		this.connect();
 	};
+	/**
+	 * Create the handler to use onmessage
+	 * @private
+	 * @param {!Function} messageHandler
+	 * @param {Object|null} context
+	 * @return {Function} Wrapped function call with set context
+	 */
 	Socket.prototype.createMessageHandler = function(messageHandler, context) {
 		var handler = messageHandler, messageContext = context;
 		return function(event) {
 			handler.call(messageContext, event.data);
 		};
 	};
+	/**
+	 * Attempts to connect to the server
+	 */
 	Socket.prototype.connect = function () {
 		if (this.socket) return;
 		console.log(this.url, this.protocol);
@@ -22,21 +41,18 @@ define(function() {
 			try {
 				this.socket = new MozWebSocket(this.url, this.protocol);
 			} catch (e) {
-				console.log("Web socket is not supported")
+				console.log("Web socket is not supported");
+				this.socket = null;
+				return;
 			}
 		}
-//		this.socket = new WebSocket(this.url, this.protocol);
 		this.socket.onmessage = this.messageHandler;
-//		
-//		function(e) {
-////			JSON.parse(e.data);
-//			this.messageHandler(e);
-//		}
-		
-//		this.messageHandler;
 		this.socket.onopen = this.setConnected.bind(this);
 		this.socket.onclose = this.disposeInternal.bind(this);
 	};
+	/**
+	 * @private
+	 */
 	Socket.prototype.setConnected = function() {
 		var i;
 		this.isConnected = true;
@@ -47,7 +63,15 @@ define(function() {
 		}
 		delete this.sendQueue;
 	};
+	/**
+	 * Sends data via the socket
+	 * @param {!JSONString} JSONString The data to send on the socket
+	 */
 	Socket.prototype.send = function(JSONString) {
+		if (!this.url) {
+			console.log('The Object is already disposed, probably connection was terminated or did not success');
+			return;
+		}
 		if (typeof JSONString !== 'string') return;
 		if (this.isConnected) {
 			this.socket.send(JSONString);
@@ -57,7 +81,7 @@ define(function() {
 	};
 	Socket.prototype.disposeInternal = function() {
 		if (this.socket) {
-			if (this.socket.readyState < 4 ) {
+			if (this.socket.readyState < 3 ) {
 				this.socket.close();
 			}
 			this.socket.onmessage = null;
@@ -71,10 +95,11 @@ define(function() {
 		this.messageHandler = null;
 		delete this.messageHandler;
 		if (this.sendQueue) delete this.sendQueue;
+		delete this.isConnected;
 	};
 	return {
 		create: function(url, protocol, onMessage, messageContext) {
 			return new Socket(url, protocol, onMessage, messageContext);
 		}
-	}
+	};
 });

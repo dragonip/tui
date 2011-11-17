@@ -101,6 +101,7 @@ define([
 		});
 		this.dom.innerHTML = this.dom_;
 		classes.addClasses(dom.$$('.epgItem', this.dom)[this.current], 'epg-selected');
+		this.Scrollable.scroll();
 	};
 	/**
 	* Sets the selection focus (visual) on the currently selected item in the listing
@@ -125,12 +126,15 @@ define([
 				info: "Hide EPG"
 			}
 		}));
+		tui.scaleContainer(true);
 		this.constructor.superClass_.enterDom.call(this);
+		this.Scrollable.scroll();
 	};
 	EPGModel.prototype.exitDom = function() {
 		if (this.isAttachedWithEvents) {
 			this.attachEvents(false);
 		}
+		tui.scaleContainer(false);
 		this.constructor.superClass_.exitDom.call(this);
 		tui.setPanels(false, false);
 	};

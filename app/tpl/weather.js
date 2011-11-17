@@ -4,11 +4,13 @@ var buf = [];
 with (locals || {}) {
 var interp;
 buf.push('<div');
+buf.push(attrs({ "class": ('weatherWrapper') }));
+buf.push('><div');
 buf.push(attrs({ "class": ('weatherScreen') }));
 buf.push('><div');
 buf.push(attrs({ "class": ('weatherCity') }));
 buf.push('>');
-var __val__ = things.cityname
+var __val__ = "City: " + location.city + ', ' + location.country
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div>');
  for (var i = 0; i < things.length; i++ )
@@ -18,13 +20,18 @@ buf.push(attrs({ "class": ('weatherDay') }));
 buf.push('><div');
 buf.push(attrs({ "class": ('weatherDayTitle') }));
 buf.push('>');
-var __val__ = things[i].dayOfWeek
+var __val__ = things[i].dayTitle
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div><div');
 buf.push(attrs({ "class": ('icon') }));
 buf.push('><img');
-buf.push(attrs({ 'src':(things[i].weatherIcon) }));
-buf.push('/></div>');
+buf.push(attrs({ 'src':("http://img.weather.weatherbug.com/forecast/icons/localized/80x67/en/trans/" + things[i].dayIcon + ".png") }));
+buf.push('/></div><div');
+buf.push(attrs({ "class": ('weatherName') }));
+buf.push('>');
+var __val__ = things[i].dayDesc
+buf.push(null == __val__ ? "" : __val__);
+buf.push('</div>');
  if (things[i].humidity)
 {
 buf.push('<div');
@@ -34,38 +41,38 @@ var __val__ = "Humidity: " + things[i].humidity
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div>');
 }
- else
-{
-buf.push('<div');
-buf.push(attrs({ "class": ('weatherName') }));
-buf.push('>');
-var __val__ = things[i].weathername
-buf.push(null == __val__ ? "" : __val__);
-buf.push('</div>');
-}
 buf.push('<div');
 buf.push(attrs({ "class": ('minTemp') }));
 buf.push('>');
-var __val__ = "Temp. Low: " + things[i].lowTemp
+var __val__ = "Temp. Low: " + things[i].low + ' ' + unit
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div><div');
 buf.push(attrs({ "class": ('maxTemp') }));
 buf.push('>');
-var __val__ = "Temp. High: " + things[i].highTemp
+var __val__ = "Temp. High: " + things[i].high + ' ' + unit
 buf.push(null == __val__ ? "" : __val__);
-buf.push('</div><div');
-buf.push(attrs({ "class": ('wind') }));
-buf.push('>');
-var __val__ = "Winds: " + things[i].windSpeed
-buf.push(null == __val__ ? "" : __val__);
-buf.push('</div><div');
+buf.push('</div>');
+if (things[i].feelslike)
+{
+buf.push('<div');
 buf.push(attrs({ "class": ('feelsLike') }));
 buf.push('>');
-var __val__ = "Feels like: " + things[i].feelsLike
+var __val__ = "Feels like: " + things[i].feelslike
 buf.push(null == __val__ ? "" : __val__);
-buf.push('</div></div>');
+buf.push('</div>');
+}
+if (things[i].wind)
+{
+buf.push('<div');
+buf.push(attrs({ "class": ('wind') }));
+buf.push('>');
+var __val__ = "Winds: " + things[i].wind
+buf.push(null == __val__ ? "" : __val__);
+buf.push('</div>');
 }
 buf.push('</div>');
+}
+buf.push('</div></div>');
 }
 return buf.join("");
 }return { render: anonymous }; });
