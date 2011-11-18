@@ -12,7 +12,16 @@ define({
 			lock: "Parental control password",
 			wrongPassword: "The password was incorrect",
 			ok: 'OK',
-			cancel: 'Cancel'
+			cancel: 'Cancel',
+			ytube: {
+				mostPopular: "Most popular",
+				topRated: "Top Rated",
+				mostViewed: "Most Viewed",
+				recent: "Recent Videos",
+				'search': "Search",
+				select: 'Choose Category',
+				searchquery: 'Enter your search query'
+			}
 		}
 	}
 });

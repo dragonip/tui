@@ -5,8 +5,9 @@ define([
 	'json/json',
 	'env/exports', 
 	'shims/bind',
-	'loader/loader'
-], function(array, Listmodel, inherit, json, exports, bind, loader) {
+	'loader/loader',
+	'data/static-strings'
+], function(array, Listmodel, inherit, json, exports, bind, loader, strings) {
 	var YTData = function(app) {
 		Listmodel.call(this, app);
 		this.currentDataURL = YTData.urls.most_popular_url;
@@ -15,6 +16,7 @@ define([
 			symbol:  bind(this.load, this)
 		});
 		this.lastDisplayedIndex = 0;
+//		this.searchURL = '';
 	};
 	inherit(YTData, Listmodel);
 	YTData.urls = {
@@ -27,8 +29,28 @@ define([
 	YTData.prototype.itemsPerLoad = 15;
 	YTData.prototype.isLoading = false;
 	YTData.prototype.hasMoreResult = true;
+	YTData.prototype.resetSource = function(identifier, querystring) {
+		if (YTData.urls[identifier]) {
+			if (identifier === 'search_url' && typeof  querystring !== 'string' ) {
+				tui.createDialog('input', true, bind(this.resetSource, this, identifier), strings.components.dialogs.ytube.searchquery);
+				return; 
+			}
+			this.currentDataURL = YTData.urls[identifier];
+			this.lastDisplayedIndex = 0;
+			delete this.data.list;
+			this.data.list = [];
+			this.app.presentation.reset(true);
+			this.loadData({
+				name: this.name,
+				type: 'list',
+				querystring: querystring
+			});
+		}
+	};
 	YTData.prototype.loadData = function(setting) {
-		console.log('Tube model load data', setting)
+		if (typeof setting.querystring == 'string') {
+			this.currentDataURL += setting.querystring
+		}
 		var url = this.currentDataURL;
 		if (setting.type === 'append') {
 			url = url + '&start-index=' + (this.lastDisplayedIndex + 1);

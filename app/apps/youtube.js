@@ -3,8 +3,9 @@ define([
 	'model/youtubelist',
 	'tpl/youtube-partial',
 	'dom/dom',
-	'shims/bind'
-], function(App, YTData, ytpartial, dom, bind){
+	'shims/bind',
+	'data/static-strings'
+], function(App, YTData, ytpartial, dom, bind, strings){
 	var YouTube = new App({
 		name: 'youtube',
 		datamodel: YTData,
@@ -21,6 +22,16 @@ define([
 			}
 		}
 	});
+	YouTube.selectionDialogOptions = {
+		options:[
+			strings.components.dialogs.ytube.mostPopular,
+			strings.components.dialogs.ytube.topRated,
+			strings.components.dialogs.ytube.mostViewed,
+			strings.components.dialogs.ytube.recent,
+			strings.components.dialogs.ytube.search
+		],
+		actions: ['most_popular_url','toprated','most_viewed','recently_featured','search_url']
+	};
 	YouTube.presentation.addNewResults = function(items) {
 		var domString = ytpartial.render({
 			alterClass: this.template.alterClass,
@@ -38,10 +49,13 @@ define([
 	YouTube.appEvents.play = {
 		name: 'play',
 		func: bind(function() {
-			console.log('My custom play handle');
-			console.log(this);
+			tui.createDialog('optionlist', this.selectionDialogOptions.options, bind(this.handleDialogSelection, this), strings.components.dialogs.ytube.select);
 		}, YouTube),
 		attached: false
+	};
+	YouTube.handleDialogSelection = function(sIndex) {
+		console.log( 'selection is ', this.selectionDialogOptions.actions[sIndex]);
+		this.model.resetSource(this.selectionDialogOptions.actions[sIndex]);
 	};
 	
 	return YouTube;
