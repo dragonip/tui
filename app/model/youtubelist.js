@@ -14,6 +14,7 @@ define([
 			name: 'load',
 			symbol:  bind(this.load, this)
 		});
+		this.lastDisplayedIndex = 0;
 	};
 	inherit(YTData, Listmodel);
 	YTData.urls = {
@@ -23,12 +24,24 @@ define([
 		recently_featured: 'http://gdata.youtube.com/feeds/api/standardfeeds/recently_featured?alt=jsonc&callback=exportedSymbols.youtube.load&v=2&max-results=15&prettyprint=true',
 		search_url: 'http://gdata.youtube.com/feeds/api/videos?alt=jsonc&callback=exportedSymbols.youtube.load&v=2&max-results=15&prettyprint=true&q=',
 	};
-	YTData.prototype.loadData = function() {
+	YTData.prototype.itemsPerLoad = 15;
+	YTData.prototype.isLoading = false;
+	YTData.prototype.hasMoreResult = true;
+	YTData.prototype.loadData = function(setting) {
+		console.log('Tube model load data', setting)
+		var url = this.currentDataURL;
+		if (setting.type === 'append') {
+			url = url + '&start-index=' + (this.lastDisplayedIndex + 1);
+		}
 		this.app.fire('data-load-start');
-		loader.loadJSONP('youtubevideos', this.currentDataURL);
+		this.isLoading = true;
+		loader.loadJSONP('youtubevideos', url);
 	};
 	YTData.prototype.load = function(data) {
 		console.log('data from youtube', data);
+		this.isLoading = false;
+		if ( data.data.startIndex + data.data.itemsPerPage >= data.data.totalItems)
+			this.hasMoreResult = false;
 		var items = data.data.items;
 		var i, item;
 		for (i = 0; i < items.length; i++) {
@@ -38,7 +51,10 @@ define([
 				this.data.list.push(item);
 			}
 		}
+		this.lastDisplayedIndex = this.data.list.length;
+		console.log('Posledniqt index e', this.lastDisplayedIndex);
 		this.pointer = this.data.list;
+		this.isLoaded = true;
 		this.app.fire('data-load-end', {
 			type: (data.data.startIndex === 1?'list':'append'),
 			app: this.app.name
@@ -47,6 +63,7 @@ define([
 	YTData.prototype.disposeInternal = function(){
 		YTData.superClass_.disposeInternal.call(this);
 		delete this.currentDataURL;
+		delete this.hasMoreResult
 	};
 	
 	return YTData;

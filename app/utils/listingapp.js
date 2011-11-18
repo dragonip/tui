@@ -60,11 +60,10 @@ define([
 		} else if (data.type === 'folder') {
 			this.presentation.show();
 			if (typeof data.index !== 'undefined') this.presentation.activate(data.index);
-		} else if (data.type === 'append') {
-			console.log('Append data to presentation');
-		}
+		} 
 	};
 	ListApp.prototype.onShowScreen = function() {
+		console.log('Showing', this.name)
 		this.presentation.show(this.container);
 	}
 	ListApp.prototype.defaultRemoteKeyHandler = function(key) {

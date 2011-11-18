@@ -141,18 +141,27 @@ define(['dom/dom', 'debug/console'], function(dom, logger) {
 			document.body.appendChild(img);
 			img.src = cur;
 		},
+		/**
+		* Load JSONP source, if the resource has been already used, dispose of the node
+		* @param {String} id The ID to use for the script tag, should be the same from the same domain
+		* @param {String} url The url to load, tstamp will be added automatically
+		*/
 		loadJSONP: function(id, url) {
+			console.log('try loading JSONP', url);
 			var node = document.querySelector('#'+id);
-			var src = url + '&tstamp=' + (new Date().getTime());
-			if (node === null) {
-				node = document.createElement('script');
-				node.setAttribute('id', id);
-				node.setAttribute('type', 'text/javascript');
-				node.setAttribute('async', true);
-				appendToHead(node);
+			if (node) {
+				dom.dispose(node);
+				node = null;
 			}
+			var src = url + '&tstamp=' + (new Date().getTime());
+			node = document.createElement('script');
+			node.setAttribute('id', id);
+			node.setAttribute('type', 'text/javascript');
+			node.setAttribute('async', true);
+			appendToHead(node);
+
 			window.setTimeout(function() {
-				node.setAttribute('src', src)
+				node.setAttribute('src', src);
 			}, 1);
 		}
 	};
