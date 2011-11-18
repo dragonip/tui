@@ -72,7 +72,6 @@ define([
 		this.attachEvents(false);
 	}
 	App.prototype.start = function() {
-		//For now just be ready to display itself
 		this.fire('start-ready');
 	};
 	App.prototype.selectMiniScreen = function(direction){

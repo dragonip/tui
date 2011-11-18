@@ -35,7 +35,6 @@ define([
 		}
 	};
 	Mini.prototype.eventReceiver = function(key) {
-		console.log('Mini has received an event routed from multiscreen', key)
 		this.fire('remote-key', key);
 	};
 	Mini.prototype.getDom = function() {

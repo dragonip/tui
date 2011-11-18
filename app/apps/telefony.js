@@ -35,8 +35,12 @@ define([
 				next = current.previousElementSibling
 			}
 		}
-		if (next && current !== null ) classes.removeClasses(current, 'active');
-		classes.addClasses(next, 'active');
+		if (next) {
+			if (current !== null ) {
+				classes.removeClasses(current, 'active');
+			}
+			classes.addClasses(next, 'active');
+		}
 	};
 	Chooser.on('activated', function(index) {
 		if (typeof index !== 'number') index = 0;
