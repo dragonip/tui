@@ -1,5 +1,10 @@
-define(['tpl/mosaiclist','text!css/mosaic.css','loader/loader','oop/idisposable','oop/inherit',
-'data/static-strings'
+define([
+	'tpl/mosaiclist',
+	'text!css/mosaic.css',
+	'loader/loader',
+	'oop/idisposable',
+	'oop/inherit',
+	'data/static-strings'
 ], function(template, css, loader, Disposable, inherit, strings) {
 	loader.loadCSSFromText(css);
 	

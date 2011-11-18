@@ -28,6 +28,11 @@ define({
 		module: 'apps/aod',
 		icon: 'imgs/ppv_screen_icon.png'
 	},
+	youtube: {
+		name: 'YOUTUBE',
+		apptag: 'youtube',
+		module: 'apps/youtube'
+	},
 	uvideo: {
 		name: 'user videos',
 		apptag: 'uvideo',

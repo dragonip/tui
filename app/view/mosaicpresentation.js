@@ -7,10 +7,11 @@ define([
 	'dom/classes',
 	'view/mosaictemplate',
 	'view/listtemplate',
+	'view/youtubetemplate',
 	'loader/loader',
 	'oop/idisposable',
 	'oop/inherit'
-], function(dom, attr, classes, MosaicTemplate, ListTemplate, loader, Disposable, inherit) {	
+], function(dom, attr, classes, MosaicTemplate, ListTemplate, YouTubeTemplate, loader, Disposable, inherit) {	
 	function getContainerRestrains(container) {
 		var s = window.getComputedStyle(container, null);
 		return {
@@ -33,6 +34,8 @@ define([
 		this.app = app;
 		if (viewType === 'mosaic' || !viewType) {
 			this.template = new MosaicTemplate(itemWidth, itemHeight);
+		} else if ( viewType === 'youtube') {
+			this.template = new YouTubeTemplate(itemWidth, itemHeight);
 		} else {
 			this.template = new ListTemplate(itemWidth, itemHeight);
 		}
@@ -90,6 +93,7 @@ define([
 		}
 		if (!this.isRendered_) {
 			if (typeof idx === 'undefined') idx = 0;
+			console.log(this.app.model.get('list'));
 			this.container.innerHTML = this.template.rasterize(this.app.model.get('list'),this.app.name);
 			this.dom = this.container.firstChild;
 			if (this.app.model.get('list').length > 0) this.activate(idx);
