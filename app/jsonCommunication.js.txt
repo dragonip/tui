@@ -1,6 +1,6 @@
 {
 	header: {
-		globalCallback: "window.GlobalFunction",
+		cb: "window.GlobalFunction",
 		tag: "unique ID",
 		method: "get_url|request|play|stop|pause|calld|     media|remote",
 		transport: "javascript|socket",
