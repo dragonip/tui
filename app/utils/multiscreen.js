@@ -10,9 +10,9 @@ define([
 	var App = function(options) {
 		VisualApp.call(this, options);
 		//Setup events
-		this.screens = [];
+		this.screens = options.miniscreens;
 		this.currentScreenIndex = 0;
-		this.initScreens(options);
+		this.initScreens();
 		this.innerContainer = document.createElement('div');
 		this.innerContainer.className = 'tui-horizontal-centered tui-scrollable-vertical';
 //		var bound = (function(that){return function(key){that.selectMiniScreen.call(that, key);}  })(this);
@@ -29,6 +29,7 @@ define([
 				attached: false
 			}
 		};
+
 		this.on('start-requested', this.start);
 		this.on('show-requested', this.onShowRequested);
 		this.on('show-complete', this.onShowComplete);
@@ -39,11 +40,11 @@ define([
 	};
 	inherit(App, VisualApp);
 	App.prototype.initScreens =  function(options) {
-		var i, screens = options.miniscreens, len = screens.length;
-		for (i = 0; i < len; i ++ ) {
-			this.screens.push(new Mini(screens[i].template));
-			this.registerDisposable(this.screens[length-1]);
-		}
+//		var i, screens = options.miniscreens, len = screens.length;
+//		for (i = 0; i < len; i ++ ) {
+////			this.screens.push(new Mini(screens[i].template));
+////			this.registerDisposable(this.screens[length-1]);
+//		}
 	};
 	App.prototype.isRendered = false;
 	App.prototype.onShowRequested = function() {
@@ -63,11 +64,11 @@ define([
 		this.fire('show-complete');
 	};
 	App.prototype.onShowComplete = function() {
-		console.log('Attaching events')
 		this.attachEvents(true);
-		console.log('Events attached')
+		this.activateScreen(this.currentScreenIndex);
 	};
 	App.prototype.onStopRequested = function() {
+		this.screens[this.currentScreenIndex].attachEvents(false);
 		this.attachEvents(false);
 	}
 	App.prototype.start = function() {
@@ -86,8 +87,12 @@ define([
 		}
 	};
 	App.prototype.activateScreen = function(index) {
-		if (typeof index === 'number') this.currentScreenIndex = index;
+		if (typeof index === 'number') {
+			this.screens[this.currentScreenIndex].attachEvents(false);
+			this.currentScreenIndex = index;
+		}
 		this.innerContainer.scrollTop = 480 * this.currentScreenIndex;
+		this.screens[this.currentScreenIndex].attachEvents(true);
 	};
 	App.prototype.disposeInternal =  function() {
 		this.constructor.superClass_.disposeInternal.call(this);
