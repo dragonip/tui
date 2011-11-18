@@ -61,6 +61,11 @@
 	background-position: right -508px;
 	background-repeat: no-repeat;
 }
+.screenChooser .screen.youtube{
+	background-image: url('app/imgs/icon_set.png');
+	background-position: right -1206px;
+	background-repeat: no-repeat;
+}
 .screenChooser .screen.uaudio {
 	background-image: url('app/imgs/icon_set.png');
 	background-position: right -609px;
