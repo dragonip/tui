@@ -51,8 +51,11 @@ define([
 	/**
 	* Resets the rendered state and enforce re-rendering of the template on the next 'show' request
 	*/
-	MosaicPresentation.prototype.reset = function() {
+	MosaicPresentation.prototype.reset = function(force) {
 		this.isRendered_ = false;
+		if (force) {
+			this.container.innerHTML = '';
+		}
 	};
 	/**
 	* @param {?HTMLElement} The container to bind to, will be reset to the new one if submitted
