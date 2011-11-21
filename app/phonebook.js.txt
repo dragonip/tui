@@ -1,0 +1,13 @@
+[
+	{
+		"id": "##id##",
+		"name": "##caller_name##",
+		"phone": "##generalnum##",
+		"home": "##homenum##",
+		"mobile": "##mobilenum##",
+		"office": "##officenum##",
+		"ip": "##ipnum##",
+		"speedDial": "##sd##"
+	},
+	...
+]
