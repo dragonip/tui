@@ -3,14 +3,17 @@ define([
 	'oop/ievent', 
 	'dom/dom',
 	'shims/bind',
-	'utils/visualapp'
-], function (inherit, Parent, dom, bind, VisualApp) {
+	'utils/visualapp',
+	'data/static-strings',
+	'tpl/infobuttons'
+], function (inherit, Parent, dom, bind, VisualApp, strings, infobuttonstpl) {
 	var Mini = function(options) {
-		console.log(arguments)
 		Parent.call(this);
 		this.name = options.name;
 		this.template_ = options.template;
+		this.deps_ = options.deps;
 		this.appEvents = {};
+		this.master = null;
 		var bound = bind(this.eventReceiver, this);
 		Mini.remoteKeys_.forEach(bind(function(item){
 			this.appEvents[item] = {
@@ -24,7 +27,11 @@ define([
 	Mini.remoteKeys_ = ['left', 'right', 'up', 'down', 'ok'];
 	Mini.prototype.render = function (renderIn) {
 		if (this.template_ !== null) {
-			this.dom_ = dom.getInnerNodes(this.template_.render());
+			this.dom_ = dom.getInnerNodes(this.template_.render({
+				things: this.master.getData(this.name),
+				header: strings.screens[this.name].list.header,
+				body: strings.screens[this.name].list.body
+			}));
 		}
 		dom.adopt(renderIn, this.dom_);
 	};
@@ -32,6 +39,13 @@ define([
 		VisualApp.prototype.attachEvents.call(this, bool);
 		if (bool) {
 			this.fire('activated');
+			if (this.panelSetup) {
+				var things = {};
+				for ( var i = 0; i <this.panelSetup.keys.length; i++) {
+					things[this.panelSetup.keys[i]] = strings.screens[this.name].panels.bottom[this.panelSetup.keys[i]]
+				}
+				tui.setPanels(this.panelSetup.top, this.panelSetup.bottom, undefined,  infobuttonstpl.render({things:things}));
+			}
 		}
 	};
 	Mini.prototype.eventReceiver = function(key) {
