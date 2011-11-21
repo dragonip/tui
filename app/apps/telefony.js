@@ -23,6 +23,12 @@ define([
 	Chooser.on('remote-key', function(key) {
 		this.setActiveIcon(key);
 	});
+	Chooser.panelSetup = {
+		top: false,
+		bottom: true,
+		keys: ['arrow','ok']
+	};
+	
 	Chooser.setActiveIcon = function(index) {
 		var current = dom.$('.active', this.dom_);
 		var next;
@@ -54,9 +60,61 @@ define([
 		template: template1
 	});
 	
+	/**
+	 * Call history mini screen
+	 */
+	var CallHistory = new Mini({
+		name: 'callhistory',
+		template: template2,
+		deps: '/cgi-bin/voip.cgi?run=callhistory_json_lists'
+	});
+	CallHistory.panelSetup = {
+		top: false,
+		bottom: true,
+		keys: ['ok']
+	};
+	
+	/**
+	 * Phonebook miniscreen
+	 */
+	var PhoneBook = new Mini({
+		name: 'phonebook',
+		template: template4,
+		deps: '/cgi-bin/voip.cgi?run=phb_json_list'
+	});
+	
+	PhoneBook.panelSetup = {
+		top: false,
+		bottom: true,
+		keys: ['info', 'ok']
+	}
+	PhoneBook.on('activated', function() {});
+	
+	/**
+	 * SmsCenter mini screens
+	 */
+	var Sms = new Mini({
+		name: 'sms',
+		template: template5
+	});
+	Sms.panelSetup = {
+		top: false,
+		bottom: true,
+		keys: ['arrows']
+	}
+	
+	/**
+	 * VoiceMail miniscreens
+	 */
+	var VoiceMail = new Mini({
+		name: 'voicemail',	
+		template: template6,
+		deps: '/cgi-bin/voip.cgi?run=vmmsgs_json_list'
+	});
+	
 	var Tele = new App({
 		name: 'phone',
-		miniscreens: [ Chooser, CallCenter ]
+		miniscreens: [ Chooser, CallCenter, CallHistory, PhoneBook, Sms, VoiceMail ]
 //			{
 //				name: 'chooser',
 //				template: template3
