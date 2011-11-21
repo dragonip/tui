@@ -1,16 +1,16 @@
 div.tui-multiscreen.telephonyChooser
 	div.icon
 		div.callCenterC
-		span Call Center
+		span!= body.callcenter
 	div.icon
 		div.callHistoryC
-		span Call History
+		span!= body.history
 	div.icon
-		div.voiceMailC		
-		span Voice Mail
+		div.voiceMailC
+		span!= body.voicemail
 	div.icon
 		div.sendSMSC
-		span SMS Center
+		span!= body.sms
 	div.icon
 		div.phonebookC
-		span Phonebook
+		span!= body.phonebook
