@@ -10,22 +10,22 @@ buf.push(attrs({ "class": ('callHistoryItem') + ' ' + ('nobg') }));
 buf.push('><div');
 buf.push(attrs({ "class": ('caller') }));
 buf.push('>');
-var __val__ = "Caller"	
+var __val__ = header.caller
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div><div');
 buf.push(attrs({ "class": ('time') }));
 buf.push('>');
-var __val__ = "Time"
+var __val__ = header.time
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div><div');
 buf.push(attrs({ "class": ('duration') }));
 buf.push('>');
-var __val__ = "Duration"		
+var __val__ = header.duration
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div><div');
 buf.push(attrs({ "class": ('type') }));
 buf.push('>');
-var __val__ = "Type"
+var __val__ = header.type
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div></div><div');
 buf.push(attrs({ "class": ('callHistoryResults') }));

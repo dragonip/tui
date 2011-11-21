@@ -6,6 +6,101 @@ define({
 		bookmark: "Bookmark",
 		unbookmark: "Unbookmark"
 	},
+	screens: {
+		callcenter: {
+			panels: {
+				bottom: {
+					
+				}
+			},
+			list: {
+				
+			}
+		},
+		sms: {
+			panels: {
+				bottom: {
+					arrows: "Navigate"
+				}
+			},
+			list: {
+				header: {
+					
+				},
+				body: {
+					to: "To:",
+					message: "Text:"
+				}
+			}
+		},
+		phonebook: {
+			panels: {
+				bottom: {
+					ok: "Call now",
+					info: "Contact options"
+				}
+			},
+			list: {
+				header: {
+					name: "Name",
+					number: "Number",
+					speedDial: "SD"
+				}
+			}
+		},
+		voicemail: {
+			panels: {
+				bottom: {
+					upDown: "Navigation",
+					ok: "Listen"
+				}
+			},
+			list: {
+				header: {
+					
+				},
+				body: {
+					caller: "Call from",
+					time: "Time of call"
+				}
+			}
+		},
+		callhistory: {
+			panels: {
+				bottom: {
+					ok: "Call"
+				}
+			},
+			list: {
+				header: {
+					caller: "Caller Name",
+					time: "Time of call",
+					duration: "Call duration",
+					type: "Type"
+				}
+			}
+		},
+		chooser: {
+			panels: {
+				bottom: {
+					leftRight: "Select task",
+					ok: "Go to task"
+				}
+			},
+			list: {
+				header: {
+					
+				},
+				body: {
+					callcenter: "Call Centre",
+					history: "Call History",
+					voicemail: "Voice Mail",
+					sms: "Send SMS",
+					phonebook: "Phonebook"			
+				}
+			}
+		}
+	},
 	components: {
 		dialogs: {
 			select: "Select action",

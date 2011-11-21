@@ -1,9 +1,9 @@
 div.tui-multiscreen.callHistory
 	div.callHistoryItem.nobg
-		div.caller!= "Caller"	
-		div.time!= "Time"
-		div.duration!= "Duration"		
-		div.type!= "Type"
+		div.caller!= header.caller
+		div.time!= header.time
+		div.duration!= header.duration
+		div.type!= header.type
 	div.callHistoryResults
 		- if (typeof things === 'object')
 			- for (var i = 0; i < things.length; i++ )

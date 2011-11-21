@@ -9,23 +9,38 @@ buf.push('><div');
 buf.push(attrs({ "class": ('icon') }));
 buf.push('><div');
 buf.push(attrs({ "class": ('callCenterC') }));
-buf.push('></div><span>Call Center</span></div><div');
+buf.push('></div><span>');
+var __val__ = body.callcenter
+buf.push(null == __val__ ? "" : __val__);
+buf.push('</span></div><div');
 buf.push(attrs({ "class": ('icon') }));
 buf.push('><div');
 buf.push(attrs({ "class": ('callHistoryC') }));
-buf.push('></div><span>Call History</span></div><div');
+buf.push('></div><span>');
+var __val__ = body.history
+buf.push(null == __val__ ? "" : __val__);
+buf.push('</span></div><div');
 buf.push(attrs({ "class": ('icon') }));
 buf.push('><div');
 buf.push(attrs({ "class": ('voiceMailC') }));
-buf.push('></div><span>Voice Mail</span></div><div');
+buf.push('></div><span>');
+var __val__ = body.voicemail
+buf.push(null == __val__ ? "" : __val__);
+buf.push('</span></div><div');
 buf.push(attrs({ "class": ('icon') }));
 buf.push('><div');
 buf.push(attrs({ "class": ('sendSMSC') }));
-buf.push('></div><span>SMS Center</span></div><div');
+buf.push('></div><span>');
+var __val__ = body.sms
+buf.push(null == __val__ ? "" : __val__);
+buf.push('</span></div><div');
 buf.push(attrs({ "class": ('icon') }));
 buf.push('><div');
 buf.push(attrs({ "class": ('phonebookC') }));
-buf.push('></div><span>Phonebook</span></div></div>');
+buf.push('></div><span>');
+var __val__ = body.phonebook
+buf.push(null == __val__ ? "" : __val__);
+buf.push('</span></div></div>');
 }
 return buf.join("");
 }return { render: anonymous }; });

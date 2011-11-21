@@ -1,6 +1,6 @@
 define(['config/main'],function(config) {
 	var Header = function Header(run, type, transport, callback, mode) {
-		this["callback"] = callback || this.defaultCallback;
+		this["cb"] = callback || this.defaultCallback;
 		this["transport"] = transport || this.transport;
 		this['mode'] = mode || this.mode;
 		this['method'] = run;
