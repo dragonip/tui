@@ -50,7 +50,10 @@ define({
 		},
 		voicemail: {
 			panels: {
-				
+				bottom: {
+					upDown: "Navigation",
+					ok: "Listen"
+				}
 			},
 			list: {
 				header: {
@@ -80,7 +83,7 @@ define({
 		chooser: {
 			panels: {
 				bottom: {
-					arrows: "Select task",
+					leftRight: "Select task",
 					ok: "Go to task"
 				}
 			},

@@ -26,7 +26,7 @@ define([
 	Chooser.panelSetup = {
 		top: false,
 		bottom: true,
-		keys: ['arrow','ok']
+		keys: ['leftRight','ok']
 	};
 	
 	Chooser.setActiveIcon = function(index) {
@@ -111,6 +111,11 @@ define([
 		template: template6,
 		deps: '/cgi-bin/voip.cgi?run=vmmsgs_json_list'
 	});
+	VoiceMail.panelSetup = {
+		top: false,
+		bottom: true,
+		keys: ['upDown', 'ok']
+	}
 	
 	var Tele = new App({
 		name: 'phone',
