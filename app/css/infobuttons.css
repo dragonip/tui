@@ -59,3 +59,75 @@
 	margin: 10px;
 	font-size: 120%;
 }
+.tui-infoblock .remote-left-right{
+	background-image: url('app/imgs/remote-keys.png');
+	background-position: left -200px;
+	background-repeat: no-repeat;
+	height: 40px;
+	display: inline-block;
+	padding-left: 50px;
+	color: white;
+	line-height: 36px;
+	margin: 10px;
+	font-size: 120%;
+}
+.tui-infoblock .remote-up-down{
+	background-image: url('app/imgs/remote-keys.png');
+	background-position: left -240px;
+	background-repeat: no-repeat;
+	height: 40px;
+	display: inline-block;
+	padding-left: 50px;
+	color: white;
+	line-height: 36px;
+	margin: 10px;
+	font-size: 120%;
+}
+.tui-infoblock .remote-play-pause{
+	background-image: url('app/imgs/remote-keys.png');
+	background-position: left -283px;
+	background-repeat: no-repeat;
+	height: 40px;
+	display: inline-block;
+	padding-left: 50px;
+	color: white;
+	line-height: 36px;
+	margin: 10px;
+	font-size: 120%;
+}
+.tui-infoblock .remote-save{
+	background-image: url('app/imgs/remote-keys.png');
+	background-position: left -323px;
+	background-repeat: no-repeat;
+	height: 40px;
+	display: inline-block;
+	padding-left: 50px;
+	color: white;
+	line-height: 36px;
+	margin: 10px;
+	font-size: 120%;
+}
+.tui-infoblock .remote-delete{
+	background-image: url('app/imgs/remote-keys.png');
+	background-position: left -363px;
+	background-repeat: no-repeat;
+	height: 40px;
+	display: inline-block;
+	padding-left: 50px;
+	color: white;
+	line-height: 36px;
+	margin: 10px;
+	font-size: 120%;
+}
+.tui-infoblock .remote-return{
+	background-image: url('app/imgs/remote-keys.png');
+	background-position: left -400px;
+	background-repeat: no-repeat;
+	height: 40px;
+	display: inline-block;
+	padding-left: 50px;
+	color: white;
+	line-height: 36px;
+	margin: 10px;
+	font-size: 120%;
+}
