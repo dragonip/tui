@@ -1,5 +1,5 @@
 define([
-	'utils/gamesapp'
+	'utils/framedapp'
 ], function(App){
 	return new App({
 		name: 'games',

@@ -83,9 +83,10 @@ define([
 		}
 	};
 	//Add default events for mosaic, can be then overwritten by children
-	ListApp.prototype.generateDefaultEvents = function() {
+	ListApp.prototype.generateDefaultEvents = function(list) {
 		this.appEvents = {};
-		ListApp.remoteKeys_.forEach(bind(function(item){
+		if (!list) list = ListApp.remoteKeys_
+		list.forEach(bind(function(item){
 			this.appEvents[item] = {
 				name: item,
 				func: bind(this.defaultRemoteKeyHandler, this),
