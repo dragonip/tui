@@ -34,10 +34,11 @@ define([
 		var elementHeight = element.scrollHeight;
 		var containerScrollTop = container.scrollTop;
 		var containerHeight = container.clientHeight;
-		
 		if (elementTopOffset + elementHeight > containerScrollTop + containerHeight ) {
+			console.log('Down')
 			container.scrollTop = elementTopOffset - containerHeight + elementHeight;
-		} else if ( containerScrollTop > elementTopOffset + elementHeight ) {
+		} else if ( containerScrollTop > elementTopOffset ) {
+			console.log('UP')
 			container.scrollTop = elementTopOffset;
 		}
 	};
