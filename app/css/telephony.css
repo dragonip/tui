@@ -198,22 +198,28 @@
 .phonebookWrapper .phoneBookResults {
 	overflow-y: auto;
 	height: 300px;
+	position: relative;
 }
 
 .phonebookWrapper .phoneBookResults .no-phonebook-entries:before {
 	content: "No entries";
 	color: white;
 }
-.phonebookWrapper .phonebookItem {
+.phonebookWrapper .phonebookItem, .phonebookHeader {
 	background-color: #272b33;
 	margin-right: 5px;
 }
-.phonebookWrapper .phonebookItem.nobg {
+/*.phonebookWrapper .phonebookItem.nobg {*/
+/*	background-color: transparent;*/
+/*	margin-top: 10px;*/
+/*	color: gray;*/
+/*}*/
+.phonebookWrapper .phonebookHeader {
 	background-color: transparent;
 	margin-top: 10px;
 	color: gray;
 }
-.phonebookWrapper .phonebookItem .name {
+.phonebookWrapper .phonebookItem .name, .phonebookHeader .name {
 	display: inline-block;
 	width: 52%;
 	margin: 0 2px;
@@ -225,7 +231,7 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-.phonebookWrapper .phonebookItem .general {
+.phonebookWrapper .phonebookItem .general, .phonebookHeader .general {
 	height: 30px;
     line-height: 30px;
 	display: inline-block;
@@ -237,7 +243,7 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-.phonebookWrapper .phonebookItem .ip {
+.phonebookWrapper .phonebookItem .ip, .phonebookHeader .ip {
 	height: 30px;
     line-height: 30px;
 	width: 21%;
