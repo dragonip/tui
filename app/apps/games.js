@@ -19,6 +19,9 @@ define([
 		},
 		Tetris: {
 			arrows: strings.games.hints.Tetris.arrows
+		},
+		SizzleBox: {
+			arrows: strings.games.hints.SizzleBox.arrows
 		}
 	};
 	return a;

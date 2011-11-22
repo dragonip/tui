@@ -1,0 +1,122 @@
+/*
+ *
+ * snake.css
+ * (c) Richard Willis
+ *
+ */
+
+#snake-col-map {
+	width:400px;
+	float:left;
+}
+#snake-col-info {
+	position:static;
+	width:100%;
+	margin-left:-490px;
+	float:right;
+}
+#marginLeft { 
+	margin:0px 30px 0px 490px;
+}
+
+#map1 {
+	margin-top:15px;
+	width:400px;
+	height:400px;
+	position:relative;
+	border:1px solid #aaa;
+	overflow:hidden;
+	background-color: white;
+	color: black;
+}
+#overlay {
+	position:absolute;
+	width:400px;
+	height:400px;
+	background:#fff;
+	z-index:100;
+	opacity:0.5;
+}
+#stats { 
+	width:402px;
+}
+#map-msg {
+	position:absolute;
+	top:42%;
+	width:100%;
+	display:block;
+	font-size:200%;
+	z-index:101;
+	text-align:center;
+	font-weight: bold;
+}
+
+
+
+#map-msg a {
+	width: 110px; 
+	background-color: white;
+	margin:0 auto 0 auto; 
+	color: white;
+	font-weight: bold; 
+	padding: 10px;
+	text-decoration: none;
+	text-shadow: 0 0 3px black;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	border: 1px solid #CCCCCC;
+	-moz-box-shadow: inset 0 0 5px black;
+	-webkit-box-shadow: inset 0 0 5px black;
+	box-shadow: inset 0 0 5px black;
+	display: block;
+}
+
+
+
+
+
+
+.snake {
+	width:10px;
+	height:10px;
+	position:absolute;
+	background:red;
+	z-index:99;
+	display:block;
+	white-space:nowrap;
+	overflow:hidden;
+}
+.wall {
+	width:10px;
+	height:10px;
+	position:absolute;
+	background:#aaa url(../img/snake/grid_bg.gif) no-repeat;
+	z-index:99;
+}
+#cherry {
+	display:none;
+	width:10px;
+	height:10px;
+	position:absolute;
+	background:url(../img/snake/cherry.jpg) no-repeat 0 0;
+	z-index:98;
+}
+#score {
+	width:100px;
+	height:50%;
+	text-align:right;
+	font-size:300%;
+	font-weight:normal;
+	padding:4px;
+	border:1px solid #ccc;
+}
+#start-game {
+	outline:none;
+}
+
+.right {float:right}
+.error {color:red}
+.hidden {display:none}
+
+/* end snake.css */

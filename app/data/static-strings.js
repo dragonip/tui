@@ -20,6 +20,9 @@ define({
 			},
 			Tetris: {
 				arrows: 'Move'
+			},
+			SizzleBox: {
+				arrows: 'Move tiles'
 			}
 		}
 	},
