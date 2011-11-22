@@ -4,8 +4,9 @@ define([
 	'dom/dom',
 	'utils/sizes',
 	'shims/bind',
-	'tpl/infobuttons'
-], function(inherit, ListApp, dom, sizes, bind, infobuttonstpl){
+	'tpl/infobuttons',
+	'utils/events'
+], function(inherit, ListApp, dom, sizes, bind, infobuttonstpl, DMCEvents){
 	var GamesApp = function(options) {
 		ListApp.call(this, options);
 		this.gamelayer = dom.create('div', {
@@ -44,13 +45,17 @@ define([
 			}
 		}
 	};
+	GamesApp.reinit = function() {
+		DMCEvents.initEvents();
+	};
 	GamesApp.prototype.startGame = function(gameObj) {
 		console.log(window.location)
 		dom.empty(this.gamelayer);
 		this.activeFrame =  dom.create('iframe', {
-			src: window.location.href + 'app/' + gameObj.path,
 			style: sizes.getStyle(sizes.getSizesForGameLayer())
 		});
+		this.activeFrame.onload = GamesApp.reinit;
+		this.activeFrame.setAttribute('src', window.location.href + 'app/' + gameObj.path)
 		dom.adopt(this.gamelayer, this.activeFrame);
 		dom.adopt(this.gamelayer);
 		if (this.hints[gameObj.publishName]) {
@@ -63,6 +68,7 @@ define([
 		tui.setPanels(false, false);
 		dom.dispose(this.gamelayer);
 		this.gamelayer.innerHTML = '';
+		this.activeFrame.onload = null;
 		this.activeFrame = null;
 	};
 	

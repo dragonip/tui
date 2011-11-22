@@ -45,8 +45,14 @@ define(['types/types', 'array/array', 'dmc/dmc', 'debug/console'], function(Mtyp
 			internalEventList[keycode][internalEventList[keycode].length -1](keycode);
 		}
 	};
-	dmc.initAPI();
-	dmc.onKeyPress(dispatchEvent);
+	
+	var initEvents = function() {
+		dmc.initAPI();
+		dmc.onKeyPress(dispatchEvent);
+		
+	};
+	initEvents();
+	
 
 	return {
 		/**
@@ -78,6 +84,7 @@ define(['types/types', 'array/array', 'dmc/dmc', 'debug/console'], function(Mtyp
 		showAll: function(){
 			console.log(internalEventList);
 		},
-		defaultEventAccepter: dispatchEvent
+		defaultEventAccepter: dispatchEvent,
+		initEvents: initEvents
 	};
 });
