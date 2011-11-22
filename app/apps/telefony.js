@@ -10,25 +10,36 @@ define([
 	'loader/loader',
 	'utils/miniscreen',
 	'dom/dom',
-	'dom/classes'
-], function(App, template1, template2, template3, template4, template5, template6, css, loader, Mini, dom, classes) {
+	'dom/classes',
+	'utils/telescreen',
+	'utils/scrollable'
+], function(App, template1, template2, template3, template4, template5, template6, css, loader, Mini, dom, classes, TeleMini, Scrollable) {
 	loader.loadCSSFromText(css);
 	/**
 	* Mini screen chooser
 	*/
-	var Chooser = new Mini({
+	var Chooser = new TeleMini({
 		name: 'chooser',
-		template: template3
+		template: template3,
+		panels: {
+			keys: ['leftRight','ok']
+		}
 	});
-	Chooser.on('remote-key', function(key) {
-		this.setActiveIcon(key);
-	});
-	Chooser.panelSetup = {
-		top: false,
-		bottom: true,
-		keys: ['leftRight','ok']
-	};
-	
+	Chooser.keyHandler = function(key) {
+		var node;
+		if (typeof key !== 'string') {
+			this.setActiveIcon(key);			
+		}
+		switch (key) {
+			case 'ok':
+				node = dom.$('.active', this.dom_);
+				this.master.activateScreen(parseInt(dom.dataGet(node, 'sequence'), 10))
+			case 'left':
+			case 'right':
+				this.setActiveIcon(key);
+				break;
+		}		
+	};	
 	Chooser.setActiveIcon = function(index) {
 		var current = dom.$('.active', this.dom_);
 		var next;
@@ -55,53 +66,77 @@ define([
 	/**
 	* Call center mini screen. Dialler
 	*/
-	var CallCenter = new Mini({
+	var CallCenter = new TeleMini({
 		name: 'callcenter',
-		template: template1
+		template: template1,
+		panels: {}
 	});
 	
 	/**
 	 * Call history mini screen
 	 */
-	var CallHistory = new Mini({
+	var CallHistory = new TeleMini({
 		name: 'callhistory',
 		template: template2,
-		deps: '/cgi-bin/voip.cgi?run=callhistory_json_lists'
+		deps: '/cgi-bin/voip.cgi?run=callhistory_json_lists&newif=1',
+		panels: {
+			keys: ['ok']
+		}
 	});
-	CallHistory.panelSetup = {
-		top: false,
-		bottom: true,
-		keys: ['ok']
+	CallHistory.keyHandler = function(key) {
+		switch (key) {
+			default: 
+				console.log('Received key', key)
+		}
 	};
+
 	
 	/**
 	 * Phonebook miniscreen
 	 */
-	var PhoneBook = new Mini({
+	var PhoneBook = new TeleMini({
 		name: 'phonebook',
 		template: template4,
-		deps: '/cgi-bin/voip.cgi?run=phb_json_list'
+		deps: '/cgi-bin/voip.cgi?run=phb_json_list&newif=1',
+		panels:{ keys : ['info', 'ok', 'upDown'] }
+	});	
+	PhoneBook.Scrollable = new Scrollable('.phoneBookResults', '.phonebookItem.active');
+	PhoneBook.registerDisposable(this.Scrollable);
+	PhoneBook.on('activated', function() {
+		console.log('Screen PB activats')
+		this.selectItem(0);
+		this.Scrollable.scroll();
 	});
-	
-	PhoneBook.panelSetup = {
-		top: false,
-		bottom: true,
-		keys: ['info', 'ok']
-	}
-	PhoneBook.on('activated', function() {});
-	
+	PhoneBook.selectItem = function(index) {
+		if (index >= this.master.getData(this.name).length || index < 0 ) return;
+		var all = dom.$$('.phonebookItem', this.dom_);
+		var current = dom.$('.active', this.dom_);
+		if (current !== null) {
+			classes.removeClasses(current, 'active');
+		}
+		classes.addClasses(all[index], 'active');
+		this.Scrollable.scroll();
+	};
+	PhoneBook.keyHandler = function(key) {
+		switch (key) {
+			case 'up':
+				this.selectItem(parseInt(dom.dataGet(dom.$('.active', this.dom_), 'sequence'), 10) - 1 );
+				break;
+			case 'down':
+				this.selectItem(parseInt(dom.dataGet(dom.$('.active', this.dom_), 'sequence'), 10) + 1 );
+				break;
+		}
+	};
 	/**
 	 * SmsCenter mini screens
 	 */
-	var Sms = new Mini({
+	var Sms = new TeleMini({
 		name: 'sms',
-		template: template5
+		template: template5,
+		panels: {
+			keys: ['arrows']
+		}
 	});
-	Sms.panelSetup = {
-		top: false,
-		bottom: true,
-		keys: ['arrows']
-	}
 	
 	/**
 	 * VoiceMail miniscreens
@@ -109,7 +144,16 @@ define([
 	var VoiceMail = new Mini({
 		name: 'voicemail',	
 		template: template6,
-		deps: '/cgi-bin/voip.cgi?run=vmmsgs_json_list'
+		deps: '/cgi-bin/voip.cgi?run=vmmsgs_json_list&newif=1'
+	});
+	VoiceMail.on('remote-key', function(key) {
+		switch (key) {
+			case 'return':
+				this.master.activateScreen(0);
+				break;
+			default: 
+				console.log('Received key', key)
+		}
 	});
 	VoiceMail.panelSetup = {
 		top: false,
@@ -119,7 +163,7 @@ define([
 	
 	var Tele = new App({
 		name: 'phone',
-		miniscreens: [ Chooser, CallCenter, CallHistory, PhoneBook, Sms, VoiceMail ]
+		miniscreens: [ Chooser, CallCenter, CallHistory, VoiceMail, Sms, PhoneBook ]
 //			{
 //				name: 'chooser',
 //				template: template3

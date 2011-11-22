@@ -37,7 +37,8 @@ define({
 			panels: {
 				bottom: {
 					ok: "Call now",
-					info: "Contact options"
+					info: "Contact options",
+					upDown: "Select"
 				}
 			},
 			list: {
