@@ -84,21 +84,21 @@ var __val__ = things.save
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div>');
 }
- if (things.delete)
+ if (things['delete'])
 {
 buf.push('<div');
 buf.push(attrs({ "class": ('remote-delete') }));
 buf.push('>');
-var __val__ = things.delete
+var __val__ = things['delete']
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div>');
 }
- if (things.return)
+ if (things['return'])
 {
 buf.push('<div');
 buf.push(attrs({ "class": ('remote-return') }));
 buf.push('>');
-var __val__ = things.return
+var __val__ = things['return']
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div>');
 }
