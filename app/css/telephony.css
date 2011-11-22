@@ -15,7 +15,7 @@
 
 
 /*@media all and (max-height: 500px) {*/
-	.callCenter {
+/*	.callCenter {
 		width: 600px;
 		height: 440px;
 	}
@@ -39,13 +39,13 @@
 	}
 	.callCenter .phoneKeyboard .phoneBtn .phoneImg {
 		height: 40px;
-	}
+	}  /*
 	
 /*	
 }
 */
 
-
+ /*
 .callCenter {
 	text-align: center;
 	padding: 20px;
@@ -115,7 +115,7 @@
 	border: 4px solid #f1720b;
 	background-color: #e8e8e8;
 }
-
+*/
 
 /*-----------------------  phone book  ------------------------*/
 
@@ -420,7 +420,7 @@
 }
 .sendSMS .sendSmsHolder {
 	background-color: #212121;
-	padding: 10px 10px;
+	padding: 30px 10px 0px;
 }
 .sendSMS .smsReceiver {
 	display: inline-block;
@@ -492,8 +492,8 @@
 
 .sendSMS .sendSmsHolder .message {
 	width: 80%;
-	margin: 20px 0 0 35px;
-	height: 220px;
+	margin: 20px 0 0 9%;
+	height: 172px;
 	background-color: black;
 	font-size: 120%;
 	padding: 4px;
@@ -504,7 +504,7 @@
 }
 .sendSMS .sendSmsHolder .sendBtn {
 	display: inline-block;
-	margin: 20px 30px 10px 170px;
+	margin: 20px 30px 10px 33%;
 	padding: 8px 20px;
 	background-color: #363636;
 	font-size: 120%;
@@ -630,4 +630,107 @@
 	z-index: 5;
 }
 
+.phone-keyboard{
+    display: block;
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+	width: 600px;
+	height: 440px;
 
+}
+/*------------------------------ !!! New Phone Keyboard --------------------------------------*/
+
+.phone-keyboard{
+    display: block;
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+	width: 600px;
+	height: 440px;
+
+}
+
+.phone-keyboard .phone-btn {
+	-moz-border-bottom-colors: #323232;
+	-moz-border-image: none;
+	-moz-border-left-colors: rgba(255,255,255,0.3);
+	-moz-border-right-colors: #323232;
+	-moz-border-top-colors: #c8c7cc;
+	
+	
+	border-bottom-color: #323232;
+	border-left-color: rgba(255,255,255,0.3);
+	border-right-color: #323232;
+	border-top-color: #c8c7cc; 
+	
+	background: -moz-linear-gradient(top, rgba(139,139,147,1) 0%, rgba(64,64,71,1) 49%, rgba(11,11,12,1) 50%, rgba(64,64,73,1) 96%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(139,139,147,1)), color-stop(49%,rgba(64,64,71,1)), color-stop(50%,rgba(11,11,12,1)), color-stop(96%,rgba(64,64,73,1))); /* Chrome,Safari4+ */
+	
+	border-radius: 1px 1px 1px 1px;
+	border-style: solid;
+	border-width: 1px;
+	color: #FFFFFF;
+	font-weight: bolder;
+	display: inline-block;
+	padding: 3% 6%;
+	/* margin: 0 -2px; */
+	text-align: center;
+	/* text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3); */
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	font-family: "MS Reference Sans Serif";
+	font-size: 244%;
+	width:5%;
+}
+
+.phone-keyboard .calls {
+	height: 39px;
+}
+.phone-keyboard .up {
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7a897a), color-stop(49%,#2f3d2f), color-stop(50%,#0f330f), color-stop(60%,#001400), color-stop(100%,#3c753c)); /* Chrome,Safari4+ */
+	height: 39px;
+}
+.phone-keyboard .down {
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8c7c7c), color-stop(49%,#3f3030), color-stop(50%,#33160f), color-stop(60%,#160000), color-stop(100%,#773D3D)); /* Chrome,Safari4+ */
+	height: 39px;
+}
+.phone-keyboard .focus{
+	background: -moz-linear-gradient(top, rgba(142,129,125,1) 0%, rgba(66,53,50,1) 49%, rgba(51,22,15,1) 50%, rgba(51,22,15,1) 60%, rgba(168,77,57,1) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8c7c70), color-stop(49%,#3f3730), color-stop(50%,#331f0f), color-stop(60%,#331f0f), color-stop(100%,#f28024)); 
+}
+.phone-keyboard .phoneBook{
+	height:39px;
+}
+
+.phone-keyboard .up .phone-image {
+	height: 27px;
+}
+
+.phone-keyboard .down .phone-image {
+	height: 27px;
+}
+.phone-keyboard .calls .phone-image {
+	height: 27px;
+	margin-left: -7px;
+}
+.phone-keyboard .phoneBook .phone-image {
+	height: 27px;
+}
+.phone-keyboard .row{
+	margin-top:0;
+	display:block;
+}
+
+
+.phone-keyboard .phoneDisplay {
+text-align: right;
+width: 70.5%;
+height: 30px;
+padding: 5px;
+margin-bottom:8px;
+margin-top:40px;
+display: inline-block;
+/* border-radius: 8px; */
+border: 2px solid #AFAFAF;
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(50%,rgba(243,243,243,1)), color-stop(51%,rgba(237,237,237,1)), color-stop(100%,rgba(255,255,255,1))); 
+}

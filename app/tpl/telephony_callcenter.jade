@@ -1,26 +1,26 @@
-div.tui-multiscreen.callCenter
+div.tui-multiscreen.phone-keyboard
 	input.phoneDisplay(type="tel", pattern="[0-9]", name="phoneNumber")
-	div.phoneKeyboard
-		div.row
-			div.phoneBtn!= "1"
-			div.phoneBtn!= "2"
-			div.phoneBtn!= "3"
-			div.phoneBtn
-				img.phoneImg(src="app/imgs/greenPhone.png")
-		div.row
-			div.phoneBtn!= "4"
-			div.phoneBtn!= "5"
-			div.phoneBtn!= "6"
-			div.phoneBtn
-				img.phoneImg(src="app/imgs/redPhone.png")
-		div.row
-			div.phoneBtn!= "7"
-			div.phoneBtn!= "8"
-			div.phoneBtn!= "9"
-			div.phoneBtn.addToPhone!= "Call<br>History"
-		div.row
-			div.phoneBtn!= "*"
-			div.phoneBtn!= "0"
-			div.phoneBtn!= "#"
-			div.phoneBtn
-				img.phoneDictionary(src="app/imgs/phoneBook.png")
+	div.row
+		div.phone-btn!= "1"
+		div.phone-btn!= "2"
+		div.phone-btn!= "3"
+		div.phone-btn.up
+			img.phone-image(src="app/imgs/phone.svg")
+	div.row
+		div.phone-btn!= "4"
+		div.phone-btn!= "5"
+		div.phone-btn!= "6"
+		div.phone-btn.down
+			img.phone-image(src="app/imgs/phone.svg")
+	div.row
+		div.phone-btn!= "7"
+		div.phone-btn!= "8"
+		div.phone-btn!= "9"
+		div.phone-btn.calls
+			img.phone-image(src="app/imgs/calls.svg")
+	div.row
+		div.phone-btn!= "*"
+		div.phone-btn!= "0"
+		div.phone-btn!= "#"
+		div.phone-btn.phoneBook
+			img.phone-image(src="app/imgs/phone-book.svg")
