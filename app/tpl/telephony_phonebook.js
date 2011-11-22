@@ -6,17 +6,7 @@ var interp;
 buf.push('<div');
 buf.push(attrs({ "class": ('tui-multiscreen') + ' ' + ('phonebookWrapper') }));
 buf.push('><div');
-buf.push(attrs({ "class": ('inputCont') }));
-buf.push('><span');
-buf.push(attrs({ "class": ('searchText') }));
-buf.push('>Press Left To activate the field</span><input');
-buf.push(attrs({ "class": ('searchInput') }));
-buf.push('/></div><div');
-buf.push(attrs({ "class": ('kbdButton') }));
-buf.push('><img');
-buf.push(attrs({ 'src':("app/imgs/kbdButton.png") }));
-buf.push('/></div><div');
-buf.push(attrs({ "class": ('phonebookItem') + ' ' + ('nobg') }));
+buf.push(attrs({ "class": ('phonebookHeader') }));
 buf.push('><div');
 buf.push(attrs({ "class": ('name') }));
 buf.push('>Name</div><div');
@@ -31,16 +21,16 @@ if (typeof things === 'object')
  for (var i = 0; i < things.length; i++ )
 {
 buf.push('<div');
-buf.push(attrs({ "class": ('phonebookItem') }));
+buf.push(attrs({ 'data-sequence':(i), "class": ('phonebookItem') }));
 buf.push('><div');
 buf.push(attrs({ "class": ('name') }));
 buf.push('>');
-var __val__ = things[i].callername
+var __val__ = things[i].name
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div><div');
 buf.push(attrs({ "class": ('general') }));
 buf.push('>');
-var __val__ = things[i].general
+var __val__ = things[i].phone
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div><div');
 buf.push(attrs({ "class": ('ip') }));
