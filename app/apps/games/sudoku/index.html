@@ -1,30 +1,394 @@
+<!doctype html>
 <html>
-	<head>
+  <head>
     <link rel="stylesheet" href="sudoku.css" type="text/css" media="screen" title="no title" charset="utf-8" />
-	<title>Sudoku</title>
-	</head>
-	<body>
-		<div class="sudoku" id="sudoku">
-				<div class="sudokuSection" id="sudokuSection0">
-				<div class="sudokuSquare" id="square_0_0" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">6</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_0_1"><span style="display: none; ">2</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_0_2"><span style="display: none; ">5</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_1_0" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">8</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_1_1" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">7</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_1_2"><span style="display: none; ">3</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_2_0"><span style="display: none; ">4</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_2_1"><span style="display: none; ">1</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_2_2" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">9</span><span style="color: rgb(0, 0, 0); display: none; "></span></div>		</div>
-				<div class="sudokuSection" id="sudokuSection1">
-				<div class="sudokuSquare" id="square_0_3"><span style="display: none; ">4</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_0_4" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">1</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_0_5" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">9</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_1_3"><span style="display: none; ">6</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_1_4" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">2</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_1_5"><span style="display: none; ">5</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_2_3"><span style="display: none; ">8</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_2_4"><span style="display: none; ">7</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_2_5" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">3</span><span style="color: rgb(0, 0, 0); display: none; "></span></div>		</div>
-				<div class="sudokuSection" id="sudokuSection2">
-				<div class="sudokuSquare" id="square_0_6"><span style="display: none; ">8</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_0_7"><span style="display: none; ">7</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_0_8" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">3</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_1_6"><span style="display: none; ">4</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_1_7" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">1</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_1_8"><span style="display: none; ">9</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_2_6"><span style="display: none; ">6</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_2_7" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">2</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_2_8" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">5</span><span style="color: rgb(0, 0, 0); display: none; "></span></div>		</div>
-				<div class="sudokuSection" id="sudokuSection3">
-				<div class="sudokuSquare" id="square_3_0" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">3</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_3_1" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">6</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_3_2"><span style="display: none; ">7</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_4_0"><span style="display: none; ">9</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_4_1" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">8</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_4_2"><span style="display: none; ">1</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_5_0" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">5</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_5_1"><span style="display: none; ">4</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_5_2"><span style="display: none; ">2</span><span style="color: rgb(0, 0, 0); "></span></div>		</div>
-				<div class="sudokuSection" id="sudokuSection4">
-				<div class="sudokuSquare" id="square_3_3" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">5</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_3_4"><span style="display: none; ">4</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_3_5" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">2</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_4_3"><span style="display: none; ">3</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_4_4" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">6</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_4_5"><span style="display: none; ">7</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_5_3"><span style="display: none; ">9</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_5_4"><span style="display: none; ">8</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_5_5" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">1</span><span style="color: rgb(0, 0, 0); display: none; "></span></div>		</div>
-				<div class="sudokuSection" id="sudokuSection5">
-				<div class="sudokuSquare" id="square_3_6" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">9</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_3_7"><span style="display: none; ">8</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_3_8"><span style="display: none; ">1</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_4_6" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">5</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_4_7" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">4</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_4_8"><span style="display: none; ">2</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_5_6" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">3</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_5_7"><span style="display: none; ">6</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_5_8"><span style="display: none; ">7</span><span style="color: rgb(0, 0, 0); "></span></div>		</div>
-				<div class="sudokuSection" id="sudokuSection6">
-				<div class="sudokuSquare" id="square_6_0"><span style="display: none; ">7</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_6_1"><span style="display: none; ">5</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_6_2"><span style="display: none; ">6</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_7_0"><span style="display: none; ">1</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_7_1" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">3</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_7_2" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">8</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_8_0" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">2</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_8_1" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">9</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_8_2"><span style="display: none; ">4</span><span style="color: rgb(0, 0, 0); "></span></div>		</div>
-				<div class="sudokuSection" id="sudokuSection7">
-				<div class="sudokuSquare" id="square_6_3"><span style="display: none; ">2</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_6_4" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">9</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_6_5"><span style="display: none; ">4</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_7_3"><span style="display: none; ">7</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_7_4" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">5</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_7_5" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">6</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_8_3" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">1</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_8_4"><span style="display: none; ">3</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_8_5"><span style="display: none; ">8</span><span style="color: rgb(0, 0, 0); "></span></div>		</div>
-				<div class="sudokuSection" id="sudokuSection8">
-				<div class="sudokuSquare" id="square_6_6" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">1</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_6_7"><span style="display: none; ">3</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_6_8" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">8</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_7_6"><span style="display: none; ">2</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_7_7"><span style="display: none; ">9</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_7_8"><span style="display: none; ">4</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_8_6" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">7</span><span style="color: rgb(0, 0, 0); display: none; "></span></div><div class="sudokuSquare" id="square_8_7"><span style="display: none; ">5</span><span style="color: rgb(0, 0, 0); "></span></div><div class="sudokuSquare" id="square_8_8" style="background-color: rgb(221, 221, 221); "><span style="color: rgb(49, 112, 130); ">6</span><span style="color: rgb(0, 0, 0); display: none; "></span></div>		</div>
-		</div>
-		<div id="hintDiv" style="left: 263px; top: 253px; display: none; "><div id="hintDivInner"></div></div>
-	</body>
+    <script src='sudoku.js'></script>
+    <title>Sudoku</title>
+  </head>
+  <body>
+    <div class="sudoku" id="sudoku">
+      <div class="sudokuSection" id="sudokuSection0">
+        <div class="sudokuSquare" id="square_0_0"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">6</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_0_1">
+          <span style="display: none;">2</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_0_2">
+          <span style="display: none;">5</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_1_0"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">8</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_1_1"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">7</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_1_2">
+          <span style="display: none;">3</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_2_0">
+          <span style="display: none;">4</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_2_1">
+          <span style="display: none;">1</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_2_2"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">9</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+      </div>
+      <div class="sudokuSection" id="sudokuSection1">
+        <div class="sudokuSquare" id="square_0_3">
+          <span style="display: none;">4</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_0_4"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">1</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_0_5"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">9</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_1_3">
+          <span style="display: none;">6</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_1_4"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">2</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_1_5">
+          <span style="display: none;">5</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_2_3">
+          <span style="display: none;">8</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_2_4">
+          <span style="display: none;">7</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_2_5"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">3</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+      </div>
+      <div class="sudokuSection" id="sudokuSection2">
+        <div class="sudokuSquare" id="square_0_6">
+          <span style="display: none;">8</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_0_7">
+          <span style="display: none;">7</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_0_8"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">3</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_1_6">
+          <span style="display: none;">4</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_1_7"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">1</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_1_8">
+          <span style="display: none;">9</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_2_6">
+          <span style="display: none;">6</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_2_7"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">2</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_2_8"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">5</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+      </div>
+      <div class="sudokuSection" id="sudokuSection3">
+        <div class="sudokuSquare" id="square_3_0"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">3</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_3_1"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">6</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_3_2">
+          <span style="display: none;">7</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_4_0">
+          <span style="display: none;">9</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_4_1"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">8</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_4_2">
+          <span style="display: none;">1</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_5_0"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">5</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_5_1">
+          <span style="display: none;">4</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_5_2">
+          <span style="display: none;">2</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+      </div>
+      <div class="sudokuSection" id="sudokuSection4">
+        <div class="sudokuSquare" id="square_3_3"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">5</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_3_4">
+          <span style="display: none;">4</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_3_5"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">2</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_4_3">
+          <span style="display: none;">3</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_4_4"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">6</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_4_5">
+          <span style="display: none;">7</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_5_3">
+          <span style="display: none;">9</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_5_4">
+          <span style="display: none;">8</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_5_5"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">1</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+      </div>
+      <div class="sudokuSection" id="sudokuSection5">
+        <div class="sudokuSquare" id="square_3_6"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">9</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_3_7">
+          <span style="display: none;">8</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_3_8">
+          <span style="display: none;">1</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_4_6"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">5</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_4_7"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">4</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_4_8">
+          <span style="display: none;">2</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_5_6"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">3</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_5_7">
+          <span style="display: none;">6</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_5_8">
+          <span style="display: none;">7</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+      </div>
+      <div class="sudokuSection" id="sudokuSection6">
+        <div class="sudokuSquare" id="square_6_0">
+          <span style="display: none;">7</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_6_1">
+          <span style="display: none;">5</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_6_2">
+          <span style="display: none;">6</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_7_0">
+          <span style="display: none;">1</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_7_1"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">3</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_7_2"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">8</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_8_0"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">2</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_8_1"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">9</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_8_2">
+          <span style="display: none;">4</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+      </div>
+      <div class="sudokuSection" id="sudokuSection7">
+        <div class="sudokuSquare" id="square_6_3">
+          <span style="display: none;">2</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_6_4"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">9</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_6_5">
+          <span style="display: none;">4</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_7_3">
+          <span style="display: none;">7</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_7_4"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">5</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_7_5"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">6</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_8_3"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">1</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_8_4">
+          <span style="display: none;">3</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_8_5">
+          <span style="display: none;">8</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+      </div>
+      <div class="sudokuSection" id="sudokuSection8">
+        <div class="sudokuSquare" id="square_6_6"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">1</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_6_7">
+          <span style="display: none;">3</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_6_8"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">8</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_7_6">
+          <span style="display: none;">2</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_7_7">
+          <span style="display: none;">9</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_7_8">
+          <span style="display: none;">4</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_8_6"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">7</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+        <div class="sudokuSquare" id="square_8_7">
+          <span style="display: none;">5</span>
+          <span style="color: rgb(0, 0, 0);"></span>
+        </div>
+        <div class="sudokuSquare" id="square_8_8"
+        style="background-color: rgb(221, 221, 221);">
+          <span style="color: rgb(49, 112, 130);">6</span>
+          <span style="color: rgb(0, 0, 0); display: none;"></span>
+        </div>
+      </div>
+    </div>
+    <div id="hintDiv"
+    style="left: 263px; top: 253px; display: none;">
+      <div id="hintDivInner"></div>
+    </div>
+  </body>
 </html>
-
