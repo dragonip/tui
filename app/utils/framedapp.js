@@ -3,8 +3,9 @@ define([
 	'utils/listingapp',
 	'dom/dom',
 	'utils/sizes',
-	'shims/bind'
-], function(inherit, ListApp, dom, sizes, bind){
+	'shims/bind',
+	'tpl/infobuttons'
+], function(inherit, ListApp, dom, sizes, bind, infobuttonstpl){
 	var GamesApp = function(options) {
 		ListApp.call(this, options);
 		this.gamelayer = dom.create('div', {
@@ -12,11 +13,9 @@ define([
 			style: sizes.getStyle(sizes.getSizesForGameLayer())
 		});
 		this.activeFrame = null;
-		this.appEvents['return'] = {
-			name: 'return',
-			func: bind(this.defaultRemoteKeyHandler, this),
-			attached: false
-		};
+		this.generateDefaultEvents(['one','two','three','four','five','six','seven','eight','nine', 'left', 'right', 'down', 'up', 'return', 'play'], bind(this.defaultRemoteKeyHandler, this));
+
+		this.on('show-complete', this.showInfoPanel);
 	};
 	inherit(GamesApp, ListApp);
 	GamesApp.prototype.onPlayRequest = function() {
@@ -24,6 +23,11 @@ define([
 		console.log(game);
 		this.startGame(game);
 		
+	};
+	GamesApp.prototype.showInfoPanel = function() {
+		tui.setPanels(false, true, undefined, infobuttonstpl.render({
+			things: this.hints.general
+		}));
 	};
 	GamesApp.prototype.defaultRemoteKeyHandler = function(key) {
 		if (this.activeFrame === null) {
@@ -36,6 +40,7 @@ define([
 					break;
 				default:
 					console.log('Transmit to game');
+					this.activeFrame.contentWindow.remoteEvent(key);
 			}
 		}
 	};
@@ -48,9 +53,14 @@ define([
 		});
 		dom.adopt(this.gamelayer, this.activeFrame);
 		dom.adopt(this.gamelayer);
+		if (this.hints[gameObj.publishName]) {
+			tui.setPanels(false, true, undefined, infobuttonstpl.render({
+				things: this.hints[gameObj.publishName]
+			}));
+		}
 	};
 	GamesApp.prototype.endGame = function() {
-		console.log('Hide the game now!')
+		tui.setPanels(false, false);
 		dom.dispose(this.gamelayer);
 		this.gamelayer.innerHTML = '';
 		this.activeFrame = null;

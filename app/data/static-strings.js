@@ -6,6 +6,23 @@ define({
 		bookmark: "Bookmark",
 		unbookmark: "Unbookmark"
 	},
+	games: {
+		panels: {
+			bottom: {
+				ok: "Start game",
+				'return': "End game"
+			}
+		},
+		hints: {
+			Sudoku: {
+				ok: "Check validity",
+				arrows: "Move around"
+			},
+			Tetris: {
+				arrows: 'Move'
+			}
+		}
+	},
 	screens: {
 		callcenter: {
 			panels: {
