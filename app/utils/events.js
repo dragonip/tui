@@ -11,7 +11,8 @@ define(['types/types', 'array/array', 'dmc/dmc', 'debug/console'], function(Mtyp
 		'left', 'right', 'up', 'down',
 		'chup', 'chdown',
 		'play', 'stop', 'ff', 'rw',
-		'power'
+		'power',
+		'delete'
 	],
 	pcli = logger.getInstance('events_tui');
 	var defHandler = function(useraction) {

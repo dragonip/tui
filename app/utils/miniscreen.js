@@ -24,7 +24,7 @@ define([
 		}, this));
 	};
 	inherit(Mini, Parent);
-	Mini.remoteKeys_ = ['left', 'right', 'up', 'down', 'ok', 'return'];
+	Mini.remoteKeys_ = ['left', 'right', 'up', 'down', 'ok', 'return', 'zero','one','two','three','four','five','six','seven','eight','nine', 'delete'];
 	Mini.prototype.render = function (renderIn) {
 		if (this.template_ !== null) {
 			this.dom_ = dom.getInnerNodes(this.template_.render({

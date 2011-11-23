@@ -77,15 +77,42 @@ define([
 	});
 	CallCenter.Dialler = new Dialler();
 	CallCenter.knownKeys_ = ['up', 'down', 'left', 'right'];
+	CallCenter.numberKeys_ =  ['zero','one','two','three','four','five','six','seven','eight','nine'];
 	CallCenter.keyHandler = function(key) {
+		var activeKey;
 		if (this.knownKeys_.indexOf(key)!== -1) {
 			if (this.Dialler.container === null ) {
 				this.Dialler.container = this.dom_;
 			}
 			this.Dialler.eventHandler(key);
+		} else if (key === 'ok') {
+			activeKey = this.Dialler.getActiveKey();
+			if (classes.hasClass(activeKey, 'digit')) {
+				this.Dialler.addCharacter(activeKey.textContent);
+			} else {
+				if (classes.hasClass(activeKey, 'back')) {
+					this.Dialler.deleteCharacter();
+				}
+			}
+		} else if (this.numberKeys_.indexOf(key)!== -1) {
+			this.Dialler.addCharacter(this.numberKeys_.indexOf(key));
+//			console.log('key is ', this.numberKeys_.indexOf(key));
+//			this.number_ = this.number_ + '' + this.numberKeys_.indexOf(key);
+//			this.updateNumber();
+		} else if (key === 'delete') {
+			this.Dialler.deleteCharacter();
 		}
 	};
+	CallCenter.updateNumber = function() {
+		this.numberField.innerHTML = this.number_;
+	}
 	CallCenter.on('activated', function() {
+		if (!this.Dialler.boundElement) {
+			this.Dialler.boundElement = dom.$('.phoneDisplay');
+		}
+		if (this.Dialler.container === null ) {
+			this.Dialler.container = this.dom_;
+		}
 		var activeKey = dom.$('.phone-btn.focus', this.dom_);
 		if (activeKey === null) {
 			classes.addClasses(dom.$('.phone-btn', this.dom_), 'focus');
