@@ -6,6 +6,17 @@ define({
 		bookmark: "Bookmark",
 		unbookmark: "Unbookmark"
 	},
+	epg: {
+		panels: {
+			bottom: {
+				upDown: "Move",
+				info: "Hide EPG",
+				ok: "Activate",
+				'return': "Deactivate",
+				ok_alternate: "Rec/Switch"
+			}
+		}
+	},
 	games: {
 		panels: {
 			bottom: {

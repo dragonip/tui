@@ -12,8 +12,9 @@ define([
 	'dom/classes',
 	'dom/dom',
 	'utils/scrollable',
-	'shims/bind'
- ], function (inherit, Togglable, events, datetime, sizes, template, dom, css, loader, infobuttonstpl, classes, dom, Scrollable, bind){
+	'shims/bind',
+	'data/static-strings'
+ ], function (inherit, Togglable, events, datetime, sizes, template, dom, css, loader, infobuttonstpl, classes, dom, Scrollable, bind, strings){
 	loader.loadCSSFromText(css);
 	var EPGModel = function(dataCollection, taint_list) {
 		Togglable.call(this);
@@ -28,6 +29,13 @@ define([
 				name: 'return',
 				func: bind(function(key) {
 					this.attachEvents(false);
+					tui.setPanels(false, true, false, infobuttonstpl.render({
+						things: {
+							upDown: strings.epg.panels.bottom.upDown,
+							info: strings.epg.panels.bottom.info,
+							ok: strings.epg.panels.bottom.ok
+						}
+					}));
 				},this),
 				attached: false
 			},
@@ -62,7 +70,15 @@ define([
 //		If no currently playing is found reset the selected item - this is when we load new channel
 		this.current = 0;
 	};
-	
+	EPGModel.prototype.enterListing = function(bool) {
+		tui.setPanels(false, true, false, infobuttonstpl.render({
+			things: {
+				upDown: strings.epg.panels.bottom.upDown,
+				ok: strings.epg.panels.bottom.ok_alternate,
+				'return': strings.epg.panels.bottom['return']
+			}
+		}));
+	}
 	EPGModel.prototype.selectItem = function(direction) {
 		var nextItem;
 		if (direction === 'up') {
@@ -122,8 +138,9 @@ define([
 	EPGModel.prototype.enterDom = function() {
 		tui.setPanels(false, true, false, infobuttonstpl.render({
 			things: {
-				arrows: "Move",
-				info: "Hide EPG"
+				upDown: strings.epg.panels.bottom.upDown,
+				info: strings.epg.panels.bottom.info,
+				ok: strings.epg.panels.bottom.ok
 			}
 		}));
 		tui.scaleContainer(true);

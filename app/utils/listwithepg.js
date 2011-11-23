@@ -25,6 +25,7 @@ define([
 			name: 'ok',
 			func: bind(function() {
 				if (this.epgInstance.isAttachedToDom()) {
+					this.epgInstance.enterListing(true);
 					this.epgInstance.attachEvents(true);
 				} else {
 					this.model.acceptEvent({
