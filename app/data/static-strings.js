@@ -23,6 +23,10 @@ define({
 			},
 			SizzleBox: {
 				arrows: 'Move tiles'
+			},
+			Hangman: {
+				arrows: "Select letter",
+				ok: "Use letter"
 			}
 		}
 	},

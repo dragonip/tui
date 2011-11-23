@@ -22,6 +22,10 @@ define([
 		},
 		SizzleBox: {
 			arrows: strings.games.hints.SizzleBox.arrows
+		},
+		Hangman: {
+			arrows: strings.games.hints.Hangman.arrows,
+			ok: strings.games.hints.Hangman.ok
 		}
 	};
 	return a;
