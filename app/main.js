@@ -98,7 +98,8 @@ require(['ui/throbber'], function(t) {
 			appRequested: false,
 			appModuleAdded: function(app) {
 				this.currentActiveApp = app;
-				app.Start();
+				if (!window.exportedSymbols['appselector'].getState())
+					app.Start();
 			},
 			systemConfirm: function(options) {
 				// TODO: make those confirm panels work

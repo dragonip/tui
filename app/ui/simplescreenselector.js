@@ -4,8 +4,9 @@
 */
 
 define(
-	[ 'tpl/appselector2','data/applist', 'dom/dom', 'dom/classes', 'utils/events', 'debug/console', 'utils/sizes'],
-function(tpl,applist, dom, classes, Mevents, logger, sizes) {
+	[ 'tpl/appselector2','data/applist', 'dom/dom', 'dom/classes', 'utils/events', 'debug/console', 'utils/sizes',
+	'env/exports'],
+function(tpl,applist, dom, classes, Mevents, logger, sizes, exports) {
 
 	var pcli = logger.getInstance('simpleselector'),
 		currenScreen, itemSize = 90, internalAppList = obj2array(applist), 
@@ -15,7 +16,7 @@ function(tpl,applist, dom, classes, Mevents, logger, sizes) {
 		}));
 	
 	DOM.style.height = sizes.pixelate(sizes.getSizesForWindow().height);
-
+	var SelectorState = false;
 	var fillers = dom.$$('.filler', DOM);
 	for (var i1 = 0; i1 < fillers.length; i1++ ) {
 		fillers[i1].style.height = padding;
@@ -44,6 +45,13 @@ function(tpl,applist, dom, classes, Mevents, logger, sizes) {
 			relocateTo(dom.dataGet(currenScreen, 'sequence'));
 		}
 	}
+	function getState() {
+		return SelectorState;
+	}
+	exports.exportSymbol('appselector', {
+		name: 'getState',
+		symbol: getState
+	});
 	function log(k) {
 		pcli.log(k.toUpperCase() + 'button activated for module AppSelector');
 	}
@@ -86,6 +94,7 @@ function(tpl,applist, dom, classes, Mevents, logger, sizes) {
 	function showAppSel() {
 			tui.setContainerVisibility(true);
 			tui.setPanels(false, false);
+			SelectorState = true;
 			Mevents.addHandlers(moduleEvent);
 			dom.adopt(document.body, DOM);
 			relocateTo(dom.dataGet(currenScreen, 'sequence'));
@@ -104,6 +113,7 @@ function(tpl,applist, dom, classes, Mevents, logger, sizes) {
 //	Hide the DOM from the screen, exposed in the context to allow calling from anywhere in the module
 	function hideDOM() {
 		Mevents.removeHandlers(moduleEvent);
+		SelectorState =  false
 		dom.dispose(DOM);
 	}
 //	Exports
