@@ -27,7 +27,7 @@ buf.push(null == __val__ ? "" : __val__);
 buf.push('</div><div');
 buf.push(attrs({ "class": ('phone-btn') + ' ' + ('up') + ' ' + ('del') }));
 buf.push('><img');
-buf.push(attrs({ 'src':("app/imgs/phone.svg"), "class": ('phone-image') }));
+buf.push(attrs({ 'src':("app/imgs/delete.svg"), "class": ('phone-image') }));
 buf.push('/></div></div><div');
 buf.push(attrs({ "class": ('row') }));
 buf.push('><div');
@@ -46,9 +46,9 @@ buf.push('>');
 var __val__ = "6"
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div><div');
-buf.push(attrs({ "class": ('phone-btn') + ' ' + ('down') }));
+buf.push(attrs({ "class": ('phone-btn') + ' ' + ('calls') }));
 buf.push('><img');
-buf.push(attrs({ 'src':("app/imgs/phone.svg"), "class": ('phone-image') }));
+buf.push(attrs({ 'src':("app/imgs/calls.svg"), "class": ('phone-image') }));
 buf.push('/></div></div><div');
 buf.push(attrs({ "class": ('row') }));
 buf.push('><div');
@@ -67,9 +67,9 @@ buf.push('>');
 var __val__ = "9"
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div><div');
-buf.push(attrs({ "class": ('phone-btn') + ' ' + ('calls') }));
+buf.push(attrs({ "class": ('phone-btn') + ' ' + ('phoneBook') }));
 buf.push('><img');
-buf.push(attrs({ 'src':("app/imgs/calls.svg"), "class": ('phone-image') }));
+buf.push(attrs({ 'src':("app/imgs/phone-book.svg"), "class": ('phone-image') }));
 buf.push('/></div></div><div');
 buf.push(attrs({ "class": ('row') }));
 buf.push('><div');
@@ -88,9 +88,9 @@ buf.push('>');
 var __val__ = "#"
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div><div');
-buf.push(attrs({ "class": ('phone-btn') + ' ' + ('phoneBook') }));
+buf.push(attrs({ "class": ('phone-btn') + ' ' + ('up') }));
 buf.push('><img');
-buf.push(attrs({ 'src':("app/imgs/phone-book.svg"), "class": ('phone-image') }));
+buf.push(attrs({ 'src':("app/imgs/phone.svg"), "class": ('phone-image') }));
 buf.push('/></div></div></div>');
 }
 return buf.join("");
