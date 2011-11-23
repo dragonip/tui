@@ -29,6 +29,7 @@ body {
 	* background-repeat: repeat, repeat, repeat, repeat;
 	* background-size:16px 16px;
 	*/
+/*	FIXME: Make the background gradient fit the screen rectangle*/
 	background-color: #000;
 	background-image: -moz-radial-gradient(center 0deg, ellipse cover , #444 15%, #000 100%);
 	/* old webkit */
@@ -99,6 +100,7 @@ body {
 	}
 }
 /*------------------- scroll styling --------------------*/
+/*FIXME: Make the scrolls look the same in chrome, firefox and device*/
 ::-webkit-scrollbar { 
 	width: 8px; 
 } 
