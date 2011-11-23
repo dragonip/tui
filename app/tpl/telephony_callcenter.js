@@ -25,7 +25,7 @@ buf.push('>');
 var __val__ = "3"
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div><div');
-buf.push(attrs({ "class": ('phone-btn') + ' ' + ('up') + ' ' + ('back') }));
+buf.push(attrs({ "class": ('phone-btn') + ' ' + ('up') + ' ' + ('del') }));
 buf.push('><img');
 buf.push(attrs({ 'src':("app/imgs/phone.svg"), "class": ('phone-image') }));
 buf.push('/></div></div><div');

@@ -630,15 +630,6 @@
 	z-index: 5;
 }
 
-.phone-keyboard{
-    display: block;
-    text-align: center;
-    width: 100%;
-    padding: 20px;
-	width: 600px;
-	height: 440px;
-
-}
 /*------------------------------ !!! New Phone Keyboard --------------------------------------*/
 
 .phone-keyboard{
@@ -690,8 +681,7 @@
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7a897a), color-stop(49%,#2f3d2f), color-stop(50%,#0f330f), color-stop(60%,#001400), color-stop(100%,#3c753c)); /* Chrome,Safari4+ */
 	height: 39px;
 }
-.phone-keyboard .down {
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8c7c7c), color-stop(49%,#3f3030), color-stop(50%,#33160f), color-stop(60%,#160000), color-stop(100%,#773D3D)); /* Chrome,Safari4+ */
+.phone-keyboard .del {
 	height: 39px;
 }
 .phone-keyboard .focus{
@@ -706,8 +696,9 @@
 	height: 27px;
 }
 
-.phone-keyboard .down .phone-image {
+.phone-keyboard .del .phone-image {
 	height: 27px;
+	margin-left: -5px;
 }
 .phone-keyboard .calls .phone-image {
 	height: 27px;
