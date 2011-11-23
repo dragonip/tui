@@ -90,7 +90,7 @@ define([
 			if (classes.hasClass(activeKey, 'digit')) {
 				this.Dialler.addCharacter(activeKey.textContent);
 			} else {
-				if (classes.hasClass(activeKey, 'back')) {
+				if (classes.hasClass(activeKey, 'del')) {
 					this.Dialler.deleteCharacter();
 				}
 			}
