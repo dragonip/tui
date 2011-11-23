@@ -19,8 +19,8 @@ define([
 	TeleMini.prototype.useBottomPanel = true;
 	TeleMini.prototype.setupPanels = function(opts) {
 		this.panelSetup = {
-			top: opts.top || this.useTopPanel,
-			bottom: opts.bottom || this.useBottomPanel,
+			top: (typeof opts.top === 'boolean') ? opts.top : this.useTopPanel,
+			bottom: (typeof opts.bottom === 'boolean') ? opts.bottom : this.useBottomPanel,
 			topContent: opts.topContent,
 			keys: opts.keys || []
 		}

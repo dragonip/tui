@@ -118,11 +118,15 @@ define([
 		toActivate = dom.$('li', row);
 		this.setActiveKey(toActivate);
 	};
+	KBD.prototype.activeItemClass = 'activekey'
+	KBD.prototype.activeItemSelector = '.';
+	KBD.prototype.activeItemSelectorHelper = 'li';
+	KBD.prototype.rowSelector = 'ul.kbdrow';
 	/**
 	* Returns the current active key from the virtual kbd
 	*/
 	KBD.prototype.getActiveKey = function() {
-		return dom.$('li.activekey', this.container);	
+		return dom.$(this.activeItemSelectorHelper + this.activeItemSelector + this.activeItemClass, this.container);	
 	};
 	/**
 	* Sets the active key to one key on the kbd, disabling the current active key if there is one
@@ -131,9 +135,9 @@ define([
 	KBD.prototype.setActiveKey = function(key, oldKey) {
 		var old = oldKey || this.getActiveKey();
 		if (old !== null ) {
-			classes.removeClasses(old, 'activekey');
+			classes.removeClasses(old, this.activeItemClass);
 		}
-		classes.addClasses(key, 'activekey');
+		classes.addClasses(key, this.activeItemClass);
 	};
 	/**
 	* Function that handles the value of the key that is selected when the "OK" button is pressed on the remote
@@ -210,7 +214,7 @@ define([
 		if (key === 'ok') {
 			this.keyPress(active_li.childNodes[0].nodeValue);
 		} else {
-			tmp = dom.$$('ul.kbdrow', this.container );
+			tmp = dom.$$(this.rowSelector, this.container );
 			for ( i = 0 ; i < tmp.length; i++){
 				if (active_li.parentNode === tmp[i]){
 					row_number = i;
@@ -259,7 +263,7 @@ define([
 							destination_row = tmp[row_number + 1];
 						}
 					}
-					t1 = dom.$$('li', destination_row);	
+					t1 = dom.$$(this.activeItemSelectorHelper, destination_row);	
 					if (position_in_row > t1.length-1) {
 						new_active = t1[t1.length-1];
 					}

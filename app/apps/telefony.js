@@ -12,8 +12,9 @@ define([
 	'dom/dom',
 	'dom/classes',
 	'utils/telescreen',
-	'utils/scrollable'
-], function(App, template1, template2, template3, template4, template5, template6, css, loader, Mini, dom, classes, TeleMini, Scrollable) {
+	'utils/scrollable',
+	'utils/dialler'
+], function(App, template1, template2, template3, template4, template5, template6, css, loader, Mini, dom, classes, TeleMini, Scrollable, Dialler) {
 	loader.loadCSSFromText(css);
 	/**
 	* Mini screen chooser
@@ -69,8 +70,27 @@ define([
 	var CallCenter = new TeleMini({
 		name: 'callcenter',
 		template: template1,
-		panels: {}
+		panels: {
+			top: false, 
+			bottom: false
+		}
 	});
+	CallCenter.Dialler = new Dialler();
+	CallCenter.knownKeys_ = ['up', 'down', 'left', 'right'];
+	CallCenter.keyHandler = function(key) {
+		if (this.knownKeys_.indexOf(key)!== -1) {
+			if (this.Dialler.container === null ) {
+				this.Dialler.container = this.dom_;
+			}
+			this.Dialler.eventHandler(key);
+		}
+	};
+	CallCenter.on('activated', function() {
+		var activeKey = dom.$('.phone-btn.focus', this.dom_);
+		if (activeKey === null) {
+			classes.addClasses(dom.$('.phone-btn', this.dom_), 'focus');
+		}
+	})
 	
 	/**
 	 * Call history mini screen
