@@ -1,0 +1,95 @@
+/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+ 
+/* Authors: Peter StJ, Kaloyan Stoilkov
+ * contacts: pjanakiev@sysmaster.com
+ * contacts: kms@novo.bg
+ * for Sysmaster Corp Free software initiative
+ */
+
+body {
+    background-color: #00FFFF;
+    background-image: url('imgs/gally_bg.gif');
+}
+table.main {
+    border: 0;
+    width: 100%;
+}
+.mainDiv {
+	width: 640px;
+	height: 480px;
+	margin: 0 auto 0 auto;
+	position: relative;
+}
+.textInputTable {
+	background-image:url('imgs/cloud.gif'); 
+	background-repeat: no-repeat; 
+	background-position: center top;
+	width:192px;
+	height:148px;
+}
+.txt_input {
+	background-color: transparent;
+	border: 0;
+	font-weight: bold;
+	font-size: 1.3em;
+	color: #345c89;
+}
+#letters input {
+	border: 0;
+	background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0.36, rgb(163,163,163)),
+    color-stop(0.76, rgb(209,209,209))
+);
+background-image: -moz-linear-gradient(
+    center bottom,
+    rgb(163,163,163) 36%,
+    rgb(209,209,209) 76%
+);	
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	width: 25px;
+	height: 18px;
+	color: white;
+	font-size: 12px;
+	font-weight: bold;
+	padding-bottom: 2px;
+}
+#letters input.active {color: black;
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.37, rgb(245,157,5)),
+		color-stop(0.69, rgb(255,196,107))
+	);
+	background-image: -moz-linear-gradient(
+		center bottom,
+		rgb(245,157,5) 37%,
+		rgb(255,196,107) 69%
+	);
+}
+.blocking_message {
+	background-color: SandyBrown;
+	padding: 20px;
+	width: 250px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	position: absolute;
+	top: 150px;
+	width: 250px;
+	border:1px white solid;	
+	left: 180px;
+}
+
