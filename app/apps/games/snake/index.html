@@ -1,0 +1,35 @@
+<html>
+<head>
+	<title>jQuery Snake</title>
+	<link rel="stylesheet" href="css/jq.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+	<link rel="stylesheet" href="css/tabs.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+	<link rel="stylesheet" href="css/snake.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js'></script>
+</head>
+<body>
+	<div id="main">
+		<div id="overview" class="tabContent">		
+		
+			<div id="snake-col-map">			
+				<div id="map1">
+					<span id="map-msg">
+						<!-- click to give focus to the document -->
+						<a href="#start" id="start-game">Start</a>
+					</span>
+				</div>
+				<div id="stats">
+					<span class="right">Eaten: 
+						<span id="stats-eaten">0</span> /
+						<span id="stats-totcherries">0</span>
+					</span>
+					Level: <span id="stats-level">0</span> | 
+					Lives: <span id="stats-lives">0</span> |
+					Score: <span id="stats-score">0</span>
+				</div>	
+			</div>
+		</div>
+	</div> 
+	<script src='js/jquery.snake.js'></script>
+	<script src='js/snake.js'></script>
+</body>
+</html>

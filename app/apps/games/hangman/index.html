@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <title>Hangman game</title>
+        <!-- include our loader -->
+        <link rel="stylesheet" href="hangman.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+        <script src='wordlist.js'></script>
+<!--        <script src='../../Lib/loader.js'></script>-->
+    </head>
+    
+    <body>
+    <!--  Use the original game body -->
+    <form name="Options">
+    <div class="mainDiv">
+    <BR>
+    <table class='main' cellpadding=0 cellspacing=0>
+    <tr>
+      <td align=left valign=top>
+        <table noborder class="textInputTable" cellpadding=0 cellspacing=0>
+        <tr><td align=center valign=middle><input type=button value="_ _ _ _ _ _ _ _ _" class="txt_input" name="TWord"></td></tr>
+        </table>
+      </td>
+      <td align=center rowspan=2>
+        <table noborder cellpadding=0 cellspacing=0>
+        <tr><td>&nbsp;<BR><img src="imgs/hangman0.gif" border=0></td></tr>
+        </table>
+      </td>
+      <td align=right>
+        <table noborder width=168 height=168 cellpadding=0 cellspacing=0>
+        <tr><td><img src="imgs/sun.gif" border=0></td></tr>
+        </table>
+      </td>
+    </tr>
+    <tr><td align=left>
+        <table class="klaviatura" noborder width=192 cellpadding=0 cellspacing=0>
+    <tr><td align=center valign=top><table id='letters' cellpadding=0 cellspacing=4><tr><td><input 
+    type="button" name="A" value="A" onClick="Click('A')" width=20 style="width:20"></td><td><input 
+    type="button" name="B" value="B" onClick="Click('B')" width=20 style="width:20"></td><td><input 
+    type="button" name="C" value="C" onClick="Click('C')" width=20 style="width:20"></td><td><input 
+    type="button" name="D" value="D" onClick="Click('D')" width=20 style="width:20"></td><td><input 
+    type="button" name="E" value="E" onClick="Click('E')" width=20 style="width:20"></td><td><input 
+    type="button" name="F" value="F" onClick="Click('F')" width=20 style="width:20"></td><td><input 
+    type="button" name="G" value="G" onClick="Click('G')" width=20 style="width:20"></td></tr><tr><td><input 
+    type="button" name="H" value="H" onClick="Click('H')" width=20 style="width:20"></td><td><input 
+    type="button" name="I" value="I" onClick="Click('I')" width=20 style="width:20"></td><td><input 
+    type="button" name="J" value="J" onClick="Click('J')" width=20 style="width:20"></td><td><input 
+    type="button" name="K" value="K" onClick="Click('K')" width=20 style="width:20"></td><td><input 
+    type="button" name="L" value="L" onClick="Click('L')" width=20 style="width:20"></td><td><input 
+    type="button" name="M" value="M" onClick="Click('M')" width=20 style="width:20"></td><td><input 
+    type="button" name="N" value="N" onClick="Click('N')" width=20 style="width:20"></td></tr><tr><td><input 
+    type="button" name="O" value="O" onClick="Click('O')" width=20 style="width:20"></td><td><input 
+    type="button" name="P" value="P" onClick="Click('P')" width=20 style="width:20"></td><td><input 
+    type="button" name="Q" value="Q" onClick="Click('Q')" width=20 style="width:20"></td><td><input 
+    type="button" name="R" value="R" onClick="Click('R')" width=20 style="width:20"></td><td><input 
+    type="button" name="S" value="S" onClick="Click('S')" width=20 style="width:20"></td><td><input 
+    type="button" name="T" value="T" onClick="Click('T')" width=20 style="width:20"></td><td><input 
+    type="button" name="U" value="U" onClick="Click('U')" width=20 style="width:20"></td></tr><tr><td><input 
+    type="button" name="V" value="V" onClick="Click('V')" width=20 style="width:20"></td><td><input 
+    type="button" name="W" value="W" onClick="Click('W')" width=20 style="width:20"></td><td><input 
+    type="button" name="X" value="X" onClick="Click('X')" width=20 style="width:20"></td><td><input 
+    type="button" name="Y" value="Y" onClick="Click('Y')" width=20 style="width:20"></td><td><input 
+    type="button" name="Z" value="Z" onClick="Click('Z')" width=20 style="width:20"></td><td colspan=2><input 
+    type="button" value="NEW" onclick="Init()" width=48 style="width:48"></td></tr></table>
+    </td></tr></table></td><td align=right><img src="imgs/gally_20.gif"><img src="imgs/gally_21.gif"><img src="imgs/gally_30.gif"><img src="imgs/gally_11.gif"></td></tr>
+    </table>
+    </div>
+    </form>
+            <script src='traversal.js'></script>
+    </body>
+</html>
