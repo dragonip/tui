@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* reset css*/
 
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
@@ -46,6 +45,7 @@ html.m55 #maincontainer.scaled {
 	overflow-y: scroll;
 	overflow-x: hidden;
 }
+/*FIXME: make games fit the screen for m55*/
 .game-layer {
 	position: absolute;
 	top: 20px;

@@ -6,6 +6,7 @@ define([
 	'shims/bind',
 	'data/static-strings'
 ], function(App, YTData, ytpartial, dom, bind, strings){
+//	TODO: add rating to videos
 	var YouTube = new App({
 		name: 'youtube',
 		datamodel: YTData,
