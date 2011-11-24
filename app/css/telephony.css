@@ -718,10 +718,12 @@ color: black;
 text-align: right;
 width: 70.5%;
 height: 30px;
-padding: 5px;
+padding: 0px 9px 24px 9px;
 margin-bottom:8px;
 margin-top:40px;
 display: inline-block;
+line-height: 2;
+font-size: 30px;
 /* border-radius: 8px; */
 border: 2px solid #AFAFAF;
 background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(50%,rgba(243,243,243,1)), color-stop(51%,rgba(237,237,237,1)), color-stop(100%,rgba(255,255,255,1))); 
