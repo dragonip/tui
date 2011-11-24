@@ -35,10 +35,10 @@ define([
 		}
 		dom.adopt(renderIn, this.dom_);
 	};
-	Mini.prototype.attachEvents = function(bool) {
+	Mini.prototype.attachEvents = function(bool, options) {
 		VisualApp.prototype.attachEvents.call(this, bool);
 		if (bool) {
-			this.fire('activated');
+			this.fire('activated', options);
 			if (this.panelSetup) {
 				var things = {};
 				for ( var i = 0; i <this.panelSetup.keys.length; i++) {

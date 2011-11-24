@@ -138,12 +138,12 @@ define([
 			}
 		}
 	};
-	App.prototype.activateScreen = function(index) {
+	App.prototype.activateScreen = function(index, intentOptions) {
 		if (typeof index === 'number') {
 			this.screens[this.currentScreenIndex].attachEvents(false);
 			this.currentScreenIndex = index;
 			this.innerContainer.scrollTop = 480 * this.currentScreenIndex;
-			this.screens[this.currentScreenIndex].attachEvents(true);
+			this.screens[this.currentScreenIndex].attachEvents(true, intentOptions);
 		}
 	};
 	App.prototype.disposeInternal =  function() {
