@@ -367,6 +367,8 @@ define([
 	KBD.getInstance = function() {
 		if (KBD.instance_ === null)  {
 			KBD.instance_ = new KBD();
+			KBD.instance_.addCustomLayout('bg_bg');
+			KBD.instance_.addCustomLayout('il_il');
 		}
 		return KBD.instance_;
 	};
