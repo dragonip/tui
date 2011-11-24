@@ -25,6 +25,12 @@ define([
 		this.startGame(game);
 		
 	};
+	GamesApp.prototype.onStopRequested = function() {
+		if (this.activeFrame !== null) {
+			this.endGame();
+		}
+		GamesApp.superClass_.onStopRequested.call(this);
+	};
 	GamesApp.prototype.showInfoPanel = function() {
 		tui.setPanels(false, true, undefined, infobuttonstpl.render({
 			things: this.hints.general
@@ -49,7 +55,6 @@ define([
 		DMCEvents.initEvents();
 	};
 	GamesApp.prototype.startGame = function(gameObj) {
-		console.log(window.location)
 		dom.empty(this.gamelayer);
 		this.activeFrame =  dom.create('iframe', {
 			style: sizes.getStyle(sizes.getSizesForGameLayer())
