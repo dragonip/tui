@@ -11,7 +11,7 @@
  * contacts: pjanakiev@sysmaster.com, kms@novo.bg
  * for Sysmaster Corp Free software initiative
  */
-/*FIXME: make the game fit!*/
+/*FIXME: make the game fit!    ----->  DONE  <----- */
 
 body{
 		font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
@@ -71,13 +71,13 @@ body{
 	}
 	.sudoku{
 		width:456px;
-		height:456px;
+		height:411px;
 		border:2px solid gray;
 		
 	}
 	.sudokuSquare,.sudokuSquareHighlighted{
 		width:46px;
-		height:46px;
+		height:42px;
 		float:left;
 		border:1px solid #000000;
 		padding:1px;
@@ -90,14 +90,14 @@ body{
 	.sudokuSquareHighlighted{
 		border:2px solid red;
 		width:46px;
-		height:46px;		
+		height:42px;		
 		padding:0px;
 		background-color:#ffce99;
 	}
 	
 	.sudokuSection{
 		width:150px;
-		height:150px;
+		height:134px;
 		border:1px solid #000000;
 		float:left;
 	}

@@ -1,4 +1,4 @@
-/*FIXME: make bottoms croll dissapear*/
+/*FIXME: make bottoms croll dissapear    ----->  DONE  <----- */
 .weatherWrapper::-webkit-scrollbar-thumb {
 	background: none;
 }
@@ -11,7 +11,7 @@
 .weatherScreen {
 	padding: 50px 0 20px 20px;
 	color: white;
-	width: 625px;
+	width: 620px;
 	overflow-x: auto;
 	overflow-y: hidden;
 }
@@ -35,7 +35,8 @@
 	border-radius: 8px;
 	display: inline-block;
 	margin-top: 18px;
-	margin-right: 20px;
+	margin-right: 9px;
+	margin-left: 2px;
 	float: left;
 	box-shadow: inset 0px 0px 5px #545454;
 	-webkit-box-shadow: inset 0px 0px 5px #545454;
