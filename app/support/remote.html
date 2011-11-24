@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+    <title>Remote control</title>
+</head>
+<body bgcolor="black">
+<img id="navigation_helper" src="navigation.jpg" style="position:absolute;top:0;left:0;border:0" usemap="#navigationMap" />
+<script>
+route = function(key) {
+    if(opener){
+        opener.transportReceiver(JSON.stringify({ 
+            "header": { 
+            "type": "event", 
+            "tag": "0000000000", 
+            "method": "remote", 
+            "tstamp": 1322144158.278165   
+            }, 
+            "event": { 
+                "key": key 
+            }    
+        }));	
+    }
+    else{
+        window.close();
+    }
+}
+</script>
+<map id="navigationMap" name="navigationMap">
+  <area shape="rect" coords="36,38,78,65" href="javascript:route('switch')">
+  <area shape="rect" coords="163,38,204,62" href="javascript:route('mute')">
+  <area shape="rect" coords="36,79,74,105" href="javascript:route('one')">
+  <area shape="rect" coords="98,79,143,105" href="javascript:route('two')">
+  <area shape="rect" coords="166,79,207,104" href="javascript:route('three')">
+  <area shape="rect" coords="35,120,75,140" href="javascript:route('four')">
+  <area shape="rect" coords="98,121,143,139" href="javascript:route('five')">
+  <area shape="rect" coords="166,120,207,139" href="javascript:route('six')">
+  <area shape="rect" coords="35,156,73,177" href="javascript:route('seven')">
+  <area shape="rect" coords="98,155,143,177" href="javascript:route('eight')">
+  <area shape="rect" coords="167,155,207,175" href="javascript:route('nine')">
+  <area shape="rect" coords="36,193,74,216" href="javascript:route('star')">
+  <area shape="rect" coords="98,191,144,216" href="javascript:route('zero')">
+  <area shape="rect" coords="167,191,207,215" href="javascript:route('pound')">
+  <area shape="rect" coords="41,241,75,273" href="javascript:route('display')">
+  <area shape="rect" coords="167,240,201,273" href="javascript:route('home')">
+  <area shape="rect" coords="41,335,76,367" href="javascript:route('setup')">
+  <area shape="rect" coords="167,334,201,366" href="javascript:route('return')">
+  <area shape="circle" coords="121,302,17" href="javascript:route('ok')">
+  <area shape="poly" coords="161,272,193,301,162,332,150,313,149,290,160,272" href="javascript:route('right')">
+  <area shape="poly" coords="49,300,78,274,93,292,93,316,79,335,49,301" href="javascript:route('left')">
+  <area shape="poly" coords="92,343,109,332,131,332,149,343,120,374" href="javascript:route('down')">
+  <area shape="poly" coords="89,263,120,233,152,264,132,277,107,277" href="javascript:route('up')">
+  <area shape="rect" coords="49,395,88,414" href="javascript:route('phone')">
+  <area shape="rect" coords="104,394,140,415" href="javascript:route('camera')">
+  <area shape="rect" coords="156,393,195,414" href="javascript:route('pgup')">
+  <area shape="rect" coords="156,425,195,444" href="javascript:route('pgdown')">
+  <area shape="rect" coords="103,425,141,443" href="javascript:route('del')">
+  <area shape="rect" coords="49,424,88,444" href="javascript:route('save')">
+  <area shape="rect" coords="49,453,88,474" href="javascript:route('video')">
+  <area shape="rect" coords="104,453,142,473" href="javascript:route('epg')">
+  <area shape="rect" coords="157,453,194,473" href="javascript:route('recall')">
+  <area shape="rect" coords="49,482,87,504" href="javascript:route('stop')">
+  <area shape="rect" coords="104,483,142,503" href="javascript:route('play')">
+  <area shape="rect" coords="156,483,194,503" href="javascript:route('pause')">
+  <area shape="rect" coords="71,516,109,536" href="javascript:route('rw')">
+  <area shape="rect" coords="136,515,175,535" href="javascript:route('ff')">
+</map>
+</body>
+</html>
