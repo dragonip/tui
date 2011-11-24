@@ -13,8 +13,9 @@ define([
 	'dom/classes',
 	'utils/telescreen',
 	'utils/scrollable',
-	'utils/dialler'
-], function(App, template1, template2, template3, template4, template5, template6, css, loader, Mini, dom, classes, TeleMini, Scrollable, Dialler) {
+	'utils/dialler',
+	'shims/bind'
+], function(App, template1, template2, template3, template4, template5, template6, css, loader, Mini, dom, classes, TeleMini, Scrollable, Dialler, bind) {
 	loader.loadCSSFromText(css);
 	/**
 	* Mini screen chooser
@@ -92,13 +93,17 @@ define([
 			} else {
 				if (classes.hasClass(activeKey, 'del')) {
 					this.Dialler.deleteCharacter();
+				} else if ( classes.hasClass(activeKey, 'phoneBook')) {
+					this.master.activateScreen(5);
+				} else if (classes.hasClass(activeKey, 'calls')) {
+					this.master.activateScreen(2);
+				} else if (classes.hasClass(activeKey, 'up')) {
+//					TODO: Start a call, probably with menu
+					console.log('Initiate call');
 				}
 			}
 		} else if (this.numberKeys_.indexOf(key)!== -1) {
 			this.Dialler.addCharacter(this.numberKeys_.indexOf(key));
-//			console.log('key is ', this.numberKeys_.indexOf(key));
-//			this.number_ = this.number_ + '' + this.numberKeys_.indexOf(key);
-//			this.updateNumber();
 		} else if (key === 'delete') {
 			this.Dialler.deleteCharacter();
 		}
@@ -149,10 +154,12 @@ define([
 	});	
 	PhoneBook.Scrollable = new Scrollable('.phoneBookResults', '.phonebookItem.active');
 	PhoneBook.registerDisposable(this.Scrollable);
-	PhoneBook.on('activated', function() {
-		console.log('Screen PB activats')
+	PhoneBook.on('activated', function(intent) {
 		this.selectItem(0);
 		this.Scrollable.scroll();
+		if (intent) {
+			this.intent = intent;
+		}
 	});
 	PhoneBook.selectItem = function(index) {
 		if (index >= this.master.getData(this.name).length || index < 0 ) return;
@@ -172,6 +179,15 @@ define([
 			case 'down':
 				this.selectItem(parseInt(dom.dataGet(dom.$('.active', this.dom_), 'sequence'), 10) + 1 );
 				break;
+			case 'ok':
+				var record = this.master.getData(this.name)[parseInt(dom.dataGet(dom.$('.active', this.dom_), 'sequence'), 10)]
+				if (typeof this.intent == 'function') {
+					var cb = this.intent;
+					delete this.intent;
+					cb(record);
+				} else {
+					console.log('Show menu', record);
+				}
 		}
 	};
 	/**
@@ -185,8 +201,85 @@ define([
 		}
 	});
 	Sms.on('activated', function() {
-		if (this.elements ) {}
+		if ( !this.elements ) {
+			this.elements = {
+				to: dom.$('.receiver', this.dom_),
+				message: dom.$('.message', this.dom_),
+				clear: dom.$('.clearBtn', this.dom_),
+				send: dom.$('.sendBtn', this.dom_),
+				toPhoneBook: dom.$('.phoneBook', this.dom_)
+			};
+			this.elements.tabOrder = ['to', 'toPhoneBook', 'message', 'send', 'clear'];
+			classes.addClasses(this.elements.to, 'focus');
+			this.elements.focusedComponent = 0;
+			this.elements.recepient = {
+				number: '',
+				name: ''
+			};
+		}
 	});
+	Sms.knownKeys_ = ['up', 'down', 'left', 'right'];
+	Sms.numberKeys_ =  ['zero','one','two','three','four','five','six','seven','eight','nine'];
+	Sms.updateNumber = function() {
+		this.elements.to.innerHTML = ( this.elements.recepient.name !== '' ) ?
+			this.elements.recepient.name :
+			this.elements.recepient.number;
+	}
+	Sms.keyHandler = function(key) {
+		if (this.numberKeys_.indexOf(key) !==-1) {
+			this.elements.recepient.number = this.elements.recepient.number + this.numberKeys_.indexOf(key);
+			this.updateNumber();
+		} else if (key === 'delete') {
+			this.elements.recepient.number = this.elements.recepient.number.substr(0,this.elements.recepient.number.length-1);
+			this.updateNumber();
+		} else if ( this.knownKeys_.indexOf(key)!==-1) {
+			this.changeFocus(key);
+		} else if (key === 'ok') {
+			switch (this.elements.tabOrder[this.elements.focusedComponent]) {
+				case 'to':
+				case 'toPhoneBook':
+					this.master.activateScreen(5, bind(function(record) {
+						this.master.activateScreen(4);
+						this.elements.recepient.name = record.name;
+						this.elements.recepient.number = record.phone;
+						this.updateNumber();
+					}, this));
+					break;
+				case 'message':
+//					TODO: start composing message when message is active on OK press
+					break;
+				case 'send':
+//					TODO: Send the message as SMS
+					console.log('Send the meessage');
+					break;
+				case 'clear':
+//					TODO: Clear the message
+					console.log('Clear messaeg');
+					break;
+			}
+		}
+	};
+	Sms.changeFocus = function(key) {
+		switch (key) {
+			case 'right':
+			case 'down':
+				if (this.elements.focusedComponent >= this.elements.tabOrder.length -1 ) {
+					return;
+				}
+				classes.removeClasses(this.elements[this.elements.tabOrder[this.elements.focusedComponent]], 'focus');
+				this.elements.focusedComponent++;
+				classes.addClasses(this.elements[this.elements.tabOrder[this.elements.focusedComponent]], 'focus');
+				break;
+			case 'left':
+			case 'up':
+				if (this.elements.focusedComponent <= 0 ) {
+					return;
+				}
+				classes.removeClasses(this.elements[this.elements.tabOrder[this.elements.focusedComponent]], 'focus');
+				this.elements.focusedComponent--;
+				classes.addClasses(this.elements[this.elements.tabOrder[this.elements.focusedComponent]], 'focus');
+		}
+	};
 	
 	/**
 	 * VoiceMail miniscreens
@@ -214,31 +307,6 @@ define([
 	var Tele = new App({
 		name: 'phone',
 		miniscreens: [ Chooser, CallCenter, CallHistory, VoiceMail, Sms, PhoneBook ]
-//			{
-//				name: 'chooser',
-//				template: template3
-//			},
-//			{	
-//				name: 'callcenter',
-//				template: template1
-//			},
-//			{
-//				name: 'callhistory',
-//				template: template2
-//			},
-//			{
-//				name: 'phonebook',
-//				template: template4
-//			},
-//			{
-//				name: 'sms',
-//				template: template5
-//			},
-//			{
-//				name: 'voicemail',
-//				template: template6
-//			}
-//		]
 	});
 	return Tele;
 });
