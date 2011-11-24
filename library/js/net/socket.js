@@ -1,4 +1,4 @@
-define(function() {
+define(['json/json'], function(json) {
 	/**
 	 * Wraps the socket interface to abstract FF and chrome, also sets the listeners for socket events
 	 * @constructor
@@ -7,9 +7,10 @@ define(function() {
 	 * @param {!Function} onMessage The function that will accept the 'onmessage' data comming on the socket link
 	 * @param {?Object} messageContext The object to be used as 'this' when calling the handler for messages  
 	 */
-	var Socket = function Socket(url, protocol, onMessage, messageContext) {
+	var Socket = function Socket(url, protocol, onMessage, messageContext, shouldParse) {
 		this.url = url;
 		this.isConnected = false;
+		this.shouldParse = (typeof shouldParse === 'boolean') ? shouldParse : true;
 		this.protocol = protocol;
 		this.sendQueue = [];
 		if (typeof messageContext === 'undefined') messageContext = null;
@@ -24,9 +25,9 @@ define(function() {
 	 * @return {Function} Wrapped function call with set context
 	 */
 	Socket.prototype.createMessageHandler = function(messageHandler, context) {
-		var handler = messageHandler, messageContext = context;
+		var handler = messageHandler, messageContext = context, shouldParse = this.shouldParse;
 		return function(event) {
-			handler.call(messageContext, event.data);
+			handler.call(messageContext, ( shouldParse) ? json.parse( event.data) : event.data );
 		};
 	};
 	/**

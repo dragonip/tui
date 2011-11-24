@@ -1,8 +1,8 @@
-define(['json/json'],function (json){
+define(function (){
 	var RemoteKeyHandler = null;
 	var Register = {};
-	var Response = function(JSONString) {
-		this.json = (typeof JSONString === 'string') ? json.parse(JSONString): JSONString;
+	var Response = function(JSON) {
+		this.json = JSON; //(typeof JSONString === 'string') ? json.parse(JSONString): JSONString;
 		this.findCallback();
 	};
 	Response.prototype.findCallback = function() {
@@ -43,8 +43,8 @@ define(['json/json'],function (json){
 		register: function(Request, callback, context) {
 			Register[Request.json["header"]["tag"]] = [ callback, context ];
 		},
-		recall: function(JSONString) {
-			var response = new Response(JSONString);
+		recall: function(JSON) {
+			var response = new Response(JSON);
 		},
 		setRemoteKeyHandler: function(func) {
 			RemoteKeyHandler = func;
