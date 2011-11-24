@@ -1,4 +1,3 @@
-/*FIXME: make bottoms croll dissapear    ----->  DONE  <----- */
 .weatherWrapper::-webkit-scrollbar-thumb {
 	background: none;
 }

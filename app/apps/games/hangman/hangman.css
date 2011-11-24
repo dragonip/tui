@@ -12,7 +12,7 @@
  * contacts: kms@novo.bg
  * for Sysmaster Corp Free software initiative
  */
-/*FIXME: make the game fit*/
+
 body {
     background-color: #00FFFF;
     background-image: url('imgs/gally_bg.gif');
@@ -22,8 +22,8 @@ table.main {
     width: 100%;
 }
 .mainDiv {
-	width: 640px;
-	height: 480px;
+	width: 630px;
+	height: 455px;
 	margin: 0 auto 0 auto;
 	position: relative;
 }

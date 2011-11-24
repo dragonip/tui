@@ -45,7 +45,7 @@ html.m55 #maincontainer.scaled {
 	overflow-y: scroll;
 	overflow-x: hidden;
 }
-/*FIXME: make games fit the screen for m55   ----->  DONE  <----- */
+
 .game-layer {
 	position: absolute;
 	top: 0;
