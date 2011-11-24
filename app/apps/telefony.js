@@ -184,6 +184,9 @@ define([
 			keys: ['arrows']
 		}
 	});
+	Sms.on('activated', function() {
+		if (this.elements ) {}
+	});
 	
 	/**
 	 * VoiceMail miniscreens

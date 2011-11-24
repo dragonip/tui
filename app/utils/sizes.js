@@ -45,8 +45,8 @@ define({
 	getSizesForGameLayer: function() {
 		var ws = this.getSizesForWindow();
 		return {
-			width: ws.width - 40,
-			height: ws.height - 40
+			width: ws.width,// - 40,
+			height: ws.height //- 40
 		};
 	},
 	getStyle: function(style) {
