@@ -62,6 +62,8 @@ define([
 			tui.setPanels(false, true, undefined, infobuttonstpl.render({
 				things: this.hints[gameObj.publishName]
 			}));
+		} else {
+			tui.setPanels(false, false);
 		}
 	};
 	GamesApp.prototype.endGame = function() {
