@@ -17,9 +17,6 @@ define([
 			ok: strings.games.hints.Sudoku.ok,
 			arrows: strings.games.hints.Sudoku.arrows
 		},
-		Tetris: {
-			arrows: strings.games.hints.Tetris.arrows
-		},
 		SizzleBox: {
 			arrows: strings.games.hints.SizzleBox.arrows
 		},
