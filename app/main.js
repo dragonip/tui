@@ -29,9 +29,8 @@ require(['transport/response'], function (response) {
 	window.transportReceiver = function(j) {
 		response.recall(j);
 	};
-});
-
-/**
+	
+	/**
  * Require the interface now
  * Basically we want to load the minimum set first to assure user notification for loading and then load everything needed
  * to start processing the user input and display things on screen
@@ -68,8 +67,11 @@ require(['ui/throbber'], function(t) {
 		'ui/popup', 
 		'dmc/dmc', 
 		'shims/bind', 
-		'ui/player'
-	], function(globalevents, classes, dom, Dialogs, dmc, bind, player ) {
+		'ui/player',
+		'transport/response'
+	], function(globalevents, classes, dom, Dialogs, dmc, bind, player, response ) {
+//		Let the response handler for transport layer know where to direct key presses on the remote
+		response.setRemoteKeyHandler(globalevents.defaultEventAccepter);
 //		Load images offscreen after we have loaded the deps to avoid trapping the JS in the max Concurent Reqs of the browsser
 		dom.adopt(dom.create('div', {
 			classes: 'tui-component tui-preloader',
@@ -85,7 +87,8 @@ require(['ui/throbber'], function(t) {
 		window.tui = {
 			signals: {
 				restoreEventTree: function() {
-					dmc.onKeyPress(globalevents.defaultEventAccepter);
+					response.setRemoteKeyHandler(globalevents.defaultEventAccepter);
+//					dmc.onKeyPress(globalevents.defaultEventAccepter);
 					this.eventsAreFetched = false;
 				},
 				eventsAreFetched: false
@@ -107,7 +110,8 @@ require(['ui/throbber'], function(t) {
 				this.rerouteEventsToPanel();
 			},
 			stealEvents: function(newManager) {
-				dmc.onKeyPress(newManager);
+//				dmc.onKeyPress(newManager);
+				response.setRemoteKeyHandler(newManager);
 				this.signals.eventsAreFetched = true;
 			},
 			createDialog: function(type, options, callback, title, defaultOption ) {
@@ -333,6 +337,13 @@ require(['ui/throbber'], function(t) {
 			});
 		});
 	});
+});
+
+
+	
+	
+	
+	
 });
 
 

@@ -1,7 +1,8 @@
 define(['json/json'],function (json){
+	var RemoteKeyHandler = null;
 	var Register = {};
 	var Response = function(JSONString) {
-		this.json = json.parse(JSONString);
+		this.json = (typeof JSONString === 'string') ? json.parse(JSONString): JSONString;
 		this.findCallback();
 	};
 	Response.prototype.findCallback = function() {
@@ -26,10 +27,12 @@ define(['json/json'],function (json){
 		else if (this.json['header']['type'] == 'event') {
 			if (this.json['header']['method'] == 'media')
 				tui.globalPlayer.handleEvent(this.json);
+			else if (this.json['header']['method'] == 'remote') {
+				if  (RemoteKeyHandler !== null ) RemoteKeyHandler(this.json['event']['key']);
+			}
 		} else {
 			console.log('No match yet for this packet', this.json);
 		}
-		
 		this.disposeInternal();
 	};
 	Response.prototype.disposeInternal = function() {
@@ -42,6 +45,9 @@ define(['json/json'],function (json){
 		},
 		recall: function(JSONString) {
 			var response = new Response(JSONString);
+		},
+		setRemoteKeyHandler: function(func) {
+			RemoteKeyHandler = func;
 		}
 	};
 });

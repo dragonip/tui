@@ -1,7 +1,7 @@
 /**
  * @module events Provides keyboard/remote key bindings for the TUI 
  */
-define(['types/types', 'array/array', 'dmc/dmc', 'debug/console'], function(Mtypes, Marray, dmc, logger){
+define(['types/types', 'array/array', 'dmc/smjs', 'debug/console'], function(Mtypes, Marray, smjs, logger){
 	var events = [
 		'display',
 		'volup', 'voldown', 'mute',
@@ -48,9 +48,8 @@ define(['types/types', 'array/array', 'dmc/dmc', 'debug/console'], function(Mtyp
 	};
 	
 	var initEvents = function() {
-		dmc.initAPI();
-		dmc.onKeyPress(dispatchEvent);
-		
+		smjs.initapi();
+		smjs.set_json_handler('window.transportReceiver');
 	};
 	initEvents();
 	
