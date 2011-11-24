@@ -29,8 +29,9 @@ require(['transport/response'], function (response) {
 	window.transportReceiver = function(j) {
 		response.recall(j);
 	};
-	
-	/**
+});
+
+/**
  * Require the interface now
  * Basically we want to load the minimum set first to assure user notification for loading and then load everything needed
  * to start processing the user input and display things on screen
@@ -338,12 +339,4 @@ require(['ui/throbber'], function(t) {
 		});
 	});
 });
-
-
-	
-	
-	
-	
-});
-
 
