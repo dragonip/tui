@@ -14,8 +14,9 @@ define([
 	'utils/telescreen',
 	'utils/scrollable',
 	'utils/dialler',
-	'shims/bind'
-], function(App, template1, template2, template3, template4, template5, template6, css, loader, Mini, dom, classes, TeleMini, Scrollable, Dialler, bind) {
+	'shims/bind',
+	'transport/request'
+], function(App, template1, template2, template3, template4, template5, template6, css, loader, Mini, dom, classes, TeleMini, Scrollable, Dialler, bind, request) {
 	loader.loadCSSFromText(css);
 	/**
 	* Mini screen chooser
@@ -308,5 +309,10 @@ define([
 		name: 'phone',
 		miniscreens: [ Chooser, CallCenter, CallHistory, VoiceMail, Sms, PhoneBook ]
 	});
+	var req = request.create('calld', {
+		run: 'get_linestat_json'
+	});
+	req.send();
+	req.disposeInternal();
 	return Tele;
 });
