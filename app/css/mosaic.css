@@ -34,6 +34,29 @@ html.browser .tui-mosaic.list-container {
 	width: 140px;
 	height: 100px;
 }
+/*------------ start-Rating-bar ----------------*/
+.tui-mosaic .regular .imgcont .video-bar {
+	height: 21px;
+	width: 85px;
+	background: rgba(0, 0, 0, 0.4);
+	border-radius: 3px;
+	position: absolute;
+	border-bottom-style: solid;
+	border-width: 1px 1px 1px 1px;
+	border-bottom-color: rgba(255, 255, 255, 0.2);
+	border-right-color: rgba(255, 255, 255, 0.2);
+	border-right-style: solid;
+}
+.tui-mosaic .regular .imgcont .video-bar .rating_bar {
+  width: 79px;
+  background: url(imgs/icon-favorite-grey.png) 0 0 repeat-x;
+}
+
+.tui-mosaic .regular .imgcont .video-bar  .rating_bar div {
+  height: 17px;
+  background: url(imgs/icon_favorite.png) 0 0 repeat-x;
+}
+/*------------- end-Ratin-bar -------------------*/
 .tui-mosaic .imgcont {
 	-webkit-transition-property: background-color;
 	-webkit-transition-duration: 1.2s;

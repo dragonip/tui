@@ -3,6 +3,9 @@ div.tui-mosaic.list-container(style="width:"+ w, data-appid=id)
 		- for (var i = 0; i < things.length; i++ )
 			div(class='item '+ (alterClass ? 'larger':'regular'), data-sequence=i)
 				div.imgcont
+					div.video-bar
+						div.rating_bar
+							div(style="width:50%")
 					img(src=things[i].thumbnail.sqDefault)
 				span.title!= things[i].title
 	- else 

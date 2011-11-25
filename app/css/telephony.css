@@ -553,6 +553,78 @@
 	font-size: 150%;
 }
 
+
+
+
+
+
+/*----------------------------  call-status  ------------------------------*/
+.call-container {
+	width: 600px;
+	height: 440px;
+	padding: 20px;
+	
+	display: -moz-box;
+	-moz-box-pack: center;
+	-moz-box-align: center;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+	display: box;
+	box-pack: center;
+	box-align: center;
+	vertical-align: middle;
+	overflow: hidden;
+	position: relative;
+}
+.call-container .scroll-call {
+	height: 320px;
+	width: 100%;
+	overflow: auto;
+	left: 0;
+	top: -10px;
+	position: relative;
+	/* background-image:url(bg.svg);  */
+}
+
+.call-container .focus {
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8c7c70), color-stop(49%,#3f3730), color-stop(50%,#331f0f), color-stop(60%,#331f0f), color-stop(100%,#f28024));
+	-webkit-border-radius: 7px;
+}
+.scroll-call .call-status {
+	display: -webkit-inline-box;
+	margin-bottom: 40px;
+	width: 100%;
+}
+.scroll-call .call-status img {
+	height: 111px;
+	margin: 11px 20px 0 53px;
+}
+.scroll-call .call-status div {
+	font-size: 130%;
+	 /*display: -webkit-inline-box; */
+	margin-top: 5px;
+	color:#979797;
+	text-align:center;
+}
+.scroll-call .call-status .caller-name {
+	font-weight: bold;
+	display: block;
+	margin: 15px 40px 0;
+	color:#FFF;
+	font-size: 160%;
+}
+.scroll-call .call-status .caller-info {
+	font-weight: normal;
+	font-size: 100%;
+	text-align:center;
+}
+
+
+
+
+
+
 /*---------------------------  TELEPHONY Chooser  -------------------------------*/
 .telephonyChooser {
 	width: 640px;
