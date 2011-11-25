@@ -29,6 +29,8 @@ define(function (){
 				tui.globalPlayer.handleEvent(this.json);
 			else if (this.json['header']['method'] == 'remote') {
 				if  (RemoteKeyHandler !== null ) RemoteKeyHandler(this.json['event']['key']);
+			} else if ( this.json['header']['method'] === 'telephony') {
+				console.log(this.json);
 			}
 		} else {
 			console.log('No match yet for this packet', this.json);
