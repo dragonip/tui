@@ -19,7 +19,7 @@ buf.push(attrs({ "class": ('video-bar') }));
 buf.push('><div');
 buf.push(attrs({ "class": ('rating_bar') }));
 buf.push('><div');
-buf.push(attrs({ 'style':("width:50%") }));
+buf.push(attrs({ 'style':("width:" + things[i].starRating +"%") }));
 buf.push('></div></div></div><img');
 buf.push(attrs({ 'src':(things[i].thumbnail.sqDefault) }));
 buf.push('/></div><span');

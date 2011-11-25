@@ -64,13 +64,16 @@ define([
 		this.isLoading = false;
 		if ( data.data.startIndex + data.data.itemsPerPage >= data.data.totalItems)
 			this.hasMoreResult = false;
-		var items = data.data.items;
-		var i, item;
-		for (i = 0; i < items.length; i++) {
-			item = items[i];
-			if ( item.accessControl && item.accessControl.list === 'allowed'  ) {
-				item.playURI = item.id;
-				this.data.list.push(item);
+		if (data.data.totalItems === 0 ) {} else {
+			var items = data.data.items;
+			var i, item;
+			for (i = 0; i < items.length; i++) {
+				item = items[i];
+				if ( item.accessControl && item.accessControl.list === 'allowed'  ) {
+					item.playURI = item.id;
+					item.starRating = parseInt(((item.rating - 1)/4)*100);
+					this.data.list.push(item);
+				}
 			}
 		}
 		this.lastDisplayedIndex = this.data.list.length;
@@ -81,6 +84,7 @@ define([
 			type: (data.data.startIndex === 1?'list':'append'),
 			app: this.app.name
 		});
+	
 	};
 	YTData.prototype.disposeInternal = function(){
 		YTData.superClass_.disposeInternal.call(this);
