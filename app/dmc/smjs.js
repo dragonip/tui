@@ -14,23 +14,22 @@ define(['window/window', 'net/socket'], function(windows, socket) {
 		window.smjs = {
 			socket: null,
 			set_json_handler: function(string) {
-				console.log('Setting global handler', string);
+				this.socket.send('{ "header" : { "transport":"socket", "mode":"async", "method":"set_global_callback", "type":"request", "tag":"0000" }, "request": { "name": "'+ string +'" } }') 
+	
 			},
 			emulated: true,
 			initapi: function(){
 				console.log('Init API');
-			},
-			jsoncmd: (function() {
-				this.socket = socket.create('ws://192.168.2.64:7681', 'stb-json-protocol', defaultTransport_);
-				return function(JSONString) {
-					if (this.socket !== null) {
-						this.socket.send(this.getRequestString());
-					} else {
-						console.log('No socket created');
-					}
-				};
-			})()
+			}
 		};
+		window.smjs.socket = socket.create('ws://192.168.2.64:7681', 'stb-json-protocol', defaultTransport_);
+		window.smjs.jsoncmd = function(JSONString) {
+			if (this.socket !== null) {
+				this.socket.send(JSONString);
+			} else {
+				console.log('No socket created');
+			}
+		}
 		return window.smjs;
 	}
 });
