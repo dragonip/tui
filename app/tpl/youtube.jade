@@ -5,7 +5,7 @@ div.tui-mosaic.list-container(style="width:"+ w, data-appid=id)
 				div.imgcont
 					div.video-bar
 						div.rating_bar
-							div(style="width:50%")
+							div(style="width:" + things[i].starRating +"%")
 					img(src=things[i].thumbnail.sqDefault)
 				span.title!= things[i].title
 	- else 
