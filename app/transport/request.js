@@ -15,24 +15,10 @@ define(['transport/requestdata', 'json/json', 'net/socket', 'dmc/smjs'], functio
 		return json.serialize(this.json);
 	};
 	/**
-	 * Contains the socket reference if one can be created
-	 * @static
-	 */
-//	JSONRequest.prototype.socket = (function() {
-//		if (dmc.emulated) return null;
-//		return socket.create('ws://192.168.2.64:7681', 'stb-json-protocol', window.transportReceiver);
-//	})();
-	/**
 	 * Sends the request via the socket, first serializing it
 	 */
 	JSONRequest.prototype.send = function() {
 		smjs.jsoncmd(this.getRequestString());
-//		console.log('Sending the request via socket',this.getRequestString());
-//		if (this.socket !== null) {
-//			this.socket.send(this.getRequestString());
-//		} else {
-//			smjs.
-//		}
 	};
 	/**
 	 * Disposes the data it uses (calling the actual request dispose methods
