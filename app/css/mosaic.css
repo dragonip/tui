@@ -9,6 +9,17 @@ html.browser .tui-mosaic.list-container {
 	-webkit-transition-property: top;
 	-webkit-transition-duration: 0.8s;
 }
+.tui-mosaic.list-container .no-content {
+	margin: 30% auto;
+	border: 2px solid orange;
+	padding: 35px 0 35px 0;
+	color: white;
+	font-weight: inherit;
+	padding: 4% 20%;
+	text-align: center;
+	font-size: 135%;
+	width: 49%;
+}
 .tui-mosaic .item.regular {
     width: 150px;
     height: 130px;
@@ -44,8 +55,9 @@ html.browser .tui-mosaic.list-container {
 	border-bottom-style: solid;
 	border-width: 1px 1px 1px 1px;
 	border-bottom-color: rgba(255, 255, 255, 0.2);
-	border-right-color: rgba(255, 255, 255, 0.2);
-	border-right-style: solid;
+	border-left-color: rgba(255, 255, 255, 0.3);
+	border-left-style: solid;
+	right: 9px;
 }
 .tui-mosaic .regular .imgcont .video-bar .rating_bar {
   width: 79px;
