@@ -149,9 +149,17 @@ define([
 			this.kbd = KBD.getInstance();
 			this.kbd.show(this.input, bind(this.kbdSubmit, this));
 			this.kbd.bindToElement(dom.$('.textarea', this.dom_), (this.type === 'password')?true:false);
+			tui.setKeyboardInputHandler(bind(function(ev) {
+				if (tui.keyboardIgnoredKeys.indexOf(ev.keyCode) !==-1) return;
+				var ch = String.fromCharCode(ev.charCode);
+				this.kbd.addCharacter(ch);
+			}, this));
 		}
 	};
 	Input.prototype.kbdSubmit = function(value) {
+		if (this.useKbd) {
+			tui.resetKeyboardInputHandler();
+		}
 		this.destroy();
 		this.callback(value);
 		this.dispose();
@@ -160,6 +168,9 @@ define([
 		if (array.has(KBD.knownKeys_, key)) {
 			this.kbd.eventHandler(key);
 		} else  {
+			if (key === 'delete') { 
+				this.kbd.deleteCharacter();
+			}
 //			TODO: Handle the submit button on text area with ff fw
 		}
 	};

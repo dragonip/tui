@@ -159,7 +159,7 @@ define([
 				break;
 			case 'Return':
 			case 'Enter':
-				console.log('Return key selected, here we should submit probably');
+//				console.log('Return key selected, here we should submit probably');
 				if (typeof this.submitCallback === 'function') {
 					this.submitCallback(this.value);
 				}
@@ -169,7 +169,7 @@ define([
 				this.shiftMutate();
 				break;
 			default:
-				console.log('Key was ', value);
+//				console.log('Key was ', value);
 				this.addCharacter(value);
 		}		
 	};

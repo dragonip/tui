@@ -8,7 +8,7 @@
 <script>
 route = function(key) {
     if(opener){
-        opener.transportReceiver(JSON.stringify({ 
+        opener.transportReceiver({ 
             "header": { 
             "type": "event", 
             "tag": "0000000000", 
@@ -18,7 +18,7 @@ route = function(key) {
             "event": { 
                 "key": key 
             }    
-        }));	
+        });	
     }
     else{
         window.close();

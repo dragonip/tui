@@ -94,6 +94,17 @@ require(['ui/throbber'], function(t) {
 				},
 				eventsAreFetched: false
 			},
+			keyboardIgnoredKeys: [34, 8, 46, 37, 38, 39, 40, 13, 36],
+			defaultKeyboardInputHandler: function(ev) {
+				console.log(String.fromCharCode(ev.charCode));
+			},
+			keyboardInputHandler_: function() {},
+			resetKeyboardInputHandler: function() {
+				this.keyboardInputHandler_ = this.defaultKeyboardInputHandler;
+			},
+			setKeyboardInputHandler: function(method) {
+				this.keyboardInputHandler_ = method;
+			},
 			globalPlayer: new player(),
 			mainContainer: dom.$('#maincontainer'),
 			loadIndicator: loadIndicator,
@@ -218,6 +229,7 @@ require(['ui/throbber'], function(t) {
 			}
 		};
 		
+		
 //		Setup global return key to check for the player and route to it 
 //		This should be used when the user wants to use the UI while the player is playing, once done and he wants toLowerCase
 //		return to the player, he presses return, if return is not bound in the UI (which it should not be)
@@ -244,7 +256,68 @@ require(['ui/throbber'], function(t) {
 //				}
 //			}
 		});
-		
+
+/**
+ * Setup global window event for keyboard input and always route this to tui handlers
+ */
+		window.addEventListener('keypress', function(ev) {
+			tui.keyboardInputHandler_(ev)
+		}, false);
+//		tui.setKeyboardInputHandler(function(ev){
+//			console.log(String.fromCharCode(ev.charCode));
+//		});
+		window.addEventListener('keydown', function(ev) {
+			var key;
+			console.log(ev.keyCode);
+			switch (ev.keyCode) {
+				case 8:
+					//backspace
+					key = 'return';
+					break;
+				case 46:
+					key = 'delete';
+					break;
+				case 37:
+					key = 'left';
+					break;
+				case 38:
+					key = 'up';
+					break;
+				case 39:
+					key = 'right';
+					break;
+				case 40:
+					key = 'down';
+					break;
+				case 13:
+					key = 'ok';
+					break;
+				case 36:
+					key = 'home';
+					break;
+				case 33:
+					// page up
+					key = 'chup';
+					break;
+				case 34: 
+					// page down
+					key = 'chdown';
+					break;
+				default:
+					return;
+			}
+			window.transportReceiver({ 
+		        "header": { 
+		        "type": "event", 
+		        "tag": "0000000000", 
+		        "method": "remote", 
+		        "tstamp": 1322144158.278165   
+		        }, 
+		        "event": { 
+		            "key": key 
+		        }    
+		    });
+		});
 		if (tui.options.debug) {
 			window.DEBUG = {
 				popup: false
