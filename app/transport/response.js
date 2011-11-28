@@ -7,7 +7,7 @@ define(function (){
 	};
 	Response.prototype.findCallback = function() {
 		var sid = this.json["header"]["tag"];
-		console.log('Received packet', this.json);
+//		console.log('Received packet', this.json);
 		if (this.json['header']['type'] == 'response') {
 			if (typeof Register[sid] !== 'undefined') {
 				if (!this.json["response"]) {
@@ -20,17 +20,18 @@ define(function (){
 				}
 				delete Register[sid];
 			} else {
-				console.log('No registered callback for received object:');
-				console.log(this.json);
+				console.log('No registered callback for received object:', this.json);
 			}
 		}
 		else if (this.json['header']['type'] == 'event') {
 			if (this.json['header']['method'] == 'media')
 				tui.globalPlayer.handleEvent(this.json);
 			else if (this.json['header']['method'] == 'remote') {
-				if  (RemoteKeyHandler !== null ) RemoteKeyHandler(this.json['event']['key']);
+				if (this.json['event']['key'] === 'settz|GMT+5') return;
+				if (RemoteKeyHandler !== null ) RemoteKeyHandler(this.json['event']['key']);
 			} else if ( this.json['header']['method'] === 'telephony') {
-				console.log(this.json);
+				window.exportedSymbols['telephony']['setLineStatus'](this.json['event']);
+//				console.log(this.json);
 			}
 		} else {
 			console.log('No match yet for this packet', this.json);
