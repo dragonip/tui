@@ -2,7 +2,7 @@
  * NATIVESMJS wrapper, i.e. we will provide 1:1 interface for browser as the one we have in STB
  * @module smjs DOCS COMMING SOON Wrapper for the native code implementation in the STBs, wraps most of the commands to make them work in browser environemtn where smjs C code is not available
  */
-define(['window/window', 'net/socket'], function(windows, socket) {
+define(['window/window', 'net/socket', 'appdebug/config'], function(windows, socket, debugconfig) {
 //	Use this to specify the global transport entry point, used only in emulated environment
 	var defaultTransport_ = window.transportReceiver;
 	if (typeof window.smjs != 'undefined') {
@@ -22,7 +22,7 @@ define(['window/window', 'net/socket'], function(windows, socket) {
 				console.log('Init API');
 			}
 		};
-		window.smjs.socket = socket.create('ws://192.168.2.64:7681', 'stb-json-protocol', defaultTransport_);
+		window.smjs.socket = socket.create(debugconfig.socket, 'stb-json-protocol', defaultTransport_);
 		window.smjs.jsoncmd = function(JSONString) {
 			if (this.socket !== null) {
 				this.socket.send(JSONString);
