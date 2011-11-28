@@ -15,8 +15,9 @@ define([
 	'utils/scrollable',
 	'utils/dialler',
 	'shims/bind',
-	'transport/request'
-], function(App, template1, template2, template3, template4, template5, template6, css, loader, Mini, dom, classes, TeleMini, Scrollable, Dialler, bind, request) {
+	'transport/request',
+	'env/exports'
+], function(App, template1, template2, template3, template4, template5, template6, css, loader, Mini, dom, classes, TeleMini, Scrollable, Dialler, bind, request, exports) {
 	loader.loadCSSFromText(css);
 	/**
 	* Mini screen chooser
@@ -309,10 +310,41 @@ define([
 		name: 'phone',
 		miniscreens: [ Chooser, CallCenter, CallHistory, VoiceMail, Sms, PhoneBook ]
 	});
+	Tele.lines = {
+		line1: {
+			status: null,
+			initCall: {
+				run: 'start_json_voicecall',
+				sig: 'openline1'
+			},
+			closeLine: {
+				run: 'hangup_json_call',
+				sig : 'closeline1'
+			}		
+		},
+		line2: {
+			status: null,
+			openLine: {
+				run: 'start_json_voicecall',
+				sig: 'openline2'
+			},
+			closeLine: {
+				run: 'hangup_json_call',
+				sig : 'closeline2'
+			}
+		}
+	};
+	Tele.setLineStatus = function(line, status, opt_args) {
+		console.log('set status line', arguments);
+	};
 	var req = request.create('calld', {
 		run: 'get_linestat_json'
 	});
 	req.send();
 	req.disposeInternal();
+	exports.exportSymbol('telephony', {
+		name: 'setLineStatus',
+		symbol: bind(Tele.setLineStatus, Tele)
+	} )
 	return Tele;
 });
