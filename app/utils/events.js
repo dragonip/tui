@@ -1,7 +1,7 @@
 /**
  * @module events Provides keyboard/remote key bindings for the TUI 
  */
-define(['types/types', 'array/array', 'dmc/smjs', 'debug/console'], function(Mtypes, Marray, smjs, logger){
+define(['types/types', 'array/array', 'dmc/smjs'], function(Mtypes, Marray, smjs){
 	var events = [
 		'display',
 		'volup', 'voldown', 'mute',
@@ -13,11 +13,8 @@ define(['types/types', 'array/array', 'dmc/smjs', 'debug/console'], function(Mty
 		'play', 'stop', 'ff', 'rw',
 		'power',
 		'delete'
-	],
-	pcli = logger.getInstance('events_tui');
-	var defHandler = function(useraction) {
-		pcli.log('This is default handler for ' + useraction);
-	};
+	];
+	var defHandler = function(useraction) {};
 	var internalEventList = {};
 	events.forEach(function(useraction) {
 		internalEventList[useraction] = [defHandler];

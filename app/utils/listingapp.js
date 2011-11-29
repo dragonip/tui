@@ -63,7 +63,6 @@ define([
 		} 
 	};
 	ListApp.prototype.onShowScreen = function() {
-		console.log('Showing', this.name)
 		this.presentation.show(this.container);
 	}
 	ListApp.prototype.defaultRemoteKeyHandler = function(key) {

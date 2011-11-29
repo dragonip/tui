@@ -1,13 +1,13 @@
 /**
  * @module throbber Provides throbbing test to use as loading indicator on lower end STB/Systems
  */
-define(['debug/console'], function(logger) {
+define(function() {
 	var opts = {
 		element: document.body,
 		text: 'Loading...',
 		startColor: '#000',
 		endColor: '#fff'
-	}, pcli = logger.getInstance('utils/throbber');
+	};
 	function updateOpts(obj) {
 		var k;
 		for (k in obj) {
@@ -38,18 +38,15 @@ define(['debug/console'], function(logger) {
 			tobber.style.width = opts.element.style.width;
 			tobber.style.top = '-' +window.innerHeight + 'px';
 			//
-			// tobber.style.lineHeight = opts.element.style.height;
+			tobber.style.lineHeight = opts.element.style.height;
 			// 
 			opts.element.appendChild(tobber);
-			/*opts.element.appendChild(backdiv);*/
 		},
 		/**
 		 * @method stop Stops the throbber and removes it from the DOM
 		 */
 		stop: function() {
-			pcli.log('called stop tobber');
 			if (tobber.parentNode)	tobber.parentNode.removeChild(tobber);
-		/*	backdiv.parentNode.removeChild(backdiv);*/
 		}
 	};
 });

@@ -1,14 +1,13 @@
 define([
 	'oop/inherit',
 	'utils/visualapp',
-	'dmc/dmc',
 	'net/simplexhr',
 	'shims/bind',
 	'env/exports',
 	'loader/loader',
 	'tpl/weather',
 	'text!css/weather.css'
-], function(inherit, VisualApp, dmc, xhr, bind, exports, loader, template, css){
+], function(inherit, VisualApp, xhr, bind, exports, loader, template, css){
 	loader.loadCSSFromText(css);
 	var Weather = function(options) {
 		VisualApp.call(this, options);

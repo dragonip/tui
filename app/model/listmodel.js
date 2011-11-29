@@ -1,13 +1,11 @@
 define([
-	'data/parsersnew', 
-	'debug/console', 
 	'types/types', 
 	'array/array',
 	'oop/idisposable',
 	'oop/inherit',
 	'json/json',
 	'net/simplexhr'
-], function(parsers, logger, types, array, Disposable, inherit, json, xhr) {
+], function(types, array, Disposable, inherit, json, xhr) {
 	
 	var Storage = function(app) {
 		Disposable.call(this);
@@ -28,7 +26,6 @@ define([
 //		debugger;
 		var url = o.url || tui.options.paths.getPath(o.name, o.type);
 		var that = this;
-		console.log('Try to load URL', url)
 		xhr.get(url, function(text) {
 			//that.load(text, o);
 			that.load(text, o);

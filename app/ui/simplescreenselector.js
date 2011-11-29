@@ -4,12 +4,11 @@
 */
 
 define(
-	[ 'tpl/appselector2','data/applist', 'dom/dom', 'dom/classes', 'utils/events', 'debug/console', 'utils/sizes',
+	[ 'tpl/appselector2','data/applist', 'dom/dom', 'dom/classes', 'utils/events', 'utils/sizes',
 	'env/exports'],
-function(tpl,applist, dom, classes, Mevents, logger, sizes, exports) {
+function(tpl,applist, dom, classes, Mevents, sizes, exports) {
 
-	var pcli = logger.getInstance('simpleselector'),
-		currenScreen, itemSize = 90, internalAppList = obj2array(applist), 
+	var currenScreen, itemSize = 90, internalAppList = obj2array(applist), 
 		padding = sizes.pixelate(sizes.getSizesForAppselector(90).padding), 
 		DOM = dom.getInnerNodes(tpl.render({
 			apps: internalAppList
@@ -52,14 +51,10 @@ function(tpl,applist, dom, classes, Mevents, logger, sizes, exports) {
 		name: 'getState',
 		symbol: getState
 	});
-	function log(k) {
-		pcli.log(k.toUpperCase() + 'button activated for module AppSelector');
-	}
 	var moduleEvent = {
 		up: {
 			name: 'up',
 			func: function(key){
-				log(key);
 				triggerScreen(false);
 			},
 			attached: false
@@ -67,7 +62,6 @@ function(tpl,applist, dom, classes, Mevents, logger, sizes, exports) {
 		down: {
 			name: 'down',
 			func: function(key){
-				log(key);
 				triggerScreen(true);
 			},
 			attached: false
@@ -80,11 +74,9 @@ function(tpl,applist, dom, classes, Mevents, logger, sizes, exports) {
 		loadApp: {
 			name: 'ok',
 			func: function(key) {
-				pcli.log('load an app');
 				var a1 = dom.$('.obscure');
 				if (a1 !== null) classes.removeClasses(a1, 'obscure');
 				var a  = dom.dataGet(currenScreen, 'appname');
-				pcli.log(applist[a]);
 				hideDOM();
 				tui.loadApp(applist[a]);
 			},
