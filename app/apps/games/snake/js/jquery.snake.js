@@ -267,7 +267,6 @@ var Snake = {
 		Snake.speed -= 1;
 		$("#stats-speed").html(Snake.speed);
 		clearInterval(Snake.animateTimer);
-		pcli(Snake.speed);
 		Snake.animateTimer = setInterval(Snake.animate, Snake.speed);
 		return false;
 	},
