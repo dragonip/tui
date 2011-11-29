@@ -23,7 +23,10 @@ define([
 //	Dialler.prototype.setActiveKey = function(key, oldkey) {
 //		KBD.prototype.setActiveKey.call(this, key, oldkey);
 //	};
-	
+	Dialler.prototype.replaceAll = function(newVal) {
+		this.value = newVal;
+		this.updateElement();
+	};
 	Dialler.prototype.disposeInternal = function() {
 		Dialler.superClass_.disposeInternal.call(this);
 		delete this.dom_;
