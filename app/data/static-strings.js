@@ -135,6 +135,24 @@ define({
 					phonebook: "Phonebook"			
 				}
 			}
+		},
+		incall: {
+			panels: {
+				bottom: {
+					'return': 'Go to menu',
+					upDown: 'Switch line'
+				}
+			},
+			list: {
+				header: {
+					
+				},
+				body: {
+					statuses: {
+						nocall: "No current call"
+					}
+				}
+			}
 		}
 	},
 	components: {

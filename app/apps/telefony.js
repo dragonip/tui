@@ -16,8 +16,10 @@ define([
 	'utils/dialler',
 	'shims/bind',
 	'transport/request',
-	'env/exports'
-], function(App, template1, template2, template3, template4, template5, template6, css, loader, Mini, dom, classes, TeleMini, Scrollable, Dialler, bind, request, exports) {
+	'env/exports',
+	'tpl/telephony_incall',
+	'data/static-strings'
+], function(App, template1, template2, template3, template4, template5, template6, css, loader, Mini, dom, classes, TeleMini, Scrollable, Dialler, bind, request, exports, template7, strings) {
 	loader.loadCSSFromText(css);
 	/**
 	* Mini screen chooser
@@ -32,7 +34,7 @@ define([
 	Chooser.keyHandler = function(key) {
 		var node;
 		if (typeof key !== 'string') {
-			this.setActiveIcon(key);			
+			this.setActiveIcon(key);
 		}
 		switch (key) {
 			case 'ok':
@@ -42,8 +44,8 @@ define([
 			case 'right':
 				this.setActiveIcon(key);
 				break;
-		}		
-	};	
+		}
+	};
 	Chooser.setActiveIcon = function(index) {
 		var current = dom.$('.active', this.dom_);
 		var next;
@@ -74,7 +76,7 @@ define([
 		name: 'callcenter',
 		template: template1,
 		panels: {
-			top: false, 
+			top: false,
 			bottom: false
 		}
 	});
@@ -83,6 +85,8 @@ define([
 	CallCenter.numberKeys_ =  ['zero','one','two','three','four','five','six','seven','eight','nine'];
 	CallCenter.keyHandler = function(key) {
 		var activeKey;
+		var line;
+		var req;
 		if (this.knownKeys_.indexOf(key)!== -1) {
 			if (this.Dialler.container === null ) {
 				this.Dialler.container = this.dom_;
@@ -96,12 +100,30 @@ define([
 				if (classes.hasClass(activeKey, 'del')) {
 					this.Dialler.deleteCharacter();
 				} else if ( classes.hasClass(activeKey, 'phoneBook')) {
-					this.master.activateScreen(5);
+//					this.master.activateScreen(5);
+					this.master.activateScreen(5, bind(function(record) {
+						this.master.activateScreen(1);
+						this.Dialler.replaceAll(record.phone);
+					}, this));
 				} else if (classes.hasClass(activeKey, 'calls')) {
 					this.master.activateScreen(2);
 				} else if (classes.hasClass(activeKey, 'up')) {
 //					TODO: Start a call, probably with menu
-					console.log('Initiate call');
+//					console.log('Initiate call');
+					if (!tui.phone.lineStatus['line1']) {
+						line = 'openline1';
+					} else if (!tui.phone.lineStatus['line2']) {
+						line = 'openline2';
+					} else {
+						return;
+					}
+					var req = request.create('calld', {
+						run: 'start_json_voicecall',
+						sig: line,
+						newif: '1',
+						num: this.Dialler.value
+					});
+					req.send();
 				}
 			}
 		} else if (this.numberKeys_.indexOf(key)!== -1) {
@@ -111,6 +133,7 @@ define([
 		}
 	};
 	CallCenter.updateNumber = function() {
+		console.log('^^^^^^^^^^^^^^^^^^')
 		this.numberField.innerHTML = this.number_;
 	}
 	CallCenter.on('activated', function() {
@@ -125,7 +148,7 @@ define([
 			classes.addClasses(dom.$('.phone-btn', this.dom_), 'focus');
 		}
 	})
-	
+
 	/**
 	 * Call history mini screen
 	 */
@@ -139,12 +162,12 @@ define([
 	});
 	CallHistory.keyHandler = function(key) {
 		switch (key) {
-			default: 
+			default:
 				console.log('Received key', key)
 		}
 	};
 
-	
+
 	/**
 	 * Phonebook miniscreen
 	 */
@@ -153,7 +176,7 @@ define([
 		template: template4,
 		deps: '/cgi-bin/voip.cgi?run=phb_json_list&newif=1',
 		panels:{ keys : ['info', 'ok', 'upDown'] }
-	});	
+	});
 	PhoneBook.Scrollable = new Scrollable('.phoneBookResults', '.phonebookItem.active');
 	PhoneBook.registerDisposable(this.Scrollable);
 	PhoneBook.on('activated', function(intent) {
@@ -268,83 +291,38 @@ define([
 				if (this.elements.focusedComponent >= this.elements.tabOrder.length -1 ) {
 					return;
 				}
-				classes.removeClasses(this.elements[this.elements.tabOrder[this.elements.focusedComponent]], 'focus');
+				classes.removeClasses(this.elements[this.elements.tabOrder[this.elements.focusedComponent]], 'active');
 				this.elements.focusedComponent++;
-				classes.addClasses(this.elements[this.elements.tabOrder[this.elements.focusedComponent]], 'focus');
+				classes.addClasses(this.elements[this.elements.tabOrder[this.elements.focusedComponent]], 'active');
 				break;
 			case 'left':
 			case 'up':
 				if (this.elements.focusedComponent <= 0 ) {
 					return;
 				}
-				classes.removeClasses(this.elements[this.elements.tabOrder[this.elements.focusedComponent]], 'focus');
+				classes.removeClasses(this.elements[this.elements.tabOrder[this.elements.focusedComponent]], 'active');
 				this.elements.focusedComponent--;
-				classes.addClasses(this.elements[this.elements.tabOrder[this.elements.focusedComponent]], 'focus');
+				classes.addClasses(this.elements[this.elements.tabOrder[this.elements.focusedComponent]], 'active');
 		}
 	};
-	
+
 	/**
 	 * VoiceMail miniscreens
 	 */
-	var VoiceMail = new Mini({
-		name: 'voicemail',	
+	var VoiceMail = new TeleMini({
+		name: 'voicemail',
 		template: template6,
-		deps: '/cgi-bin/voip.cgi?run=vmmsgs_json_list&newif=1'
+		deps: '/cgi-bin/voip.cgi?run=vmmsgs_json_list&newif=1',
+		panels: { keys: ['upDown', 'ok']}
 	});
-	VoiceMail.on('remote-key', function(key) {
-		switch (key) {
-			case 'return':
-				this.master.activateScreen(0);
-				break;
-			default: 
-				console.log('Received key', key)
-		}
-	});
-	VoiceMail.panelSetup = {
-		top: false,
-		bottom: true,
-		keys: ['upDown', 'ok']
-	}
 	
 	var Tele = new App({
 		name: 'phone',
 		miniscreens: [ Chooser, CallCenter, CallHistory, VoiceMail, Sms, PhoneBook ]
 	});
-	Tele.lines = {
-		line1: {
-			status: null,
-			initCall: {
-				run: 'start_json_voicecall',
-				sig: 'openline1'
-			},
-			closeLine: {
-				run: 'hangup_json_call',
-				sig : 'closeline1'
-			}		
-		},
-		line2: {
-			status: null,
-			openLine: {
-				run: 'start_json_voicecall',
-				sig: 'openline2'
-			},
-			closeLine: {
-				run: 'hangup_json_call',
-				sig : 'closeline2'
-			}
-		}
-	};
-	Tele.setLineStatus = function(line, status, opt_args) {
-		console.log('set status line', arguments);
-	};
 	var req = request.create('calld', {
 		run: 'get_linestat_json'
 	});
 	req.send();
-	req.disposeInternal();
-	exports.exportSymbol('telephony', {
-		name: 'setLineStatus',
-		symbol: bind(Tele.setLineStatus, Tele)
-	} )
 	return Tele;
 });

@@ -30,8 +30,8 @@ define(function (){
 				if (this.json['event']['key'] === 'settz|GMT+5') return;
 				if (RemoteKeyHandler !== null ) RemoteKeyHandler(this.json['event']['key']);
 			} else if ( this.json['header']['method'] === 'telephony') {
+				console.log('Received update for phone');
 				window.exportedSymbols['telephony']['setLineStatus'](this.json['event']);
-//				console.log(this.json);
 			}
 		} else {
 			console.log('No match yet for this packet', this.json);

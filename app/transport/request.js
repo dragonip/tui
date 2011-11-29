@@ -18,7 +18,9 @@ define(['transport/requestdata', 'json/json', 'net/socket', 'dmc/smjs'], functio
 	 * Sends the request via the socket, first serializing it
 	 */
 	JSONRequest.prototype.send = function() {
+		console.log(this.getRequestString());
 		smjs.jsoncmd(this.getRequestString());
+		this.disposeInternal();
 	};
 	/**
 	 * Disposes the data it uses (calling the actual request dispose methods
