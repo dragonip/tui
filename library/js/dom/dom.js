@@ -4,9 +4,8 @@
  */
 define(['dom/string',
 	    'types/types',
-	    'utils/static',
 	    'dom/attributes'
-	    ], function(stringmodule, types, mstatic, attr) {
+	    ], function(stringmodule, types, attr) {
 	var nextid = 1;
 	var can_store_data = (document.body.dataset ? true : false);
 
@@ -72,7 +71,7 @@ define(['dom/string',
 				if (a === null) {
 					throw {
 						name: 'DOMError',
-						message: mstatic.concat(mstatic.errors.cannotCreateElement, tag)
+						message: "Cannot create element"
 					};
 				}
 				if (types.assert(opts, 'object')) {
