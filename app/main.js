@@ -69,8 +69,9 @@ require(['ui/throbber'], function(t) {
 		'dmc/dmc', 
 		'shims/bind', 
 		'ui/player',
-		'transport/response'
-	], function(globalevents, classes, dom, Dialogs, dmc, bind, player, response ) {
+		'transport/response',
+		'appdebug/preload'
+	], function(globalevents, classes, dom, Dialogs, dmc, bind, player, response, preloads ) {
 //		Let the response handler for transport layer know where to direct key presses on the remote
 		response.setRemoteKeyHandler(globalevents.defaultEventAccepter);
 //		Load images offscreen after we have loaded the deps to avoid trapping the JS in the max Concurent Reqs of the browsser
@@ -373,16 +374,26 @@ require(['ui/throbber'], function(t) {
 		dom.adopt(tui.panels.bottom, tui.panels.infoBlock);
 		dom.adopt(tui.panels.top);
 		dom.adopt(tui.panels.bottom);
+		function preloadApps() {
+			console.log(preloads)
+			require(preloads.preloadsModules, function(varargs) {
+				console.log('Modules loaded...')
+			});
+		}
+		
 		function loadTUI() {
 			require(['ui/simplescreenselector', 'dmc/dmc'], function(Mappsel, Mdmc) {
 				require(['transport/response'], function(response) {
 //					window.transportReceiver = function(JSONString) {
 //						response.recall(JSONString);
 //					};
-					require(['app/paths/stb.js', 'data/applist', 'ui/player', 'tpl/infobuttons'], function(paths, apps, player, itpl) {
+					require(['app/paths/stb.js', 'data/applist', 'ui/player', 'tpl/infobuttons', 'ui/telephone'], function(paths, apps, player, itpl, Phone) {
 						tui.player = player;
 						tui.options.paths = paths;
-						tui.loadIndicator.hide();
+						tui.phone = Phone;
+						preloadApps();
+						console.log("we are ready, go now....");
+						tui.loadIndicator.hide();						
 //						Signal to backend that we are ready to receive signals
 						alert("app://dmcready");
 						tui.loadApp({

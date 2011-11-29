@@ -1,0 +1,3 @@
+define({
+	preloadsModules: ['apps/telefony']
+});
