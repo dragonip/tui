@@ -42,6 +42,15 @@ define({
 		}
 	},
 	screens: {
+		iptv: {
+			panels: {
+				bottom: {
+					info: 'Show EPG',
+					ok: 'Play',
+					playPause: 'Show menu'
+				}
+			}
+		},
 		callcenter: {
 			panels: {
 				bottom: {
