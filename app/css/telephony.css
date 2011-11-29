@@ -673,31 +673,31 @@
 }
 .telephonyChooser .icon .voiceMailC {
 	background-image: url('app/imgs/telephonyIcons.png');
-	background-position: left -3px;
+	background-position: -3px -3px;
 	background-repeat:no-repeat;
 	z-index: 5;
 }
 .telephonyChooser .icon .callHistoryC {
 	background-image: url('app/imgs/telephonyIcons.png');
-	background-position: left -205px;
+	background-position: -3px -205px;
 	background-repeat:no-repeat;
 	z-index: 5;
 }
 .telephonyChooser .icon .callCenterC {
 	background-image: url('app/imgs/telephonyIcons.png');
-	background-position: left -103px;
+	background-position: -3px -103px;
 	background-repeat:no-repeat;
 	z-index: 5;
 }
 .telephonyChooser .icon .phonebookC{
 	background-image: url('app/imgs/telephonyIcons.png');
-	background-position: left -303px;
+	background-position: -3px -303px;
 	background-repeat:no-repeat;
 	z-index: 5;
 }
 .telephonyChooser .icon .sendSMSC {
 	background-image: url('app/imgs/telephonyIcons.png');
-	background-position: left -405px;
+	background-position: -3px -405px;
 	background-repeat:no-repeat;
 	z-index: 5;
 }
