@@ -26,14 +26,25 @@ define([
 	inherit(Mini, Parent);
 	Mini.remoteKeys_ = ['left', 'right', 'up', 'down', 'ok', 'return', 'zero','one','two','three','four','five','six','seven','eight','nine', 'delete'];
 	Mini.prototype.render = function (renderIn) {
-		if (this.template_ !== null) {
-			this.dom_ = dom.getInnerNodes(this.template_.render({
-				things: this.master.getData(this.name),
-				header: strings.screens[this.name].list.header,
-				body: strings.screens[this.name].list.body
-			}));
+		var mydom = dom.getInnerNodes(this.template_.render({
+			things: this.master.getData(this.name),
+			header: strings.screens[this.name].list.header,
+			body: strings.screens[this.name].list.body
+		}));
+		if (this.dom_ && this.dom_.parentNode) {
+			this.dom_.parentNode.replaceChild(mydom, this.dom_)
+		} else {
+			dom.adopt(renderIn, mydom);
 		}
-		dom.adopt(renderIn, this.dom_);
+		this.dom_= mydom;
+//		if (this.template_ !== null) {
+//			this.dom_ = dom.getInnerNodes(this.template_.render({
+//				things: this.master.getData(this.name),
+//				header: strings.screens[this.name].list.header,
+//				body: strings.screens[this.name].list.body
+//			}));
+//		}
+//		dom.adopt(renderIn, this.dom_);
 	};
 	Mini.prototype.attachEvents = function(bool, options) {
 		VisualApp.prototype.attachEvents.call(this, bool);
