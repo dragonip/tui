@@ -66,12 +66,11 @@ require(['ui/throbber'], function(t) {
 		'dom/classes', 
 		'dom/dom', 
 		'ui/popup', 
-		'dmc/dmc', 
 		'shims/bind', 
 		'ui/player',
 		'transport/response',
 		'appdebug/preload'
-	], function(globalevents, classes, dom, Dialogs, dmc, bind, player, response, preloads ) {
+	], function(globalevents, classes, dom, Dialogs, bind, player, response, preloads ) {
 //		Let the response handler for transport layer know where to direct key presses on the remote
 		response.setRemoteKeyHandler(globalevents.defaultEventAccepter);
 //		Load images offscreen after we have loaded the deps to avoid trapping the JS in the max Concurent Reqs of the browsser
@@ -90,7 +89,6 @@ require(['ui/throbber'], function(t) {
 			signals: {
 				restoreEventTree: function() {
 					response.setRemoteKeyHandler(globalevents.defaultEventAccepter);
-//					dmc.onKeyPress(globalevents.defaultEventAccepter);
 					this.eventsAreFetched = false;
 				},
 				eventsAreFetched: false
@@ -123,7 +121,6 @@ require(['ui/throbber'], function(t) {
 				this.rerouteEventsToPanel();
 			},
 			stealEvents: function(newManager) {
-//				dmc.onKeyPress(newManager);
 				response.setRemoteKeyHandler(newManager);
 				this.signals.eventsAreFetched = true;
 			},
@@ -210,7 +207,6 @@ require(['ui/throbber'], function(t) {
 						break;
 					case 'restore-event-stack':
 						tui.signals.restoreEventTree();
-//						dmc.onKeyPress(globalevents.defaultEventAccepter);
 						break;
 					}
 				}
@@ -382,7 +378,7 @@ require(['ui/throbber'], function(t) {
 		}
 		
 		function loadTUI() {
-			require(['ui/simplescreenselector', 'dmc/dmc'], function(Mappsel, Mdmc) {
+			require(['ui/simplescreenselector'], function(Mappsel) {
 				require(['transport/response'], function(response) {
 //					window.transportReceiver = function(JSONString) {
 //						response.recall(JSONString);
