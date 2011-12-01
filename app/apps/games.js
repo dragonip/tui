@@ -1,12 +1,14 @@
 define([
 	'utils/framedapp',
-	'data/static-strings'
-], function(App, strings){
+	'data/static-strings',
+	'model/listmodel'
+], function(App, strings, LM){
 	var a = new App({
 		name: 'games',
 		shouldJump: false,
 		itemWidth: 220,
-		itemHeight: 190
+		itemHeight: 190,
+		datamodel: LM
 	});
 	a.hints = {
 		general: {

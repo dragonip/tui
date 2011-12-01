@@ -113,7 +113,7 @@ define([
 				return;
 			}
 		}
-		var play_command = (obj.player? 'play_tube':'play')
+		var play_command = (obj.player? 'play_youtube':'play')
 		var newreq = request.create(play_command, {url: obj.playURI});
 //		response.register(newreq, bind(this.requestResultHandle, this) );
 		newreq.send();

@@ -13,7 +13,7 @@ require.config({
 		"net": "../library/js/net",
 		"json": "../library/js/json",
 		"loader": "../library/js/loader",
-		"host": "../library/js/nost",
+		"host": "../library/js/host",
 		"env/exports": "../library/js/env/exports",
 		"dom": "../library/js/dom",
 		"debug": "../library/js/debug",
@@ -383,7 +383,7 @@ require(['ui/throbber'], function(t) {
 //					window.transportReceiver = function(JSONString) {
 //						response.recall(JSONString);
 //					};
-					require(['app/paths/stb.js', 'data/applist', 'ui/player', 'tpl/infobuttons', 'ui/telephone'], function(paths, apps, player, itpl, Phone) {
+					require(['app/paths/jsonpaths.js', 'data/applist', 'ui/player', 'tpl/infobuttons', 'ui/telephone'], function(paths, apps, player, itpl, Phone) {
 						tui.player = player;
 						tui.options.paths = paths;
 						tui.phone = Phone;

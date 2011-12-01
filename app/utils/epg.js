@@ -116,8 +116,10 @@ define([
 			things: this.epgdata
 		});
 		this.dom.innerHTML = this.dom_;
-		classes.addClasses(dom.$$('.epgItem', this.dom)[this.current], 'epg-selected');
-		this.Scrollable.scroll();
+		if ( this.epgdata.length > 0 ) {
+			classes.addClasses(dom.$$('.epgItem', this.dom)[this.current], 'epg-selected');
+			this.Scrollable.scroll();
+		}
 	};
 	/**
 	* Sets the selection focus (visual) on the currently selected item in the listing

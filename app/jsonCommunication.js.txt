@@ -2,7 +2,7 @@
 	header: {
 		cb: "window.GlobalFunction",
 		tag: "unique ID",
-		method: "get_url|request|play|stop|pause|calld|     media|remote",
+		method: "get_url|request|play|play_youtube|stop|pause|calld|     media|remote",
 		transport: "javascript|socket",
 		type: "request|event|reply|response",
 		mode: "sync|async"

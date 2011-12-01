@@ -80,21 +80,21 @@ define([
 			dom.dispose(bm);
 		}
 	};
-	MosaicPresentation.prototype.show = function(cont) {
+	MosaicPresentation.prototype.show = function(cont, force) {
 		this.app.fire('show-start');
 		if (typeof cont !== 'undefined' && cont !== null)
 			this.container = cont;
-		this.rasterize_();
+		this.rasterize_(undefined, force);
 		this.app.fire('show-complete');
 	};
 	//
 	// TODO: Make sure this does nto break once we start actually unload data to save mem
 	// 
-	MosaicPresentation.prototype.rasterize_ = function(idx) {
+	MosaicPresentation.prototype.rasterize_ = function(idx, force) {
 		if (this.container === null) {
 			return;
 		}
-		if (!this.isRendered_) {
+		if (!this.isRendered_ || force) {
 			if (typeof idx === 'undefined') idx = 0;
 			this.container.innerHTML = this.template.rasterize(this.app.model.get('list'),this.app.name);
 			this.dom = this.container.firstChild;

@@ -13,7 +13,15 @@ buf.push('>');
 buf.push('<div');
 buf.push(attrs({ 'data-sequence':(i), "class": ('item '+ (alterClass ? 'larger':'regular')) }));
 buf.push('>');
- if (things[i].thumbnail.length < 5 )
+ if (things[i].isDir !== false)
+{
+buf.push('<div');
+buf.push(attrs({ "class": ('imgcont') }));
+buf.push('><img');
+buf.push(attrs({ 'src':("app/imgs/folder.png") }));
+buf.push('/></div>');
+}
+ else if (things[i].thumbnail.length < 5 )
 {
 buf.push('<div');
 buf.push(attrs({ "class": ('imgcont') }));

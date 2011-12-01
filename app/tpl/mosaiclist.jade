@@ -2,7 +2,10 @@ div.tui-mosaic.list-container(style="width:"+ w, data-appid=id)
 	- if (things.length > 0)
 		- for (var i = 0; i < things.length; i++ )
 			div(class='item '+ (alterClass ? 'larger':'regular'), data-sequence=i)
-				- if (things[i].thumbnail.length < 5 )
+				- if (things[i].isDir !== false)
+					div.imgcont
+						img(src="app/imgs/folder.png")
+				- else if (things[i].thumbnail.length < 5 )
 					div.imgcont
 						div.default_icon.screen_default_icon_size
 				- else

@@ -24,6 +24,7 @@ define(['types/types', 'array/array'], function(types, array) {
 		 * @param {Array|String} Supported are two type of parameters, array that contains the strings for class names to be added or arbitary length of arguments as strings
 		 */
 		addClasses: function(element, var_arg) {
+			if (element === null) return;
 			var args;
 			if (!types.assert(var_arg, 'array')) {
 				args = Array.prototype.slice.call(arguments, 1);

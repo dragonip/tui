@@ -1,4 +1,11 @@
-define(['types/types', 'utils/baseapp', 'dom/dom', 'utils/events', 'dom/attributes', , 'text!css/start.css', 'text!tpl/start.txt', 'loader/loader'], function(types, appeng, dom, events, domattr, css, html, loader) {
+define(['types/types',
+	'utils/baseapp', 
+	'dom/dom', 
+	'utils/events', 
+	'dom/attributes',
+	'text!css/start.css', 
+	'text!tpl/start.txt', 
+	'loader/loader'], function(types, appeng, dom, events, domattr, css, html, loader) {
 	loader.loadCSSFromText(css, 'startCSS');
 	var APP = appeng({
 		config: {

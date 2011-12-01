@@ -21,7 +21,6 @@ define([
 	inherit(GamesApp, ListApp);
 	GamesApp.prototype.onPlayRequest = function() {
 		var game = this.model.getItem();
-		console.log(game);
 		this.startGame(game);
 		
 	};

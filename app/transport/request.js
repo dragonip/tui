@@ -1,4 +1,4 @@
-define(['transport/requestdata', 'json/json', 'net/socket', 'dmc/smjs'], function(request, json, socket, smjs) {
+define(['transport/requestdata', 'json/json', 'dmc/smjs'], function(request, json, smjs) {
 	/**
 	* Wrapper for JSON requests, it only provides the socket wrapper if needed, used only in browsers, will be stripped off when building
 	* @param {!String} run The method to set in the header

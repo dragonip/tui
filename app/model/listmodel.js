@@ -4,8 +4,9 @@ define([
 	'oop/idisposable',
 	'oop/inherit',
 	'json/json',
-	'net/simplexhr'
-], function(types, array, Disposable, inherit, json, xhr) {
+	'net/simplexhr',
+	'shims/bind'
+], function(types, array, Disposable, inherit, json, xhr, bind) {
 	
 	var Storage = function(app) {
 		Disposable.call(this);
@@ -20,14 +21,15 @@ define([
 		this.isLoaded = false;
 		this.pointer = null;
 		this.isLoading = false;
+		this.bound = bind(this.loadDir, this)
 	};
 	inherit(Storage, Disposable);
 	Storage.prototype.loadData = function(o) {
 //		debugger;
 		var url = o.url || tui.options.paths.getPath(o.name, o.type);
+//		url = url + "&newif=1";
 		var that = this;
 		xhr.get(url, function(text) {
-			//that.load(text, o);
 			that.load(text, o);
 		}, {
 			parse: true
@@ -81,44 +83,32 @@ define([
 	};
 	Storage.prototype.enterDir = function() {
 		var item = this.getItem();
-		if (types.assert(item.isDir,'string')) {
+		var url = {};
+		if (types.assert(item.isDir,'object')) {
 			this.isLoading = true;
+			for (var k in item.isDir) {
+				url[k] = item.isDir[k]
+			};
+			url.run = 'folder_list_json';
+			url.newif = 1;
 			this.loadData({
-				url: item.isDir,
+				url: url,
 				type: 'folder',
-				callback: (function(self) {
-					return function(data) {
-						//Store the data array
-						self.data.dirs[self.pointer[self.currentIndex].id] = data;
-						//Store the history entry
-						self.history.push( {
-							dir: self.pointer,
-							index: self.currentIndex
-						});
-						//Change current position
-						self.pointer = self.data.dirs[self.pointer[self.currentIndex].id];
-						self.app.fire('data-load-end', {
-							type: 'folder'
-						});
-						self.isLoading = false;
-						item.isDir = true;
-					}
-				}(this))
+				callback: this.bound
 			});
 			return true;
-		} else if (item.isDir === true ){ 
-			//dir is already loaded, just show it
-			this.history.push({
-				dir: this.pointer,
-				index: this.currentIndex
-			});
-			this.pointer = this.data.dirs[this.pointer[this.currentIndex].id];
-			this.app.fire('data-load-end', {
-				type: 'folder'
-			});
 		} else {
 			return false;
 		}	
+	};
+	Storage.prototype.loadDir = function(data) {
+		this.data.dirs[this.pointer[this.currentIndex].id] = data;
+		this.history.push({
+			dir: this.pointer,
+			index: this.currentIndex
+		});
+		this.pointer = this.data.dirs[this.pointer[this.currentIndex].id];
+		this.isLoading = false;
 	};
 	Storage.prototype.getItem = function(i) {
 		var ii = (types.assert(i, 'number'))?i:this.currentIndex;
@@ -143,7 +133,6 @@ define([
 		}
 		switch (o.type) {
 			case 'list':
-				
 				this.data.list = res;
 				if (array.isEmpty(this.history)) this.pointer = this.data.list;
 				this.isLoaded = true;

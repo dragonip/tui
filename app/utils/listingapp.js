@@ -1,7 +1,7 @@
 define([
 	'oop/inherit',
 	'utils/visualapp',
-	'model/listmodel',
+	'model/listmodel2',
 	'view/mosaicpresentation',
 	'shims/bind',
 	'net/simplexhr',
@@ -58,7 +58,7 @@ define([
 		if (data.type === 'list') {
 			this.fire('start-ready');
 		} else if (data.type === 'folder') {
-			this.presentation.show();
+			this.presentation.show(undefined, true);
 			if (typeof data.index !== 'undefined') this.presentation.activate(data.index);
 		} 
 	};
