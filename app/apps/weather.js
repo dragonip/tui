@@ -1,14 +1,18 @@
 define([
 	'oop/inherit',
 	'utils/visualapp',
-	'net/simplexhr',
 	'shims/bind',
 	'env/exports',
 	'loader/loader',
 	'tpl/weather',
-	'text!css/weather.css'
-], function(inherit, VisualApp, xhr, bind, exports, loader, template, css){
+	'text!css/weather.css',
+	'transport/request',
+//	'transport/response'
+	'transport/grouprequest'
+], function(inherit, VisualApp, bind, exports, loader, template, css, request, GroupRequest){
 	loader.loadCSSFromText(css);
+	var units_ = '1';
+	var city_ = '104164';
 	var Weather = function(options) {
 		VisualApp.call(this, options);
 		this.forecast = null;
@@ -29,6 +33,21 @@ define([
 			this.fire('start-ready');
 		}
 	};
+	Weather.prototype.cityLoaded_ = false;
+	Weather.prototype.unitsLoaded_ = false;
+	Weather.prototype.loadJSON = function(results) {
+		if (results[0].status.toLowerCase()==='ok') {
+			this.city = results[0].content;
+		} else {
+			this.city = city_;
+		}
+		if (results[1].status.toLowerCase() === 'ok' ) {
+			this.units = results[1].content;
+		} else {
+			this.units = units_;
+		}
+		this.loadData([this.units, this.city]);
+	};
 	Weather.prototype.onShowRequested = function() {
 		this.dom_ = template.render({
 			things: this.forecast['forecastList'],
@@ -38,18 +57,14 @@ define([
 		this.container.innerHTML = this.dom_;
 	};
 	Weather.prototype.loadData = function(data) {
-		var units = '1';
-		var city = '104164'
 		if (data) {
-			if (data.length > 0) {
-				if (data[0] === '0') units = 0;
-				if (typeof data[1] === 'string' && data[1].length > 1 ) city = data[1];
-			}
-			loader.loadJSONP('weatherlocation', 'http://i.wxbug.net/REST/Direct/GetLocation.ashx?api_key=u2bwf83unq43dt66ugm6t2fa&nf&f=exportedSymbols.weather.locationInfo&city=' + city);
-			loader.loadJSONP('weatherinfo', 'http://i.wxbug.net/REST/Direct/GetForecast.ashx?api_key=u2bwf83unq43dt66ugm6t2fa&nf=4&f=exportedSymbols.weather.load&city=' + city + '&units='+ units);
+			loader.loadJSONP('weatherlocation', 'http://i.wxbug.net/REST/Direct/GetLocation.ashx?api_key=u2bwf83unq43dt66ugm6t2fa&nf&f=exportedSymbols.weather.locationInfo&city=' + this.city);
+			loader.loadJSONP('weatherinfo', 'http://i.wxbug.net/REST/Direct/GetForecast.ashx?api_key=u2bwf83unq43dt66ugm6t2fa&nf=4&f=exportedSymbols.weather.load&city=' + this.city + '&units='+ this.units);
 			return;
 		}
-		xhr.getMany([tui.options.paths.getPath(this.name, 'units'), tui.options.paths.getPath(this.name, 'city')], bind(this.loadData, this));
+		var req = request.create('calld', tui.options.paths.getPath(this.name, 'units'));
+		var req2 = request.create('calld', tui.options.paths.getPath(this.name, 'city'));
+		var a = new GroupRequest(bind(this.loadJSON, this), req2, req);
 	};
 	Weather.prototype.setLocationInfo = function(json) {
 		this.location = json;
@@ -87,6 +102,10 @@ define([
 		delete this.dom_;
 		delete this.forecast;
 		delete this.location;
+		delete this.city;
+		delete this.units;
+		delete this.cityLoaded_;
+		delete this.unitsLoaded_;
 	};
 	var a = new Weather({
 		name: 'weather'

@@ -33,23 +33,23 @@ define({
 		apptag: 'youtube',
 		module: 'apps/youtube'
 	},
-	uvideo: {
-		name: 'user videos',
-		apptag: 'uvideo',
-		module: 'apps/start',
-		icon: 'imgs/start_screen_icon.png'
-	},
-	settings: {
-		name: 'Settings',
-		apptag: 'settings',
-		module: 'apps/settings',
-		icon: 'imgs/start_screen_icon.png'
-	},
-	phone: {
-		name: 'phone',
-		apptag: 'phone',
-		module: 'apps/telefony'
-	},
+//	uvideo: {
+//		name: 'user videos',
+//		apptag: 'uvideo',
+//		module: 'apps/start',
+//		icon: 'imgs/start_screen_icon.png'
+//	},
+//	settings: {
+//		name: 'Settings',
+//		apptag: 'settings',
+//		module: 'apps/settings',
+//		icon: 'imgs/start_screen_icon.png'
+//	},
+//	phone: {
+//		name: 'phone',
+//		apptag: 'phone',
+//		module: 'apps/telefony'
+//	},
 	radio: {
 		name: 'RADIO',
 		apptag: 'radio',
