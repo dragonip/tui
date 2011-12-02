@@ -10,7 +10,9 @@ div.tui-list.list-container(style="width:"+ w, data-appid=id)
 					div.description!= "Time:" + things[i].time
 				- if (things[i].cost)
 					div.description!= "Cost:" + things[i].cost
-			- if (things[i].thumbnail !== null)
+			- if (things[i].isDir !== false) 
+				div.rightCont-folder
+			- else if (things[i].thumbnail !== null)
 				div.rightCont
 					img.img_thumb(src=things[i].thumbnail)
 			ul.channel-settings-icons

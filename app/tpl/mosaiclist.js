@@ -13,15 +13,7 @@ buf.push('>');
 buf.push('<div');
 buf.push(attrs({ 'data-sequence':(i), "class": ('item '+ (alterClass ? 'larger':'regular')) }));
 buf.push('>');
- if (things[i].isDir !== false)
-{
-buf.push('<div');
-buf.push(attrs({ "class": ('imgcont') }));
-buf.push('><img');
-buf.push(attrs({ 'src':("app/imgs/folder.png") }));
-buf.push('/></div>');
-}
- else if (things[i].thumbnail.length < 5 )
+ if (things[i].thumbnail.length < 5 )
 {
 buf.push('<div');
 buf.push(attrs({ "class": ('imgcont') }));
@@ -64,7 +56,7 @@ buf.push(attrs({ "class": ('icon') + ' ' + ('recordable') }));
 buf.push('></li>');
 }
 buf.push('</ul>');
-if (typeof things[i].id === 'number' )
+ if (typeof things[i].id === 'number' )
 {
 buf.push('<div');
 buf.push(attrs({ "class": ('object-index') }));
@@ -73,10 +65,16 @@ var __val__ = things[i].id
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div>');
 }
+ if (things[i].isDir !== false)
+{
+buf.push('<div');
+buf.push(attrs({ "class": ('folder-icon') }));
+buf.push('></div>');
+}
 buf.push('</div>');
 }
 }
- else 
+ else
 {
 buf.push('<div');
 buf.push(attrs({ "class": ('no-content') }));

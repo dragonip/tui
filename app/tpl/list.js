@@ -51,7 +51,13 @@ buf.push(null == __val__ ? "" : __val__);
 buf.push('</div>');
 }
 buf.push('</div>');
- if (things[i].thumbnail !== null)
+ if (things[i].isDir !== false) 
+{
+buf.push('<div');
+buf.push(attrs({ "class": ('rightCont-folder') }));
+buf.push('></div>');
+}
+ else if (things[i].thumbnail !== null)
 {
 buf.push('<div');
 buf.push(attrs({ "class": ('rightCont') }));

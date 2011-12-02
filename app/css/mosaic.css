@@ -211,4 +211,13 @@ div[data-appid="aod"] .item .default_icon {
 	background-image: url('app/imgs/icon_set.png');
 	background-position: center -508px;
 }
+.tui-mosaic div.folder-icon {
+        background-image: url('app/imgs/folder.png');
+        background-size: cover;
+        position: absolute;
+        width: 40px;
+        height: 30px;
+        right: 11px;
+        top: 74px;      
+}
 
