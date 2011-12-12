@@ -15,7 +15,7 @@ buf.push(attrs({ "class": (((things[i].thumbnail !== null)? "leftCont" : "leftCo
 buf.push('><h1');
 buf.push(attrs({ "class": ('number_id') }));
 buf.push('>');
-var __val__ = things[i].sortIndex
+var __val__ = things[i].id
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</h1><h2');
 buf.push(attrs({ "class": ('item_name') }));
@@ -50,6 +50,15 @@ var __val__ = "Cost:" + things[i].cost
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div>');
 }
+ if (things[i].size) 
+{
+buf.push('<div');
+buf.push(attrs({ "class": ('description') }));
+buf.push('>');
+var __val__ = "Size:" + things[i].size
+buf.push(null == __val__ ? "" : __val__);
+buf.push('</div>');
+}
 buf.push('</div>');
  if (things[i].isDir !== false) 
 {
@@ -57,7 +66,7 @@ buf.push('<div');
 buf.push(attrs({ "class": ('rightCont-folder') }));
 buf.push('></div>');
 }
- else if (things[i].thumbnail !== null)
+ else if (things[i].thumbnail.length > 5)
 {
 buf.push('<div');
 buf.push(attrs({ "class": ('rightCont') }));

@@ -29,6 +29,9 @@ define({
 			skipParametrize: true,
 			list: "app/apps/games/list.js"
 		},
+		uservideo: {
+			list: "uvideo_json_list"
+		},
 		weather: {
 			units: {
 				run: 'get_cfgval_json',

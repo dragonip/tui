@@ -33,12 +33,11 @@ define({
 		apptag: 'youtube',
 		module: 'apps/youtube'
 	},
-//	uvideo: {
-//		name: 'user videos',
-//		apptag: 'uvideo',
-//		module: 'apps/start',
-//		icon: 'imgs/start_screen_icon.png'
-//	},
+	uservideo: {
+		name: 'USERVIDEO',
+		apptag: 'uservideo',
+		module: 'apps/uvideo',
+	},
 //	settings: {
 //		name: 'Settings',
 //		apptag: 'settings',

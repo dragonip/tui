@@ -148,6 +148,15 @@
 }
 
 
-
+.tui-list .rightCont-folder {
+	float: right;
+	width: 39px;
+	height: 40px;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	background: url(app/imgs/folder.png) no-repeat;
+	background-size: cover;
+	margin: 3px 3.8% 0px 0%;
+}
 
 

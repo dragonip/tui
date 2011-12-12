@@ -1,0 +1,23 @@
+.chanel-input-main {
+	position: absolute;
+	width: 100%;
+	top: 0;
+}
+.chanel-input {
+	margin: 27% auto;
+	background: black;
+	border-radius: 5px;
+	width: 490px;
+	padding: 2px 2px 2px 2px;
+}
+.chanel-input  .input {
+	margin: auto;
+	height: 75px;
+	border-radius: 5px;
+	background: grey;
+	text-align: center;
+	color: white;
+	font-size: 470%;
+	border: 2px solid white;
+	line-height: 1;
+}

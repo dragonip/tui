@@ -69,8 +69,9 @@ require(['ui/throbber'], function(t) {
 		'shims/bind', 
 		'ui/player',
 		'transport/response',
-		'appdebug/preload'
-	], function(globalevents, classes, dom, Dialogs, bind, player, response, preloads ) {
+		'appdebug/preload',
+		'utils/fis'
+	], function(globalevents, classes, dom, Dialogs, bind, player, response, preloads, fis ) {
 //		Let the response handler for transport layer know where to direct key presses on the remote
 		response.setRemoteKeyHandler(globalevents.defaultEventAccepter);
 //		Load images offscreen after we have loaded the deps to avoid trapping the JS in the max Concurent Reqs of the browsser
@@ -93,6 +94,7 @@ require(['ui/throbber'], function(t) {
 				},
 				eventsAreFetched: false
 			},
+			fastIndexSelector: fis.create(),
 			keyboardIgnoredKeys: [34, 8, 46, 37, 38, 39, 40, 13, 36],
 			defaultKeyboardInputHandler: function(ev) {
 				console.log(String.fromCharCode(ev.charCode));
@@ -103,6 +105,12 @@ require(['ui/throbber'], function(t) {
 			},
 			setKeyboardInputHandler: function(method) {
 				this.keyboardInputHandler_ = method;
+			},
+			fastSwitchChannels: function(up_down) {
+				if (up_down === 'down')
+					this.currentActiveApp.model.activateNextItem();
+				else 
+					this.currentActiveApp.model.activatePreviousItem();
 			},
 			globalPlayer: new player(),
 			mainContainer: dom.$('#maincontainer'),

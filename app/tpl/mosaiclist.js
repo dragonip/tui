@@ -56,7 +56,7 @@ buf.push(attrs({ "class": ('icon') + ' ' + ('recordable') }));
 buf.push('></li>');
 }
 buf.push('</ul>');
- if (typeof things[i].id === 'number' )
+ if (!/[^0-9]/.test(things[i].id))
 {
 buf.push('<div');
 buf.push(attrs({ "class": ('object-index') }));

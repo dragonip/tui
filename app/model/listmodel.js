@@ -71,8 +71,72 @@ define([
 				}
 			}
 		}
-		
 	};
+	Storage.prototype.selectByIndex = function(index) {
+		console.log('Selected index : ' +  index);
+		if (index < this.pointer.length) {
+			this.currentIndex = index;
+			this.app.presentation.activate(this.currentIndex);
+		}
+	};
+	/**
+	 * Finds the next item that is not a dir and play it (should be called only
+	 * in playback mode)
+	 *
+	 * @private
+	 */
+	Storage.prototype.activateNextItem = function() {
+		var index = this.currentIndex;
+		var found = null;		
+		for (index++ ; index < this.pointer.length; index++ ) {
+			if (this.pointer[index].isDir === false && this.pointer[index].id !== null) {
+				found = index;
+				break;
+			}
+		}
+		if (found === null) {
+			index = 0;
+			for (; index < this.currentIndex; index ++) {
+				if (this.pointer[index].isDir === false && this.pointer[index].id !== null) {
+					found = index;
+					break;
+				}
+			}
+		}
+		if (found === null ) {
+			console.log('There is no other channel available')
+		} else {
+			this.selectByIndex(found);
+			this.app.fire('try-play', this.getItem());
+			
+		}
+	}
+	Storage.prototype.activatePreviousItem = function() {
+		var index = this.currentIndex - 1, found = null;
+		for (; index >= 0; index--) {
+			if (this.pointer[index].isDir === false && this.pointer[index].id !== null) {
+				found = index;
+				console.log(JSON.stringify(this.pointer[index]));
+				break;
+			}
+		}
+		if (found === null) {
+			console.log('Not found, try from back ')
+			index = this.pointer.length-1;
+			for (; index > this.currentIndex; index--) {
+				if (this.pointer[index].isDir === false && this.pointer[index].id !== null) {
+					found = index;
+					break;
+				}
+			}
+		}
+		if (found === null) {
+			console.log('No prev channel to select');
+		} else {
+			this.selectByIndex(found);
+			this.app.fire('try-play', this.getItem());
+		}
+	}
 	Storage.prototype.outDir = function() {
 		var toLoad = this.history.pop();
 		this.pointer = toLoad.dir;
@@ -84,12 +148,11 @@ define([
 	Storage.prototype.enterDir = function() {
 		var item = this.getItem();
 		var url = {};
-		if (types.assert(item.isDir,'object')) {
+		if (item.isDir !== false) {
 			this.isLoading = true;
 			for (var k in item.isDir) {
 				url[k] = item.isDir[k]
 			};
-			url.run = 'folder_list_json';
 			url.newif = 1;
 			this.loadData({
 				url: url,

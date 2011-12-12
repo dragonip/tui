@@ -3,7 +3,7 @@
 		"id": ##obj_id##, //{Number} positive integer or 0 for directories
 		"sortIndex": ##index_id##, //{Number} positive integer or 0 for directories
 		"publishName": "##video_name##", //{String} 
-		"type": "", //{String} lowercase name (iptv, vod, ppv, aod, uservideo, radio, dir)
+		"type": "", //{String} lowercase name (iptv, vod, ppv, aod, uservideo, radio, dir, useraudio)
 		"thumbnail": "##logo_img##", //{String} Any URL in http[s] protocol or empty string
 		"isLocked": false,  //{Boolean} 
 		"isBookmarked": false, //{Boolean}

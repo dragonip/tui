@@ -7,7 +7,7 @@ define(function (){
 	};
 	Response.prototype.findCallback = function() {
 		var sid = this.json["header"]["tag"];
-//		console.log('Received packet', this.json);
+		console.log('Received packet', this.json);
 		if (this.json['header']['type'] == 'response') {
 			if (typeof Register[sid] !== 'undefined') {
 				if (!this.json["response"]) {

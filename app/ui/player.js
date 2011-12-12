@@ -2,8 +2,9 @@ define([
 	'transport/request',
 	'transport/response',
 	'shims/bind',
-	'data/static-strings'
-], function(request, response, bind, strings) {
+	'data/static-strings',
+	'utils/events'
+], function(request, response, bind, strings, events) {
 	/**
 	* Global player object to handle all playback in DSP
 	* @consructor
@@ -48,8 +49,10 @@ define([
 	* @param {Player.dspStates.*} state A state representation from DSP 
 	*/
 	Player.prototype.setState = function(state) {
+		
 		var old_state = this.state;
 		this.state = Player.dspStates[state];
+		console.log('**************PLAYER STATE UPDATE : ' + this.state)
 		if (old_state !== this.state) {
 			if (this.state === Player.STATES.STOPPED) {
 				tui.signals.restoreEventTree();
@@ -58,12 +61,20 @@ define([
 			}
 		}
 	};
+	Player.fastSwitchKeys = ['zero', 'one','two','three','four','five','six','seven','eight','nine'];
 	/**
 	* Handler for the remote events when they are routed to the played (i.e. state is playing/paused)
 	* @param {!String} key The remote key issued in remote/kbd
 	*/
 	Player.prototype.handleKeys = function(key) {
+		if (Player.fastSwitchKeys.indexOf(key)!==-1) {
+			events.defaultEventAccepter(key);
+		}
 		switch (key) {
+			case 'up':
+			case 'down':
+				tui.fastSwitchChannels(key)
+				break;
 			case 'stop':
 				this.stop();
 				break;

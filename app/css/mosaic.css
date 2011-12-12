@@ -85,7 +85,7 @@ html.browser .tui-mosaic.list-container {
 	margin-left: 5px;
 }
 .tui-mosaic .item.regular   img {
-    width: 130px;
+/*    width: 130px;*/
     height: 90px;
 }
 .tui-mosaic .item.larger img {

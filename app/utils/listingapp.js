@@ -9,6 +9,8 @@ define([
 ], function(inherit, VisualApp, ListModel, MosaicPresentation, bind, xhr, strings) {
 	var ListApp = function(options) {
 		VisualApp.call(this, options);
+		this.numericTimeout_ = null;
+		this.selectChannelIndex = '';
 		if (options.datamodel) {
 			this.model = new options.datamodel(this)
 		} else {
@@ -23,12 +25,6 @@ define([
 			func: bind(this.handlePlayButton, this),
 			attached: false
 		};
-		this.setFive= function(){this.presentation.activate(5-1);};
-		this.appEvents['five'] = {
-			name: 'five',
-			func: bind(this.setFive, this),
-			attached: false
-		};
 
 		this.on('start-requested', this.defaultStartRequested);
 		this.on('show-requested', this.onShowScreen);
@@ -39,7 +35,7 @@ define([
 		this.on('try-play', this.onPlayRequest);
 	};
 	inherit(ListApp, VisualApp);
-	ListApp.remoteKeys_ = ['left', 'right', 'up', 'down', 'chup', 'chdown', 'ok'];
+	ListApp.remoteKeys_ = ['left', 'right', 'up', 'down', 'chup', 'chdown', 'ok', 'zero', 'one','two','three','four','five','six','seven','eight','nine'];
 	ListApp.prototype.onShowComplete = function() {
 		this.attachEvents(true);
 	};
@@ -64,12 +60,47 @@ define([
 	};
 	ListApp.prototype.onShowScreen = function() {
 		this.presentation.show(this.container);
-	}
+	};
+	ListApp.numerics_ = ['zero', 'one','two','three','four','five','six','seven','eight','nine'];
 	ListApp.prototype.defaultRemoteKeyHandler = function(key) {
-		this.model.acceptEvent({
-			type: 'remote',
-			action: key
-		});
+		if (ListApp.numerics_.indexOf(key)!==-1) {
+			this.handleNumerics(key);
+		} else {
+			if (this.numericTimeout_ !== null) {
+				window.clearTimeout(this.numericTimeout_);
+				this.numericTimeout_ = null;
+				this.selectChannelIndex = '';
+			}
+			this.model.acceptEvent({
+				type: 'remote',
+				action: key
+			});
+		}
+	};
+	ListApp.prototype.handleNumerics = function(digit) {
+		var nDigit = ListApp.numerics_.indexOf(digit);
+		window.clearTimeout(this.numericTimeout_);
+		this.selectChannelIndex += nDigit.toString();
+		tui.fastIndexSelector.setContent(this.selectChannelIndex);
+		this.numericTimeout_ = window.setTimeout(bind(this.goToChannel, this), 2000);
+
+		
+	};
+	ListApp.prototype.goToChannel = function(channelIndex) {
+		tui.fastIndexSelector.exitDom();
+		console.log('Executing timeout')
+		var find = this.selectChannelIndex;
+		this.selectChannelIndex = '';
+		this.numericTimeout_ = null;
+		var data = this.model.get();
+		var i;
+		for (i = 0; i < data.length; i++) {
+			if (data[i].id == find) {
+				this.model.selectByIndex(i);
+				this.fire('try-play', this.model.getItem());
+				break;
+			}
+		}
 	};
 	ListApp.prototype.defaultStartRequested = function() {
 		if (!this.model.isLoaded) {
@@ -174,6 +205,7 @@ define([
 	ListApp.prototype.disposeInternal = function() {
 		this.constructor.superClass_.disposeInternal.call(this);
 		delete this.appEvents;
+		delete this.numericTimeout_;
 	};
 	return ListApp;
 });
