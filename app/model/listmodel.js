@@ -107,7 +107,6 @@ define([
 			console.log('There is no other channel available')
 		} else {
 			this.selectByIndex(found);
-			this.app.fire('try-play', this.getItem());
 			
 		}
 	}
@@ -134,7 +133,6 @@ define([
 			console.log('No prev channel to select');
 		} else {
 			this.selectByIndex(found);
-			this.app.fire('try-play', this.getItem());
 		}
 	}
 	Storage.prototype.outDir = function() {

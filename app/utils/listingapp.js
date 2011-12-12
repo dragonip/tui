@@ -82,7 +82,7 @@ define([
 		window.clearTimeout(this.numericTimeout_);
 		this.selectChannelIndex += nDigit.toString();
 		tui.fastIndexSelector.setContent(this.selectChannelIndex);
-		this.numericTimeout_ = window.setTimeout(bind(this.goToChannel, this), 2000);
+		this.numericTimeout_ = window.setTimeout(bind(this.goToChannel, this), 3000);
 
 		
 	};

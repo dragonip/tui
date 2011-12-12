@@ -12,7 +12,9 @@ define([
 	var Player = function() {
 		this.state = Player.STATES.STOPPED;
 		this.keyHandler = bind(this.handleKeys, this);
-
+		this.timeout_ = null;
+		this.history_;
+		this.current_;
 	};
 	Player.prototype.parentalPassword = '';
 	/**
@@ -61,6 +63,7 @@ define([
 			}
 		}
 	};
+
 	Player.fastSwitchKeys = ['zero', 'one','two','three','four','five','six','seven','eight','nine'];
 	/**
 	* Handler for the remote events when they are routed to the played (i.e. state is playing/paused)
@@ -73,7 +76,13 @@ define([
 		switch (key) {
 			case 'up':
 			case 'down':
-				tui.fastSwitchChannels(key)
+				events.defaultEventAccepter(key);
+				if (this.timeout_ !== null) {
+					window.clearTimeout(this.timeout_);
+				}
+				this.timeout_ = window.setTimeout(function() { 
+					tui.currentActiveApp.fire('try-play', tui.currentActiveApp.model.getItem());
+				}, 500);
 				break;
 			case 'stop':
 				this.stop();
@@ -86,10 +95,17 @@ define([
 					tui.signals.restoreEventTree();
 				}
 				break;
+			case 'recall':
+				this.alterChannels();
 			default:
 //				console.log('This is the player now accepting all events');
 				return;
 		}
+	};
+	Player.prototype.alterChannels = function() {
+		console.log(JSON.stringify(this.history_));
+		if (this.history_ && this.history_.length === 2)
+			this.play.apply(this, this.history_)
 	};
 	/**
 	* Returns the current state, should be compared to Player.STATES
@@ -105,6 +121,7 @@ define([
 	*/
 	Player.prototype.play = function(obj, password) {
 		console.log('Try to play uri:', obj, password);
+		var url;
 		if (obj.isLocked ) {
 			if (this.parentalPassword === '') {
 				var newreq = request.create('calld', {
@@ -124,10 +141,16 @@ define([
 				return;
 			}
 		}
-		var play_command = (obj.player? 'play_youtube':'play')
-		var newreq = request.create(play_command, {url: obj.playURI});
+		var play_command = (obj.player? 'play_youtube':'play');
+		this.addToHistory( [obj.playURI, password] );
+		url = (typeof obj === 'string') ? obj : obj.playURI;
+		var newreq = request.create(play_command, {url: url});
 //		response.register(newreq, bind(this.requestResultHandle, this) );
 		newreq.send();
+	};
+	Player.prototype.addToHistory = function(newSet) {
+		this.history_ = this.current_;
+		this.current_ = newSet;
 	};
 	/**
 	* Set the parent lock password to the one provided by the backend
