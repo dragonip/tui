@@ -70,8 +70,8 @@ require(['ui/throbber'], function(t) {
 		'ui/player',
 		'transport/response',
 		'appdebug/preload',
-		'utils/fis'
-	], function(globalevents, classes, dom, Dialogs, bind, player, response, preloads, fis ) {
+		'utils/osd'
+	], function(globalevents, classes, dom, Dialogs, bind, player, response, preloads, OSD ) {
 //		Let the response handler for transport layer know where to direct key presses on the remote
 		response.setRemoteKeyHandler(globalevents.defaultEventAccepter);
 //		Load images offscreen after we have loaded the deps to avoid trapping the JS in the max Concurent Reqs of the browsser
@@ -94,7 +94,7 @@ require(['ui/throbber'], function(t) {
 				},
 				eventsAreFetched: false
 			},
-			fastIndexSelector: fis.create(),
+			osdInstance: new OSD(),
 			keyboardIgnoredKeys: [34, 8, 46, 37, 38, 39, 40, 13, 36],
 			defaultKeyboardInputHandler: function(ev) {
 				console.log(String.fromCharCode(ev.charCode));
@@ -374,6 +374,7 @@ require(['ui/throbber'], function(t) {
 		tui.panels.infoBlock = dom.create('div', {
 			classes: 'tui-component tui-infoblock'
 		});
+		tui.systemClock = updateClock;
 		//Attach pannels
 		dom.adopt(tui.panels.bottom, tui.panels.infoBlock);
 		dom.adopt(tui.panels.top);

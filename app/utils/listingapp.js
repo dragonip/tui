@@ -81,13 +81,11 @@ define([
 		var nDigit = ListApp.numerics_.indexOf(digit);
 		window.clearTimeout(this.numericTimeout_);
 		this.selectChannelIndex += nDigit.toString();
-		tui.fastIndexSelector.setContent(this.selectChannelIndex);
+		tui.osdInstance.setContent(this.selectChannelIndex, 3);
 		this.numericTimeout_ = window.setTimeout(bind(this.goToChannel, this), 3000);
-
-		
 	};
 	ListApp.prototype.goToChannel = function(channelIndex) {
-		tui.fastIndexSelector.exitDom();
+
 		console.log('Executing timeout')
 		var find = this.selectChannelIndex;
 		this.selectChannelIndex = '';

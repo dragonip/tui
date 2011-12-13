@@ -38,12 +38,11 @@ define({
 		apptag: 'uservideo',
 		module: 'apps/uvideo',
 	},
-//	settings: {
-//		name: 'Settings',
-//		apptag: 'settings',
-//		module: 'apps/settings',
-//		icon: 'imgs/start_screen_icon.png'
-//	},
+	setup: {
+		name: 'SETUP',
+		apptag: 'setup',
+		module: 'apps/setup',
+	},
 //	phone: {
 //		name: 'phone',
 //		apptag: 'phone',

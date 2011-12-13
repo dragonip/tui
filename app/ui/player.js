@@ -15,6 +15,7 @@ define([
 		this.timeout_ = null;
 		this.history_;
 		this.current_;
+		this.log = [];
 	};
 	Player.prototype.parentalPassword = '';
 	/**
@@ -45,16 +46,29 @@ define([
 		playing: Player.STATES.PLAYING,
 		error: Player.STATES.STOPPED
 	};
+//	Player.prototype.setOSDState = function(state) {
+//		switch (state) {
+//			case 'started':
+//			case 'playing':
+//				tui.osdInstance.setContent(undefined, 'play');
+//				break;
+//			case 'buffering':
+//				tui.osdInstance.setContent(undefined, 'buffering');
+//				break;
+//			case 'paused':
+//				tui.osdInstance.setContent(undefined, 'pause')
+//		}
+//	}
 	/**
 	* Sets the current status of the player, act on change
 	* @private 
 	* @param {Player.dspStates.*} state A state representation from DSP 
 	*/
 	Player.prototype.setState = function(state) {
-		
 		var old_state = this.state;
+//		this.setOSDState(state);
 		this.state = Player.dspStates[state];
-		console.log('**************PLAYER STATE UPDATE : ' + this.state)
+		this.log.push('**************PLAYER STATE UPDATE : ' + this.state);
 		if (old_state !== this.state) {
 			if (this.state === Player.STATES.STOPPED) {
 				tui.signals.restoreEventTree();
@@ -76,7 +90,11 @@ define([
 		switch (key) {
 			case 'up':
 			case 'down':
-				events.defaultEventAccepter(key);
+				if (key === 'up') {
+					tui.currentActiveApp.model.activatePreviousItem();
+				} else {
+					tui.currentActiveApp.model.activateNextItem();
+				}
 				if (this.timeout_ !== null) {
 					window.clearTimeout(this.timeout_);
 				}
@@ -97,6 +115,23 @@ define([
 				break;
 			case 'recall':
 				this.alterChannels();
+				break;
+			case 'power': 
+//				var DEBUG = document.createElement('div');
+//				var log = '';
+//				for (var i = 0; i < this.log.length; i++) {
+//					log += this.log[i];
+//					log += '<br>';
+//				}
+//				DEBUG.innerHTML = log;
+//				DEBUG.style.position = 'absolute',
+//				DEBUG.style.top = 0;
+//				DEBUG.style.width = '640px';
+//				DEBUG.style.height = '480px';
+//				DEBUG.style.left = 0;
+//				DEBUG.style.backgroundColor = 'black';
+//				document.body.appendChild(DEBUG);
+				break;
 			default:
 //				console.log('This is the player now accepting all events');
 				return;
@@ -120,9 +155,15 @@ define([
 	* @param {?String} password The password the user has enetered when queried about the parental lock pass
 	*/
 	Player.prototype.play = function(obj, password) {
-		console.log('Try to play uri:', obj, password);
+		this.log.push('Try to play uri: '+ obj.playURI + ' , pass:' + password);
 		var url;
 		if (obj.isLocked ) {
+			//Prevent event stealing, set state manually so that when the event comes it 
+			//does not restore the event handler but leave it to the lock screen
+			if (this.state !== Player.STATES.STOPPED) {
+				this.state = Player.STATES.STOPPED;
+				this.stop();
+			}
 			if (this.parentalPassword === '') {
 				var newreq = request.create('calld', {
 					run: 'get_cfgval_json',
@@ -166,10 +207,10 @@ define([
 	* Check status and if it is different from internal stopped, attempt stop signal on transport layer
 	*/
 	Player.prototype.stop = function() {
-		if (this.state !== Player.STATES.STOPPED) {
+//		if (this.state !== Player.STATES.STOPPED) {
 			var newreq = request.create('stop', {});
 			newreq.send();
-		}
+//		}
 	};
 	/**
 	* Handle pause / unpause
@@ -191,7 +232,7 @@ define([
 	* @param {JSONObject} JSONObj The event object comming from transport layer ({event>state}-the player state)
 	*/
 	Player.prototype.handleEvent = function(JSONObj) {
-		console.log("Received JSON Obj for event in player", JSONObj, this);
+		this.log.push("Received JSON Obj for event in player: " + JSON.stringify(JSONObj));
 		this.setState(JSONObj.event.state);
 	};
 	
