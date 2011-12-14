@@ -1,29 +1,25 @@
-define([
-	'oop/inherit',
-	'utils/visualapp',
-	'model/listmodel2',
-	'view/mosaicpresentation',
-	'shims/bind',
-	'net/simplexhr',
-	'data/static-strings'
-], function(inherit, VisualApp, ListModel, MosaicPresentation, bind, xhr, strings) {
+define(['oop/inherit', 'utils/visualapp', 'model/listmodel2', 'view/mosaicpresentation', 'shims/bind',
+// 'net/simplexhr',
+'data/static-strings', 'transport/request', 'transport/response',
+'json/json'], 
+function(inherit, VisualApp, ListModel, MosaicPresentation, bind, strings, request, response, json) {
 	var ListApp = function(options) {
 		VisualApp.call(this, options);
 		this.numericTimeout_ = null;
 		this.selectChannelIndex = '';
-		if (options.datamodel) {
-			this.model = new options.datamodel(this)
+		if(options.datamodel) {
+			this.model = new options.datamodel(this);
 		} else {
-			this.model = new ListModel(this);	
+			this.model = new ListModel(this);
 		}
-		this.presentation = new MosaicPresentation(this, options.listType, options.itemWidth, options.itemHeight, options.shouldJump );
+		this.presentation = new MosaicPresentation(this, options.listType, options.itemWidth, options.itemHeight, options.shouldJump);
 		this.registerDisposable(this.model);
 		this.registerDisposable(this.presentation);
 		this.generateDefaultEvents();
-		this.appEvents['play'] = {
-			name: 'play',
-			func: bind(this.handlePlayButton, this),
-			attached: false
+		this.appEvents.play = {
+			name : 'play',
+			func : bind(this.handlePlayButton, this),
+			attached : false
 		};
 
 		this.on('start-requested', this.defaultStartRequested);
@@ -35,7 +31,7 @@ define([
 		this.on('try-play', this.onPlayRequest);
 	};
 	inherit(ListApp, VisualApp);
-	ListApp.remoteKeys_ = ['left', 'right', 'up', 'down', 'chup', 'chdown', 'ok', 'zero', 'one','two','three','four','five','six','seven','eight','nine', 'return'];
+	ListApp.remoteKeys_ = ['left', 'right', 'up', 'down', 'chup', 'chdown', 'ok', 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'return'];
 	ListApp.prototype.onShowComplete = function() {
 		this.attachEvents(true);
 	};
@@ -51,29 +47,30 @@ define([
 		this.attachEvents(false);
 	};
 	ListApp.prototype.onDataLoadEnd = function(data) {
-		if (data.type === 'list') {
+		if(data.type === 'list') {
 			this.fire('start-ready');
-		} else if (data.type === 'folder') {
+		} else if(data.type === 'folder') {
 			this.presentation.show(undefined, true);
-			if (typeof data.index !== 'undefined') this.presentation.activate(data.index);
-		} 
+			if( typeof data.index !== 'undefined')
+				this.presentation.activate(data.index);
+		}
 	};
 	ListApp.prototype.onShowScreen = function() {
 		this.presentation.show(this.container);
 	};
-	ListApp.numerics_ = ['zero', 'one','two','three','four','five','six','seven','eight','nine'];
+	ListApp.numerics_ = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
 	ListApp.prototype.defaultRemoteKeyHandler = function(key) {
-		if (ListApp.numerics_.indexOf(key)!==-1) {
+		if(ListApp.numerics_.indexOf(key) !== -1) {
 			this.handleNumerics(key);
 		} else {
-			if (this.numericTimeout_ !== null) {
+			if(this.numericTimeout_ !== null) {
 				window.clearTimeout(this.numericTimeout_);
 				this.numericTimeout_ = null;
 				this.selectChannelIndex = '';
 			}
 			this.model.acceptEvent({
-				type: 'remote',
-				action: key
+				type : 'remote',
+				action : key
 			});
 		}
 	};
@@ -86,14 +83,14 @@ define([
 	};
 	ListApp.prototype.goToChannel = function(channelIndex) {
 
-		console.log('Executing timeout')
+		console.log('Executing timeout');
 		var find = this.selectChannelIndex;
 		this.selectChannelIndex = '';
 		this.numericTimeout_ = null;
 		var data = this.model.get();
 		var i;
-		for (i = 0; i < data.length; i++) {
-			if (data[i].id == find) {
+		for( i = 0; i < data.length; i++) {
+			if(data[i].id == find) {
 				this.model.selectByIndex(i);
 				this.fire('try-play', this.model.getItem());
 				break;
@@ -101,10 +98,10 @@ define([
 		}
 	};
 	ListApp.prototype.defaultStartRequested = function() {
-		if (!this.model.isLoaded) {
+		if(!this.model.isLoaded) {
 			this.model.loadData({
-				name: this.name,
-				type: 'list'
+				name : this.name,
+				type : 'list'
 			});
 		} else {
 			this.fire('start-ready');
@@ -112,14 +109,17 @@ define([
 	};
 	//Add default events for mosaic, can be then overwritten by children
 	ListApp.prototype.generateDefaultEvents = function(list, boundFunction) {
-		if (!this.appEvents) this.appEvents = {};
-		if (!list) list = ListApp.remoteKeys_;
-		if (!boundFunction) boundFunction = bind(this.defaultRemoteKeyHandler, this);
-		list.forEach(bind(function(item){
+		if(!this.appEvents)
+			this.appEvents = {};
+		if(!list)
+			list = ListApp.remoteKeys_;
+		if(!boundFunction)
+			boundFunction = bind(this.defaultRemoteKeyHandler, this);
+		list.forEach(bind(function(item) {
 			this.appEvents[item] = {
-				name: item,
-				func: boundFunction,
-				attached: false
+				name : item,
+				func : boundFunction,
+				attached : false
 			};
 		}, this));
 	};
@@ -128,15 +128,15 @@ define([
 		var item = this.model.getItem(objIndex);
 		var options = [];
 		var actions = [];
-		if (item.isBookmarked) {
+		if(item.isBookmarked) {
 			options.push(strings.lists.unbookmark);
 			actions.push('unbookmark');
 		} else {
 			options.push(strings.lists.bookmark);
 			actions.push('bookmark');
 		}
-		if (item.rating !== 'X') {
-			if (item.isLocked) {
+		if(item.rating !== 'X') {
+			if(item.isLocked) {
 				options.push(strings.lists.unlock);
 				actions.push('unlock');
 			} else {
@@ -146,23 +146,23 @@ define([
 		}
 		options.push(strings.components.dialogs.cancel);
 		this.dialogInstance = {
-			index: objIndex,
-			object: item,
-			options: options,
-			actions: actions
+			index : objIndex,
+			object : item,
+			options : options,
+			actions : actions
 		};
 		tui.createDialog('optionlist', this.dialogInstance.options, bind(this.handleDialogSelection, this), strings.components.dialogs.select);
 	};
 	ListApp.prototype.handleDialogSelection = function(selectedIndex) {
 		var action;
-		if (this.dialogInstance) {
+		if(this.dialogInstance) {
 			this.dialogInstance.action = this.dialogInstance.actions[selectedIndex];
 			switch (this.dialogInstance.action) {
 				case 'lock':
 				case 'unlock':
 					tui.createDialog('password', true, bind(this.acceptPass, this), strings.components.dialogs.lock);
 					break;
-					
+
 				case 'bookmark':
 				case 'unbookmark':
 					this.acceptPass();
@@ -171,20 +171,27 @@ define([
 		}
 	};
 	ListApp.prototype.acceptPass = function(val) {
-		var url = tui.options.paths.getPath(this.name, this.dialogInstance.action) + '&id='+this.dialogInstance.object.id;
-		if (['lock','unlock'].indexOf(this.dialogInstance.action)!== -1){
-			url = url + '&password=' + val;
+		var urlconf = tui.options.paths.getPath(this.dialogInstance.action);
+		var url = {
+			'run' : urlconf.run,
+			'sig' : urlconf.sig,
+			'type' : this.name.toUpperCase(),
+			'id' : this.dialogInstance.object.id,
+			'newif': 1
+		};
+		if(['lock', 'unlock'].indexOf(this.dialogInstance.action) !== -1) {
+			url["password"] = val;
 		}
-		xhr.get(url, bind(this.handleUpdate, this, this.dialogInstance.index, this.dialogInstance.action), {
-			parse: true
-		});
+		var req = request.create('calld', url);
+		response.register(req, bind(this.handleUpdate, this, this.dialogInstance.index, this.dialogInstance.action));
+		req.send();
 		this.dialogInstance.object = null;
 		delete this.dialogInstance;
 	};
 	ListApp.prototype.handleUpdate = function(index, action, result) {
-		console.log(arguments);
 		var obj = this.model.getItem(index);
-		if (result && result.status === 'OK') {
+		var status = json.parse(result.content);
+		if(status && status.status === 'OK') {
 			switch (action) {
 				case 'lock':
 				case 'unlock':
@@ -197,11 +204,10 @@ define([
 			}
 			this.presentation.updateItem(index, obj);
 		} else {
-			tui.createDialog('optionlist', 
-				[strings.components.dialogs.ok], 
-				function(){}, strings.lists.actionFailed 
-			);
+			tui.createDialog('optionlist', [strings.components.dialogs.ok], function() {
+			}, strings.lists.actionFailed);
 		}
+
 	};
 	ListApp.prototype.disposeInternal = function() {
 		this.constructor.superClass_.disposeInternal.call(this);

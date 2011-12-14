@@ -5,10 +5,30 @@ define({
 //		newif: 1
 //	},
 	urls : {
-		lock: "run=add_json_lock&sig=lock&type=", //id, password
-		unlock: "run=add_json_lock&sig=unlock&type=", //id, password
-		bookmark: "run=add_json_favorites&sig=bookmark&type=", //id
-		unbookmark: "run=add_json_favorites&sig=bookmark&type=", //id
+		lock: {
+			list: {
+				"run": "add_json_lock",
+				"sig": "lock"
+			}
+		},
+		unlock: {
+			 list: {
+				"run": "add_json_lock",
+				"sig": "unlock"
+			}
+		},
+		bookmark: {
+			list: {
+				"run": "add_json_favorites",
+				"sig": "bookmark"
+			}
+		},
+		unbookaark: {
+			list: {
+				"run": "add_json_favorites",
+				"sig": "unbookmark"
+			}
+		},
 		vod: {
 			list:  'vod_json_list'
 		},
