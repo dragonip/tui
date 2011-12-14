@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="width=device-width, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <title>Test</title>
+    <style>
+     .leftCont {
+	float: left;
+	width: 88%;
+	height: 80%;
+	padding: 0.5em;
+}
+ .leftContLong {
+	float: left;
+	width: 99%;
+	height: 80%;
+	padding: 0.5em;
+}
+
+ .rightCont {
+	float: left;
+    width: 7%;
+    height: 93%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    padding-bottom: 3px;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 3px;
+    text-align: right;
+}
+ .leftCont .number_id {
+	color: #b4b3ae;
+    float: left;
+    font-size: 1.3em;
+    font-weight: bold;
+    height: 100%;
+    margin-right: 0.5em;
+    text-align: center;
+    width: 70px;
+    line-height: 1em;
+}
+
+ .leftContLong .number_id {
+	color: #b4b3ae;
+    float: left;
+    font-size: 1.3em;
+    font-weight: bold;
+    height: 100%;
+    margin-right: 0.5em;
+    text-align: center;
+    width: 70px;
+    line-height: 1em;
+}
+
+ .item_name {
+    font-size: 1.1em;
+    font-weight: bold;
+    height: 50%;
+	-moz-box-pack:center;
+	-moz-box-align:center;
+	-webkit-box-pack:center;
+	-webkit-box-align:center;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+ .img_thumb {
+	height: 3em;
+	border: 0;
+}
+ .description {
+	display: inline-block;
+	margin-right: 20px;
+}
+ .channel-settings-icons {
+	left: 2px;
+    list-style-type: none;
+    position: absolute;
+    bottom: 2px;
+}
+
+.icon {
+	background-color: #596876;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 20px;
+    margin-right: 1px;
+    width: 20px;
+    float: left; 
+}
+ .bookmarked {
+	background-image: url("../imgs/icon_favorite.png");
+}
+.recordable {
+	background-image: url("../imgs/icon_recording.png");
+}
+.locked {
+	background-image: url("imgs/icon_lock.png");
+}
+    
+    
+    
+        #scrollcontainer {
+            background-color: yellow;
+            overflow: hidden;
+            position: relative;
+        }
+        .item {
+            position: absolute;
+            top: 0;
+            left: 0;
+           /* border: 2px solid blue; */
+           
+           -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.9); 
+            width: 100%;
+            height: 96px;
+            background-color: red;
+            -moz-transition-property: -moz-transform;
+            -moz-transition-duration: 1s;
+            -moz-transform: translateZ(0);
+            -webkit-transform-style: preserve-3d;
+            -webkit-transition-property: -webkit-transform;
+            -webkit-transition-duration: 0.2s;
+            -webkit-transform: translateX(-100px);
+            -webkit-transform: translateZ(0);
+            
+        }
+        .item.active {
+            background-color: green;
+        
+        }
+        body {    
+            background-color: brown;
+        }
+    </style>
+  </head>
+  <body>
+    <div id='scrollcontainer' style="height: 480px; overflow: scoll">
+        <div class='item'></div>
+        <div class='item'></div>
+        <div class='item'></div>
+        <div class='item'></div>
+        <div class='item'></div>
+        <div class='item'></div>
+        <div class='item'></div>
+    </div>
+    <script src='netflix.js'></script>
+<!--    <div style="height: 100px; margin: 10px">-->
+<!--        <div style="height: 80px; background-color: green; position: absolute; top:0; left:0; width: 100%;""></div>-->
+<!--        <div style="height: 80px; background-color: red; position: absolute; top:0; left:0; width: 100%;""></div>-->
+<!--    </div>-->
+  </body>
+</html>

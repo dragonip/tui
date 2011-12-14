@@ -1,0 +1,58 @@
+
+.setup-container {
+	background-color: #000;
+}
+.setup-container .icon {
+	color: black;
+	-webkit-transition-property: -webkit-transform;
+	-webkit-transition-duration: 0.2s;
+	
+}
+.setup-container .icon span {
+    position: static;
+    color: black;
+    -webkit-transition-property: color;
+    -webkit-transition-duration: 0.2s;
+}
+.setup-container .icon div {
+	height: 104px;
+}
+.setup-container .icon.active {
+	-webkit-transform: translate(0px, -30px);
+}
+.setup-container .active span {
+	color: white;
+}
+
+
+
+.setup-container .icon .general {
+	background-image: url('app/imgs/setup.png');
+	background-position: left -4px;
+	background-repeat:no-repeat;
+	z-index: 5;
+}
+.setup-container .icon .iptv-settings {
+	background-image: url('app/imgs/setup.png');
+	background-position: left -115px;
+	background-repeat:no-repeat;
+	z-index: 5;
+}
+.setup-container .icon .LAN {
+	background-image: url('app/imgs/setup.png');
+	background-position: left -215px;
+	background-repeat: no-repeat;
+	z-index: 5;
+}
+.setup-container .icon .WIFI {
+	background-image: url('app/imgs/setup.png');
+	background-position: left -325px;
+	background-repeat:no-repeat;
+	z-index: 5;
+}
+.setup-container .icon .voip-settings {
+	background-image: url('app/imgs/setup.png');
+	background-position: left -430px;
+	background-repeat:no-repeat;
+	z-index: 5;
+}

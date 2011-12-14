@@ -91,7 +91,7 @@ define([
 		var index = this.currentIndex;
 		var found = null;		
 		for (index++ ; index < this.pointer.length; index++ ) {
-			if (this.pointer[index].isDir === false && this.pointer[index].id !== null && !this.pointer[index].isLocked) {
+			if (this.pointer[index].isDir === false && this.pointer[index].id !== null) {
 				found = index;
 				break;
 			}
@@ -99,7 +99,7 @@ define([
 		if (found === null) {
 			index = 0;
 			for (; index < this.currentIndex; index ++) {
-				if (this.pointer[index].isDir === false && this.pointer[index].id !== null  && !this.pointer[index].isLocked) {
+				if (this.pointer[index].isDir === false && this.pointer[index].id !== null) {
 					found = index;
 					break;
 				}
@@ -115,7 +115,7 @@ define([
 	Storage.prototype.activatePreviousItem = function() {
 		var index = this.currentIndex - 1, found = null;
 		for (; index >= 0; index--) {
-			if (this.pointer[index].isDir === false && this.pointer[index].id !== null  && !this.pointer[index].isLocked) {
+			if (this.pointer[index].isDir === false && this.pointer[index].id !== null) {
 				found = index;
 				console.log(JSON.stringify(this.pointer[index]));
 				break;
@@ -125,7 +125,7 @@ define([
 			console.log('Not found, try from back ')
 			index = this.pointer.length-1;
 			for (; index > this.currentIndex; index--) {
-				if (this.pointer[index].isDir === false && this.pointer[index].id !== null  && !this.pointer[index].isLocked) {
+				if (this.pointer[index].isDir === false && this.pointer[index].id !== null) {
 					found = index;
 					break;
 				}

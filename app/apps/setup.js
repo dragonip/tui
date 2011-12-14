@@ -20,8 +20,9 @@ define([
 //	'env/exports',
 //	'tpl/telephony_incall',
 	'data/static-strings',
-	'text!css/telephony.css',
-	'tpl/telephony_chooser',
+//	'text!css/multiscreenchooser.css',
+//	'text!css/setup.css'
+	'tpl/setup_chooser',
 	'utils/telescreen'
 ], function(
 	App, 
@@ -33,10 +34,12 @@ define([
 	request,
 	response,
 	strings,
-	css,
+//	css,
+//	css2,
 	choosertpl, 
 	TeleMini ) {
-	loader.loadCSSFromText(css);
+//	loader.loadCSSFromText(css+css2);
+	loader.loadCSS(['app/css/multiscreenchooser.css','app/css/setup.css' ], function(){});
 	/**
 	* Mini screen chooser
 	*/

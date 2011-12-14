@@ -1,4 +1,11 @@
 define({
+	player: {
+		states: {
+			playing: 'Playing: ',
+			buffering: 'Buffering: ',
+			paused: 'Paused: '
+		}
+	},
 	lists: {
 		noContent: "There are no items in this category",
 		lock: "Lock",

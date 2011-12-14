@@ -1,0 +1,46 @@
+/*---------------------------  Multi Screen Chooser  -------------------------------*/
+.tui-multiscreen {
+	width: 640px;
+	height: 480px;
+	background-color: #333333;
+	
+	display: -moz-box;
+	-moz-box-pack: center;
+	-moz-box-align: center;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+	display: box;
+	box-pack: center;
+	box-align: center;
+	vertical-align: middle;
+}
+.tui-multiscreen .icon {
+	width: 120px;
+	height: 90px;
+	text-align: center;
+	display: inline-block;
+}
+.tui-multiscreen .icon span {
+	color: white;
+	z-index:1;
+    font-size: 120%;
+    position: relative;
+    top: -22px;
+    margin: 0 auto;
+}
+.tui-multiscreen .icon div {
+/*	-webkit-transition: all 0.2s ease-in; */
+/*	-moz-transition: all 0.2s ease-in; */
+/*	-o-transition: all 0.2s ease-in; */
+/*	-ms-transition: all 0.2s ease-in;*/
+/*	position: relative;*/
+/*	width: 120px;*/
+/*	height: 90px;*/
+}
+.tui-multiscreen .icon.active div {
+/*	-webkit-transform: translate(0px,-30px); */
+/*	-moz-transform: translate(0px,-30px);*/
+/*	-o-transform: translate(0px,-30px);*/
+/*	-ms-transform: translate(0px,-30px);*/
+}

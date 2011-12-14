@@ -5,11 +5,12 @@ define([
 		this.state_ = OSD.OFF;
 	};
 	OSD.prototype.defaultTimeout_ = 3;
+	OSD.prototype.defaultMessage_ = '';
 	OSD.prototype.setContent = function(opt_msg, opt_timeout, opt_icon) { 
 		var req = request.create('osd', {
 			'action': 'show',
 			'timeout': opt_timeout || this.defaultTimeout_,
-			'messsage': opt_msg || this.defaultMessage_,
+			'message': opt_msg || this.defaultMessage_,
 			'icon': opt_icon
 		});
 		req.send();

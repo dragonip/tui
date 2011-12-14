@@ -46,19 +46,19 @@ define([
 		playing: Player.STATES.PLAYING,
 		error: Player.STATES.STOPPED
 	};
-//	Player.prototype.setOSDState = function(state) {
-//		switch (state) {
-//			case 'started':
-//			case 'playing':
-//				tui.osdInstance.setContent(undefined, 'play');
-//				break;
-//			case 'buffering':
-//				tui.osdInstance.setContent(undefined, 'buffering');
-//				break;
-//			case 'paused':
-//				tui.osdInstance.setContent(undefined, 'pause')
-//		}
-//	}
+	Player.prototype.setOSDState = function(state) {
+		switch (state) {
+			case 'started':
+			case 'playing':
+				tui.osdInstance.setContent(strings.player.states.playing + this.current_[0].publishName, 5, 'play');
+				break;
+			case 'buffering':
+				tui.osdInstance.setContent(strings.player.states.buffering + this.current_[0].publishName, 5, 'buffering');
+				break;
+			case 'paused':
+				tui.osdInstance.setContent(strings.player.states.paused, 5, 'pause')
+		}
+	}
 	/**
 	* Sets the current status of the player, act on change
 	* @private 
@@ -66,9 +66,9 @@ define([
 	*/
 	Player.prototype.setState = function(state) {
 		var old_state = this.state;
-//		this.setOSDState(state);
+		this.setOSDState(state);
 		this.state = Player.dspStates[state];
-		this.log.push('**************PLAYER STATE UPDATE : ' + this.state);
+		console.log('**************PLAYER STATE UPDATE : ' + this.state);
 		if (old_state !== this.state) {
 			if (this.state === Player.STATES.STOPPED) {
 				tui.signals.restoreEventTree();
@@ -139,8 +139,10 @@ define([
 	};
 	Player.prototype.alterChannels = function() {
 		console.log(JSON.stringify(this.history_));
-		if (this.history_ && this.history_.length === 2)
+		if (this.history_ && this.history_.length === 2) {
+			this.stop();
 			this.play.apply(this, this.history_)
+		}
 	};
 	/**
 	* Returns the current state, should be compared to Player.STATES
@@ -155,9 +157,8 @@ define([
 	* @param {?String} password The password the user has enetered when queried about the parental lock pass
 	*/
 	Player.prototype.play = function(obj, password) {
-		this.log.push('Try to play uri: '+ obj.playURI + ' , pass:' + password);
-		var url;
-		if (obj.isLocked ) {
+		console.log('Try to play uri: '+ obj.playURI + ' , pass:' + password);
+		if (obj.isLocked) {
 			//Prevent event stealing, set state manually so that when the event comes it 
 			//does not restore the event handler but leave it to the lock screen
 			if (this.state !== Player.STATES.STOPPED) {
@@ -182,10 +183,9 @@ define([
 				return;
 			}
 		}
-		var play_command = (obj.player? 'play_youtube':'play');
-		this.addToHistory( [obj.playURI, password] );
-		url = (typeof obj === 'string') ? obj : obj.playURI;
-		var newreq = request.create(play_command, {url: url});
+		var play_command = (obj.player ? 'play_youtube':'play');
+		this.addToHistory( [obj, password] );
+		var newreq = request.create(play_command, {url: obj.playURI});
 //		response.register(newreq, bind(this.requestResultHandle, this) );
 		newreq.send();
 	};
@@ -219,7 +219,7 @@ define([
 		var newreq = request.create('pause',{ });
 		newreq.send();
 
-	}
+	};
 	/**
 	* Handle for the request result (i.e. transport layer debug, no useful application yet)
 	* @param {JSONObject} data The data returned by transport layer response
