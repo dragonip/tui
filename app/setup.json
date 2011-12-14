@@ -117,7 +117,7 @@
 	"iptv" : [
 		{
 			"name": "subtitles",
-			"publishName": "##setup_text75##", 
+			"publishName": "##setup_text75##",
 			"value":"##subtitles##",
 			"type": "list",
 			"values": {
