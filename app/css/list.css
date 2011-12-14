@@ -68,6 +68,7 @@
 .tui-list .rightCont {
 float: left;
 height: 43px;
+width: 43px;
 overflow-x: hidden;
 overflow-y: hidden;
 text-align: right;
