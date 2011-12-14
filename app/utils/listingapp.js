@@ -35,7 +35,7 @@ define([
 		this.on('try-play', this.onPlayRequest);
 	};
 	inherit(ListApp, VisualApp);
-	ListApp.remoteKeys_ = ['left', 'right', 'up', 'down', 'chup', 'chdown', 'ok', 'zero', 'one','two','three','four','five','six','seven','eight','nine'];
+	ListApp.remoteKeys_ = ['left', 'right', 'up', 'down', 'chup', 'chdown', 'ok', 'zero', 'one','two','three','four','five','six','seven','eight','nine', 'return'];
 	ListApp.prototype.onShowComplete = function() {
 		this.attachEvents(true);
 	};
@@ -199,7 +199,7 @@ define([
 		} else {
 //			TODO: display error messsage when action on object did not success
 		}
-	}
+	};
 	ListApp.prototype.disposeInternal = function() {
 		this.constructor.superClass_.disposeInternal.call(this);
 		delete this.appEvents;

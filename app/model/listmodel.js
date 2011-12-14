@@ -70,6 +70,12 @@ define([
 					this.app.fire('try-play', this.getItem());
 				}
 			}
+			break;
+		case 'return':
+			if (this.pointer[0].id === null) {
+				this.outDir();
+			}
+			break;
 		}
 	};
 	Storage.prototype.selectByIndex = function(index) {

@@ -95,27 +95,24 @@
 			},
 			"help": "##setup_text125##: ##cur_sat##"
 		},
-<!-- #ENDZONE m70_zone -->	
+<!-- #ENDZONE m70_zone -->
+		{
+			"name": "reboot",
+			"publishName": "##setup_text87##",
+			"type": "action",
+			"action": "confirm",
+			"confirmtext": "##setup_text88##<br><br>##setup_text84##",
+			"exec":  CONFIG.COMMANDS.REBOOT,
+			"help":  "##setup_text94##"
+		},
+		{
+			"name" : "voucher",
+			"publishName": "##setup_text102##",
+			"type": "strgin"
+		}
 	]
 }
                     
-
-//                        ["reboot", "##setup_text87##", "", 
-//                                {
-//                                        actionType : "dialogAction",
-//                                        action: CONFIG.COMMANDS.REBOOT,
-//                                        message: "##setup_text88##<br><br>##setup_text84##",
-//                                        dialogType: "confirm"
-//                                }, "##setup_text94##"
-//                        ],
-//                        ["exit", "##setup_text89##", "", 
-//                                {
-//                                        actionType : "dialogAction",
-//                                        action: CONFIG.COMMANDS.TURN_OFF,
-//                                        message: "##setup_text90##<br><br>##setup_text84##",
-//                                        dialogType: "confirm"
-//                                }, "##setup_text95##"
-//                        ],
 //                        ["voucher", "##setup_text102##", "", "string", "##setup_text103##"]
 //                ]
 //        },
