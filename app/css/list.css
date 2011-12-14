@@ -66,16 +66,21 @@
 }
 
 .tui-list .rightCont {
-	float: left;
-    width: 7%;
-    height: 93%;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    padding-bottom: 3px;
-    padding-left: 3px;
-    padding-right: 3px;
-    padding-top: 3px;
-    text-align: right;
+float: left;
+height: 43px;
+overflow-x: hidden;
+overflow-y: hidden;
+text-align: right;
+}
+.tui-list .rightCont-folder {
+	float: right;
+	width: 39px;
+	height: 40px;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	background: url(app/imgs/folder.png) no-repeat;
+	background-size: cover;
+	margin: 3px 3.8% 0px 0%;
 }
 .tui-list .leftCont .number_id {
 	color: #b4b3ae;
@@ -87,6 +92,9 @@
     text-align: center;
     width: 70px;
     line-height: 1em;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 .tui-list .leftContLong .number_id {
@@ -114,7 +122,7 @@
 	text-overflow: ellipsis;
 }
 .tui-list .img_thumb {
-	height: 3em;
+	height: 100%;
 	border: 0;
 }
 .tui-list .description {
@@ -146,17 +154,3 @@
 .tui-list.list-container .locked {
 	background-image: url("imgs/icon_lock.png");
 }
-
-
-.tui-list .rightCont-folder {
-	float: right;
-	width: 39px;
-	height: 40px;
-	overflow-x: hidden;
-	overflow-y: hidden;
-	background: url(app/imgs/folder.png) no-repeat;
-	background-size: cover;
-	margin: 3px 3.8% 0px 0%;
-}
-
-

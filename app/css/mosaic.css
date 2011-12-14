@@ -85,7 +85,7 @@ html.browser .tui-mosaic.list-container {
 	margin-left: 5px;
 }
 .tui-mosaic .item.regular   img {
-/*    width: 130px;*/
+    /*width: 130px;*/
     height: 90px;
 }
 .tui-mosaic .item.larger img {
@@ -136,38 +136,14 @@ html.browser .tui-mosaic.list-container {
     top: 5px;
 }
 .tui-mosaic .item.current .imgcont {
-    background-color: #e10303;
-    -webkit-transition-property: background-color;
-	-webkit-transition-duration: 0.1s; */
-/*	background-image: linear-gradient(bottom, rgb(135,15,15) 1%, rgb(237,12,12) 18%, rgb(230,23,23) 41%, rgb(173,38,38) 97%);*/
-/*	background-image: -o-linear-gradient(bottom, rgb(135,15,15) 1%, rgb(237,12,12) 18%, rgb(230,23,23) 41%, rgb(173,38,38) 97%);*/
-/*	background-image: -moz-linear-gradient(bottom, rgb(135,15,15) 1%, rgb(237,12,12) 18%, rgb(230,23,23) 41%, rgb(173,38,38) 97%);*/
-/*	background-image: -webkit-linear-gradient(bottom, rgb(135,15,15) 1%, rgb(237,12,12) 18%, rgb(230,23,23) 41%, rgb(173,38,38) 97%);*/
-/*	background-image: -ms-linear-gradient(bottom, rgb(135,15,15) 1%, rgb(237,12,12) 18%, rgb(230,23,23) 41%, rgb(173,38,38) 97%);*/
-
-/*	background-image: -webkit-gradient(*/
-/*		linear,*/
-/*		left bottom,*/
-/*		left top,*/
-/*		color-stop(0.01, rgb(135,15,15)),*/
-/*		color-stop(0.18, rgb(237,12,12)),*/
-/*		color-stop(0.41, rgb(230,23,23)),*/
-/*		color-stop(0.97, rgb(173,38,38))*/
-/*	);*/
-	background-image: linear-gradient(bottom, rgb(214,114,26) 10%, rgb(158,82,24) 19%, rgb(250,108,13) 87%);
+	background-color: rgba(227, 118, 48, 1);
+	-webkit-transition-property: background-color;
+	-webkit-transition-duration: 0.3s;
 	background-image: -o-linear-gradient(bottom, rgb(214,114,26) 10%, rgb(158,82,24) 19%, rgb(250,108,13) 87%);
 	background-image: -moz-linear-gradient(bottom, rgb(214,114,26) 10%, rgb(158,82,24) 19%, rgb(250,108,13) 87%);
 	background-image: -webkit-linear-gradient(bottom, rgb(214,114,26) 10%, rgb(158,82,24) 19%, rgb(250,108,13) 87%);
 	background-image: -ms-linear-gradient(bottom, rgb(214,114,26) 10%, rgb(158,82,24) 19%, rgb(250,108,13) 87%);
-
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0.1, rgb(214,114,26)),
-		color-stop(0.19, rgb(158,82,24)),
-		color-stop(0.87, rgb(250,108,13))
-	);
+	background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0.07, rgb(222,101,7)), color-stop(0.67, rgb(158,82,24)) );
 }
 .tui-mosaic .item.current span {
     color: #ffc4c4;
@@ -212,12 +188,11 @@ div[data-appid="aod"] .item .default_icon {
 	background-position: center -508px;
 }
 .tui-mosaic div.folder-icon {
-        background-image: url('app/imgs/folder.png');
-        background-size: cover;
-        position: absolute;
-        width: 40px;
-        height: 30px;
-        right: 11px;
-        top: 74px;      
+    background-image: url('app/imgs/folder.png');
+	background-size: contain;
+	position: absolute;
+	width: 43px;
+	height: 43px;
+	right: 9px;
+	top: 67px;  
 }
-

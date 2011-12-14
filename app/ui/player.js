@@ -13,9 +13,8 @@ define([
 		this.state = Player.STATES.STOPPED;
 		this.keyHandler = bind(this.handleKeys, this);
 		this.timeout_ = null;
-		this.history_;
-		this.current_;
-		this.log = [];
+		this.history_ = null;
+		this.current_ = null;
 	};
 	Player.prototype.parentalPassword = '';
 	/**
@@ -56,9 +55,9 @@ define([
 				tui.osdInstance.setContent(strings.player.states.buffering + this.current_[0].publishName, 5, 'buffering');
 				break;
 			case 'paused':
-				tui.osdInstance.setContent(strings.player.states.paused, 5, 'pause')
+				tui.osdInstance.setContent(strings.player.states.paused, 5, 'pause');
 		}
-	}
+	};
 	/**
 	* Sets the current status of the player, act on change
 	* @private 
@@ -141,7 +140,7 @@ define([
 		console.log(JSON.stringify(this.history_));
 		if (this.history_ && this.history_.length === 2) {
 			this.stop();
-			this.play.apply(this, this.history_)
+			this.play.apply(this, this.history_);
 		}
 	};
 	/**
@@ -232,7 +231,6 @@ define([
 	* @param {JSONObject} JSONObj The event object comming from transport layer ({event>state}-the player state)
 	*/
 	Player.prototype.handleEvent = function(JSONObj) {
-		this.log.push("Received JSON Obj for event in player: " + JSON.stringify(JSONObj));
 		this.setState(JSONObj.event.state);
 	};
 	

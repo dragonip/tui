@@ -6,8 +6,8 @@ define([
 	var a = new App({
 		name: 'games',
 		shouldJump: false,
-		itemWidth: 220,
-		itemHeight: 190,
+		itemWidth: 160,
+		itemHeight: 138,
 		datamodel: LM
 	});
 	a.hints = {
