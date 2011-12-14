@@ -108,13 +108,28 @@
 		{
 			"name" : "voucher",
 			"publishName": "##setup_text102##",
-			"type": "strgin"
+			"value": "",
+			"type": "string",
+			"help": "##setup_text103##"
+			
+		}
+	],
+	"iptv" : [
+		{
+			"name": "subtitles",
+			"publishName": "##setup_text75##", 
+			"value":"##subtitles##",
+			"type": "list",
+			"values": {
+				"1":"##setup_text37##",
+				"0":"##setup_text38##"
+			}
 		}
 	]
 }
                     
-//                        ["voucher", "##setup_text102##", "", "string", "##setup_text103##"]
-//                ]
+
+
 //        },
 //        "iptv" : {
 //                body : [

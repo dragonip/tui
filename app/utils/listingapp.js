@@ -197,7 +197,10 @@ define([
 			}
 			this.presentation.updateItem(index, obj);
 		} else {
-//			TODO: display error messsage when action on object did not success
+			tui.createDialog('optionlist', 
+				[strings.components.dialogs.ok], 
+				function(){}, strings.lists.actionFailed 
+			);
 		}
 	};
 	ListApp.prototype.disposeInternal = function() {

@@ -185,7 +185,7 @@ define([
 		var play_command = (obj.player ? 'play_youtube':'play');
 		this.addToHistory( [obj, password] );
 		var newreq = request.create(play_command, {url: obj.playURI});
-//		response.register(newreq, bind(this.requestResultHandle, this) );
+		response.register(newreq, bind(this.requestResultHandle, this, obj.publishName, 'play') );
 		newreq.send();
 	};
 	Player.prototype.addToHistory = function(newSet) {
@@ -223,8 +223,8 @@ define([
 	* Handle for the request result (i.e. transport layer debug, no useful application yet)
 	* @param {JSONObject} data The data returned by transport layer response
 	*/
-	Player.prototype.requestResultHandle = function(data) {
-		console.log(data, this);
+	Player.prototype.requestResultHandle = function(title, icon) {
+		tui.osdInstance.setContent(strings.player.states.starting + title, 10, icon);
 	};
 	/**
 	* Handles the events coming from transport layer communication, called via tui.globalPlayer.handleEvent, no need for context

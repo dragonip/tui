@@ -3,7 +3,8 @@ define({
 		states: {
 			playing: 'Playing: ',
 			buffering: 'Buffering: ',
-			paused: 'Paused: '
+			paused: 'Paused: ',
+			starting: 'Starting: ' 
 		}
 	},
 	lists: {
@@ -11,7 +12,8 @@ define({
 		lock: "Lock",
 		unlock: "Unlock",
 		bookmark: "Bookmark",
-		unbookmark: "Unbookmark"
+		unbookmark: "Unbookmark",
+		actionFailed: "The selected action cannot be completed"
 	},
 	epg: {
 		panels: {
