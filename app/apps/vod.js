@@ -3,6 +3,7 @@ define([
 ], function(App){
 	return new App({
 		name: 'vod',
-		shouldJump: true
+		shouldJump: true,
+		canResume: true
 	});
 });

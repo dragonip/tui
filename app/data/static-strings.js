@@ -13,7 +13,8 @@ define({
 		unlock: "Unlock",
 		bookmark: "Bookmark",
 		unbookmark: "Unbookmark",
-		actionFailed: "The selected action cannot be completed"
+		actionFailed: "The selected action cannot be completed",
+		resumePlay: 'Resume'
 	},
 	epg: {
 		panels: {
@@ -51,6 +52,12 @@ define({
 		}
 	},
 	screens: {
+		setup: {
+			header: {
+				settings: "Setting",
+				value: "Value"
+			}
+		},
 		iptv: {
 			panels: {
 				bottom: {

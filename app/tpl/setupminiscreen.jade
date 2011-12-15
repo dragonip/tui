@@ -1,0 +1,23 @@
+div.tui-multiscreen.general-wrapper
+	div(class="image-selector " + appname)
+	div.general-item.head
+		div.settings!= transl.settings
+		div.value!= transl.value
+	div.general-content
+		- for ( var i = 0; i < items.length; i++)
+			- if (items[i].type === 'list')
+				div.general-item
+					div.settings!= items[i].publishName
+					div.value!= items[i].values[items[i].value]
+				div.section
+					div(style='float: left;text-align: center;margin-left: 13%;position: relative;top: 37px; width: 31%;')!= items[i].help
+					- for (var k in items[i].values)
+						div.row(data-key=k)!=items[i].values[k]
+			- else if (items[i].type === 'static')
+				div.general-item.inactive
+					div.settings!= items[i].publishName
+					div.value!= items[i].value
+			- else if (items[i].type === 'action')
+				div.general-item
+					div.settings!= items[i].publishName
+					div.value!= items[i].help

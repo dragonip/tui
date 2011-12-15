@@ -15,6 +15,8 @@ define([
 		this.timeout_ = null;
 		this.history_ = null;
 		this.current_ = null;
+		this.playlist_ = null;
+		this.shufflePlayList_ = false;
 	};
 	Player.prototype.parentalPassword = '';
 	/**
@@ -46,13 +48,16 @@ define([
 		error: Player.STATES.STOPPED
 	};
 	Player.prototype.setOSDState = function(state) {
+		var item = this.current_[0], id = '';
+		if (item.id.length < 5)
+			id = '[' + item.id + '] ';
 		switch (state) {
 			case 'started':
 			case 'playing':
-				tui.osdInstance.setContent(strings.player.states.playing + this.current_[0].publishName, 5, 'play');
+				tui.osdInstance.setContent(strings.player.states.playing + id + item.publishName, 5, 'play');
 				break;
 			case 'buffering':
-				tui.osdInstance.setContent(strings.player.states.buffering + this.current_[0].publishName, 5, 'buffering');
+				tui.osdInstance.setContent(strings.player.states.buffering + id +  item.publishName, 5, 'buffering');
 				break;
 			case 'paused':
 				tui.osdInstance.setContent(strings.player.states.paused, 5, 'pause');
@@ -150,12 +155,16 @@ define([
 	Player.prototype.getState = function() {
 		return this.state;
 	};
+	Player.prototype.playAll = function(dataSource, shuffle) {
+		this.playlist_ = dataSource;
+		this.shufflePlayList_ = shuffle;
+	};
 	/**
 	* Try to play object from listings
 	* @param {Object} obj A channel/Video/Audio object with playURI property
 	* @param {?String} password The password the user has enetered when queried about the parental lock pass
 	*/
-	Player.prototype.play = function(obj, password) {
+	Player.prototype.play = function(obj, resume, password) {
 		console.log('Try to play uri: '+ obj.playURI + ' , pass:' + password);
 		if (obj.isLocked) {
 			//Prevent event stealing, set state manually so that when the event comes it 
@@ -174,7 +183,7 @@ define([
 				newreq.send();
 			}
 			if (typeof password !== 'string') {
-				tui.createDialog('password', true, bind(this.play, this, obj), strings.components.dialogs.lock);
+				tui.createDialog('password', true, bind(this.play, this, obj, resume), strings.components.dialogs.lock);
 				return;
 			}
 			else if ( password !== this.parentalPassword ) {
@@ -184,7 +193,7 @@ define([
 		}
 		var play_command = (obj.player ? 'play_youtube':'play');
 		this.addToHistory( [obj, password] );
-		var newreq = request.create(play_command, {url: obj.playURI});
+		var newreq = request.create(play_command, {"url": obj.playURI, 'resume': resume});
 		response.register(newreq, bind(this.requestResultHandle, this, obj.publishName, 'play') );
 		newreq.send();
 	};

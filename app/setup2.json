@@ -54,14 +54,6 @@
 			"help": "##setup_text17##"
 		},
 		{
-		<!-- //TODO: Check if this is editable -->
-			"name": "dateTime",
-			"publishName":  "##setup_text91##",
-			"value":  "##cur_time##",
-			"type": "date",
-			"help":  "##setup_text92##"
-		},
-		{
 			"name": "upgrade",
 			"publishName": "##setup_text85##",
 			"type": "action",
@@ -91,7 +83,6 @@
 			"type": "list",
 			"values": 
 			    <!-- #BEGINTABLE data1 -->
-			    <!-- // TODO: Make this list not have comma at its end -->
 		        "##satellite##":"##satellite##",
 		        <!--  #ENDTABLE data1 -->
 			},
@@ -104,15 +95,15 @@
 			"type": "action",
 			"action": "confirm",
 			"confirmtext": "##setup_text88##<br><br>##setup_text84##",
-			"exec":  CONFIG.COMMANDS.REBOOT,
+			"exec":  "CONFIG.COMMANDS.REBOOT",
 			"help":  "##setup_text94##"
 		},
 		{
 			"name" : "voucher",
 			"publishName": "##setup_text102##",
 			"value": "",
-			<!-- // TODO: Make this another type, static strings should not be editable and should be skipped in list walking -->
-			"type": "string",
+			"type": "action",
+			"action": "submit",
 			"help": "##setup_text103##"
 			
 		}
@@ -128,6 +119,9 @@
 				"0":"##setup_text38##"
 			}
 		},
+					<!--  BEGINZONE unuzes -->
+			//TODO: Make this text translatable!!
+			<!-- ENDZONE unuzes -->
 		{
 			"name": "fontsize",
 			"publishName": "##setup_text124##",
@@ -147,9 +141,6 @@
 				"10":"10"
 			},
 			"help":  "Choose subtitles font size."
-			<!--  BEGINZONE unuzes //TODO: Make this text translatable!! -->
-			//TODO: Make this text translatable!!
-			<!-- ENDZONE unuzed -->
 		}, {
 			"name": "subtlang",
 			"publishName": "##setup_text77##",

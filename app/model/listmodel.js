@@ -210,7 +210,7 @@ define([
 				res.unshift({
 					id: null,
 					sortIndex: 0,
-					publishName: "up",
+					publishName: "..",
 					type: "",
 					time: "",
 					cost: 0.00,

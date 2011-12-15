@@ -13,6 +13,7 @@ function(inherit, VisualApp, ListModel, MosaicPresentation, bind, strings, reque
 			this.model = new ListModel(this);
 		}
 		this.presentation = new MosaicPresentation(this, options.listType, options.itemWidth, options.itemHeight, options.shouldJump);
+		this.canResume = options.canResume;
 		this.registerDisposable(this.model);
 		this.registerDisposable(this.presentation);
 		this.generateDefaultEvents();
@@ -35,8 +36,8 @@ function(inherit, VisualApp, ListModel, MosaicPresentation, bind, strings, reque
 	ListApp.prototype.onShowComplete = function() {
 		this.attachEvents(true);
 	};
-	ListApp.prototype.onPlayRequest = function() {
-		tui.globalPlayer.play(this.model.getItem());
+	ListApp.prototype.onPlayRequest = function(resume) {
+		tui.globalPlayer.play(this.model.getItem(), resume);
 	};
 	ListApp.prototype.onSelectionChanged = function(objectWithIndex) {
 		this.model.currentIndex = objectWithIndex.index;
@@ -53,6 +54,8 @@ function(inherit, VisualApp, ListModel, MosaicPresentation, bind, strings, reque
 			this.presentation.show(undefined, true);
 			if( typeof data.index !== 'undefined')
 				this.presentation.activate(data.index);
+			else if (this.model.pointer.length > 1)
+				this.presentation.activate(1);
 		}
 	};
 	ListApp.prototype.onShowScreen = function() {
@@ -128,6 +131,10 @@ function(inherit, VisualApp, ListModel, MosaicPresentation, bind, strings, reque
 		var item = this.model.getItem(objIndex);
 		var options = [];
 		var actions = [];
+		if (this.canResume === true) {
+			options.push(strings.lists.resumePlay);
+			actions.push('resume');
+		}
 		if(item.isBookmarked) {
 			options.push(strings.lists.unbookmark);
 			actions.push('unbookmark');
@@ -167,6 +174,12 @@ function(inherit, VisualApp, ListModel, MosaicPresentation, bind, strings, reque
 				case 'unbookmark':
 					this.acceptPass();
 					break;
+				case 'resume':
+					this.fire('try-play', true);
+					this.dialogInstance = null;
+					delete this.dialogInstance;
+					break;
+					
 			}
 		}
 	};

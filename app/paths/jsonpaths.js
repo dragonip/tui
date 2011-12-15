@@ -84,7 +84,7 @@ define({
 		} else {
 			result = {};
 			for (var k in this.urls[name][type]) {
-				result[k] = this.urls[name][type][k]
+				result[k] = this.urls[name][type][k];
 			}
 		}
 //		return result;
