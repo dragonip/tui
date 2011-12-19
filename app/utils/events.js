@@ -10,7 +10,7 @@ define(['types/types', 'array/array', 'dmc/smjs'], function(Mtypes, Marray, smjs
 		'recall', 'home', 'info', 'return', 'ok',
 		'left', 'right', 'up', 'down',
 		'chup', 'chdown',
-		'play', 'stop', 'ff', 'rw',
+		'play', 'stop', 'ff', 'rw', 'rec', 'save',
 		'power',
 		'delete'
 	];

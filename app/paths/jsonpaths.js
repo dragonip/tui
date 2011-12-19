@@ -23,7 +23,7 @@ define({
 				"sig": "bookmark"
 			}
 		},
-		unbookaark: {
+		unbookmark: {
 			list: {
 				"run": "add_json_favorites",
 				"sig": "unbookmark"

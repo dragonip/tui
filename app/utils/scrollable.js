@@ -26,11 +26,13 @@ define([
 		this.elementSelector_ = elementSelector;
 	};
 	
-	Scrollable.prototype.scroll = function() {
-		var element = dom.$(this.elementSelector_);
+	Scrollable.prototype.scroll = function(elem) {
+		var element = elem || dom.$(this.elementSelector_);
 		var container = dom.$(this.containerSelector_);
+		console.log(container);
 		if (element ===  null) return;
 		var elementTopOffset = element.offsetTop;
+		console.log('Offset top = ' + elementTopOffset);
 		var elementHeight = element.scrollHeight;
 		var containerScrollTop = container.scrollTop;
 		var containerHeight = container.clientHeight;

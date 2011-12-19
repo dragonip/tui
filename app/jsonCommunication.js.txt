@@ -6,6 +6,7 @@
 		transport: "javascript|socket",
 		type: "request|event|reply|response",
 		mode: "sync|async"
+		source: "remote"||"cmd"
 	},
 	request: {
 		templateurl: "",
@@ -16,6 +17,9 @@
 	=====
 	event: {
 		key: "up",
+		"action" (for source == cmd) : "refreshdata" -- reload na lists
+		"reloadinterface" -- reload na celia interface primerno se e smenil ezika
+		"reloadconfig" -- reload na config
 	},
 	response: {
 		status: "ERR_*"

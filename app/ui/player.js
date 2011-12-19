@@ -47,6 +47,13 @@ define([
 		playing: Player.STATES.PLAYING,
 		error: Player.STATES.STOPPED
 	};
+	Player.prototype.audioPlayerSetup = function(options) {
+		this.audioPlayerState = options.status;
+		
+	};
+	Player.prototype.autioPlayerUpdate = function(options) {
+		
+	};
 	Player.prototype.setOSDState = function(state) {
 		var item = this.current_[0], id = '';
 		if (item.id.length < 5)
@@ -136,9 +143,42 @@ define([
 //				DEBUG.style.backgroundColor = 'black';
 //				document.body.appendChild(DEBUG);
 				break;
+			case 'rec':
+				this.record();
 			default:
 //				console.log('This is the player now accepting all events');
 				return;
+		}
+	};
+	Player.prototype.defaultRecordingPath = '/mnt/usb/';
+	Player.prototype.pathSeparator = '/';
+	Player.prototype.record = function(AVObject) {
+		if (!AVObject) {
+			object = this.current_[0];
+		} else {
+			object = AVObject;
+		}
+		if (object.personalRecordingOptions && object.personalRecordingOptions.canRecord) {
+			var now = new Date();
+			var path = this.defaultRecordingPath + now.getFullYear();
+			path += this.pathSeparator;
+			path += (now.getMonth() + 1);
+			path += this.pathSeparator;
+			path += now.getDate();
+			path += this.pathSeparator;
+			path += object.publishName;
+			path += this.pathSeparator;
+			path += (now.getHours() + ':' + now.getMinutes());
+			path += this.pathSeparator;
+			console.log('Configured path', path);
+		//
+		// var newreq = request.create('record',{
+		// 	'status':'start',
+		// 	'path': path
+		// });
+		// 
+		} else {
+			return;
 		}
 	};
 	Player.prototype.alterChannels = function() {
@@ -240,7 +280,18 @@ define([
 	* @param {JSONObject} JSONObj The event object comming from transport layer ({event>state}-the player state)
 	*/
 	Player.prototype.handleEvent = function(JSONObj) {
-		this.setState(JSONObj.event.state);
+		switch (JSONObj['header']['method']) {
+		case 'media':
+			this.setState(JSONObj.event.state);
+			break;
+		case 'player':
+			this.handlePlaybackInfo(JSONObj['event']);
+		}
+	};
+	Player.prototype.handlePlaybackInfo = function(event) {
+		var audio = event['has_audio'] || false;
+		var video = event['has_video'] || false;
+		//Handle this further
 	};
 	
 	return Player;

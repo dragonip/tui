@@ -94,7 +94,9 @@ define([
 		if (this.container === null) {
 			return;
 		}
+		console.log('View rasterize');
 		if (!this.isRendered_ || force) {
+			console.log('Real rasterize');
 			if (typeof idx === 'undefined') idx = 0;
 			this.container.innerHTML = this.template.rasterize(this.app.model.get('list'),this.app.name);
 			this.dom = this.container.firstChild;
@@ -140,6 +142,7 @@ define([
 		this.app.fire('selection-changed', { index: i });
 	};
 	MosaicPresentation.prototype.getStep = function() { return this.template.getStep(); };
+	MosaicPresentation.prototype.getHStep = function() { return this.template.getHStep();};
 	MosaicPresentation.prototype.unload = function() {
 //		this.isRendered_ = false;
 	};

@@ -8,7 +8,7 @@ buf.push(attrs({ "class": ('tui-multiscreen') + ' ' + ('general-wrapper') }));
 buf.push('><div');
 buf.push(attrs({ "class": ("image-selector " + appname) }));
 buf.push('></div><div');
-buf.push(attrs({ "class": ('general-item') + ' ' + ('head') }));
+buf.push(attrs({ "class": ('general-head') }));
 buf.push('><div');
 buf.push(attrs({ "class": ('settings') }));
 buf.push('>');

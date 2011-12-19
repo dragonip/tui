@@ -1,5 +1,6 @@
 define([
 	'utils/multiscreenjson',
+	'utils/telescreen',
 	'loader/loader',
 	'dom/dom',
 	'dom/classes',
@@ -16,6 +17,7 @@ define([
 	'loader/loader'
 ], function(
 	App, 
+	TeleMini,
 	loader, 
 	dom, 
 	classes, 
@@ -33,7 +35,7 @@ define([
 	/**
 	* Mini screen chooser
 	*/
-	var Chooser = new NM({
+	var Chooser = new TeleMini({
 		name: 'chooser',
 		template: choosertpl,
 		panels: {

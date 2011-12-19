@@ -25,9 +25,7 @@ define([
 	};
 	inherit(Storage, Disposable);
 	Storage.prototype.loadData = function(o) {
-//		debugger;
 		var url = o.url || tui.options.paths.getPath(o.name, o.type);
-//		url = url + "&newif=1";
 		var that = this;
 		xhr.get(url, function(text) {
 			that.load(text, o);
@@ -37,9 +35,22 @@ define([
 		this.app.fire('data-load-start')
 	};
 	Storage.prototype.acceptEvent = function(ev) {
+		console.log('Received event from remote to datamodel', ev)
 		if (this.isLoading) return;
 		var step = this.app.presentation.getStep();
+		var hstep = this.app.presentation.getHStep();
+
 		switch(ev.action) {
+		case 'chdown':
+			if (this.currentIndex + (step * hstep) < this.pointer.length) {
+				this.app.presentation.activate(this.currentIndex + (step * hstep));
+			}
+			break;
+		case 'chup': 
+			if (this.currentIndex - (step * hstep) >= 0) {
+				this.app.presentation.activate(this.currentIndex - (step * hstep));
+			}
+			break;
 		case 'right':
 			if (step === 1) return;
 			if (this.currentIndex + 1 < this.pointer.length) {
@@ -72,11 +83,18 @@ define([
 			}
 			break;
 		case 'return':
-			if (this.pointer[0].id === null) {
+			if (this.pointer.length > 0  && this.pointer[0].id === null) {
 				this.outDir();
 			}
 			break;
+		case 'recall':
+			this.isLoaded = false;
+			this.history = [];
+			this.app.presentation.reset(true);
+			this.app.defaultStartRequested();
+			break;
 		}
+
 	};
 	Storage.prototype.selectByIndex = function(index) {
 		console.log('Selected index : ' +  index);
@@ -117,7 +135,39 @@ define([
 			this.selectByIndex(found);
 			
 		}
-	}
+	};
+	Storage.sortById = function(a, b) {
+		var ida = parseInt(a.id, 10);
+		var idb = parseInt(b.id, 10);
+		if (ida > idb) return 1;
+		else if (ida < idb ) return -1;
+		return 0;
+	};
+	Storage.sortByName = function(a,b) {
+		var namea = a.publishName.toLowerCase();
+		var nameb = b.publishName.toLowerCase();
+		if (namea > nameb) {
+			return 1;
+		} else if (namea < nameb) return -1;
+		else return 0;
+	};
+	Storage.sortBySortIndex = function() {
+		var ia = parseInt(a.sortIndex, 10);
+		var ib = parseInt(b.sortIndex, 10);
+		if (ia > ib) {
+			return 1;
+		} else if (ia < ib) return -1;
+		else return 0;
+	};
+	Storage.prototype.sort = function(byWhat) {
+		if (this.pointer.length > 0 ) {
+			this.pointer.sort(Storage[byWhat]);
+			this.app.presentation.reset(true);
+			this.app.fire('data-load-end', {
+				type: (this.history.length > 0) ?  'folder': 'list'
+			});
+		}
+	};
 	Storage.prototype.activatePreviousItem = function() {
 		var index = this.currentIndex - 1, found = null;
 		for (; index >= 0; index--) {

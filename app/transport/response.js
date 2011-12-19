@@ -24,7 +24,7 @@ define(function (){
 			}
 		}
 		else if (this.json['header']['type'] == 'event') {
-			if (this.json['header']['method'] == 'media')
+			if (this.json['header']['method'] == 'media' || this.json['header']['method'] === 'player' )
 				tui.globalPlayer.handleEvent(this.json);
 			else if (this.json['header']['method'] == 'remote') {
 				if (this.json['event']['key'] === 'settz|GMT+5') return;
@@ -32,7 +32,7 @@ define(function (){
 			} else if ( this.json['header']['method'] === 'telephony') {
 				console.log('Received update for phone');
 				window.exportedSymbols['telephony']['setLineStatus'](this.json['event']);
-			}
+			} 
 		} else {
 			console.log('No match yet for this packet', this.json);
 		}

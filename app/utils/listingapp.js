@@ -32,7 +32,7 @@ function(inherit, VisualApp, ListModel, MosaicPresentation, bind, strings, reque
 		this.on('try-play', this.onPlayRequest);
 	};
 	inherit(ListApp, VisualApp);
-	ListApp.remoteKeys_ = ['left', 'right', 'up', 'down', 'chup', 'chdown', 'ok', 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'return'];
+	ListApp.remoteKeys_ = ['left', 'right', 'up', 'down', 'chup', 'chdown', 'ok', 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'return', 'recall', 'star'];
 	ListApp.prototype.onShowComplete = function() {
 		this.attachEvents(true);
 	};
@@ -65,6 +65,10 @@ function(inherit, VisualApp, ListModel, MosaicPresentation, bind, strings, reque
 	ListApp.prototype.defaultRemoteKeyHandler = function(key) {
 		if(ListApp.numerics_.indexOf(key) !== -1) {
 			this.handleNumerics(key);
+		} else if (key === 'star') {
+			//check if we support sorting
+			//if yes - show sort dialog
+			//when sort is selected, sort current list and set this.customSort_ to true and sort from now on
 		} else {
 			if(this.numericTimeout_ !== null) {
 				window.clearTimeout(this.numericTimeout_);
@@ -86,7 +90,6 @@ function(inherit, VisualApp, ListModel, MosaicPresentation, bind, strings, reque
 	};
 	ListApp.prototype.goToChannel = function(channelIndex) {
 
-		console.log('Executing timeout');
 		var find = this.selectChannelIndex;
 		this.selectChannelIndex = '';
 		this.numericTimeout_ = null;

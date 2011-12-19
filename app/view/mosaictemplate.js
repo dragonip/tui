@@ -26,6 +26,9 @@ define([
 	View.prototype.getStep = function() {
 		return Math.floor(this.w / this.iw);
 	};
+	View.prototype.getHStep = function() {
+		return Math.floor(this.h / this.ih);
+	};
 	View.prototype.getULWidth = function() {
 		return this.w - (this.w % this.iw);
 	};
