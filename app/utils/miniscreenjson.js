@@ -171,20 +171,23 @@ define([
 				this.showListOptions();
 				break;
 			case 'static':
-				return;
+				//
+				// tui.createDialog('message',undefined, undefined, 'Test test test');
+				// 
+				break;
 			case 'action':
 				if (data['action'] == 'confirm') {
 					tui.createDialog('confirm', undefined, bind(this.performAction, this, data['exec']), data['actiontitle']);
 				} else if (data['action'] == 'prompt') {
 					if (data['prompttype']== 'text') {
 						tui.createDialog('input', true, bind(this.setValueByText, this, data['name'], this.getDataNodes()[index]), data['help']);
-					} else if( data['prototype'] == 'ip' ) {
+					} else if( data['prompttype'] == 'ip' ) {
 						tui.createDialog('ip', false, bind(this.setIpAddress, this), data['help']);
 					}
 				}
 				break;
 			case 'password':
-				tui.createDialog('password', true, bind(this.setPassWord, this, data['name'],  0), strings.common.old_password);
+				tui.createDialog('password', true, bind(this.setPassWord, this, data['name'],  0), strings.common.new_password);
 				break;
 			case 'string':
 				tui.createDialog('input', true, bind(this.setValueByText, this, data['name'], this.getDataNodes()[index]), data['publishName']);
@@ -222,8 +225,12 @@ define([
 			this.isDirty_ = true;
 			this.updates_[dataName] = pass;
 			if (index === 0) {
-				tui.createDialog('password', true, bind(this.setPassWord, this, 'plock2', 1), strings.common.new_password);
+				tui.createDialog('password', true, bind(this.setPassWord, this, dataName + '2', 1), strings.common.old_password);
 			}
+		} else {
+			if (index === 1) {
+				delete this.updates_[dataName];
+			}	
 		}
 	};
 	/**

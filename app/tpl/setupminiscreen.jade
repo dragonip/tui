@@ -3,7 +3,7 @@ div.tui-multiscreen.general-wrapper
 	div.general-head
 		div.settings!= transl.settings
 		div.value!= transl.value
-	div.general-content
+	div(class="general-content " + appname)
 		- for ( var i = 0; i < items.length; i++)
 			- if (items[i].type === 'list')
 				div.general-item
@@ -17,7 +17,14 @@ div.tui-multiscreen.general-wrapper
 				div.general-item.inactive
 					div.settings!= items[i].publishName
 					div.value!= items[i].value
+			- else if (items[i].type === 'password' ||items[i].type === 'string' ) 
+				div.general-item
+					div.settings!= items[i].publishName
+					div.value!= items[i].value
 			- else if (items[i].type === 'action')
 				div.general-item
 					div.settings!= items[i].publishName
-					div.value!= items[i].help
+					- if (typeof items[i].value !== 'undefined') 
+						div.value!= items[i].value
+					- else 
+						div.value!= items[i].help

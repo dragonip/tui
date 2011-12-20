@@ -114,7 +114,16 @@
 			"prompttype":"text",
 			"exec": "",
 			"help": "##setup_text103##"
+		},
+		{
+			"name":"dlna",
+			"publishName":"##setup_text104##",
+			"type":"list",
+			"value":"##dlna##",
+			"values":{ "0":"OFF", "1":"ON"},
+			"help": "##setup_text105##"
 		}
+
 	],
 	"iptv" : [
 		{
@@ -202,14 +211,6 @@
 			"value":"##seektm##",
 			"values":{ "0":"Auto", "3":"3 sec", "5":"5 sec", "7":"7 sec", "10":"10 sec", "20":"20 sec"},
 			"help":"##setup_text119##"
-		},
-		{
-			"name":"dlna",
-			"publishName":"##setup_text104##",
-			"type":"list",
-			"value":"##dlna##",
-			"values":{ "0":"OFF", "1":"ON"},
-			"help": "##setup_text105##"
 		}
 	],
 	"lannetworking": [

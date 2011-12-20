@@ -22,7 +22,9 @@ define([
 	inherit(Popup, Disposable)
 	
 	Popup.prototype.useKbd = false;
-	
+	Popup.prototype.useOkCancel = false;
+	Popup.prototype.useOkOnly = false;
+	Popup.prototype.ipDialog = false;
 	Popup.prototype.destroyer = function() { tui.signals.restoreEventTree();};
 	
 	Popup.prototype.show = function(container) {
@@ -31,11 +33,13 @@ define([
 			classes: 'multi-select-wrapper',
 			style: domattr.get(this.container, 'style').cssText
 		});
+		console.log('Title before rendering', this.title);
 		this.dom_.innerHTML = tpl.render({
 			title: this.title,
 			things: this.options || [],
 			type: this.type,
-			addKbdContainer: this.useKbd
+			addKbdContainer: this.useKbd,
+			useDefaultButtons: this.useOkCancel
 		});
 //		this.dom_.style.top = '-' +window.innerHeight + 'px';
 		dom.adopt(this.container, this.dom_);
@@ -174,9 +178,105 @@ define([
 //			TODO: Handle the submit button on text area with ff fw
 		}
 	};
+	var ConfirmBox = function(type, useButtons, callback, title) {
+		Popup.call(this, type, callback, title);
+		this.useOkCancel = useButtons || false;
+	};
+	inherit(ConfirmBox, Popup);
+	ConfirmBox.prototype.cssSelector = '.horizontal-button';
+	ConfirmBox.prototype.eventHandler = function(key) {
+		var node = dom.$(this.cssSelector + '.active', this.dom_);
 
+		switch (key) {
+			case 'left':
+				if (node.previousElementSibling !== null) {
+					classes.removeClasses(node, 'active');
+					classes.addClasses(node.previousElementSibling, 'active');
+				}
+				break;
+			case 'right': 
+				if (node.nextElementSibling !== null) {
+					classes.removeClasses(node, 'active');
+					classes.addClasses(node.nextElementSibling, 'active');
+				}
+				break;
+			case 'ok':
+				var trigger = parseInt(dom.dataGet(node, 'trigger'), 10);
+				this.destroy();
+				this.callback(trigger);
+				this.dispose();
+				break;
+		}
+	};
+	ConfirmBox.prototype.destroyer = OptionSelector.prototype.destroyer;
+	ConfirmBox.prototype.destroy = function() {
+		OptionSelector.prototype.destroy.call(this);
+	};
+	ConfirmBox.prototype.disposeInternal = function() {
+
+		ConfirmBox.superClass_.disposeInternal.call(this);
+		delete this.useOkCancel;
+	};
+	IPBox = function(type, option, callback, title) {
+		ConfirmBox.call(this, type, false, callback, title);
+		this.ipDialog = true;
+	};
+	inherit(IPBox, ConfirmBox);
+	IPBox.prototype.cssSelector = '.input-box';
+	IPBox.prototype.numerics_ = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+	IPBox.prototype.disposeInternal = function() {
+		IPBox.superClass_.disposeInternal.call(this);
+		delete this.ipDialog;
+	};
+	IPBox.prototype.next_ = ['star'];
+	IPBox.prototype.eventHandler = function(key) {
+		var node;
+		if (key == this.next_) key = 'right';
+		switch (key) {
+			case 'left':
+			case 'right':
+				IPBox.superClass_.eventHandler.call(this, key);
+				node = dom.$(this.cssSelector + '.active', this.dom_);
+				break;
+			case 'delete':
+				node = dom.$(this.cssSelector + '.active', this.dom_);
+				node.innerHTML = '';
+				break;
+			case 'ok':
+				console.log('Handle update');
+				break;
+			case 'return':
+				this.destroy();
+				this.dispose();
+			default: 
+				if (this.numerics_.indexOf(key)!== -1) {
+					node = dom.$(this.cssSelector + '.active', this.dom_);
+					var old = node.textContent;
+					if (old.length === 3) {
+						this.eventHandler(this.next_);
+						this.eventHandler('delete');
+						this.eventHandler(key);
+					} else {
+						node.innerHTML = old + this.numerics_.indexOf(key);
+					}
+				}
+		}
+	};
+	var MessageBox = function(type, message) {
+		Popup.call(this, type, null, message);
+	};
+	inherit(MessageBox, Popup);
+	MessageBox.prototype.eventHandler = function(key) {
+		if (key == 'ok') {
+			this.destroyer();
+			this.dispose();
+		}
+	};
 	return {
+		MessageBox: MessageBox,
 		OptionList: OptionSelector,
-		Text: Input
+		Text: Input,
+		Confirm: ConfirmBox,
+		IPBox: IPBox
 	};
 });

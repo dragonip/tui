@@ -138,7 +138,14 @@ require(['ui/throbber'], function(t) {
 					dialog = new Dialogs.OptionList(type, options, callback, title, defaultOption);
 				} else if (['input', 'password', 'text'].indexOf(type) !== -1  ) {
 					dialog = new Dialogs.Text(type, options, callback, title);
+				} else if (type === 'confirm') {
+					dialog = new Dialogs.Confirm(type, true, callback, title);
+				} else if (type === 'ip') {
+					dialog = new Dialogs.IPBox(type, undefined, callback, title);
+				} else if (type === 'message') {
+					dialog = new Dialogs.MessageBox(type, title);
 				}
+
 				dialog.show();
 				this.stealEvents(bind(dialog.eventHandler, dialog));
 			},

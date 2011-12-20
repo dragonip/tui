@@ -20,7 +20,7 @@ buf.push('>');
 var __val__ = transl.value
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div></div><div');
-buf.push(attrs({ "class": ('general-content') }));
+buf.push(attrs({ "class": ("general-content " + appname) }));
 buf.push('>');
  for ( var i = 0; i < items.length; i++)
 {
@@ -73,7 +73,7 @@ var __val__ = items[i].value
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div></div>');
 }
- else if (items[i].type === 'action')
+ else if (items[i].type === 'password' ||items[i].type === 'string' ) 
 {
 buf.push('<div');
 buf.push(attrs({ "class": ('general-item') }));
@@ -85,9 +85,39 @@ buf.push(null == __val__ ? "" : __val__);
 buf.push('</div><div');
 buf.push(attrs({ "class": ('value') }));
 buf.push('>');
-var __val__ = items[i].help
+var __val__ = items[i].value
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div></div>');
+}
+ else if (items[i].type === 'action')
+{
+buf.push('<div');
+buf.push(attrs({ "class": ('general-item') }));
+buf.push('><div');
+buf.push(attrs({ "class": ('settings') }));
+buf.push('>');
+var __val__ = items[i].publishName
+buf.push(null == __val__ ? "" : __val__);
+buf.push('</div>');
+ if (typeof items[i].value !== 'undefined') 
+{
+buf.push('<div');
+buf.push(attrs({ "class": ('value') }));
+buf.push('>');
+var __val__ = items[i].value
+buf.push(null == __val__ ? "" : __val__);
+buf.push('</div>');
+}
+ else 
+{
+buf.push('<div');
+buf.push(attrs({ "class": ('value') }));
+buf.push('>');
+var __val__ = items[i].help
+buf.push(null == __val__ ? "" : __val__);
+buf.push('</div>');
+}
+buf.push('</div>');
 }
 }
 buf.push('</div></div>');

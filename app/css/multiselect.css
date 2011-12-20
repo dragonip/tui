@@ -36,9 +36,11 @@
 .multi-select-wrapper .multi-select-shadow.wide {
 	width: 580px;
 }
+.multi-select-wrapper .multi-select-shadow.message {
+	width: 450px;
+}
 .multi-select-wrapper .multi-select-shadow.has-kbd {
 	width: 500px;
-	
 }
 .multi-select-container .tui-kbd-container {
 	text-align: center;
@@ -84,7 +86,8 @@
 	text-align: center;
 	margin: 4px;
 	border: 2px solid transparent;
-	font-size: 120%;
+	font-size: 160%;
+	line-height: 1;
 	border-radius: 4px;
 }
 .multi-select-wrapper .multi-select-shadow .multi-select-container .tui-horizontal-container {
@@ -102,7 +105,10 @@
 	font-size: 120%;
 	border-radius: 4px;
 }
-
+.multi-select-wrapper .multi-select-shadow .multi-select-container .horizontal-button.single-button {
+	float: right;
+	position: relative;
+}
 .multi-select-wrapper .multi-select-shadow .multi-select-container .multi-select-item {
 	font-weight: bold;
 	background-image: linear-gradient(bottom, rgb(69,69,69) 25%, rgb(102,102,102) 75%);
@@ -183,7 +189,7 @@
 .multi-select-wrapper .multi-select-shadow .multi-select-container .area-type-text {
 	height: 60px;
 }
-.multi-select-wrapper .multi-select-shadow .multi-select-container .area-type-confirm {
+.multi-select-wrapper .multi-select-shadow .multi-select-container .area-type-confirm, .multi-select-wrapper .multi-select-shadow .multi-select-container .area-type-ip, .multi-select-wrapper .multi-select-shadow .multi-select-container .area-type-message  {
 	height: 0px;
 	border: 0;
 	padding: 0;

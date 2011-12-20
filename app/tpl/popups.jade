@@ -1,17 +1,26 @@
 div
-	div(class='multi-select-shadow' + ((addKbdContainer) ? ' has-kbd' : ''))
+	div(class='multi-select-shadow' + ((addKbdContainer) ? ' has-kbd' : (type === 'confirm' || type === 'ip' ) ? ' wide': (type == 'message') ? ' message' : '' ))
 		div.multi-select-container
 			div.title!= title
-			- if (typeof type === 'string' && ['input', 'password', 'text'].indexOf(type) !== -1 )
+			- if (typeof type === 'string' && ['input', 'password', 'text', 'confirm', 'ip', 'message'].indexOf(type) !== -1 )
 				div(class='textarea area-type-' + type)
 				- if (type === 'text')
 					div.kbd-submitBtn Submit
 				- if (addKbdContainer === true) 
 					div.tui-kbd-container
-				- else if (typeof useDefaultButtons === 'boolean' && useDefaultButtons)
+				- else if (type == 'confirm')
 					div.tui-horizontal-container
-						div.tui-popup-button.horizontal-button OK
-						div.tui-popup-button.horizontal-button Cancel
+						div.tui-popup-button.horizontal-button(data-trigger="1") OK
+						div.tui-popup-button.horizontal-button.active(data-trigger="0") Cancel
+				- else if (type == 'message')
+					div.tui-horizontal-container
+						div.tui.popup-button.horizontal-button.single-button.active OK
+				- else if (type == 'ip')
+					div.tui-horizontal-container
+						div.input-box.active
+						div.input-box
+						div.input-box
+						div.input-box
 			- else if ( typeof things === 'object')
 				- for( var i = 0; i < things.length; i++) 
 					div.multi-select-item!= things[i]
