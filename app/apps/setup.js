@@ -86,15 +86,53 @@ define([
 		template: template,
 		panels: {
 			top: false,
-			bottom: false
+			bottom: true,
+			keys: ['return']
+		}
+	});
+	var IPTV = new NM({
+		name: 'iptv',
+		template: template,
+		panels: {
+			top: false,
+			bottom: true,
+			keys: ['return']
+		}
+	});
+	var lan = new NM({
+		name: 'lannetworking',
+		template: template,
+		panels: {
+			top: false,
+			bottom: true,
+			keys: ['return']
 		}
 	});
 
+	var wifi = new NM({
+		name: 'wifi',
+		template: template,
+		panels: {
+			top: false,
+			bottom: true,
+			keys: ['return']
+		}
+	});
+	var voip = new NM({
+		name: 'voip',
+		template: template,
+		panels: {
+			top: false,
+			bottom: true,
+			keys: ['return']
+		}
+	});
 	var Setup = new App({
-		name: 'phone',
-		miniscreens: [ Chooser , General ],
+		name: 'setup',
+		miniscreens: [ Chooser , General, IPTV, lan, wifi, voip ],
 		deps: {
-			"run": 'fill_setup_json'
+			"run": 'fill_setup_json',
+			'newif': 1
 		}
 	});
 	Setup.fillContent = function(data) {

@@ -46,6 +46,11 @@ define([
 	App.prototype.currentScreenIndex = 0;
 	App.prototype.isRendered = false;
 	App.prototype.depsLoaded_ = false;
+	App.prototype.reload = function() {
+		delete this.isRendered;
+		this.loadDeps();
+	};
+
 	App.prototype.loadDeps = function() {
 		var deps = [], key, order = [];
 		for (key in this.assets) {
@@ -103,7 +108,8 @@ define([
 		}
 //		Empty the container because we will use "adopt" in this screen
 		this.container.innerHTML = '';
-		dom.adopt(this.container, this.innerContainer);
+		if (this.innerContainer.parentNode === null)
+			dom.adopt(this.container, this.innerContainer);
 		this.fire('show-complete');
 	};
 	

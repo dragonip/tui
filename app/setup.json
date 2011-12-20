@@ -54,11 +54,10 @@
 			"help": "##setup_text17##"
 		},
 		{
-		<!-- //TODO: Check if this is editable -->
 			"name": "dateTime",
 			"publishName":  "##setup_text91##",
 			"value":  "##cur_time##",
-			"type": "date",
+			"type": "static",
 			"help":  "##setup_text92##"
 		},
 		{
@@ -66,7 +65,7 @@
 			"publishName": "##setup_text85##",
 			"type": "action",
 			"action": "confirm",
-			"confirmtext": "##setup_text86##<br><br>##setup_text84##",
+			"actiontitle": "##setup_text86##<br><br>##setup_text84##",
 			"exec": "",
 			"help":"##setup_text93##"
 			
@@ -77,7 +76,7 @@
 			"publishName":"##setup_text97##",
 			"type": "action",
 			"action":"confirm",
-			"confirmtext": "##setup_text98##<br><br>##setup_text84##",
+			"actiontitle": "##setup_text98##<br><br>##setup_text84##",
 			"exec":"",
 			"help": "##setup_text99##"
 			
@@ -91,9 +90,8 @@
 			"type": "list",
 			"values": 
 			    <!-- #BEGINTABLE data1 -->
-			    <!-- // TODO: Make this list not have comma at its end -->
 		        "##satellite##":"##satellite##",
-		        <!--  #ENDTABLE data1 -->
+		      <!--  #ENDTABLE data1 -->
 			},
 			"help": "##setup_text125##: ##cur_sat##"
 		},
@@ -103,18 +101,19 @@
 			"publishName": "##setup_text87##",
 			"type": "action",
 			"action": "confirm",
-			"confirmtext": "##setup_text88##<br><br>##setup_text84##",
-			"exec":  CONFIG.COMMANDS.REBOOT,
+			"actiontitle": "##setup_text88##<br><br>##setup_text84##",
+			"exec":  "",
 			"help":  "##setup_text94##"
 		},
 		{
 			"name" : "voucher",
 			"publishName": "##setup_text102##",
 			"value": "",
-			<!-- // TODO: Make this another type, static strings should not be editable and should be skipped in list walking -->
-			"type": "string",
+			"type": "action",
+			"action":"prompt",
+			"prompttype":"text",
+			"exec": "",
 			"help": "##setup_text103##"
-			
 		}
 	],
 	"iptv" : [
@@ -147,218 +146,277 @@
 				"10":"10"
 			},
 			"help":  "Choose subtitles font size."
-			<!--  BEGINZONE unuzes //TODO: Make this text translatable!! -->
-			//TODO: Make this text translatable!!
-			<!-- ENDZONE unuzed -->
-		}, {
+		}, 
+		{
 			"name": "subtlang",
 			"publishName": "##setup_text77##",
 			"value": "##subtlang##",
 			"type": "list",
-			"value": {
-               "1":"##setup_text10##",
-               "2":"##setup_text11##",
-               "3":"##setup_text12##",
-               "4":"##setup_text13##",
-               "5":"##setup_text14##"
-           },
-           "help": "##setup_text78##"
+			"values": {
+				 "1":"##setup_text10##",
+				 "2":"##setup_text11##",
+				 "3":"##setup_text12##",
+				 "4":"##setup_text13##",
+				 "5":"##setup_text14##"
+			 },
+			 "help": "##setup_text78##"
+		},
+		{
+			"name":"plock",
+			"publishName":"##setup_text79##",
+			"value":"******",
+			"type":"password",
+			"help":"##setup_text80##"
+		},
+		{
+			"name":"bufftime",
+			"publishName":"##setup_text114##",
+			"type":"list",
+			"value":"##bufftime##",
+			"values":{ "0":"0", "2":"2", "4":"4", "6":"6", "8":"8", "10":"10", "12":"12", "14":"14", "16":"16"},
+			"help": "##setup_text96##"
+		},
+    <!-- #BEGINZONE unused_zone -->
+		{
+			"name":"pvrrec",
+			"publishName":"Local timeshift recording",
+			"type":"list",
+			"value":"##pvrrec##",
+			"values":{ "0":"Disabled", "30":"30 min", "60":"60 min", "90":"90 min", "120":"120 min"},
+			"help":"Local Timeshift Recording Status"
+
+		},
+    <!-- #ENDZONE unused_zone -->
+		{
+			"name":"seektype",
+			"publishName":"##setup_text115##",
+			"type":"list",
+			"value":"##seektype##",
+			"values":{ "0":"Once", "1":"Continuous"},
+			"help":"##setup_text115##"
+		},
+		{
+			"name":"seektm",
+			"publishName": "##setup_text118##",
+			"type":"list",
+			"value":"##seektm##",
+			"values":{ "0":"Auto", "3":"3 sec", "5":"5 sec", "7":"7 sec", "10":"10 sec", "20":"20 sec"},
+			"help":"##setup_text119##"
+		},
+		{
+			"name":"dlna",
+			"publishName":"##setup_text104##",
+			"type":"list",
+			"value":"##dlna##",
+			"values":{ "0":"OFF", "1":"ON"},
+			"help": "##setup_text105##"
+		}
+	],
+	"lannetworking": [
+		{
+			"name":"landisabled",
+			"publishName":"##setup_text20##",
+			"type":"list",
+			"value":"##landisabled##",
+			"values":{
+                "0":"##setup_text21##",
+                "1":"##setup_text22##"
+            },
+            "help":"##setup_text23##"
+
+		},
+		{
+			"name":"defif",
+			"publishName":"##setup_text120##:",
+			"type":"list",
+			"value":"##defif##",
+			"values": {
+	            "0":"LAN",
+	            "1":"WIRELESS"
+		    },
+		    "help":"##setup_text121##"
+		},
+		{
+			"name":"mac",
+			"publishName":"##setup_text24##",
+			"type":"static",
+			"value":"##mac_addr##",
+			"help":"##setup_text25##"
+		},
+		{
+			"name":"port",
+			"publishName":"##setup_text26##",
+			"type":"static",
+			"value":"##httpd_port##",
+			"help":"##setup_text27##"
+		},
+		{
+			"name":"ip",
+			"publishName":"##setup_text28##",
+			"type":"action",
+			"value":"##ip##",
+			"action":"prompt",
+			"prompttype": "ip",
+			"exec":"",
+			"help":"##setup_text29##"
+		},
+		{
+			"name":"netmask",
+			"publishName":"##setup_text30##",
+			"type":"action",
+			"action":"prompt",
+			"prompttype":"ip",
+			"value":"##netmask##",
+			"help":"##setup_text31##"
+		},
+		{
+			"name":"gw",
+			"publishName":"##setup_text32##",
+			"type":"action",
+			"action":"prompt",
+			"prompttype":"ip",
+			"value":"##gateway##",
+			"help":"##setup_text33##"
+		},
+		{
+			"name":"nameserver",
+			"publishName":"##setup_text34##",
+			"type":"action",
+			"action":"prompt",
+			"prompttype":"ip",
+			"value":"##dns##",
+			"help":"##setup_text35##"			
+		},{
+			"name":"isldhcp",
+			"publishName":"##setup_text36##:",
+			"type":"list",
+			"value":"##isldhcp##",
+			"values": {
+                "1":"##setup_text37##",
+                "0":"##setup_text38##"
+            },
+		    "help":"##setup_text39##"
+		}
+		
+	],
+	"wifi": [
+		{
+			"name":"wrconn",
+			"publishName":"##setup_text40##",
+			"type":"static",
+			"value":"##wrconn##",
+			"help":"##setup_text41##"
+		},
+		{
+			"name":"wrlevel",
+			"publishName":"##setup_text42##",
+			"type":"static",
+			"value":"##wrlevel## dBm",
+			"help":"##setup_text43##"			
+		},
+		{
+			"name":"wrstat",
+			"publishName":"##setup_text44##:",
+			"type":"list",
+			"value":"##wrstat##",
+			"values": {
+                "1":"##setup_text21##",
+                "0":"##setup_text22##"
+            },
+		    "help":"##setup_text45##"
+		},
+		{
+			"name":"ssidname",
+			"publishName":"##setup_text46##:",
+			"type":"list",
+			"value":"##ssidname##",
+			"values": {
+  				<!-- #BEGINTABLE data1 -->
+                "##ssid##":"##ssid##",
+                <!-- #ENDTABLE data1 -->
+            },
+		    "help":"##setup_text47##"
+		},
+		{
+			"name":"enctype",
+			"publishName":"##setup_text57##:",
+			"type":"list",
+			"value":"##enctype##",
+			"values": {
+                "0":"Hex",
+                "1":"String"
+            },
+		    "help":"##setup_text58##"
+		},
+		{
+			"name":"enckey",
+			"publishName":"##setup_text55##",
+			"value":"##enckey##",
+			"type":"string",
+			"help":"##setup_text80##"
+		},
+		{
+			"name":"wifi_dhcp",
+			"publishName":"##setup_text61##:",
+			"type":"list",
+			"value":"##wifi_dhcp##",
+			"values": {
+                "1":"##setup_text37##",
+                "0":"##setup_text38##"
+            },
+		    "help":"##setup_text62##"
+		},
+		{
+			"name":"wifi_ip",
+			"publishName":"##setup_text63##",
+			"type":"action",
+			"action":"prompt",
+			"prompttype":"ip",
+			"value":"##wifi_ip##",
+			"help":"##setup_text64##"
+		},
+		{
+			"name":"wifi_netmask",
+			"publishName":"##setup_text65##",
+			"type":"action",
+			"action":"prompt",
+			"prompttype":"ip",
+			"value":"##wifi_netmask##",
+			"help":"##setup_text66##"
+		},
+		{
+			"name":"wifi_gw",
+			"publishName":"##setup_text67##",
+			"type":"action",
+			"action":"prompt",
+			"prompttype":"ip",
+			"value":"##wifi_gateway##",
+			"help":"##setup_text68##"
+		},
+		{
+			"name":"wifi_dns",
+			"publishName":"##setup_text69##",
+			"type":"action",
+			"action":"prompt",
+			"prompttype":"ip",
+			"value":"##wifi_dns##", 
+			"help":"##setup_text70##"
+		}
+	],
+	"voip": [
+		{
+			"name":"callerid",
+			"publishName":"##setup_text71##",
+			"value":"##userid##",
+			"type":"static",
+			"help":"##setup_text72##"
+		},
+		{
+			"name": "voipstatus",
+			"publishName": "##setup_text73##",
+			"value": "##devstat##",
+			"type" : "static",
+			"help": "##setup_text74##"
 		}
 	]
 }
-                    
-
-
-//        },
-//        "iptv" : {
-//                body : [
-
-//                        ["subtlang", "##setup_text77##", "##subtlang##",
-//                                {
-//                                        'type':'list',
-//                                        'data':{
-//                                                "1":"##setup_text10##",
-//                                                "2":"##setup_text11##",
-//                                                "3":"##setup_text12##",
-//                                                "4":"##setup_text13##",
-//                                                "5":"##setup_text14##"
-//                                        }
-//                                }, "##setup_text78##"],
-//                        ["plock", "##setup_text79##", "*******", "password", "##setup_text80##"],
-//                        ["bufftime", "##setup_text114##", "##bufftime##", {
-//                                "type":"list",
-//                                "data":{ "0":"0", "2":"2", "4":"4", "6":"6", "8":"8", "10":"10", "12":"12", "14":"14", "16":"16"}
-//                                }, "##setup_text96##"],
-//                        <!-- #BEGINZONE unused_zone -->
-//                        ["pvrrec", "Local Timeshift Recording", "##pvrrec##", {
-//                                "type":"list",
-//                                "data":{ "0":"Disabled", "30":"30 min", "60":"60 min", "90":"90 min", "120":"120 min"}
-//                                }, "Local Timeshift Recording Status"],
-//                        <!-- #ENDZONE unused_zone -->
-//                        ["seektype", "##setup_text115##", "##seektype##", {
-//                                "type":"list",
-//                                "data":{ "0":"Once", "1":"Continuous"}
-//                                }, "##setup_text115##"],
-//                        ["seektm", "##setup_text118##", "##seektm##", {
-//                                "type":"list",
-//                                "data":{ "0":"Auto", "3":"3 sec", "5":"5 sec", "7":"7 sec", "10":"10 sec", "20":"20 sec"}
-//                                }, "##setup_text119##"],
-//                        ["layout", "##setup_text100##", "##layout##", {
-//                                "type":"list",
-//                                "data":{ "0":"List", "1":"Mosaic"}
-//                                }, "##setup_text101##"],
-//                        <!-- #BEGINZONE unused_zone -->
-//                        ["satRetrieve", "##setup_text81##", "", "dialogAction", {
-//                                action: CONFIG.SCREENS.SETUP.getSatChannels,
-//                                message: "##setup_text82##<br><br>##setup_text83##<br><br>##setup_text84##",
-//                                dialogType: "confirm"
-//                                }]
-//                        <!-- #ENDZONE unused_zone -->
-//                        ["dlna", "##setup_text104##", "##dlna##", {
-//                                "type":"list",
-//                                "data":{ "0":"OFF", "1":"ON"}
-//                                }, "##setup_text105##"],
-//                ]
-//        },
-//        "lannetworking" : {
-//                body : [
-//                        ["landisabled", "##setup_text20##", "##landisabled##", 
-//                                {
-//                                        'type':'list',
-//                                        'data':{
-//                                                "0":"##setup_text21##",
-//                                                "1":"##setup_text22##"
-//                                        }
-//                                }, "##setup_text23##"],
-//                        ["defif", "##setup_text120##:", "##defif##", 
-//                                {
-//                                        'type':'list',
-//                                        'data':{
-//                                                "0":"LAN",
-//                                                "1":"WIRELESS"
-//                                        }
-//                                }, "##setup_text121##"],
-//                        ["mac", "##setup_text24##", "##mac_addr##", "static", "##setup_text25##"],
-//                        ["port", "##setup_text26##", "##httpd_port##", "number", "##setup_text27##"],
-//                        ["ip", "##setup_text28##", "##ip##", "ipaddress", "##setup_text29##"],
-//                        ["netmask", "##setup_text30##", "##netmask##", "ipaddress", "##setup_text31##"],
-//                        ["gw", "##setup_text32##", "##gateway##", "ipaddress", "##setup_text33##"],
-//                        ["nameserver", "##setup_text34##", "##dns##", "ipaddress", "##setup_text35##"],
-//                        ["isldhcp", "##setup_text36##", "##isldhcp##", 
-//                                {
-//                                        'type':'list',
-//                                        'data':{
-//                                                "1":"##setup_text37##",
-//                                                "0":"##setup_text38##"
-//                                        }
-//                                }, "##setup_text39##"]
-//                ]
-//        },
-//        "wifi" : {
-//                body : [
-//                        ["wrconn", "##setup_text40##", "##wrconn##", "static", "##setup_text41##"],
-//                        ["wrlevel", "##setup_text42##", "##wrlevel## dBm", "static", "##setup_text43##"],
-//                        ["wrstat", "##setup_text44##", "##wrstat##", 
-//                                {
-//                                        'type':'list',
-//                                        'data':{
-//                                                "1":"##setup_text21##",
-//                                                "0":"##setup_text22##"
-//                                        }
-//                                }, "##setup_text45##"],
-//                        ["ssidname", "##setup_text46##", "##ssidname##", 
-//                                {
-//                                        'type':'list',
-//                                        'data':{
-//                                                <!-- #BEGINTABLE data1 -->
-//                                                "##ssid##":"##ssid##",
-//                                                <!-- #ENDTABLE data1 -->
-//                                        }
-//                                }, "##setup_text47##"],
-//                        <!-- #BEGINZONE unused_zone2 -->
-//                        ["ssidname", "SSID Name", "##ssidname##", "string", "Name of wifi network to which to connect."],
-//                        ["aconnect", "Auto Connect", "##aconnect##", 
-//                                {
-//                                        'type':'list',
-//                                        'data':{
-//                                                "1":"YES",
-//                                                "0":"NO"
-//                                        }
-//                                }, "Auto connect to the specified wireless network"],
-//                        <!-- #ENDZONE unused_zone2 -->
-//                        <!-- #BEGINZONE unused_zone -->
-//                        ["encrypt", "##setup_text48##", "##encrypt##", 
-//                                {
-//                                        'type':'list',
-//                                        'data':{
-//                                                "3":"WPA2",
-//                                                "2":"##setup_text49##",
-//                                                "1":"##setup_text50##",
-//                                                "0":"##setup_text51##"
-//                                        }
-//                                }, "##setup_text52##"],
-//                        ["encbits", "##setup_text53##", "##encbits##", 
-//                                {
-//                                        'type':'list',
-//                                        'data':{
-//                                                "0":"64 Bits",
-//                                                "1":"128 Bits"
-//                                        }
-//                                }, "##setup_text54##"],
-//                        ["encrypttype", "Encryption Type", "##encrypttype##", 
-//                                {
-//                                        'type':'list',
-//                                        'data':{
-//                                                "0":"TKIP",
-//                                                "1":"AES"
-//                                        }
-//                                }, "Specify encryption type. Press 'OK' to edit"],
-//                        <!-- #ENDZONE unused_zone -->
-//                        ["enckey", "##setup_text55##", "##enckey##", "string", "##setup_text56##"],
-//                        <!-- #BEGINZONE unused_zone -->
-//                        ["enctype", "##setup_text57##", "##enctype##", 
-//                                {
-//                                        'type':'list',
-//                                        'data':{
-//                                                "0":"Hex",
-//                                                "1":"String"
-//                                        }
-//                                }, "##setup_text58##"],
-//                        ["wifimode", "##setup_text59##", "##wifimode##", 
-//                                {
-//                                        'type':'list',
-//                                        'data':{
-//                                                "0":"Managed",
-//                                                "1":"Ad-Hoc"
-//                                        }
-//                                }, "##setup_text60##"],
-//                        <!-- #ENDZONE unused_zone -->
-//                        ["wifi_dhcp", "##setup_text61##", "##wifi_dhcp##", 
-//                                {
-//                                        'type':'list',
-//                                        'data':{
-//                                                "1":"##setup_text37##",
-//                                                "0":"##setup_text38##"
-//                                        }
-//                                }, "##setup_text62##"],
-//                        ["wifi_ip", "##setup_text63##", "##wifi_ip##", "ipaddress", "##setup_text64##"],
-//                        ["wifi_netmask", "##setup_text65##", "##wifi_netmask##", "ipaddress", "##setup_text66##"],
-//                        ["wifi_gw", "##setup_text67##", "##wifi_gateway##", "ipaddress", "##setup_text68##"],
-//                        ["wifi_dns", "##setup_text69##", "##wifi_dns##", "ipaddress", "##setup_text70##"],
-//                ]
-//        },
-//        "voip" : {
-//                body : [
-//                        ["callerid", "##setup_text71##", "##userid##", "string", "##setup_text72##"],
-//                        ["voipstatus", "##setup_text73##", "##devstat##", "static", "##setup_text74##"]
-//                ]
-//        },
-//        <!-- #BEGINZONE unused_zone -->
-//        "billing" : {
-//                body : [
-//                        ["balance", "##setup_text18##", "##cbalance##", "static", "##setup_text19##"],
-//                ]
-//        },
-//        <!-- #ENDZONE unused_zone -->
-//});
-

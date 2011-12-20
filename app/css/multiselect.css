@@ -33,6 +33,9 @@
 	width: 30%;
 	border-radius: 5px;
 }
+.multi-select-wrapper .multi-select-shadow.wide {
+	width: 580px;
+}
 .multi-select-wrapper .multi-select-shadow.has-kbd {
 	width: 500px;
 	
@@ -70,7 +73,36 @@
 	font-size: 160%;
 	color: white;
 	margin-bottom: 14px;
+	padding: 0 10px;
 }
+.multi-select-wrapper .multi-select-shadow .multi-select-container .input-box {
+	font-weight: bold;
+	background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0.25, rgb(69,69,69)), color-stop(0.75, rgb(102,102,102)) );
+	width: 33px;
+	height: 20px;
+	padding: 10px;
+	text-align: center;
+	margin: 4px;
+	border: 2px solid transparent;
+	font-size: 120%;
+	border-radius: 4px;
+}
+.multi-select-wrapper .multi-select-shadow .multi-select-container .tui-horizontal-container {
+	display: -webkit-inline-box;
+}
+.multi-select-wrapper .multi-select-shadow .multi-select-container .horizontal-button {
+	font-weight: bold;
+	background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0.25, rgb(69,69,69)), color-stop(0.75, rgb(102,102,102)) );
+	width: 80px;
+	height: 20px;
+	padding: 10px;
+	text-align: center;
+	margin: 4px;
+	border: 2px solid transparent;
+	font-size: 120%;
+	border-radius: 4px;
+}
+
 .multi-select-wrapper .multi-select-shadow .multi-select-container .multi-select-item {
 	font-weight: bold;
 	background-image: linear-gradient(bottom, rgb(69,69,69) 25%, rgb(102,102,102) 75%);
@@ -150,6 +182,11 @@
 }
 .multi-select-wrapper .multi-select-shadow .multi-select-container .area-type-text {
 	height: 60px;
+}
+.multi-select-wrapper .multi-select-shadow .multi-select-container .area-type-confirm {
+	height: 0px;
+	border: 0;
+	padding: 0;
 }
 .multi-select-wrapper .multi-select-shadow .multi-select-container .kbd-submitBtn {
 	display: inline-block;

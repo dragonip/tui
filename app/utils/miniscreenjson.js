@@ -4,8 +4,12 @@ define([
 	'dom/dom',
 	'data/static-strings',
 	'dom/classes',
-	'utils/scrollable'
-], function(inherit, TScreen, dom, strings, classes, Scrollable) {
+	'utils/scrollable',
+	'transport/request',
+	'transport/response',
+	'shims/bind',
+	'data/static-strings'
+], function(inherit, TScreen, dom, strings, classes, Scrollable, request, response, bind, strings) {
 	/**
 	 * Subset of the TeleMini screen that handles the specifities of the config panel
 	 *
@@ -20,6 +24,7 @@ define([
 		this.selectedIndex = null;
 		this.listIsActive = false;
 		this.activeListNode = null;
+		this.updates_ = {};
 	};
 
 	inherit(NS, TScreen);
@@ -28,7 +33,9 @@ define([
 	 * @type {String}
 	 */
 	NS.prototype.activeDataCssSelector = '.general-item.active';
+	NS.prototype.isDirty_ = false;
 	NS.prototype.dataCssSelector = '.general-item';
+	NS.prototype.updateRun = 'update_setup_json';
 	NS.prototype.activeDataCss = 'active';
 	/**
 	 * Gets the data without copying it in the object should updates need tp be performed from outside
@@ -57,17 +64,40 @@ define([
 		case 'ok':
 			if (!this.listIsActive) {
 				this.activateItem();
+			} else {
+				this.activateItemInList();
 			}
 			break;
 		case 'return':
-			console.log('List is active ? ' + this.listIsActive);
 			if (this.listIsActive) {
 				this.deactivateItem();
 			} else {
-				this.master.activateScreen(0);
+				if (this.isDirty_) {
+					tui.createDialog('confirm', undefined, bind(this.handleUpdateDataOnServer, this), strings.components.dialogs.confirmApply);
+				} else {
+					this.master.activateScreen(0);
+				}
 			}
 			break;
 		}
+	};
+	/**
+	 * Called when the user presses return in a mini screen and there are item updated.
+	 * If th user confirms the action those will be saved on server,
+	 * if not - the data will be re-get
+	 *
+	 * @param {number} confirmation 0 is the user canceled, 1 is user wants to submit
+	 * @private
+	 */
+	NS.prototype.handleUpdateDataOnServer = function(confirmation) {
+		if (confirmation === 1 ) {
+			console.log(arguments, this.updates_);
+		} else {
+			delete this.isDirty_;
+			this.updates_ = null;
+			this.updates_ = {};
+			this.master.reload();
+		} 
 	};
 	/**
 	 * Override of the TeleScreen implementation as we have special meaning for the retunr key here
@@ -112,15 +142,101 @@ define([
 
 	};
 	/**
+	 * Called when item in list options is activated, this is - the user wants to activate an option in the list
+	 * The function will update the list of changes and will update visually the value, however
+	 * it will also mark the data as 'dirty' and will prevent its lost.
+	 */
+	NS.prototype.activateItemInList = function() {
+		var dataRecord = this.getData()[this.selectedIndex];
+		var itemName = dataRecord['name']
+		var node = dom.$('.' + this.activeDataCss, this.activeListNode);
+		var itemNewValue = dom.dataGet(node, 'key');
+		var nodeValue = dom.$('.value', this.getDataNodes()[this.selectedIndex])
+		nodeValue.textContent = dataRecord['values'][itemNewValue];
+		this.isDirty_ = true;
+		this.updates_[itemName] = itemNewValue;
+		this.deactivateItem();
+	};
+	/**
 	 * When on general list pressing OK should activate the item, handle it here
+	 * This function handles all possible action types, if you extend the action, extend this function as well
 	 * @protected
 	 */
 	NS.prototype.activateItem = function() {
 		var data = this.getData();
-		if (data[this.selectedIndex].type === 'list') {
-			this.showListOptions();
-		} else if (data[this.selectedIndex].type === 'static') {
-			return;
+		var index = this.selectedIndex;
+		data = data[index];
+		switch (data['type']) {
+			case 'list':
+				this.showListOptions();
+				break;
+			case 'static':
+				return;
+			case 'action':
+				if (data['action'] == 'confirm') {
+					tui.createDialog('confirm', undefined, bind(this.performAction, this, data['exec']), data['actiontitle']);
+				} else if (data['action'] == 'prompt') {
+					if (data['prompttype']== 'text') {
+						tui.createDialog('input', true, bind(this.setValueByText, this, data['name'], this.getDataNodes()[index]), data['help']);
+					} else if( data['prototype'] == 'ip' ) {
+						tui.createDialog('ip', false, bind(this.setIpAddress, this), data['help']);
+					}
+				}
+				break;
+			case 'password':
+				tui.createDialog('password', true, bind(this.setPassWord, this, data['name'],  0), strings.common.old_password);
+				break;
+			case 'string':
+				tui.createDialog('input', true, bind(this.setValueByText, this, data['name'], this.getDataNodes()[index]), data['publishName']);
+				break;
+
+		}
+	};
+	/**
+	 * Called when returning from type == action && action == prompt && prompttype == text 
+	 * or when type == string
+	 *
+	 * This functions protects from empty values
+	 * @param {string} dataName The name of the variable to record for update as received by the server in {name}
+	 * @param {HTMLElement} node The Element that represents the data node
+	 * @param {string} value The new value to be set
+	 */
+	NS.prototype.setValueByText = function(dataName, node, value) {
+		console.log(arguments);
+		if (value !== "") {
+			this.isDirty_ = true;
+			this.updates_[dataName] = value;
+			dom.$('.value', node).textContent = value
+		}
+	};
+	/**
+	 * Called when returning from type = 'password'. The functions is designed to be used with two step password resets
+	 * This is = the first value is the old pass the second - the new one
+	 *
+	 * @param {string} dataName The name of the variable to update as received by the server
+	 * @param {Number} index Integer representing the pass - 0 for old pass, 1 for new one
+	 * @param {string} pass The password as typed by the user, empty values are discarted
+	 */
+	NS.prototype.setPassWord = function(dataName, index, pass) {
+		if (pass !== '') {
+			this.isDirty_ = true;
+			this.updates_[dataName] = pass;
+			if (index === 0) {
+				tui.createDialog('password', true, bind(this.setPassWord, this, 'plock2', 1), strings.common.new_password);
+			}
+		}
+	};
+	/**
+	 * This is called when returning from type == action && action == confirm, i.e. user is prompted and if confirmed 
+	 * the exe command is submited for execution on backend
+	 *
+	 * @param {Object} exe The exec parameters for the backend as received by the server
+	 * @param {Number} confirmed 0 for Cancel, 1 for Ok
+	 */
+	NS.prototype.performAction = function(exe, confirmed) { 
+		console.log(arguments); 
+		if (confirmed === 1) {
+			this.master.reload();
 		}
 	};
 	/**
@@ -134,15 +250,18 @@ define([
 		this.activeListNode = list;
 		this.listIsActive = true;
 		classes.addClasses(dom.$('.row', this.activeListNode), this.activeDataCss);
+		this.scroller_.scroll(list);
+		this.scroller_.scroll(dom.$('.row', this.activeListNode));
 	};
 	/**
 	 * Called when the mini screen is displayed to user, for now just reset the list
 	 *
 	 */
 	NS.prototype.onActivate = function() {
+		console.log('On Activate fired');
 		if (this.selectedIndex === null) {
 			this.selectItem(0);
-		}
+		} else this.selectItem(this.selectedIndex);
 	};
 	/**
 	 * General list movement, this allows for selecting any item in the list
@@ -150,6 +269,7 @@ define([
 	 */
 	NS.prototype.selectItem = function(index) {
 		var data = this.getData();
+		console.log(data);
 		if (index >= data.length || index < 0) return;
 		this.selectedIndex = index;
 		var dataNodes = dom.$$(this.dataCssSelector, this.dom_);
@@ -177,7 +297,7 @@ define([
 			dom.adopt(renderIn, mydom);
 		}
 		this.dom_= mydom;
-		this.scroller_ = new Scrollable('.general-content', '.active');
+		this.scroller_ = new Scrollable('.general-content.' + this.name, '.active');
 	};
 	//
 	// Export the object in the define space

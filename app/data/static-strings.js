@@ -1,4 +1,8 @@
 define({
+	common: {
+		old_password: "Your old password",
+		new_password: "Your new password"
+	},
 	player: {
 		states: {
 			playing: 'Playing: ',
@@ -63,7 +67,8 @@ define({
 				bottom: {
 					info: 'Show EPG',
 					ok: 'Play',
-					playPause: 'Show menu'
+					playPause: 'Show menu',
+					'return': "Apply changes"
 				}
 			}
 		},
@@ -75,6 +80,34 @@ define({
 			},
 			list: {
 				
+			}
+		},
+		general: {
+			panels: {
+				bottom: {
+					'return': 'Apply changes'
+				}
+			}
+		},
+		voip: {
+			panels: {
+				bottom: {
+					'return': 'Apply changes'
+				}
+			}
+		},
+		wifi: {
+			panels: {
+				bottom: {
+					'return': 'Apply changes'
+				}
+			}
+		},
+		lannetworking: {
+			panels: {
+				bottom: {
+					'return': 'Apply changes'
+				}
 			}
 		},
 		sms: {
@@ -182,6 +215,7 @@ define({
 	},
 	components: {
 		dialogs: {
+			confirmApply: "Save changes?",
 			select: "Select action",
 			lock: "Parental control password",
 			wrongPassword: "The password was incorrect",

@@ -5,8 +5,9 @@ define([
 	'oop/inherit',
 	'json/json',
 	'net/simplexhr',
-	'shims/bind'
-], function(types, array, Disposable, inherit, json, xhr, bind) {
+	'shims/bind',
+	'ui/simplescreenselector'
+], function(types, array, Disposable, inherit, json, xhr, bind, appsel) {
 	
 	var Storage = function(app) {
 		Disposable.call(this);
@@ -85,6 +86,8 @@ define([
 		case 'return':
 			if (this.pointer.length > 0  && this.pointer[0].id === null) {
 				this.outDir();
+			} else {
+				appsel.show();
 			}
 			break;
 		case 'recall':

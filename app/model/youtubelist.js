@@ -20,13 +20,13 @@ define([
 	};
 	inherit(YTData, Listmodel);
 	YTData.urls = {
-		most_popular_url: 'http://gdata.youtube.com/feeds/api/standardfeeds/most_popular?alt=jsonc&callback=exportedSymbols.youtube.load&v=2&max-results=15&prettyprint=true',
-		toprated: 'http://gdata.youtube.com/feeds/api/standardfeeds/top_rated?alt=jsonc&callback=exportedSymbols.youtube.load&v=2&max-results=15&prettyprint=true',
-		most_viewed: 'http://gdata.youtube.com/feeds/api/standardfeeds/most_viewed?alt=jsonc&callback=exportedSymbols.youtube.load&v=2&max-results=15&prettyprint=true',
-		recently_featured: 'http://gdata.youtube.com/feeds/api/standardfeeds/recently_featured?alt=jsonc&callback=exportedSymbols.youtube.load&v=2&max-results=15&prettyprint=true',
-		search_url: 'http://gdata.youtube.com/feeds/api/videos?alt=jsonc&callback=exportedSymbols.youtube.load&v=2&max-results=15&prettyprint=true&q=',
+		most_popular_url: 'http://gdata.youtube.com/feeds/api/standardfeeds/most_popular?alt=jsonc&callback=exportedSymbols.youtube.load&v=2&max-results=16&prettyprint=true',
+		toprated: 'http://gdata.youtube.com/feeds/api/standardfeeds/top_rated?alt=jsonc&callback=exportedSymbols.youtube.load&v=2&max-results=16&prettyprint=true',
+		most_viewed: 'http://gdata.youtube.com/feeds/api/standardfeeds/most_viewed?alt=jsonc&callback=exportedSymbols.youtube.load&v=2&max-results=16&prettyprint=true',
+		recently_featured: 'http://gdata.youtube.com/feeds/api/standardfeeds/recently_featured?alt=jsonc&callback=exportedSymbols.youtube.load&v=2&max-results=16&prettyprint=true',
+		search_url: 'http://gdata.youtube.com/feeds/api/videos?alt=jsonc&callback=exportedSymbols.youtube.load&v=2&max-results=16&prettyprint=true&q=',
 	};
-	YTData.prototype.itemsPerLoad = 15;
+	YTData.prototype.itemsPerLoad = 16;
 	YTData.prototype.isLoading = false;
 	YTData.prototype.hasMoreResult = true;
 	YTData.prototype.resetSource = function(identifier, querystring) {
