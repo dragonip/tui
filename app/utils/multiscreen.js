@@ -126,7 +126,7 @@ define([
 	App.prototype.onStopRequested = function() {
 		this.screens[this.currentScreenIndex].attachEvents(false);
 		this.attachEvents(false);
-	}
+	};
 	App.prototype.start = function() {
 		if (!this.depsLoaded_) {
 			return;
@@ -155,6 +155,6 @@ define([
 	App.prototype.disposeInternal =  function() {
 		this.constructor.superClass_.disposeInternal.call(this);
 		delete this.screens;
-	}
+	};
 	return App;
 });

@@ -16,15 +16,15 @@ define([
 		var url = o.url || tui.options.paths.getPath(o.name, o.type);
 		var req = request.create('calld', url);
 		response.register(req, bind(this.load, this, o));
-		req.send()
+		req.send();
 		this.app.fire('data-load-start');
 	};
 	ListModel.prototype.load = function(o, res) {
 		var content;
 		if (res.status.toLowerCase() === 'ok' && typeof res.content === 'string') {
-			content = json.parse(res.content)
+			content = json.parse(res.content);
 		}
 		ListModel.superClass_.load.call(this, content, o);
-	}
+	};
 	return ListModel;
 });

@@ -1,5 +1,6 @@
 define({
 	common: {
+		refresh: 'Reloading ',
 		old_password: "Your old password",
 		new_password: "Your new password"
 	},
@@ -221,6 +222,7 @@ define({
 			wrongPassword: "The password was incorrect",
 			ok: 'OK',
 			cancel: 'Cancel',
+			updateFailed: 'Update failed<br>',
 			ytube: {
 				mostPopular: "Most popular",
 				topRated: "Top Rated",

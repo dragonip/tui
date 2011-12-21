@@ -13,8 +13,7 @@ define([
 	'utils/miniscreenjson',
 	'json/json',
 	'tpl/setupminiscreen',
-	'text!css/setupminis.css',
-	'loader/loader'
+	'text!css/setupminis.css'
 ], function(
 	App, 
 	TeleMini,
@@ -30,7 +29,7 @@ define([
 	NM,
 	json,
 	template,
-	css, loader ) {
+	css ) {
 	loader.loadCSSFromText(css);
 	/**
 	* Mini screen chooser
@@ -50,10 +49,13 @@ define([
 		switch (key) {
 			case 'ok':
 				node = dom.$('.active', this.dom_);
-				this.master.activateScreen(parseInt(dom.dataGet(node, 'sequence'), 10))
+				this.master.activateScreen(parseInt(dom.dataGet(node, 'sequence'), 10));
+				break;
 			case 'left':
 			case 'right':
 				this.setActiveIcon(key);
+				break;
+			default: 
 				break;
 		}
 	};
@@ -66,7 +68,7 @@ define([
 			if (index == 'right' && current.nextElementSibling !== null) {
 				next =  current.nextElementSibling;
 			} else if (index == 'left' && current.previousElementSibling !== null) {
-				next = current.previousElementSibling
+				next = current.previousElementSibling;
 			}
 		}
 		if (next) {

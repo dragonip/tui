@@ -8,8 +8,8 @@ define([
 	'transport/request',
 	'transport/response',
 	'shims/bind',
-	'data/static-strings'
-], function(inherit, TScreen, dom, strings, classes, Scrollable, request, response, bind, strings) {
+	'json/json'
+], function(inherit, TScreen, dom, strings, classes, Scrollable, request, response, bind, json ) {
 	/**
 	 * Subset of the TeleMini screen that handles the specifities of the config panel
 	 *
@@ -35,7 +35,7 @@ define([
 	NS.prototype.activeDataCssSelector = '.general-item.active';
 	NS.prototype.isDirty_ = false;
 	NS.prototype.dataCssSelector = '.general-item';
-	NS.prototype.updateRun = 'update_setup_json';
+	NS.prototype.updateRun = 'update_section_json';
 	NS.prototype.activeDataCss = 'active';
 	/**
 	 * Gets the data without copying it in the object should updates need tp be performed from outside
@@ -49,7 +49,7 @@ define([
 	 * @param {String} key The key pressed on the remote
 	 */
 	NS.prototype.keyHandler = function(key) {
-		console.log('received key for handling in miniscreen: ' + key)
+		console.log('received key for handling in miniscreen: ' + key);
 		switch (key) {
 		case 'up':
 			if (this.listIsActive) {
@@ -79,6 +79,8 @@ define([
 				}
 			}
 			break;
+		default:
+			break;
 		}
 	};
 	/**
@@ -91,13 +93,35 @@ define([
 	 */
 	NS.prototype.handleUpdateDataOnServer = function(confirmation) {
 		if (confirmation === 1 ) {
-			console.log(arguments, this.updates_);
+			this.updates_['run'] = this.updateRun;
+			this.updates_['newif'] = 1;
+			this.updates_['section']=this.name;
+			var req = request.create('calld', this.updates_);
+			response.register(req, bind(this.handleSettingsUpdate, this));
+			req.send();
 		} else {
 			delete this.isDirty_;
 			this.updates_ = null;
 			this.updates_ = {};
 			this.master.reload();
 		} 
+	};
+	/**
+	 * Function to handle the update reply from calld
+	 *
+	 * @param {JSONObject} response The server response (Response['response'])
+	 */
+	NS.prototype.handleSettingsUpdate = function(response) {
+		if (response['status'] === 'OK') {
+			var res = json.parse(response['content']);
+			if (res['status'].toLowerCase() !== 'ok') {
+				tui.createDialog('message', undefined, undefined, strings.components.dialogs.updateFailed + res['message']);
+			} else {
+				delete this.isDirty_;
+				this.updates_ = null;
+				this.updates_ = [];
+			}
+		}
 	};
 	/**
 	 * Override of the TeleScreen implementation as we have special meaning for the retunr key here
@@ -137,7 +161,7 @@ define([
 		if (next !== null && classes.hasClass(next, 'row')) {
 			classes.removeClasses(node, this.activeDataCss);
 			classes.addClasses(next, this.activeDataCss);
-			this.scroller_.scroll(next)
+			this.scroller_.scroll(next);
 		}
 
 	};
@@ -147,14 +171,15 @@ define([
 	 * it will also mark the data as 'dirty' and will prevent its lost.
 	 */
 	NS.prototype.activateItemInList = function() {
-		var dataRecord = this.getData()[this.selectedIndex];
-		var itemName = dataRecord['name']
-		var node = dom.$('.' + this.activeDataCss, this.activeListNode);
-		var itemNewValue = dom.dataGet(node, 'key');
-		var nodeValue = dom.$('.value', this.getDataNodes()[this.selectedIndex])
-		nodeValue.textContent = dataRecord['values'][itemNewValue];
-		this.isDirty_ = true;
-		this.updates_[itemName] = itemNewValue;
+		var record = this.getData()[this.selectedIndex],
+			record_name = record['name'],
+			record_value = record['value'],
+			new_value = dom.dataGet( dom.$('.' + this.activeDataCss, this.activeListNode), 'key');
+		if ( new_value != record_value) {
+			dom.$('.value', this.getDataNodes()[this.selectedIndex]).textContent = record['values'][new_value];
+			this.isDirty_ = true;
+			this.updates_[record_name] = new_value;
+		}
 		this.deactivateItem();
 	};
 	/**
@@ -192,6 +217,8 @@ define([
 			case 'string':
 				tui.createDialog('input', true, bind(this.setValueByText, this, data['name'], this.getDataNodes()[index]), data['publishName']);
 				break;
+			default:
+				break;
 
 		}
 	};
@@ -209,7 +236,7 @@ define([
 		if (value !== "") {
 			this.isDirty_ = true;
 			this.updates_[dataName] = value;
-			dom.$('.value', node).textContent = value
+			dom.$('.value', node).textContent = value;
 		}
 	};
 	/**
@@ -243,8 +270,18 @@ define([
 	NS.prototype.performAction = function(exe, confirmed) { 
 		console.log(arguments); 
 		if (confirmed === 1) {
-			this.master.reload();
+			var req = request.create('calld', exe);
+			response.register(req, bind(this.handleExecError, this));
+			req.send();
 		}
+	};
+	/**
+	 * Handle the error when calling exec, i.e. when the exe command cannot be executed
+	 *
+	 * @param {JSONObject} response The response of the error that we receive
+	 */
+	NS.prototype.handleExecError = function(response) {
+		console.log(arguments);
 	};
 	/**
 	 * Shows the list option of the currently active item, should be called only for items that are of type 'list'

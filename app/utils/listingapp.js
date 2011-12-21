@@ -66,9 +66,7 @@ function(inherit, VisualApp, ListModel, MosaicPresentation, bind, strings, reque
 		if(ListApp.numerics_.indexOf(key) !== -1) {
 			this.handleNumerics(key);
 		} else if (key === 'star') {
-			//check if we support sorting
-			//if yes - show sort dialog
-			//when sort is selected, sort current list and set this.customSort_ to true and sort from now on
+			console.log('sort');
 		} else {
 			if(this.numericTimeout_ !== null) {
 				window.clearTimeout(this.numericTimeout_);
@@ -104,7 +102,7 @@ function(inherit, VisualApp, ListModel, MosaicPresentation, bind, strings, reque
 		}
 	};
 	ListApp.prototype.defaultStartRequested = function() {
-		if(!this.model.isLoaded) {
+		if(!this.model.isLoaded || ( this.model.lastLoadedTS !== null && this.model.lastLoadedTS < tui.DATA_TS.LISTS)) {
 			this.model.loadData({
 				name : this.name,
 				type : 'list'
@@ -182,7 +180,7 @@ function(inherit, VisualApp, ListModel, MosaicPresentation, bind, strings, reque
 					this.dialogInstance = null;
 					delete this.dialogInstance;
 					break;
-					
+				default: break;		
 			}
 		}
 	};
@@ -217,6 +215,7 @@ function(inherit, VisualApp, ListModel, MosaicPresentation, bind, strings, reque
 				case 'unbookmark':
 					obj.isBookmarked = !obj.isBookmarked;
 					break;
+				default: break;
 			}
 			this.presentation.updateItem(index, obj);
 		} else {

@@ -18,7 +18,6 @@ define([
 		req.send();
 	};
 	MS.prototype.loadData = function(data) {
-		console.log('Load data pass')
 		if (data.status === 'OK')
 			this.commonData_ = json.parse(data.content);
 		else this.commonData_ = {};
@@ -28,7 +27,6 @@ define([
 		}
 	};
 	MS.prototype.getData = function(screenName) {
-		console.log('Get data pass')
 		if (this.commonData_[screenName]){
 			return this.commonData_[screenName];
 		}

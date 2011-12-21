@@ -6,8 +6,10 @@ define([
 	'json/json',
 	'net/simplexhr',
 	'shims/bind',
-	'ui/simplescreenselector'
-], function(types, array, Disposable, inherit, json, xhr, bind, appsel) {
+	'ui/simplescreenselector',
+	'transport/request',
+	'data/static-strings'
+], function(types, array, Disposable, inherit, json, xhr, bind, appsel, request, strings){
 	
 	var Storage = function(app) {
 		Disposable.call(this);
@@ -22,7 +24,8 @@ define([
 		this.isLoaded = false;
 		this.pointer = null;
 		this.isLoading = false;
-		this.bound = bind(this.loadDir, this)
+		this.bound = bind(this.loadDir, this);
+		this.lastLoadedTS = null;
 	};
 	inherit(Storage, Disposable);
 	Storage.prototype.loadData = function(o) {
@@ -33,10 +36,10 @@ define([
 		}, {
 			parse: true
 		});
-		this.app.fire('data-load-start')
+		this.app.fire('data-load-start');
 	};
 	Storage.prototype.acceptEvent = function(ev) {
-		console.log('Received event from remote to datamodel', ev)
+		console.log('Received event from remote to datamodel', ev);
 		if (this.isLoading) return;
 		var step = this.app.presentation.getStep();
 		var hstep = this.app.presentation.getHStep();
@@ -91,11 +94,21 @@ define([
 			}
 			break;
 		case 'recall':
-			this.isLoaded = false;
-			this.history = [];
 			this.app.presentation.reset(true);
-			this.app.defaultStartRequested();
+			this.app.Stop();
+			var req = request.create('calld', {
+				'run':'refresh_media_json'
+			});
+			req.send();
+			tui.loadIndicator.show(strings.common.refresh + this.app.name.toUpperCase());
+			//
+			// this.isLoaded = false;
+			// this.history = [];
+			// this.app.presentation.reset(true);
+			// this.app.defaultStartRequested();
+			// 
 			break;
+		default: break;
 		}
 
 	};
@@ -133,7 +146,7 @@ define([
 			}
 		}
 		if (found === null ) {
-			console.log('There is no other channel available')
+			console.log('There is no other channel available');
 		} else {
 			this.selectByIndex(found);
 			
@@ -181,7 +194,7 @@ define([
 			}
 		}
 		if (found === null) {
-			console.log('Not found, try from back ')
+			console.log('Not found, try from back ');
 			index = this.pointer.length-1;
 			for (; index > this.currentIndex; index--) {
 				if (this.pointer[index].isDir === false && this.pointer[index].id !== null) {
@@ -195,7 +208,7 @@ define([
 		} else {
 			this.selectByIndex(found);
 		}
-	}
+	};
 	Storage.prototype.outDir = function() {
 		var toLoad = this.history.pop();
 		this.pointer = toLoad.dir;
@@ -210,8 +223,8 @@ define([
 		if (item.isDir !== false) {
 			this.isLoading = true;
 			for (var k in item.isDir) {
-				url[k] = item.isDir[k]
-			};
+				url[k] = item.isDir[k];
+			}
 			url.newif = 1;
 			this.loadData({
 				url: url,
@@ -235,7 +248,7 @@ define([
 	Storage.prototype.getItem = function(i) {
 		var ii = (types.assert(i, 'number'))?i:this.currentIndex;
 		return this.pointer[ii];
-	}
+	};
 	
 	Storage.prototype.get = function(what) {
 		what = (types.assert(what,'string'))? what : 'list';
@@ -244,20 +257,23 @@ define([
 		} else if ( what === 'epg') {
 			return this.data.epg;
 		}
-	}
+	};
 	Storage.prototype.load = function(res, o) {
 		if (res === null ) {
 			throw {
 				name: 'NetworkError',
 				message: 'Cannot get requested URL : '
 			};
-			return;
 		}
 		switch (o.type) {
 			case 'list':
 				this.data.list = res;
 				if (array.isEmpty(this.history)) this.pointer = this.data.list;
 				this.isLoaded = true;
+				this.lastLoadedTS = (new Date()).getTime();
+				if (this.lastLoadedTS > tui.DATA_TS.LISTS) {
+					this.pointer = this.data.list;
+				}
 				break;
 			case 'folder':
 				res.unshift({
@@ -280,9 +296,10 @@ define([
 				});
 				break;
 			case 'epg':
-				console.log('JUST LOADED EPG DATA FROM SERVER')
+				console.log('JUST LOADED EPG DATA FROM SERVER');
 				this.data.epg = res;
 				break;
+			default: break;
 		}
 		if (typeof o.callback === 'function') {
 			o.callback(res);
@@ -312,7 +329,7 @@ define([
 	Storage.prototype.disposeInternal = function() {
 		Storage.superClass_.disposeInternal.call(this);
 		
-	}
+	};
 	return Storage;
 });
 	

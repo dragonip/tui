@@ -85,14 +85,33 @@ require(['ui/throbber'], function(t) {
 			id: 'maincontainer',
 			style: 'height: ' + window.innerHeight + 'px; width: ' + window.innerWidth + 'px; margin-top: 0; margin-bottom: 0'
 		}));
+		var tNow = (new Date()).getTime();
 		//Create the main Controller
 		window.tui = {
+			DATA_TS: {
+				CONFIG: tNow,
+				LISTS: tNow
+			},
 			signals: {
+				listingApp: ['iptv', 'vod', 'ppv', 'aod', 'radio'],
+				refreshConfig: function() {
+					tui.DATA_TS.CONFIG = (new Date()).getTime();
+					if (tui.currentActiveApp.name === 'setup') {
+						tui.currentActiveApp.reload();
+					}
+				},
+				refreshLists: function() {
+					tui.DATA_TS.LISTS = (new Date()).getTime();
+					if (this.listingApp.indexOf(tui.currentActiveApp.name) !== -1) {
+						tui.appModuleAdded(tui.currentActiveApp);
+					}
+				},
 				restoreEventTree: function() {
 					response.setRemoteKeyHandler(globalevents.defaultEventAccepter);
 					this.eventsAreFetched = false;
 				},
 				eventsAreFetched: false
+
 			},
 			osdInstance: new OSD(),
 			keyboardIgnoredKeys: [34, 8, 46, 37, 38, 39, 40, 13, 36],
@@ -177,13 +196,13 @@ require(['ui/throbber'], function(t) {
 				if (bool) {
 					//calculate for 20%
 					if (this.options.useScale) {
-						console.log('SET SCALE')
+						console.log('SET SCALE');
 						this.mainContainer.className = 'scaled';
 						var x = parseInt(this.mainContainer.style.width, 10);
 						var y = parseInt(this.mainContainer.style.height, 10);
 						var x1 = parseInt(((x * 20) / 100), 10);
 						var y1 = parseInt(((y * 20) / 100), 10);
-						var moveX = parseInt(x / 2) - parseInt(x1 / 2);
+						var moveX = parseInt(x / 2, 10) - parseInt(x1 / 2, 10);
 						//var moveY = parseInt(y/2) - parseInt(y1/2);
 						var res = "scale(0.2) translateX(" + moveX * 5 + "px)"; //  + "translateY(-" + moveY * 5 + "px)"
 						this.mainContainer.style.webkitTransform = res;
@@ -222,6 +241,8 @@ require(['ui/throbber'], function(t) {
 						break;
 					case 'restore-event-stack':
 						tui.signals.restoreEventTree();
+						break;
+					default: 
 						break;
 					}
 				}
@@ -273,7 +294,7 @@ require(['ui/throbber'], function(t) {
  * Setup global window event for keyboard input and always route this to tui handlers
  */
 		window.addEventListener('keypress', function(ev) {
-			tui.keyboardInputHandler_(ev)
+			tui.keyboardInputHandler_(ev);
 		}, false);
 //		tui.setKeyboardInputHandler(function(ev){
 //			console.log(String.fromCharCode(ev.charCode));
@@ -387,9 +408,9 @@ require(['ui/throbber'], function(t) {
 		dom.adopt(tui.panels.top);
 		dom.adopt(tui.panels.bottom);
 		function preloadApps() {
-			console.log(preloads)
+			console.log(preloads);
 			require(preloads.preloadsModules, function(varargs) {
-				console.log('Modules loaded...')
+				console.log('Modules loaded...');
 			});
 		}
 		
