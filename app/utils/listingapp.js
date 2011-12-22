@@ -1,8 +1,8 @@
 define(['oop/inherit', 'utils/visualapp', 'model/listmodel2', 'view/mosaicpresentation', 'shims/bind',
 // 'net/simplexhr',
 'data/static-strings', 'transport/request', 'transport/response',
-'json/json'], 
-function(inherit, VisualApp, ListModel, MosaicPresentation, bind, strings, request, response, json) {
+'json/json', 'view/partials'], 
+function(inherit, VisualApp, ListModel, MosaicPresentation, bind, strings, request, response, json, Partials) {
 	var ListApp = function(options) {
 		VisualApp.call(this, options);
 		this.numericTimeout_ = null;
@@ -12,7 +12,11 @@ function(inherit, VisualApp, ListModel, MosaicPresentation, bind, strings, reque
 		} else {
 			this.model = new ListModel(this);
 		}
-		this.presentation = new MosaicPresentation(this, options.listType, options.itemWidth, options.itemHeight, options.shouldJump);
+		if (options.usePagination) {
+			this.presentation = new Partials(this, options.listType, options.itemWidth, options.itemHeight, options.shouldJump);
+		} else {
+			this.presentation = new MosaicPresentation(this, options.listType, options.itemWidth, options.itemHeight, options.shouldJump);
+		}
 		this.canResume = options.canResume;
 		this.registerDisposable(this.model);
 		this.registerDisposable(this.presentation);

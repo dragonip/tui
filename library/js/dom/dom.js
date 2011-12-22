@@ -28,6 +28,7 @@ define(['dom/string',
 		/**
 		 * @method getInnerNodes returns a DOM tree from html string
 		 * @param {String} The html string to parse
+		 * @return {HTMLElement} The top dom node of the partial internally rendered to dom tree
 		 */
 		getInnerNodes: function(html) {
 			var a = this.create('div', {

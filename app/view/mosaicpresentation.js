@@ -8,10 +8,9 @@ define([
 	'view/mosaictemplate',
 	'view/listtemplate',
 	'view/youtubetemplate',
-	'loader/loader',
 	'oop/idisposable',
 	'oop/inherit'
-], function(dom, attr, classes, MosaicTemplate, ListTemplate, YouTubeTemplate, loader, Disposable, inherit) {	
+], function(dom, attr, classes, MosaicTemplate, ListTemplate, YouTubeTemplate, Disposable, inherit) {	
 	function getContainerRestrains(container) {
 		var s = window.getComputedStyle(container, null);
 		return {

@@ -4,6 +4,7 @@ define([
 	return new App({
 		name: 'vod',
 		shouldJump: true,
-		canResume: true
+		canResume: true,
+		usePagination: true
 	});
 });

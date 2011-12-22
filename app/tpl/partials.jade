@@ -1,0 +1,25 @@
+div.tui-mosaic.list-container(style="width:"+ width, data-appid=name)
+	- if (data.length > startIndex)
+		- for (var i = startIndex; i < endIndex; i++ )
+			- if ( data.length > i )
+				div(class='item '+ (alterClass ? 'larger':'regular'), data-sequence=i)
+					- if (data[i].thumbnail.length < 5 )
+						div.imgcont
+							div.default_icon.screen_default_icon_size
+					- else
+						div.imgcont
+							img(src=data[i].thumbnail)
+					span.title!= data[i].publishName
+					ul.channel-settings-icons
+						- if (data[i].isLocked)
+							li.icon.locked
+						- if (data[i].isBookmarked)
+							li.icon.bookmarked
+						- if (data[i].personalRecordingOptions && data[i].personalRecordingOptions.canRecord) 
+							li.icon.recordable
+					- if (!/[^0-9]/.test(data[i].id))
+						div.object-index!= data[i].id
+					- if (data[i].isDir !== false)
+						div.folder-icon
+	- else
+		div.no-content!= nocontentstring
