@@ -13,6 +13,10 @@ define({
 		}
 	},
 	lists: {
+		sorting: {
+			sortByIndex: 'Sort by Index, Bookmarked first',
+			sortByName: 'Sort by Name'
+		},
 		noContent: "There are no items in this category",
 		lock: "Lock",
 		unlock: "Unlock",

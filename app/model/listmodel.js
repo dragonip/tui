@@ -167,13 +167,19 @@ define([
 		} else if (namea < nameb) return -1;
 		else return 0;
 	};
-	Storage.sortBySortIndex = function() {
+	Storage.sortByIndex = function(a, b) {
+		var ba = (a.isBookmarked) ? 1 : 0;
+		var bb = (b.isBookmarked) ? 1 : 0;
 		var ia = parseInt(a.sortIndex, 10);
 		var ib = parseInt(b.sortIndex, 10);
-		if (ia > ib) {
-			return 1;
-		} else if (ia < ib) return -1;
-		else return 0;
+		if ( ba != bb ) {
+			if ( ba < bb ) return 1;
+			if ( ba > bb ) return -1;
+			return 0;
+		}
+		if ( ia < ib ) return -1;
+		if ( ia > ib ) return 1;
+		return 0;
 	};
 	Storage.prototype.sort = function(byWhat) {
 		if (this.pointer.length > 0 ) {

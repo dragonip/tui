@@ -63,7 +63,7 @@ buf.push('</ul>');
 buf.push('<div');
 buf.push(attrs({ "class": ('object-index') }));
 buf.push('>');
-var __val__ = data[i].id
+var __val__ = data[i].sortIndex
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</div>');
 }

@@ -62,11 +62,19 @@ Partials.prototype.getPage = function() {
 	return this.page_;
 };
 /**
+ * Abstraction to get to the app name
+ * @return {string}
+ */
+Partials.prototype.getAppName = function() {
+	return this.app.name;
+};
+/**
  * Method designed to be overridden by implementations, provides rasterization of the data
  * @param {number} data_index The index we are interested in seeing 
  * @protected
  */
 Partials.prototype.rasterizeInternal = function ( data_index ) {
+	console.log('called rasterize');
 	if (this.container === null) return;
 	if (typeof data_index != 'undefined') this.dataIndex = data_index;
 	this.setPage();
@@ -76,7 +84,7 @@ Partials.prototype.rasterizeInternal = function ( data_index ) {
 		// TODO: remove dependency on this class in template
 		// 
 		alterClass: false,
-		name: this.getAppName,
+		name: this.getAppName(),
 		data: this.getData(),
 		startIndex: this.getStartIndex(),
 		//
@@ -153,6 +161,7 @@ Partials.prototype.activate = function( data_index ) {
 Partials.prototype.updateItem = function( data_index ) {
 
 };
+Partials.prototype.reset = function(){};
 /**
  * Called only once to indicate that the presentation layer should become visible
  *

@@ -15,7 +15,7 @@ buf.push(attrs({ "class": (((things[i].thumbnail !== null)? "leftCont" : "leftCo
 buf.push('><h1');
 buf.push(attrs({ "class": ('number_id') }));
 buf.push('>');
-var __val__ = things[i].id
+var __val__ = things[i].sortIndex
 buf.push(null == __val__ ? "" : __val__);
 buf.push('</h1><h2');
 buf.push(attrs({ "class": ('item_name') }));

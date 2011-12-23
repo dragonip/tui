@@ -17,7 +17,7 @@ div.tui-mosaic.list-container(style="width:"+ w, data-appid=id)
 					- if (things[i].personalRecordingOptions && things[i].personalRecordingOptions.canRecord) 
 						li.icon.recordable
 				- if (!/[^0-9]/.test(things[i].id))
-					div.object-index!= things[i].id
+					div.object-index!= things[i].sortIndex
 				- if (things[i].isDir !== false)
 					div.folder-icon
 	- else

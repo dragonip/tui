@@ -70,7 +70,7 @@ function(inherit, VisualApp, ListModel, MosaicPresentation, bind, strings, reque
 		if(ListApp.numerics_.indexOf(key) !== -1) {
 			this.handleNumerics(key);
 		} else if (key === 'star') {
-			console.log('sort');
+			this.handleSortRequest();
 		} else {
 			if(this.numericTimeout_ !== null) {
 				window.clearTimeout(this.numericTimeout_);
@@ -98,7 +98,7 @@ function(inherit, VisualApp, ListModel, MosaicPresentation, bind, strings, reque
 		var data = this.model.get();
 		var i;
 		for( i = 0; i < data.length; i++) {
-			if(data[i].id == find) {
+			if(data[i].sortIndex == find) {
 				this.model.selectByIndex(i);
 				this.fire('try-play', this.model.getItem());
 				break;
@@ -131,6 +131,37 @@ function(inherit, VisualApp, ListModel, MosaicPresentation, bind, strings, reque
 			};
 		}, this));
 	};
+	/**
+	 * List the handled sort algorithms/criterias
+	 *
+	 * @type {Array.<string>}
+	 */
+	ListApp.sortAlgorithms_ = [ 'sortByIndex', 'sortByName' ];
+
+	/**
+	 * Handle user request to sort the listing, i.e. display sort mechanism option list and let the user select sorting
+	 *
+	 * @protected
+	 */
+	ListApp.prototype.handleSortRequest = function() {
+		var options = [];
+		ListApp.sortAlgorithms_.forEach(function( item ) {
+			options.push( strings.lists.sorting[ item ] );
+		});
+		options.push( strings.components.dialogs.cancel );
+		tui.createDialog( 'optionlist', options, bind( this.handleSorting, this ), strings.lists.sorting.title );
+	};
+
+	/**
+	 * Handle the user selection from the sort criteria dialog
+	 *
+	 * @param {number} selectedIndex The index of the option the user elected
+	 */
+	ListApp.prototype.handleSorting = function( selectedIndex ) {
+		if ( selectedIndex >= ListApp.sortAlgorithms_.length ) return;
+		this.model.sort( ListApp.sortAlgorithms_[ selectedIndex ] );
+	};
+
 	ListApp.prototype.handlePlayButton = function() {
 		var objIndex = this.model.currentIndex;
 		var item = this.model.getItem(objIndex);
@@ -184,7 +215,10 @@ function(inherit, VisualApp, ListModel, MosaicPresentation, bind, strings, reque
 					this.dialogInstance = null;
 					delete this.dialogInstance;
 					break;
-				default: break;		
+				default: 
+					this.dialogInstance = null;
+					delete this.dialogInstance;
+					break;		
 			}
 		}
 	};
